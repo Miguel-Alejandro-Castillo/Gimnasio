@@ -10,8 +10,8 @@
   
    <properties>
     <spring.version>4.0.6.RELEASE</spring.version>
-    <hibernate.version>4.3.6.Final</hibernate.version>
-    <mysql.connector.version>5.1.31</mysql.connector.version>
+    <hibernate.version>5.1.0.Final</hibernate.version>
+    <mysql.connector.version>5.1.23</mysql.connector.version>
   </properties>
   <dependencies>
     <dependency>
@@ -37,6 +37,34 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    <!-- Spring Data -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>1.9.2.RELEASE</version>
+    </dependency>
+
+    <!-- Mysql Connector -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.connector.version}</version>
+    </dependency>
+
+    <!-- Hibernate ORM -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+
     <!-- servlet api -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -49,6 +77,7 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+
   </dependencies>
 
   <build>
