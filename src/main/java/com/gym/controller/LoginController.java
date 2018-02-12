@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Locale;
@@ -39,9 +36,13 @@ public class LoginController {
     }
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-    public ModelAndView showLoginForm(){
+    public ModelAndView showLoginForm(@RequestParam( value="error", required = false, defaultValue = "false")
+                                          boolean error){
         ModelAndView mav = new ModelAndView("login");
         mav.addObject("loginBean", new LoginBean());
+        if (error)
+            mav.addObject("loginError",messageSource.getMessage("login.error",null,null));
+
         return mav;
     }
     @RequestMapping(value={"/login"}, method = RequestMethod.POST)

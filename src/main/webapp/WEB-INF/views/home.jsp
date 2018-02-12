@@ -57,6 +57,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Home</h1>
+
+                        <form class="form-inline" action="logout" method="post">
+                            <input type="submit" value="Log out" />
+                        </form>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
