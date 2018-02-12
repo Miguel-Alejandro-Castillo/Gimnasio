@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * Created by Alejandro on 4/12/2017.
  */
-public class GenericDAOImplHibernate<T>  implements GenericDAO<T> {
+public class GenericDaoImplHibernate<T>  implements GenericDao<T> {
     private SessionFactory sessionFactory;
 
-    public GenericDAOImplHibernate() {
+    public GenericDaoImplHibernate() {
         sessionFactory= HibernateUtil.getSessionFactory();
     }
 

@@ -1,7 +1,6 @@
 package com.gym.model;
 
 import javax.persistence.*;
-
 /**
  * Created by Alejandro on 10/2/2018.
  */

@@ -18,8 +18,19 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         </property>
     </bean>
     <mvc:annotation-driven />
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+    <mvc:resources mapping="/templates/**" location="/WEB-INF/views/templates/" />
+
     <context:component-scan base-package="com.gym.dao" />
-    <bean id="administradorDaoDao" class="com.gym.dao.AdministradorDAOImplHibernate" />
+    <bean id="administradorIDao" class="com.gym.dao.AdministradorDaoImplHibernateIDao" />
+
+    <context:component-scan base-package="com.gym.validator" />
+    <bean id="validatorLoginBean" class="com.gym.validator.ValidatorLoginBean" />
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>messages</value>
+        </property>
+    </bean>
 
 </beans>
