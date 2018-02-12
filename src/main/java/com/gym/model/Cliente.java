@@ -7,6 +7,9 @@ import javax.persistence.*;
 @Entity
 @Table( name = "CLIENTE")
 public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private Long dni;
     @Column(nullable = false)
@@ -18,13 +21,29 @@ public class Cliente {
     @Column(nullable = false)
     private Long telefono;
 
-    public Long getDNI() {
-        return dni;
+    public Cliente() {
+        super();
     }
 
-    public void setDNI(Long id) {
+    public Cliente(Long dni, String nombre, String apellido, Short edad, Long telefono) {
         this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.telefono = telefono;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getDni() { return dni; }
+
+    public void setDni(Long dni) { this.dni = dni; }
 
     public String getApellido() {
         return apellido;

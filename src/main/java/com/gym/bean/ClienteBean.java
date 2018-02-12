@@ -23,11 +23,11 @@ public class ClienteBean {
     }
 
     
-    public Long getDNI() {
+    public Long getDni() {
         return dni;
     }
 
-    public void setDNI(Long id) {
+    public void setDni(Long id) {
         this.dni = dni;
     }
 
