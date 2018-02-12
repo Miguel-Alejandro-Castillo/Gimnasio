@@ -3,6 +3,7 @@ package com.gym.controller;
 
 import com.gym.bean.LoginBean;
 import com.gym.dao.AdministradorIDao;
+import com.gym.dao.AdministradorRepository;
 import com.gym.model.Administrador;
 import com.gym.validator.ValidatorLoginBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class LoginController {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private AdministradorRepository administradorRepository;
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(validatorLoginBean);
@@ -42,7 +45,7 @@ public class LoginController {
         mav.addObject("loginBean", new LoginBean());
         if (error)
             mav.addObject("loginError",messageSource.getMessage("login.error",null,null));
-
+        System.out.println("Cantidad de adminitradores: " + administradorRepository.count());
         return mav;
     }
     @RequestMapping(value={"/login"}, method = RequestMethod.POST)
