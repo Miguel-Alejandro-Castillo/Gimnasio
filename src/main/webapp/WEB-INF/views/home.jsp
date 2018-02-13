@@ -18,7 +18,6 @@
     <spring:url value="/resources/css/metisMenu.min.css" var="metisMenuMinCss"/>
     <link href="${metisMenuMinCss}" rel="stylesheet"/>
 
-
     <!-- Custom CSS -->
     <spring:url value="/resources/css/sb-admin-2.css" var="sbAdmin2Css"/>
     <link href="${sbAdmin2Css}" rel="stylesheet"/>
@@ -52,21 +51,92 @@
         </div>
 
         <!-- Page Content -->
+        
+            
         <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Home</h1>
-
-                        <form class="form-inline" action="logout" method="post">
-                            <input type="submit" value="Log out" />
-                        </form>
-                    </div>
-                    <!-- /.col-lg-12 -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">El Deposito</h1>
                 </div>
-                <!-- /.row -->
+                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.container-fluid -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- /.panel -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Ultimos Asistentes
+                            
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre y Apellido</th>
+                                                    <th>Fecha</th>
+                                                    <th>Hora</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>3326</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>3:29 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3325</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>3:20 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3324</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>3:03 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3323</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>3:00 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3322</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>2:49 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3321</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>2:23 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3320</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>2:15 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3319</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>2:13 PM</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+            </div>
+            <!-- /.row -->
+
         </div>
         <!-- /#page-wrapper -->
 

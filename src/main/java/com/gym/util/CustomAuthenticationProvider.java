@@ -2,6 +2,7 @@ package com.gym.util;
 
 import com.gym.dao.AdministradorIDao;
 import com.gym.model.Administrador;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
