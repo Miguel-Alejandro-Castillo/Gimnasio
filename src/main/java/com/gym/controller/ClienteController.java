@@ -5,6 +5,7 @@ import com.gym.bean.LoginBean;
 import com.gym.dao.ClienteRepository;
 import com.gym.model.Administrador;
 import com.gym.model.Cliente;
+import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,38 +23,50 @@ import java.util.List;
  * Created by Alejandro on 12/2/2018.
  */
 @Controller
+@RequestMapping(value="/clientes")
 public class ClienteController {
+
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @RequestMapping(value="/alta-cliente", method = RequestMethod.GET)
+    @RequestMapping(value="/crear", method = RequestMethod.GET)
     public ModelAndView showAltaClienteForm(){
         ModelAndView mav=new ModelAndView("cliente");
         mav.addObject("clienteBean", new ClienteBean());
         return mav;
     }
 
-    @RequestMapping(value={"/alta-cliente"}, method = RequestMethod.POST)
+    @RequestMapping(value={"/crear","/{id_cliente}/editar"}, method = RequestMethod.POST)
     public  ModelAndView submitClienteForm(@ModelAttribute("clienteBean") @Validated ClienteBean clienteBean, BindingResult result){
         if(result.hasErrors())
             return new ModelAndView("cliente");
         else{
-            Cliente cliente=new Cliente(clienteBean.getDni(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getEdad(),clienteBean.getTelefono());
+            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getDni(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getEdad(),clienteBean.getTelefono());
             clienteRepository.save(cliente);
-            return new ModelAndView("redirect:/clientes");
+            return new ModelAndView("redirect:/clientes/");
         }
 
     }
 
-    @RequestMapping(value="/editar-cliente/{id_cliente}", method = RequestMethod.GET)
-    public ModelAndView showEditarClienteForm(@PathVariable(name = "id_cliente") Long id_cliente){
-        ModelAndView mav=new ModelAndView("cliente");
-        mav.addObject("clienteBean", new ClienteBean());
-        return mav;
+    @RequestMapping(value="/{id_cliente}/editar", method = RequestMethod.GET)
+    public ModelAndView showEditarClienteForm(@PathVariable(name = "id_cliente") String id_cliente){
+            ModelAndView mav=null;
+            Long id= NumberUtils.toLong(id_cliente);
+            Cliente cliente= clienteRepository.findOne(id);
+            if(cliente!=null) {
+                ClienteBean clienteBean = new ClienteBean();
+                clienteBean.load(cliente);
+                mav= new ModelAndView("cliente");
+                mav.addObject("clienteBean", cliente);
+            }
+            else {
+                // renderizar a una vista que informe que no se envio un id de cliente en el path
+            }
+            return mav;
     }
 
-    @RequestMapping(value="/clientes", method = RequestMethod.GET)
+    @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView showClientes(){
         ModelAndView mav=new ModelAndView("clientes");
         Iterable<Cliente> clientes=clienteRepository.findAll();

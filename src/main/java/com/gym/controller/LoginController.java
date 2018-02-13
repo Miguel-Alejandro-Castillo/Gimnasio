@@ -48,6 +48,7 @@ public class LoginController {
         System.out.println("Cantidad de adminitradores: " + administradorRepository.count());
         return mav;
     }
+
     @RequestMapping(value={"/login"}, method = RequestMethod.POST)
     public  ModelAndView submitLoginForm(@ModelAttribute("loginBean") @Validated LoginBean loginBean, BindingResult result){
         if(result.hasErrors())

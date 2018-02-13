@@ -1,33 +1,43 @@
 package com.gym.bean;
 
+import com.gym.model.Cliente;
 import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Alejandro on 11/2/2018.
  */
 public class ClienteBean {
-
-    @NotBlank(message = "dni.empty")
+    private Long id;
+    @NotNull
     private Long dni;
-    @NotBlank(message = "nombre.empty")
+    @NotBlank
     private String nombre;
-    @NotBlank(message = "apellido.empty")
+    @NotBlank
     private String apellido;
-    @NotBlank(message = "edad.empty")
+    @NotNull
     private Short edad;
-    @NotBlank(message = "telefono.empty")
+    @NotNull
     private Long telefono;
 
     public ClienteBean() {
         super();
     }
 
-    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getDni() {
         return dni;
     }
 
-    public void setDni(Long id) {
+    public void setDni(Long dni) {
         this.dni = dni;
     }
 
@@ -61,5 +71,14 @@ public class ClienteBean {
 
     public void setTelefono(Long telefono) {
         this.telefono = telefono;
+    }
+
+    public void load(Cliente cliente) {
+        this.setId(cliente.getId());
+        this.setApellido(cliente.getApellido());
+        this.setDni(cliente.getDni());
+        this.setEdad(cliente.getEdad());
+        this.setNombre(cliente.getNombre());
+        this.setTelefono(cliente.getTelefono());
     }
 }

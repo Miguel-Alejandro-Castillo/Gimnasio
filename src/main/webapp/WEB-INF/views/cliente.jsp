@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
 
@@ -33,7 +34,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <spring:url value="/templates/nav.html" var="nav"/>
+     <spring:url value="/templates/nav.html" var="nav"/>
 
 </head>
 
@@ -43,6 +44,7 @@
 
         <!-- Navigation -->
         <div id="nav-placeholder">
+
             <script>
                 var nav = "${nav}"
                 $(function(){
@@ -65,30 +67,36 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form">
+                                <form:form id="clienteForm" modelAttribute="clienteBean" action="crear" method="post" role="form">
+                                        <form:hidden path="id"/>
                                         <div class="form-group">
-                                            <label>Nombre</label>
-                                            <input class="form-control">
+                                            <form:label path="nombre">Nombre</form:label>
+                                            <form:input path="nombre"  cssClass="form-control" autofocus="autofocus"/>
+                                            <form:errors path="nombre" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <label>Apellido</label>
-                                            <input class="form-control">
+                                            <form:label path="apellido">Apellido</form:label>
+                                            <form:input path="apellido"  cssClass="form-control"/>
+                                            <form:errors path="apellido" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <label>DNI</label>
-                                            <input class="form-control">
+                                            <form:label path="dni">DNI</form:label>
+                                            <form:input path="dni" type="number" cssClass="form-control"/>
+                                            <form:errors path="dni" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <label>Edad</label>
-                                            <input class="form-control">
+                                            <form:label path="edad">Edad</form:label>
+                                            <form:input type="number" path="edad"  cssClass="form-control"/>
+                                            <form:errors path="edad" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <label>Numero de telefono</label>
-                                            <input class="form-control">
+                                            <form:label path="telefono">Numero de telefono</form:label>
+                                            <form:input type="number" path="telefono"  cssClass="form-control"/>
+                                            <form:errors path="telefono" cssClass="error"/>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        <button type="reset" class="btn btn-default">Reset Button</button>
-                                    </form>
+                                        <form:button type="submit" class="btn btn-default">Submit Button</form:button>
+                                        <form:button type="reset" class="btn btn-default">Reset Button</form:button>
+                                    </form:form>
                                 </div>
                                 
                                 <!-- /.col-lg-6 (nested) -->

@@ -25,7 +25,9 @@ public class Cliente {
         super();
     }
 
-    public Cliente(Long dni, String nombre, String apellido, Short edad, Long telefono) {
+    public Cliente(Long id, Long dni, String nombre, String apellido, Short edad, Long telefono) {
+        super();
+        this.id= id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
