@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Definicion template general -->
+    <definition name="default-template" template="/WEB-INF/views/templates/default-template.jsp">
+        <put-attribute name="title" 	value="" />
+        <put-attribute name="header" 	value="/WEB-INF/views/templates/default-header.jsp" />
+        <put-attribute name="menu" 		value="/WEB-INF/views/templates/default-menu.jsp" />
+        <put-attribute name="main" 		value="" />
+        <put-attribute name="footer" 	value="/WEB-INF/views/templates/default-footer.jsp" />
+    </definition>
+
+    <!-- Definicion pantalla login -->
+    <definition name="login" extends="default-template">
+        <put-attribute name="title" value="Login" />
+        <put-attribute name="menu" value="" />
+        <put-attribute name="main"	value="/WEB-INF/views/login.jsp" />
+    </definition>
+
+    <!-- Definicion pantalla home -->
+    <definition name="home" extends="default-template">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="main"	value="/WEB-INF/views/home.jsp" />
+    </definition>
+
+    <!-- Definicion pantalla  para crear un cliente -->
+    <definition name="crear-cliente" extends="default-template">
+        <put-attribute name="title" value="Alta de cliente" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/cliente.jsp" />
+        <put-attribute name="titleSubmit" value="Crear cliente" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla  para editar un cliente-->
+    <definition name="editar-cliente" extends="default-template">
+        <put-attribute name="title" value="Editar cliente" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/cliente.jsp" />
+        <put-attribute name="titleSubmit" value="Modificar datos" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla para listar a todos los clientes -->
+    <definition name="clientes" extends="default-template">
+        <put-attribute name="title" value="Listado de clientes" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/clientes.jsp" />
+    </definition>
+
+</tiles-definitions>
