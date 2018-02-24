@@ -1,13 +1,13 @@
 package com.gym.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by Alejandro on 10/2/2018.
  */
 @Entity
-@Table( name = "CLIENTE")
+@Table( name = "CLIENTES")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,7 @@ public class Cliente {
     private String apellido;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fecha_de_nacimiento;
 
     @Column(nullable = false)

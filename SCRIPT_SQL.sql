@@ -1,4 +1,6 @@
-INSERT INTO clientes(nombre,apellido,fecha_de_nacimiento,telefono,direccion,email,facebook) VALUES
+INSERT INTO gimnasio.administradores(nombre, apellido,username,`password`)VALUES
+('eldeposito','eldeposito','admin','1234');
+INSERT INTO gimnasio.clientes(nombre,apellido,fecha_de_nacimiento,telefono,direccion,email,facebook) VALUES
 ('Hee','radio','2001-07-30','4652041','22 Marsh Ave.','grady@att.net','brainstorm'),
 ('Muoi','asperse','1979-07-01','4828751',"'Salisbury, MD 21801'",'mcrawfor@sbcglobal.net','spirit'),
 ('Elenore','unsleepy','1965-12-15','4625700','9486 West Trenton St.','jyoliver@msn.com','jacket'),

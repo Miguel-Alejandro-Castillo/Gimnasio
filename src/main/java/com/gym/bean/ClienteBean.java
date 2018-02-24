@@ -1,11 +1,16 @@
 package com.gym.bean;
 
 import com.gym.model.Cliente;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import javax.validation.constraints.Past;
+import java.util.Date;
 
 /**
  * Created by Alejandro on 11/2/2018.
@@ -13,11 +18,20 @@ import java.sql.Date;
 public class ClienteBean {
 
     private Long id;
+
+    @NotBlank
     private String nombre;
+    @NotBlank
     private String apellido;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "No se ingreso una fecha de nacimiento" )
+    @Past
     private Date fecha_de_nacimiento;
+    @NotBlank
     private String telefono;
+    @NotBlank
     private String direccion;
+    @Email
     private String email;
     private String facebook;
 

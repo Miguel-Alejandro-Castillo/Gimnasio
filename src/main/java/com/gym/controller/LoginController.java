@@ -30,10 +30,7 @@ public class LoginController {
     }
     @RequestMapping(value={"/",""}, method = RequestMethod.GET)
     public String index(){
-        if (isAunthenticated())
             return "redirect:/home";
-        else
-            return "redirect:/login";
     }
 
 
