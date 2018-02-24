@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container">
     <div class="row">
@@ -7,30 +8,19 @@
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <!--<form role="form"> -->
-                   <form:form id="loginForm" modelAttribute="loginBean" action="login" method="post" role="form">
+                    <spring:url value="/login" var="urlLogin"/>
+                   <form id="loginForm"  action="${urlLogin}" method="post" role="form">
                         <fieldset>
                             <div class="form-group">
-                                <form:input path="username"  cssClass="form-control" autofocus="autofocus" placeholder="Username"/>
-                                    <form:errors path="username" cssClass="error"/>
-                                <!--<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus> -->
+                                <input id="username" name="username" class="form-control" autofocus placeholder="Username"/>
                             </div>
                             <div class="form-group">
-                                <form:password path="password" cssClass="form-control" placeholder="Password"/>
-                                <form:errors path="password" cssClass="error"/>
-                                <!--<input class="form-control" placeholder="Password" name="password" type="password" value="">-->
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
-                            </div>
-                            <!-- Change this to a button or input when using this as a form -->
-                            <form:button  class="btn btn-lg btn-success btn-block">Login</form:button>
-                            <!--<a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>-->
-                            <span class="error">${loginError}</div>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                            <span class="error">${loginError}</span>
                         </fieldset>
-                    </form:form>
+                    </form>
                 </div>
             </div>
         </div>

@@ -3,26 +3,38 @@ package com.gym.bean;
 import com.gym.model.Cliente;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 /**
  * Created by Alejandro on 11/2/2018.
  */
 public class ClienteBean {
+
     private Long id;
-    @NotNull
-    private Long dni;
-    @NotBlank
     private String nombre;
-    @NotBlank
     private String apellido;
-    @NotNull
-    private Short edad;
-    @NotNull
-    private Long telefono;
+    private Date fecha_de_nacimiento;
+    private String telefono;
+    private String direccion;
+    private String email;
+    private String facebook;
 
     public ClienteBean() {
         super();
+    }
+
+    public ClienteBean(Long id, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email, String facebook) {
+        this();
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fecha_de_nacimiento = fecha_de_nacimiento;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.email = email;
+        this.facebook = facebook;
     }
 
     public Long getId() {
@@ -33,12 +45,12 @@ public class ClienteBean {
         this.id = id;
     }
 
-    public Long getDni() {
-        return dni;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDni(Long dni) {
-        this.dni = dni;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellido() {
@@ -49,36 +61,54 @@ public class ClienteBean {
         this.apellido = apellido;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Date getFecha_de_nacimiento() {
+        return fecha_de_nacimiento;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setFecha_de_nacimiento(Date fecha_de_nacimiento) {
+        this.fecha_de_nacimiento = fecha_de_nacimiento;
     }
 
-    public Short getEdad() {
-        return edad;
-    }
-
-    public void setEdad(Short edad) {
-        this.edad = edad;
-    }
-
-    public Long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 
     public void load(Cliente cliente) {
         this.setId(cliente.getId());
-        this.setApellido(cliente.getApellido());
-        this.setDni(cliente.getDni());
-        this.setEdad(cliente.getEdad());
         this.setNombre(cliente.getNombre());
+        this.setApellido(cliente.getApellido());
+        this.setFecha_de_nacimiento(cliente.getFecha_de_nacimiento());
         this.setTelefono(cliente.getTelefono());
+        this.setDireccion(cliente.getDireccion());
+        this.setEmail(cliente.getEmail());
+        this.setFacebook(cliente.getFacebook());
     }
 }

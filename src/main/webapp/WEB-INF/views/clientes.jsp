@@ -21,24 +21,27 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>dni</th>
                                 <th>nombre</th>
                                 <th>apellido</th>
-                                <th>edad</th>
+                                <th>fecha de nacimiento</th>
                                 <th>telefono</th>
+                                <th>direccion</th>
+                                <th>email</th>
+                                <th>facebook</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${clientes}" var="cliente">
                                <tr class="odd gradeX">
-                                     <td><c:out value="${cliente.id}"></c:out></td>
-                                     <td><c:out value="${cliente.dni}"></c:out></td>
-                                     <td><c:out value="${cliente.nombre}"></c:out></td>
-                                     <td><c:out value="${cliente.apellido}"></c:out></td>
-                                      <td><c:out value="${cliente.edad}"></c:out></td>
-                                      <td><c:out value="${cliente.telefono}"></c:out></td>
+                                   <td><c:out value="${cliente.id}"></c:out></td>
+                                   <td><c:out value="${cliente.nombre}"></c:out></td>
+                                   <td><c:out value="${cliente.apellido}"></c:out></td>
+                                   <td><c:out value="${cliente.fecha_de_nacimiento}"></c:out></td>
                                    <td><c:out value="${cliente.telefono}"></c:out></td>
+                                   <td><c:out value="${cliente.direccion}"></c:out></td>
+                                   <td><c:out value="${cliente.email}"></c:out></td>
+                                   <td><c:out value="${cliente.facebook}"></c:out></td>
                                    <spring:url value="/clientes/${cliente.id}/editar" var="urlEditCliente"/>
                                    <td><a href="${urlEditCliente}" >Editar cliente</a></td>
                                </tr>

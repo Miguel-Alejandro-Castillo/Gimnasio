@@ -1,15 +1,13 @@
 package com.gym.util;
 
-import com.gym.dao.AdministradorIDao;
+import com.gym.dao.AdministradorRepository;
 import com.gym.model.Administrador;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,12 +20,12 @@ import java.util.List;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private AdministradorIDao administradorIDao;
+    private AdministradorRepository administradorRepository;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
-        Administrador admin= administradorIDao.get(username ,password);
+        Administrador admin= administradorRepository.findByUsernameAndPassword(username, password);
         if ( admin != null ) {
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
             //grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));

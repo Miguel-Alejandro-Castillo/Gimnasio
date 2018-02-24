@@ -9,14 +9,17 @@
        <beans:import resource="dispatcher-servlet.xml"/>
        <http auto-config="true">
               <csrf disabled="true" />
-              <intercept-url pattern="/login" access="isAnonymous()"   />
+              <intercept-url pattern="/clientes/**" access="isAuthenticated()" />
               <intercept-url pattern="/home" access="isAuthenticated()"/>
+              <intercept-url pattern="/login" access="permitAll"/>
 
               <form-login
                       login-page='/login'
                       default-target-url="/home"
                       login-processing-url="/login"
-                      authentication-failure-url="/login?error=true"  />
+                      authentication-failure-url="/login?error=true"
+                      username-parameter="username"
+                      password-parameter="password "/>
 
               <logout logout-url="/logout"
                       logout-success-url="/login"

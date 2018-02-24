@@ -253,7 +253,7 @@
                         <a href="${crearCliente}">Alta de cliente</a>
                     </li>
                     <li>
-                        <spring:url value="/clientes/" var="listadoClientes"/>
+                        <spring:url value="/clientes" var="listadoClientes"/>
                         <a href="${listadoClientes}">Listado de clientes</a>
                     </li>
                 </ul>

@@ -15,6 +15,7 @@
      <spring.security.version>4.2.3.RELEASE</spring.security.version>
   </properties>
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

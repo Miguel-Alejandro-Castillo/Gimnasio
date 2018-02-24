@@ -19,30 +19,40 @@
                                 <form:form id="clienteForm" modelAttribute="clienteBean" action="${urlActual}" method="post" role="form">
                                         <form:hidden path="id"/>
                                         <div class="form-group">
-                                            <form:label path="nombre">Nombre</form:label>
+                                            <form:label path="nombre">Nombre*</form:label>
                                             <form:input path="nombre"  cssClass="form-control" autofocus="autofocus"/>
                                             <form:errors path="nombre" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <form:label path="apellido">Apellido</form:label>
+                                            <form:label path="apellido">Apellido*</form:label>
                                             <form:input path="apellido"  cssClass="form-control"/>
                                             <form:errors path="apellido" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <form:label path="dni">DNI</form:label>
-                                            <form:input path="dni" type="number" cssClass="form-control"/>
-                                            <form:errors path="dni" cssClass="error"/>
+                                          <form:label path="fecha_de_nacimiento">Fecha de nacimiento*</form:label>
+                                          <form:input type="date" path="fecha_de_nacimiento"  cssClass="form-control"/>
+                                          <form:errors path="fecha_de_nacimiento" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <form:label path="edad">Edad</form:label>
-                                            <form:input type="number" path="edad"  cssClass="form-control"/>
-                                            <form:errors path="edad" cssClass="error"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <form:label path="telefono">Numero de telefono</form:label>
-                                            <form:input type="number" path="telefono"  cssClass="form-control"/>
+                                            <form:label path="telefono">Telefono*</form:label>
+                                            <form:input  path="telefono"  cssClass="form-control"/>
                                             <form:errors path="telefono" cssClass="error"/>
                                         </div>
+                                       <div class="form-group">
+                                           <form:label path="direccion">Direccion*</form:label>
+                                           <form:input  path="direccion"  cssClass="form-control"/>
+                                           <form:errors path="direccion" cssClass="error"/>
+                                        </div>
+                                    <div class="form-group">
+                                        <form:label path="email">Email</form:label>
+                                        <form:input  path="email"  cssClass="form-control"/>
+                                        <form:errors path="email" cssClass="error"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="facebook">Facebook</form:label>
+                                        <form:input  path="facebook"  cssClass="form-control"/>
+                                        <form:errors path="facebook" cssClass="error"/>
+                                    </div>
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
                                     </form:form>
                                 </div>
