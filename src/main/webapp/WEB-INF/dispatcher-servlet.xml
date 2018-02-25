@@ -32,9 +32,22 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <mvc:resources mapping="/templates/**" location="/WEB-INF/views/templates/" />
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename">
+      <property name="basenames">
+        <list>
             <value>messages</value>
+            <value>ValidationMessages</value>
+        </list>
+      </property>
+     <property name="defaultEncoding" value="UTF-8" />
+   </bean>
+    <!-- JSR-303 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="messageInterpolator">
+            <bean class="com.gym.util.MyMessageInterpolator" />
         </property>
     </bean>
+
+
+
 
 </beans>

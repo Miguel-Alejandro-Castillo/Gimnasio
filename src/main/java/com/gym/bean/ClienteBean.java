@@ -19,19 +19,19 @@ public class ClienteBean {
 
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "{campo.obligatorio}")
     private String nombre;
-    @NotBlank
+    @NotBlank(message = "{campo.obligatorio}")
     private String apellido;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "No se ingreso una fecha de nacimiento" )
-    @Past
+    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
+    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
     private Date fecha_de_nacimiento;
-    @NotBlank
+    @NotBlank(message = "{campo.obligatorio}")
     private String telefono;
-    @NotBlank
+    @NotBlank(message = "{campo.obligatorio}")
     private String direccion;
-    @Email
+    @Email(message = "{campo.email.incorrecto}" )
     private String email;
     private String facebook;
 

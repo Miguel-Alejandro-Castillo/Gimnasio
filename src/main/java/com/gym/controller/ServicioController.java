@@ -32,7 +32,7 @@ public class ServicioController {
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showServicios(){
         ModelAndView mav=new ModelAndView("servicios");
-        List<servicios> servicios= ServicioRepository.findAll();
+        List<Servicio> servicios= ServicioRepository.findAll();
         mav.addObject("servicios",servicios);
         return mav;
     }

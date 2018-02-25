@@ -27,7 +27,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
         Administrador admin= administradorRepository.findByUsernameAndPassword(username, password);
         if ( admin != null ) {
-            List<GrantedAuthority> grantedAuths = new ArrayList<>();
+            List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
             //grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
             Authentication auth = new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
             return auth;
