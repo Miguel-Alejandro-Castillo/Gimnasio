@@ -33,13 +33,12 @@ public class ClienteBean {
     private String direccion;
     @Email(message = "{campo.email.incorrecto}" )
     private String email;
-    private String facebook;
 
     public ClienteBean() {
         super();
     }
 
-    public ClienteBean(Long id, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email, String facebook) {
+    public ClienteBean(Long id, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
         this();
         this.id = id;
         this.nombre = nombre;
@@ -48,7 +47,6 @@ public class ClienteBean {
         this.telefono = telefono;
         this.direccion = direccion;
         this.email = email;
-        this.facebook = facebook;
     }
 
     public Long getId() {
@@ -107,14 +105,6 @@ public class ClienteBean {
         this.email = email;
     }
 
-    public String getFacebook() {
-        return facebook;
-    }
-
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
-    }
-
     public void load(Cliente cliente) {
         this.setId(cliente.getId());
         this.setNombre(cliente.getNombre());
@@ -123,6 +113,5 @@ public class ClienteBean {
         this.setTelefono(cliente.getTelefono());
         this.setDireccion(cliente.getDireccion());
         this.setEmail(cliente.getEmail());
-        this.setFacebook(cliente.getFacebook());
     }
 }

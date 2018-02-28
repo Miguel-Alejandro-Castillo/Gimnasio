@@ -46,10 +46,10 @@
         <put-attribute name="main"	value="/WEB-INF/views/clientes.jsp" />
     </definition>
 
-    <!-- Definicion pantalla para listar las listas -->
-    <definition name="servicios" extends="default-template">
-        <put-attribute name="title" value="Listado de Servicios" cascade="true"/>
-        <put-attribute name="main"	value="/WEB-INF/views/servicios.jsp" />
+    <!-- Definicion pantalla para listar las actividades -->
+    <definition name="actividades" extends="default-template">
+        <put-attribute name="title" value="Listado de Actividades" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/actividades.jsp" />
     </definition>
 
 

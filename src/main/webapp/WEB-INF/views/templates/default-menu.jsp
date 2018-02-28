@@ -67,8 +67,8 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <spring:url value="/servicios" var="servicios"/>
-                <a href="${servicios}">><i class="fa fa-edit fa-fw"></i>Servicios</a>
+                <spring:url value="/actividades" var="actividades"/>
+                <a href="${actividades}">><i class="fa fa-edit fa-fw"></i>Actividades</a>
             </li>
 
         </ul>

@@ -5,32 +5,47 @@ import javax.persistence.*;
  * Created by Javier on 10/2/2018.
  */
 @Entity
-@Table( name = "SERVICIO")
-public class Servicio {
+@Table( name = "ACTIVIDADES")
+public class Actividad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
-    private String nombreServicio;
+    private Long id;    
+    
+	@Column(nullable = false)
+    private String nombreActividad;
+	
     @Column(nullable = false)
     private String profesor;
+    
     @Column(nullable = false)
     private Integer costo;
+    
     @Column(nullable = false)
     private String dia;
-    @Column(nullable = false)
-    private String rangoHorario;
+    
+    public Actividad() {
+    	super();
+    }
+    
+    public Actividad(Long id, String nombreActividad, String profesor, Integer costo, String dia) {
+		this.id = id;
+		this.nombreActividad = nombreActividad;
+		this.profesor = profesor;
+		this.costo = costo;
+		this.dia = dia;
+	}
+        
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombreServicio() {
-		return nombreServicio;
+	public String getNombreActividad() {
+		return nombreActividad;
 	}
-	public void setNombreServicio(String nombreServicio) {
-		this.nombreServicio = nombreServicio;
+	public void setNombreActividad(String nombreActividad) {
+		this.nombreActividad = nombreActividad;
 	}
 	public String getProfesor() {
 		return profesor;
@@ -49,11 +64,5 @@ public class Servicio {
 	}
 	public void setDia(String dia) {
 		this.dia = dia;
-	}
-	public String getRangoHorario() {
-		return rangoHorario;
-	}
-	public void setRangoHorario(String rangoHorario) {
-		this.rangoHorario = rangoHorario;
 	}
 }

@@ -32,14 +32,11 @@ public class Cliente {
     @Column
     private String email;
 
-    @Column
-    private String facebook;
-
     public Cliente() {
         super();
     }
 
-    public Cliente(Long id,String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email, String facebook) {
+    public Cliente(Long id,String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
         this();
         this.id=id;
         this.nombre = nombre;
@@ -48,7 +45,6 @@ public class Cliente {
         this.telefono = telefono;
         this.direccion = direccion;
         this.email = email;
-        this.facebook = facebook;
     }
 
     public Long getId() {
@@ -105,13 +101,5 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFacebook() {
-        return facebook;
-    }
-
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
     }
 }

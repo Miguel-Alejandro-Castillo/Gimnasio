@@ -28,7 +28,6 @@
                                 <th>telefono</th>
                                 <th>direccion</th>
                                 <th>email</th>
-                                <th>facebook</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -42,7 +41,6 @@
                                    <td><c:out value="${cliente.telefono}"></c:out></td>
                                    <td><c:out value="${cliente.direccion}"></c:out></td>
                                    <td><c:out value="${cliente.email}"></c:out></td>
-                                   <td><c:out value="${cliente.facebook}"></c:out></td>
                                    <spring:url value="/clientes/${cliente.id}/editar" var="urlEditCliente"/>
                                    <td><a href="${urlEditCliente}" >Editar cliente</a></td>
                                </tr>

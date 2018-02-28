@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping(value="/clientes")
 public class ClienteController {
 
-
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -46,7 +45,7 @@ public class ClienteController {
         if(result.hasErrors())
             return new ModelAndView("crear-cliente");
         else{
-            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getFecha_de_nacimiento(),clienteBean.getTelefono(), clienteBean.getDireccion(),clienteBean.getEmail(),clienteBean.getFacebook());
+            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getFecha_de_nacimiento(),clienteBean.getTelefono(), clienteBean.getDireccion(),clienteBean.getEmail());
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }
@@ -75,7 +74,7 @@ public class ClienteController {
         if(result.hasErrors())
             return new ModelAndView("editar-cliente");
         else{
-            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getFecha_de_nacimiento(),clienteBean.getTelefono(),clienteBean.getDireccion(),clienteBean.getEmail(),clienteBean.getFacebook());
+            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getFecha_de_nacimiento(),clienteBean.getTelefono(),clienteBean.getDireccion(),clienteBean.getEmail());
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }

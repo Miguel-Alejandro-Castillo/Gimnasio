@@ -1,28 +1,25 @@
 package com.gym.bean;
 
-//import com.gym.model.Servicio;
+import com.gym.model.Actividad;
 
 /**
  * Created by Alejandro on 11/2/2018.
  */
-public class ServicioBean {
+public class ActividadBean {
 
 	private Long id;
-    private String nombreServicio;
+    private String nombreActividad;
     private String profesor;
     private Integer costo;
     private String dia;
-    private String rangoHorario;	
-	
-    public ServicioBean(Long id, String nombreServicio, String profesor, Integer costo, String dia,
-			String rangoHorario) {
+    
+    public ActividadBean(Long id, String nombreActividad, String profesor, Integer costo, String dia) {
 		super();
 		this.id = id;
-		this.nombreServicio = nombreServicio;
+		this.nombreActividad = nombreActividad;
 		this.profesor = profesor;
 		this.costo = costo;
 		this.dia = dia;
-		this.rangoHorario = rangoHorario;
 	}
 
 	public Long getId() {
@@ -31,11 +28,11 @@ public class ServicioBean {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombreServicio() {
-		return nombreServicio;
+	public String getNombreActividad() {
+		return nombreActividad;
 	}
-	public void setNombreServicio(String nombreServicio) {
-		this.nombreServicio = nombreServicio;
+	public void setNombreActividad(String nombreActividad) {
+		this.nombreActividad = nombreActividad;
 	}
 	public String getProfesor() {
 		return profesor;
@@ -54,14 +51,6 @@ public class ServicioBean {
 	}
 	public void setDia(String dia) {
 		this.dia = dia;
-	}
-	public String getRangoHorario() {
-		return rangoHorario;
-	}
-	public void setRangoHorario(String rangoHorario) {
-		this.rangoHorario = rangoHorario;
-	}
-    
-    
+	} 
     
 }

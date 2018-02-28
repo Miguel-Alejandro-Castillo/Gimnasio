@@ -48,11 +48,6 @@
                                         <form:input  path="email"  cssClass="form-control"/>
                                         <form:errors path="email" cssClass="error"/>
                                     </div>
-                                    <div class="form-group">
-                                        <form:label path="facebook">Facebook</form:label>
-                                        <form:input  path="facebook"  cssClass="form-control"/>
-                                        <form:errors path="facebook" cssClass="error"/>
-                                    </div>
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
                                     </form:form>
                                 </div>
