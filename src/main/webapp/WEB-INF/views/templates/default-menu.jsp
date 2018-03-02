@@ -67,8 +67,18 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <spring:url value="/actividades" var="actividades"/>
-                <a href="${actividades}">><i class="fa fa-edit fa-fw"></i>Actividades</a>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Actividades<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+	                <li>
+						<spring:url value="/actividades/crearActividad" var="crearActividad"/>
+						<a href="${crearActividad}">Alta de Actividad</a>
+					</li>
+					<li>
+						<spring:url value="/actividades" var="listadoActividades"/>
+		                <a href="${listadoActividades}">Lista de Actividades</a>
+					</li>
+                </ul>
+                <!-- /.nav-second-level -->
             </li>
 
         </ul>

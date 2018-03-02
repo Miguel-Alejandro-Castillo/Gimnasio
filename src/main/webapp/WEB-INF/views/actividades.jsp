@@ -1,12 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"><tiles:getAsString name="title"/></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        DataTables Advanced Tables
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>nombreActividad</th>
+                                <th>profesor</th>
+                                <th>costo</th>
+                                <th>dia</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${actividades}" var="actividad">
+                               <tr class="odd gradeX">
+                                   <td><c:out value="${actividad.id}"></c:out></td>
+                                   <td><c:out value="${actividad.nombreActividad}"></c:out></td>
+                                   <td><c:out value="${actividad.profesor}"></c:out></td>
+                                   <td><c:out value="${actividad.costo}"></c:out></td>
+                                   <td><c:out value="${actividad.dia}"></c:out></td>
+                                   <spring:url value="/actividades/${actividad.id}/editar" var="urlEditActividad"/>
+                                   <td><a href="${urlEditActividad}" >Editar actividad</a></td>
+                               </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <!-- /.table-responsive -->
 
-</body>
-</html> 
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->

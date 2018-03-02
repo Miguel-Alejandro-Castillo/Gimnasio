@@ -45,6 +45,20 @@
         <put-attribute name="title" value="Listado de clientes" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/clientes.jsp" />
     </definition>
+    
+        <!-- Definicion pantalla  para crear una actividad -->
+    <definition name="crear-actividad" extends="default-template">
+        <put-attribute name="title" value="Alta de actividad" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/actividad.jsp" />
+        <put-attribute name="titleSubmit" value="Crear actividad" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla  para editar una actividad-->
+    <definition name="editar-actividad" extends="default-template">
+        <put-attribute name="title" value="Editar Actividad" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/actividad.jsp" />
+        <put-attribute name="titleSubmit" value="Modificar datos" cascade="true" />
+    </definition>
 
     <!-- Definicion pantalla para listar las actividades -->
     <definition name="actividades" extends="default-template">

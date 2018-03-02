@@ -21,6 +21,10 @@ public class ActividadBean {
 		this.costo = costo;
 		this.dia = dia;
 	}
+    
+    public ActividadBean() {
+    	super();
+    }
 
 	public Long getId() {
 		return id;
@@ -52,5 +56,12 @@ public class ActividadBean {
 	public void setDia(String dia) {
 		this.dia = dia;
 	} 
+	public void load(Actividad actividad) {
+        this.setId(actividad.getId());
+		this.setNombreActividad(actividad.getNombreActividad());
+		this.setProfesor(actividad.getProfesor());
+		this.setCosto(actividad.getCosto());
+		this.setDia(actividad.getDia());
+    }
     
 }
