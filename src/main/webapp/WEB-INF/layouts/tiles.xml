@@ -65,6 +65,25 @@
         <put-attribute name="title" value="Listado de Actividades" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/actividades.jsp" />
     </definition>
+    
+    <!-- Definicion pantalla  para crear un profesor -->
+    <definition name="crear-profesor" extends="default-template">
+        <put-attribute name="title" value="Alta de Profesor" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/profesor.jsp" />
+        <put-attribute name="titleSubmit" value="Crear Profesor" cascade="true" />
+    </definition>
 
+    <!-- Definicion pantalla  para editar un profesor-->
+    <definition name="editar-profesor" extends="default-template">
+        <put-attribute name="title" value="Editar Profesor" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/profesor.jsp" />
+        <put-attribute name="titleSubmit" value="Modificar datos" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla para listar a todos los profesores -->
+    <definition name="profesores" extends="default-template">
+        <put-attribute name="title" value="Listado de Profesores" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/profesores.jsp" />
+    </definition>
 
 </tiles-definitions>
