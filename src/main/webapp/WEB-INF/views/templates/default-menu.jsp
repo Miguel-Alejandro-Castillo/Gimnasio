@@ -94,7 +94,20 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Horarios<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <spring:url value="/horarios/crearHorario" var="crearHorario"/>
+                        <a href="${crearHorario}">Alta de Horario</a>
+                    </li>
+                    <li>
+                        <spring:url value="/horarios" var="listadoHorarios"/>
+                        <a href="${listadoHorarios}">Listado de Horarios</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

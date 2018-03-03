@@ -86,4 +86,24 @@
         <put-attribute name="main"	value="/WEB-INF/views/profesores.jsp" />
     </definition>
 
+        <!-- Definicion pantalla  para crear un horario -->
+    <definition name="crear-horario" extends="default-template">
+        <put-attribute name="title" value="Alta de Horario" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/horario.jsp" />
+        <put-attribute name="titleSubmit" value="Crear horario" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla  para editar un horario-->
+    <definition name="editar-horario" extends="default-template">
+        <put-attribute name="title" value="Editar Horario" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/horario.jsp" />
+        <put-attribute name="titleSubmit" value="Modificar datos" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla para listar las horarios -->
+    <definition name="horarios" extends="default-template">
+        <put-attribute name="title" value="Listado de Horarios" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/horarios.jsp" />
+    </definition>
+
 </tiles-definitions>
