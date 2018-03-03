@@ -34,6 +34,11 @@
                                           <form:errors path="fecha_de_nacimiento" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
+                                            <form:label path="dni">DNI*</form:label>
+                                            <form:input path="dni"  cssClass="form-control" autofocus="autofocus"/>
+                                            <form:errors path="dni" cssClass="error"/>
+                                        </div>
+                                        <div class="form-group">
                                             <form:label path="telefono">Telefono*</form:label>
                                             <form:input  path="telefono"  cssClass="form-control"/>
                                             <form:errors path="telefono" cssClass="error"/>

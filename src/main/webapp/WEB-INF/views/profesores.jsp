@@ -18,6 +18,7 @@
                             <thead>
                             <tr>
                                 <th>id</th>
+                                <th>dni</th>
                                 <th>nombre</th>
                                 <th>apellido</th>
                                 <th>fecha de nacimiento</th>
@@ -31,6 +32,7 @@
                             <c:forEach items="${profesores}" var="profesor">
                                <tr class="odd gradeX">
                                    <td><c:out value="${profesor.id}"></c:out></td>
+                                   <td><c:out value="${profesor.dni}"></c:out></td>
                                    <td><c:out value="${profesor.nombre}"></c:out></td>
                                    <td><c:out value="${profesor.apellido}"></c:out></td>
                                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${profesor.fecha_de_nacimiento}" /></td>

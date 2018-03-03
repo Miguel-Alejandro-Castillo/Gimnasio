@@ -19,6 +19,8 @@ public class ProfesorBean {
 
     private Long id;
 
+    @NotNull(message = "{campo.obligatorio}")
+    private Long dni;
     @NotBlank(message = "{campo.obligatorio}")
     private String nombre;
     @NotBlank(message = "{campo.obligatorio}")
@@ -38,7 +40,7 @@ public class ProfesorBean {
         super();
     }
 
-    public ProfesorBean(Long id, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
+    public ProfesorBean(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
         this();
         this.id = id;
         this.nombre = nombre;
@@ -47,8 +49,17 @@ public class ProfesorBean {
         this.telefono = telefono;
         this.direccion = direccion;
         this.email = email;
+        this.dni = dni;
     }
 
+    public Long getDni() {
+		return dni;
+	}
+
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
+    
     public Long getId() {
         return id;
     }
@@ -113,5 +124,6 @@ public class ProfesorBean {
         this.setTelefono(profesor.getTelefono());
         this.setDireccion(profesor.getDireccion());
         this.setEmail(profesor.getEmail());
+        this.setDni(profesor.getDni());
     }
 }

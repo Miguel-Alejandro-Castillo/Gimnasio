@@ -15,6 +15,9 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+	@Column(nullable = false)
+    private Long dni;
+	
     @Column(nullable = false)
     private String nombre;
 
@@ -34,7 +37,7 @@ public class Profesor {
     @Column
     private String email;
 
-    public Profesor(Long id, String nombre, String apellido, Date fecha_de_nacimiento, String telefono,
+    public Profesor(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono,
 			String direccion, String email) {
 		this.id = id;
 		this.nombre = nombre;
@@ -43,13 +46,23 @@ public class Profesor {
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.email = email;
+		this.dni = dni;
 	}
 	
 	public Profesor() {
 		super();
 	}
 
+	public Long getDni() {
+		return dni;
+	}
 
+
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

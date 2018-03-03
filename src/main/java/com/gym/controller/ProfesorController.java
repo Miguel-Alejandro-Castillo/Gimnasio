@@ -45,7 +45,7 @@ public class ProfesorController {
         if(result.hasErrors())
             return new ModelAndView("crear-profesor");
         else{
-            Profesor profesor=new Profesor(profesorBean.getId(),profesorBean.getNombre(),profesorBean.getApellido(),profesorBean.getFecha_de_nacimiento(),profesorBean.getTelefono(), profesorBean.getDireccion(),profesorBean.getEmail());
+            Profesor profesor=new Profesor(profesorBean.getId(),profesorBean.getDni(),profesorBean.getNombre(),profesorBean.getApellido(),profesorBean.getFecha_de_nacimiento(),profesorBean.getTelefono(), profesorBean.getDireccion(),profesorBean.getEmail());
             profesorRepository.save(profesor);
             return new ModelAndView("redirect:/profesores");
         }
@@ -74,7 +74,7 @@ public class ProfesorController {
         if(result.hasErrors())
             return new ModelAndView("editar-profesor");
         else{
-            Profesor profesor=new Profesor(profesorBean.getId(),profesorBean.getNombre(),profesorBean.getApellido(),profesorBean.getFecha_de_nacimiento(),profesorBean.getTelefono(),profesorBean.getDireccion(),profesorBean.getEmail());
+            Profesor profesor=new Profesor(profesorBean.getId(),profesorBean.getDni(),profesorBean.getNombre(),profesorBean.getApellido(),profesorBean.getFecha_de_nacimiento(),profesorBean.getTelefono(),profesorBean.getDireccion(),profesorBean.getEmail());
             profesorRepository.save(profesor);
             return new ModelAndView("redirect:/profesores");
         }
