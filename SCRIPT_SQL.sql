@@ -1,5 +1,6 @@
 INSERT INTO gimnasio.administradores(nombre, apellido,username,`password`)VALUES
 ('eldeposito','eldeposito','admin','1234');
+
 INSERT INTO gimnasio.clientes(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
 (42032779,'Hee','radio','2001-07-30','4652041','22 Marsh Ave.','grady@att.net'),
 (31352234,'Muoi','asperse','1979-07-01','4828751',"'Salisbury, MD 21801'",'mcrawfor@sbcglobal.net'),
@@ -50,3 +51,23 @@ INSERT INTO gimnasio.clientes(dni,nombre,apellido,fecha_de_nacimiento,telefono,d
 (50520385,'Summer','functionary','1993-12-21','4535393','68 Penn St.','jpflip@optonline.net'),
 (28570140,'Kanesha','staircase','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com'),
 (14793287,'Sybil','sprucely','1970-09-11','4812534','393 Manhattan Street','shrapnull@icloud.com');
+
+INSERT INTO gimnasio.profesores(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
+(37833319,'Nancy','Villareal','1969-01-26','4380705',"'Salt Lake City, UT 84119'",'dhrakar@att.net'),
+(14933335,'Jose','Perez','1973-01-16','4732404','8124 Berkshire St.','matthijs@sbcglobal.net'),
+(46533341,'Jose','Hernandez','1977-04-09','4663208',"'Saratoga Springs, NY 12866'",'mfburgo@comcast.net'),
+(50533385,'Ramon','Lopez','1993-12-21','4535393','68 Penn St.','jpflip@optonline.net'),
+(28533340,'Sandra','Goñi','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com');
+
+INSERT INTO gimnasio.horarios(hora_inicio,hora_fin)VALUES
+('08:30:00','09:15:00'),
+('09:30:00','10:30:00'),
+('10:30:00','11:30:00'),
+('13:30:00','14:30:00'),
+('14:30:00','15:30:00'),
+('15:30:00','16:30:00'),
+('17:00:00','18:00:00'),
+('18:00:00','19:00:00'),
+('19:00:00','20:00:00'),
+('20:00:00','21:00:00'),
+('21:00:00','22:00:00');
