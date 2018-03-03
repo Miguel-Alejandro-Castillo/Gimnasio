@@ -10,10 +10,10 @@ public class HorarioBean {
 	
 	private Long id;
     
-    @NotNull
+    @NotBlank
     private String hora_inicio;
     
-    @NotNull
+    @NotBlank
     private String hora_fin;
 
     public HorarioBean() {
