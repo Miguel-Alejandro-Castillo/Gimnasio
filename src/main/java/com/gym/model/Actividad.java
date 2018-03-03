@@ -1,38 +1,40 @@
 package com.gym.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Javier on 10/2/2018.
  */
 @Entity
 @Table( name = "ACTIVIDADES")
 public class Actividad {
-    @Id
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
     
-	@Column(nullable = false)
-    private String nombreActividad;
-	
+	@Column(nullable = false, unique = true)
+    private String nombre;
+
     @Column(nullable = false)
-    private String profesor;
-    
-    @Column(nullable = false)
-    private Integer costo;
-    
-    @Column(nullable = false)
-    private String dia;
-    
+    private BigDecimal costo;
+
+	@OneToMany
+	private Set<DiaHorarioProfesor> diasHorariosProfesores;
+
     public Actividad() {
     	super();
+		diasHorariosProfesores=new HashSet<>();
     }
     
-    public Actividad(Long id, String nombreActividad, String profesor, Integer costo, String dia) {
+    public Actividad(Long id, String nombre, BigDecimal costo) {
+		this();
 		this.id = id;
-		this.nombreActividad = nombreActividad;
-		this.profesor = profesor;
+		this.nombre = nombre;
 		this.costo = costo;
-		this.dia = dia;
 	}
         
 	public Long getId() {
@@ -41,28 +43,24 @@ public class Actividad {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombreActividad() {
-		return nombreActividad;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombreActividad(String nombreActividad) {
-		this.nombreActividad = nombreActividad;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getProfesor() {
-		return profesor;
-	}
-	public void setProfesor(String profesor) {
-		this.profesor = profesor;
-	}
-	public Integer getCosto() {
+	public BigDecimal getCosto() {
 		return costo;
 	}
-	public void setCosto(Integer costo) {
+	public void setCosto(BigDecimal costo) {
 		this.costo = costo;
 	}
-	public String getDia() {
-		return dia;
+
+	public Set<DiaHorarioProfesor> getDiasHorariosProfesores() {
+		return diasHorariosProfesores;
 	}
-	public void setDia(String dia) {
-		this.dia = dia;
+
+	public void setDiasHorariosProfesores(Set<DiaHorarioProfesor> diasHorariosProfesores) {
+		this.diasHorariosProfesores = diasHorariosProfesores;
 	}
 }

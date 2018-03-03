@@ -28,6 +28,12 @@
                                             <form:input path="apellido"  cssClass="form-control"/>
                                             <form:errors path="apellido" cssClass="error"/>
                                         </div>
+
+                                    <div class="form-group">
+                                        <form:label path="dni">Dni*</form:label>
+                                        <form:input type="number" path="dni"  cssClass="form-control"/>
+                                        <form:errors path="dni" cssClass="error"/>
+                                    </div>
                                         <div class="form-group">
                                           <form:label path="fecha_de_nacimiento">Fecha de nacimiento*</form:label>
                                           <form:input type="date" path="fecha_de_nacimiento"  cssClass="form-control"/>

@@ -45,7 +45,7 @@ public class ClienteController {
         if(result.hasErrors())
             return new ModelAndView("crear-cliente");
         else{
-            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getFecha_de_nacimiento(),clienteBean.getTelefono(), clienteBean.getDireccion(),clienteBean.getEmail());
+            Cliente cliente=new Cliente(clienteBean);
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }
@@ -58,8 +58,7 @@ public class ClienteController {
         Long id = NumberUtils.toLong(id_cliente);
         Cliente cliente= clienteRepository.findOne(id);
         if(cliente!=null) {
-            ClienteBean clienteBean = new ClienteBean();
-            clienteBean.load(cliente);
+            ClienteBean clienteBean = new ClienteBean(cliente);
             mav= new ModelAndView("editar-cliente");
             mav.addObject("clienteBean", cliente);
         }
@@ -74,7 +73,7 @@ public class ClienteController {
         if(result.hasErrors())
             return new ModelAndView("editar-cliente");
         else{
-            Cliente cliente=new Cliente(clienteBean.getId(),clienteBean.getNombre(),clienteBean.getApellido(),clienteBean.getFecha_de_nacimiento(),clienteBean.getTelefono(),clienteBean.getDireccion(),clienteBean.getEmail());
+            Cliente cliente = new Cliente(clienteBean);
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }

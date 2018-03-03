@@ -2,6 +2,7 @@ package com.gym.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @author negro
@@ -15,14 +16,14 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@Column(nullable = false)
-    private Long dni;
-	
     @Column(nullable = false)
     private String nombre;
 
     @Column(nullable = false)
     private String apellido;
+
+	@Column(nullable = false, unique = true)
+	private  Long dni;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
@@ -35,10 +36,10 @@ public class Profesor {
     private String direccion;
 
     @Column
+
     private String email;
 
-    public Profesor(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono,
-			String direccion, String email) {
+    public Profesor(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono,			String direccion, String email) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -48,6 +49,8 @@ public class Profesor {
 		this.email = email;
 		this.dni = dni;
 	}
+
+
 	
 	public Profesor() {
 		super();

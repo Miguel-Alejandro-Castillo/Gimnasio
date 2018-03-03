@@ -22,20 +22,16 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>nombreActividad</th>
-                                <th>profesor</th>
+                                <th>nombre</th>
                                 <th>costo</th>
-                                <th>dia</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${actividades}" var="actividad">
                                <tr class="odd gradeX">
                                    <td><c:out value="${actividad.id}"></c:out></td>
-                                   <td><c:out value="${actividad.nombreActividad}"></c:out></td>
-                                   <td><c:out value="${actividad.profesor}"></c:out></td>
+                                   <td><c:out value="${actividad.nombre}"></c:out></td>
                                    <td><c:out value="${actividad.costo}"></c:out></td>
-                                   <td><c:out value="${actividad.dia}"></c:out></td>
                                    <spring:url value="/actividades/${actividad.id}/editar" var="urlEditActividad"/>
                                    <td><a href="${urlEditActividad}" >Editar actividad</a></td>
                                </tr>

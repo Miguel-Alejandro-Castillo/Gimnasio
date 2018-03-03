@@ -19,25 +19,17 @@
                                 <form:form id="actividadForm" modelAttribute="actividadBean" action="${urlActual}" method="post" role="form">
                                         <form:hidden path="id"/>
                                         <div class="form-group">
-                                            <form:label path="nombreActividad">Nombre Actividad*</form:label>
-                                            <form:input path="nombreActividad"  cssClass="form-control" autofocus="autofocus"/>
-                                            <form:errors path="nombreActividad" cssClass="error"/>
+                                            <form:label path="nombre">Nombre*</form:label>
+                                            <form:input path="nombre"  cssClass="form-control" autofocus="autofocus"/>
+                                            <form:errors path="nombre" cssClass="error"/>
                                         </div>
-                                        <div class="form-group">
-                                            <form:label path="profesor">Profesor*</form:label>
-                                            <form:input path="profesor"  cssClass="form-control"/>
-                                            <form:errors path="profesor" cssClass="error"/>
-                                        </div>
+
                                         <div class="form-group">
                                           <form:label path="costo">Costo*</form:label>
-                                          <form:input path="costo"  cssClass="form-control"/>
+                                          <form:input input="number" path="costo" step="0.01" min="1" cssClass="form-control"/>
                                           <form:errors path="costo" cssClass="error"/>
                                         </div>
-                                        <div class="form-group">
-                                            <form:label path="dia">Dia*</form:label>
-                                            <form:input  path="dia"  cssClass="form-control"/>
-                                            <form:errors path="dia" cssClass="error"/>
-                                        </div>
+
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
                                     </form:form>
                                 </div>

@@ -24,6 +24,7 @@
                                 <th>id</th>
                                 <th>nombre</th>
                                 <th>apellido</th>
+                                <th>dni</th>
                                 <th>fecha de nacimiento</th>
                                 <th>telefono</th>
                                 <th>direccion</th>
@@ -37,6 +38,7 @@
                                    <td><c:out value="${cliente.id}"></c:out></td>
                                    <td><c:out value="${cliente.nombre}"></c:out></td>
                                    <td><c:out value="${cliente.apellido}"></c:out></td>
+                                   <td><c:out value="${cliente.dni}"></c:out></td>
                                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${cliente.fecha_de_nacimiento}" /></td>
                                    <td><c:out value="${cliente.telefono}"></c:out></td>
                                    <td><c:out value="${cliente.direccion}"></c:out></td>

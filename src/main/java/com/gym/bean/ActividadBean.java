@@ -1,6 +1,11 @@
 package com.gym.bean;
 
 import com.gym.model.Actividad;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NegativeOrZero;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * Created by Alejandro on 11/2/2018.
@@ -8,18 +13,18 @@ import com.gym.model.Actividad;
 public class ActividadBean {
 
 	private Long id;
-    private String nombreActividad;
-    private String profesor;
-    private Integer costo;
-    private String dia;
+
+	@NotBlank(message = "{campo.obligatorio}")
+    private String nombre;
+
+	@NegativeOrZero @NotNull
+	private  BigDecimal costo;
     
-    public ActividadBean(Long id, String nombreActividad, String profesor, Integer costo, String dia) {
+    public ActividadBean(Long id, String nombre, Integer costo) {
 		super();
 		this.id = id;
-		this.nombreActividad = nombreActividad;
-		this.profesor = profesor;
+		this.nombre = nombre;
 		this.costo = costo;
-		this.dia = dia;
 	}
     
     public ActividadBean() {
@@ -32,36 +37,24 @@ public class ActividadBean {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombreActividad() {
-		return nombreActividad;
+
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombreActividad(String nombreActividad) {
-		this.nombreActividad = nombreActividad;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getProfesor() {
-		return profesor;
-	}
-	public void setProfesor(String profesor) {
-		this.profesor = profesor;
-	}
-	public Integer getCosto() {
+	public BigDecimal getCosto() {
 		return costo;
 	}
-	public void setCosto(Integer costo) {
+	public void setCosto(BigDecimal costo) {
 		this.costo = costo;
 	}
-	public String getDia() {
-		return dia;
-	}
-	public void setDia(String dia) {
-		this.dia = dia;
-	} 
+
 	public void load(Actividad actividad) {
         this.setId(actividad.getId());
-		this.setNombreActividad(actividad.getNombreActividad());
-		this.setProfesor(actividad.getProfesor());
+		this.setNombre(actividad.getNombre());
 		this.setCosto(actividad.getCosto());
-		this.setDia(actividad.getDia());
     }
     
 }

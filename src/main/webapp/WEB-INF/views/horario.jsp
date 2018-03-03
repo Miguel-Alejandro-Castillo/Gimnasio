@@ -20,12 +20,12 @@
                                         <form:hidden path="id"/>
                                         <div class="form-group">
                                             <form:label path="hora_inicio">hora inicio</form:label>
-                                            <form:input path="hora_inicio"  cssClass="form-control" autofocus="autofocus"/>
+                                            <form:input  path="hora_inicio" type="time" cssClass="form-control" autofocus="autofocus"/>
                                             <form:errors path="hora_inicio" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
                                             <form:label path="hora_fin">hora fin</form:label>
-                                            <form:input path="hora_fin"  cssClass="form-control"/>
+                                            <form:input path="hora_fin"  type="time" cssClass="form-control"/>
                                             <form:errors path="hora_fin" cssClass="error"/>
                                         </div>
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>

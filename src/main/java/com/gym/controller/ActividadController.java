@@ -45,7 +45,7 @@ public class ActividadController {
         if(result.hasErrors())
             return new ModelAndView("crear-actividad");
         else{
-            Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombreActividad(), actividadBean.getProfesor(), actividadBean.getCosto(), actividadBean.getDia());
+            Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
             actividadRepository.save(actividad);
             return new ModelAndView("redirect:/actividades");
         }
@@ -74,7 +74,7 @@ public class ActividadController {
         if(result.hasErrors())
             return new ModelAndView("editar-actividad");
         else{
-        	Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombreActividad(), actividadBean.getProfesor(), actividadBean.getCosto(), actividadBean.getDia());
+        	Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
             actividadRepository.save(actividad);
             return new ModelAndView("redirect:/actividades");
         }
