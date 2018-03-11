@@ -432,3 +432,19 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+
+/* Estilos para las solapas de el alta/edicion de una actividad  */
+*, *:before, *:after {margin: 0; padding: 0; box-sizing: border-box;}
+
+p {margin: 0 0 20px; line-height: 1.5;}
+
+.content > #content1, #content2 {display: none; padding: 20px 25px 5px;}
+
+#tab1, #tab2 {display: none;}
+.label_tab {display: inline-block; padding: 15px 25px; font-weight: 600; text-align: center;}
+#label1:hover , #label2:hover  {color: blue; cursor: pointer;}
+#tab1:checked + #label1, #tab2:checked + #label2 {background: #ed5a6a; color: #fff;}
+
+#tab1:checked ~ .content #content1, #tab2:checked ~ .content #content2 { display: block; }
+
+@media screen and (max-width: 400px) { .label_tab {padding: 15px 10px;} }

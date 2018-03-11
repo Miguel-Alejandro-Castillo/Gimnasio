@@ -20,7 +20,7 @@ public class ActividadBean {
 	@NegativeOrZero @NotNull
 	private  BigDecimal costo;
     
-    public ActividadBean(Long id, String nombre, Integer costo) {
+    public ActividadBean(Long id, String nombre, BigDecimal costo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

@@ -20,6 +20,7 @@
                                 <th>id</th>
                                 <th>hora inicio</th>
                                 <th>hora fin</th>
+                                <th>acciones</th>
                             </tr>
                             </thead>
                             <tbody>
