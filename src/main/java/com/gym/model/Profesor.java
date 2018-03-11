@@ -39,8 +39,13 @@ public class Profesor {
 
     private String email;
 
-    public Profesor(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono,			String direccion, String email) {
-		this.id = id;
+	public Profesor() {
+		super();
+	}
+
+    public Profesor(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
+		this();
+	    this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fecha_de_nacimiento = fecha_de_nacimiento;
@@ -50,11 +55,6 @@ public class Profesor {
 		this.dni = dni;
 	}
 
-
-	
-	public Profesor() {
-		super();
-	}
 
 	public Long getDni() {
 		return dni;
