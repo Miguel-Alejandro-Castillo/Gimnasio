@@ -19,17 +19,18 @@ public class ActividadBean {
 
 	@NegativeOrZero @NotNull
 	private  BigDecimal costo;
-    
-    public ActividadBean(Long id, String nombre, BigDecimal costo) {
+
+	public ActividadBean() {
+		super();
+	}
+
+	public ActividadBean(Long id, String nombre, BigDecimal costo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
 	}
     
-    public ActividadBean() {
-    	super();
-    }
 
 	public Long getId() {
 		return id;

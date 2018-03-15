@@ -2,7 +2,13 @@ package com.gym.controller;
 
 import com.gym.bean.ActividadBean;
 import com.gym.dao.ActividadRepository;
+import com.gym.dao.DiaHorarioProfesorRepository;
+import com.gym.dao.HorarioRepository;
+import com.gym.dao.ProfesorRepository;
 import com.gym.model.Actividad;
+import com.gym.model.DiaHorarioProfesor;
+import com.gym.model.Horario;
+import com.gym.model.Profesor;
 import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +32,15 @@ public class ActividadController {
 
     @Autowired
     private ActividadRepository actividadRepository;
+
+    @Autowired
+    private HorarioRepository horarioRepository;
+
+    @Autowired
+    private DiaHorarioProfesorRepository diaHorarioProfesorRepository;
+
+    @Autowired
+    private ProfesorRepository profesorRepository;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showActividades(){
@@ -37,9 +54,28 @@ public class ActividadController {
     public ModelAndView showAltaActividadForm(){
         ModelAndView mav=new ModelAndView("crear-actividad");
         mav.addObject("actividadBean", new ActividadBean());
+        String []dias={"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"};
+        mav.addObject("dias",dias);
+        List<Horario> horarios= horarioRepository.findAll();
+        mav.addObject("horarios",horarios);
+        List<Profesor> profesores=profesorRepository.findAll();
+        mav.addObject("profesores",profesores);
+        mav.addObject("diasHorariosProfesores", new ArrayList());
         return mav;
     }
 
+    /*@RequestMapping(value="/agregar-dia-horario-profesor", method = RequestMethod.POST)
+    public  ModelAndView submitCreateActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
+        if(result.hasErrors())
+            return new ModelAndView("crear-actividad");
+        else{
+            Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
+            actividadRepository.save(actividad);
+            return new ModelAndView("redirect:/actividades");
+        }
+
+    }
+    */
     @RequestMapping(value="/crearActividad", method = RequestMethod.POST)
     public  ModelAndView submitCreateActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
         if(result.hasErrors())

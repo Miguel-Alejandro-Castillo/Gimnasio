@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -27,6 +28,7 @@
                                     <spring:url value="" var="urlActual"/>
                                     <form:form id="actividadForm" modelAttribute="actividadBean" action="${urlActual}" method="post" role="form">
                                         <form:hidden path="id"/>
+
                                         <div class="form-group">
                                             <form:label path="nombre">Nombre*</form:label>
                                             <form:input path="nombre" cssClass="form-control" autofocus="autofocus"/>
@@ -56,19 +58,44 @@
 
 
         <div id="content2" class="row">
-            <p>
-                London is the capital city of England and the United Kingdom. It is the most populous city in the United
-                Kingdom, with a metropolitan area of over 13 million inhabitants. Standing on the River Thames, London
-                has been a major settlement for two millennia, its history going back to its founding by the Romans, who
-                named it Londinium.
-            </p>
 
-            <p>
-                London's ancient core, the City of London, largely retains its 1.12-square-mile (2.9 km2) mediaeval
-                boundaries and in 2011 had a resident population of 7,375, making it the smallest city in England. Since
-                at least the 19th century, the term London has also referred to the metropolis developed around this
-                core.
-            </p>
+             <select id="dia" name="dia" required>
+                 <option>Seleccione un dia</option>
+                 <c:forEach items="${dias}" var="dia">
+                     <option value="${dia}">${dia}</option>
+                 </c:forEach>
+             </select>
+             <select id="horario" name="horario" >
+                 <option>Seleccione un horario</option>
+                 <c:forEach items="${horarios}" var="horario">
+                     <option value="${horario.id}">${horario.hora_inicio} hs a ${horario.hora_fin} hs</option>
+                 </c:forEach>
+             </select>
+            <select id="profesor" name="profesor" >
+                <option>Seleccione un profesor</option>
+                <c:forEach items="${profesores}" var="profesor">
+                    <option value="${profesor.id}">${profesor.nombre} ${profesor.apellido}</option>
+                </c:forEach>
+            </select>
+            <button type="submit" value="Agregar" >Agregar</button>
+            <table id="tablaDiasHorariosDias">
+                <thead>
+                <tr>
+                    <th>dia</th>
+                    <th>horario</th>
+                    <th>profesor</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${diasHorariosProfesores}" var="diaHorarioProfesor">
+                    <tr class="odd gradeX">
+                        <td><c:out value="${diaHorarioProfesor.dia}"></c:out></td>
+                        <td><c:out value="${diaHorarioProfesor.horario.hora_inicio} hs a ${diaHorarioProfesor.horario.hora_fin} hs"></c:out></td>
+                        <td><c:out value="${diaHorarioProfesor.profesor.nombre} ${diaHorarioProfesor.profesor.apellido}"></c:out></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
 
     </div>
