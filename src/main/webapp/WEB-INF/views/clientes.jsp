@@ -45,6 +45,8 @@
                                    <td><c:out value="${cliente.email}"></c:out></td>
                                    <spring:url value="/clientes/${cliente.id}/editar" var="urlEditCliente"/>
                                    <td><a href="${urlEditCliente}" >Editar cliente</a></td>
+                                   <spring:url value="/clientes/${cliente.id}/pagar" var="urlPagar"/>
+                                   <td><a href="${urlPagar}" >Realizar Pago</a></td>
                                </tr>
                             </c:forEach>
                             </tbody>

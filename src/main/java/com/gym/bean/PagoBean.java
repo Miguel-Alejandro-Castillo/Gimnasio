@@ -16,41 +16,35 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import java.util.Date;
 import java.math.BigDecimal;
-import java.sql.*;
+import java.util.Calendar;
 
 public class PagoBean {
 
-	private Actividad idActividad;
+	private Actividad actividad;
 
 	private Long id;
-
-    private Date fecha_pago;
-   
-    private Time hora_pago;
+	
+	private Calendar momento_pago;
     
     @NegativeOrZero
     private BigDecimal monto;
-    
+        
     @NotNull
-    private Date fecha_desde;
-    
-    @NotNull
-    private Date fecha_hasta;
+    private Calendar fecha_hasta;
 
     public PagoBean() {
         super();
     }
     
-	public Actividad getIdActividad() {
-		return idActividad;
+    public Actividad getActividad() {
+		return actividad;
 	}
 
-	public void setIdActividad(Actividad idActividad) {
-		this.idActividad = idActividad;
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
 	}
-      
+
 	public Long getId() {
 		return id;
 	}
@@ -59,20 +53,12 @@ public class PagoBean {
 		this.id = id;
 	}
 
-	public Date getFecha_pago() {
-		return fecha_pago;
+	public Calendar getMomento_pago() {
+		return momento_pago;
 	}
 
-	public void setFecha_pago(Date fecha_pago) {
-		this.fecha_pago = fecha_pago;
-	}
-
-	public Time getHora_pago() {
-		return hora_pago;
-	}
-
-	public void setHora_pago(Time hora_pago) {
-		this.hora_pago = hora_pago;
+	public void setMomento_pago(Calendar momento_pago) {
+		this.momento_pago = momento_pago;
 	}
 
 	public BigDecimal getMonto() {
@@ -83,39 +69,27 @@ public class PagoBean {
 		this.monto = monto;
 	}
 
-	public Date getFecha_desde() {
-		return fecha_desde;
-	}
-
-	public void setFecha_desde(Date fecha_desde) {
-		this.fecha_desde = fecha_desde;
-	}
-
-	public Date getFecha_hasta() {
+	public Calendar getFecha_hasta() {
 		return fecha_hasta;
 	}
 
-	public void setFecha_hasta(Date fecha_hasta) {
+	public void setFecha_hasta(Calendar fecha_hasta) {
 		this.fecha_hasta = fecha_hasta;
 	}
-	
-	public PagoBean(Actividad idActividad, Long id, Date fecha_pago, Time hora_pago, BigDecimal monto, Date fecha_desde,
-			Date fecha_hasta) {
+
+	public PagoBean(Long id, Actividad actividad, BigDecimal monto, Calendar fecha_hasta) {
 		super();
-		this.idActividad = idActividad;
 		this.id = id;
-		this.fecha_pago = fecha_pago;
-		this.hora_pago = hora_pago;
+		this.actividad = actividad;
+		this.momento_pago = Calendar.getInstance();
 		this.monto = monto;
-		this.fecha_desde = fecha_desde;
 		this.fecha_hasta = fecha_hasta;
 	}
-    
-    private void load(Pago pago) {
+
+	private void load(Pago pago) {
     	this.setId(pago.getId());
-    	this.setIdActividad(pago.getIdActividad());
-    	this.setFecha_desde(pago.getFecha_desde());
-    	this.setFecha_pago(pago.getFecha_pago());
+    	this.setActividad(pago.getActividad());
+    	this.setMomento_pago(pago.getMomento_pago());
     	this.setFecha_hasta(pago.getFecha_hasta());
     	this.setMonto(pago.getMonto());  
     }

@@ -105,5 +105,11 @@
         <put-attribute name="title" value="Listado de Horarios" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/horarios.jsp" />
     </definition>
+    
+    <!-- Definicion pantalla para pagar una actividad -->
+    <definition name="pagar" extends="default-template">
+    	<put-attribute name="title" value="Pagar Actividad" cascade="true"/>
+    	<put-attribute name="main"  value="/WEB-INF/views/pago.jsp" />
+    </definition>
 
 </tiles-definitions>

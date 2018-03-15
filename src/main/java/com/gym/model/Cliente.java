@@ -1,9 +1,9 @@
 package com.gym.model;
 
 import com.gym.bean.ClienteBean;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Alejandro on 10/2/2018.
@@ -15,6 +15,9 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany
+    private Set<Pago> pagos;
+        
     @Column(nullable = false)
     private String nombre;
 
@@ -126,4 +129,13 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public Set<Pago> getPagos(){
+		return pagos;
+	}
+    
+	public void setPagos(Set<Pago> pagos) {
+		this.pagos = pagos;
+	}
+    
 }
