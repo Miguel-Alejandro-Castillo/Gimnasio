@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping(value="/clientes")
 public class ClienteController {
 
-    @Autowired
+    @Autowired	
     private ClienteRepository clienteRepository;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
