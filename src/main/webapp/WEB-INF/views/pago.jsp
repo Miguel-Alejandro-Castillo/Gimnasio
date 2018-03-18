@@ -20,13 +20,16 @@
                                         <form:hidden path="id"/>
                                         <div class="form-group">
                                             <form:label path="fecha_hasta">Fecha Hasta</form:label>
-                                            <form:input path="fecha_hasta"  cssClass="form-control"/>
+                                            <form:input type="date" path="fecha_hasta"  cssClass="form-control"/>
                                             <form:errors path="fecha_hasta" cssClass="error"/>
                                         </div>
 	                                    <div class="form-group">
-	                                        <form:label path="idActividad">Actividad</form:label>
-	                                        <form:input path="idActividad"  cssClass="form-control"/>
-	                                        <form:errors path="idActividad" cssClass="error"/>
+	                                    	<select id="idActividad" name="idActividad" required>
+	                                        <option>Seleccione el ID de la actividad</option>
+	                                        <c:forEach items="${idActividades}" var="idActividad">
+	                                        	<option value="${idActividad}">${idActividad}</option>
+	                                        </c:forEach>
+	                                        </select>                                  	          	                                                                      
 	                                    </div>                                                                   
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
                                     </form:form>

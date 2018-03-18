@@ -33,9 +33,13 @@ public class PagoController {
     
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
     public  ModelAndView submitPago(@ModelAttribute("pagoBean") @Validated PagoBean pagoBean, BindingResult result){
-        Pago pago=new Pago(pagoBean.getId(),pagoBean.getActividad(),pagoBean.getMonto(),pagoBean.getFecha_hasta());
-        pagoRepository.save(pago);
-        return new ModelAndView("redirect:/pagar");
+    	if(result.hasErrors())
+            return new ModelAndView("pagar");
+        else{
+	        Pago pago=new Pago(pagoBean.getId(),pagoBean.getActividad(),pagoBean.getMonto(),pagoBean.getFecha_hasta());
+	        pagoRepository.save(pago);
+	        return new ModelAndView("redirect:/pagar");
+        }
 
     }
 
