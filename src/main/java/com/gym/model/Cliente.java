@@ -15,7 +15,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany( fetch = FetchType.LAZY)
     private Set<Pago> pagos;
         
     @Column(nullable = false)

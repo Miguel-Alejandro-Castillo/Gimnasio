@@ -31,7 +31,7 @@
                                         </div>
 	                                    <div class="form-group">
 	                                    	<select id="actividad" name="actividad" required>
-	                                        <option>Seleccione el ID de la actividad</option>
+	                                        <option>Seleccione el nombre de la actividad</option>
 	                                        <c:forEach items="${actividades}" var="actividad">
 	                                        	<option value="${actividad.id}">${actividad.nombre}</option>
 	                                        </c:forEach>

@@ -60,7 +60,10 @@ public class ClienteController {
         if(cliente!=null) {
             ClienteBean clienteBean = new ClienteBean(cliente);
             mav= new ModelAndView("editar-cliente");
-            mav.addObject("clienteBean", cliente);
+            mav.addObject("clienteBean", clienteBean);
+            
+                       
+            
         }
         else {
             // renderizar a una vista que informe que no se envio un id de cliente en el path

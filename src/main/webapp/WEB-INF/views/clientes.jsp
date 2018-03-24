@@ -29,7 +29,8 @@
                                 <th>telefono</th>
                                 <th>direccion</th>
                                 <th>email</th>
-                                <th>Acciones</th>
+                                <th>Editar</th>
+                                <th>Pagar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,7 +57,7 @@
                     </div>
                     <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
+                <!-- /.panel -->                
             </div>
             <!-- /.col-lg-12 -->
         </div>

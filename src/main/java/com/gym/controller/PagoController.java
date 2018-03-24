@@ -7,7 +7,9 @@ import com.gym.dao.ActividadRepository;
 import com.gym.dao.PagoRepository;
 import com.gym.model.Pago;
 import com.gym.model.Actividad;
+import com.gym.model.Cliente;
 import com.gym.util.NumberUtils;
+import com.gym.dao.ClienteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,9 @@ public class PagoController {
     @Autowired
     private ActividadRepository actividadRepository;
     
+    @Autowired
+    private ClienteRepository clienteRepository;
+    
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.GET)
     public ModelAndView showPagoForm(){
         ModelAndView mav=new ModelAndView("pagar");
@@ -42,13 +47,19 @@ public class PagoController {
     }
     
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
-    public  ModelAndView submitPago(@ModelAttribute("pagoBean") @Validated PagoBean pagoBean, BindingResult result){
+    public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pagoBean") @Validated PagoBean pagoBean, BindingResult result){
     	if(result.hasErrors())
             return new ModelAndView("pagar");
         else{
 	        Pago pago=new Pago(pagoBean.getId(),pagoBean.getActividad(),pagoBean.getMonto(),pagoBean.getFecha_hasta(), pagoBean.getFecha_desde());
 	        pagoRepository.save(pago);
-	        return new ModelAndView("redirect:/pagar");
+	        
+	        Long id = NumberUtils.toLong(id_cliente);
+	        Cliente cliente= clienteRepository.findOne(id);
+	        cliente.getPagos().add(pago);
+	        clienteRepository.save(cliente);
+	        
+	        return new ModelAndView("redirect:/{id_cliente}/editar");
         }
 
     }
