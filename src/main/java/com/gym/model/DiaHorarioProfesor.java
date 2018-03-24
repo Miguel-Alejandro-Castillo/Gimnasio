@@ -27,6 +27,12 @@ public class DiaHorarioProfesor {
         super();
     }
 
+    public DiaHorarioProfesor(Dia dia, Horario horario, Profesor profesor) {
+        this.dia = dia;
+        this.horario = horario;
+        this.profesor = profesor;
+    }
+
     public Long getId() {
         return id;
     }

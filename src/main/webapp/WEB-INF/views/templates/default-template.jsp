@@ -60,7 +60,7 @@
             </nav>
 
             <main>
-            <tiles:insertAttribute name="main" />
+                <tiles:insertAttribute name="main" />
             </main>
 
             <footer>

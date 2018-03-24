@@ -10,23 +10,14 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-
-
-    <input id="tab1" type="radio" name="tabs" checked >
-    <label  id="label1" class="label_tab" for="tab1">Datos basicos</label>
-    <input id="tab2" type="radio" name="tabs" >
-    <label   id="label2"   class="label_tab" for="tab2">Planificacion semanal</label>
-
-
-    <div class="content">
-            <div id="content1" class="row" >
+            <spring:url value="" var="urlActual"/>
+            <form:form id="actividadForm" modelAttribute="actividadBean" action="${urlActual}" method="post" role="form">
+            <div  class="row" >
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <spring:url value="" var="urlActual"/>
-                                    <form:form id="actividadForm" modelAttribute="actividadBean" action="${urlActual}" method="post" role="form">
                                         <form:hidden path="id"/>
 
                                         <div class="form-group">
@@ -41,8 +32,7 @@
                                             <form:errors path="costo" cssClass="error"/>
                                         </div>
 
-                                        <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
-                                    </form:form>
+
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
@@ -56,28 +46,25 @@
             </div>
             <!-- /.row -->
 
+            <div class="row">
 
-        <div id="content2" class="row">
+                <form:select path="newDia">
+                    <form:option value="" label="Seleccione un dia"/>
+                    <form:options items="${dias}"  />
+                </form:select>
 
-             <select id="dia" name="dia" required>
-                 <option>Seleccione un dia</option>
-                 <c:forEach items="${dias}" var="dia">
-                     <option value="${dia}">${dia}</option>
-                 </c:forEach>
-             </select>
-             <select id="horario" name="horario" >
-                 <option>Seleccione un horario</option>
-                 <c:forEach items="${horarios}" var="horario">
-                     <option value="${horario.id}">${horario.hora_inicio} hs a ${horario.hora_fin} hs</option>
-                 </c:forEach>
-             </select>
-            <select id="profesor" name="profesor" >
-                <option>Seleccione un profesor</option>
-                <c:forEach items="${profesores}" var="profesor">
-                    <option value="${profesor.id}">${profesor.nombre} ${profesor.apellido}</option>
-                </c:forEach>
-            </select>
-            <button type="submit" value="Agregar" >Agregar</button>
+                    <form:select path="newHorario">
+                        <form:option value="${null}" label="Seleccione un horario"/>
+                        <form:options items="${horarios}" itemValue="id" />
+                    </form:select>
+
+
+                    <form:select path="newProfesor">
+                        <form:option value="${null}" label="Seleccione un profesor"/>
+                        <form:options items="${profesores}" itemValue="id" />
+                    </form:select>
+
+                    <button onclick="alert('Elemento agregado')">Agregar</button>
             <table id="tablaDiasHorariosDias">
                 <thead>
                 <tr>
@@ -87,7 +74,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${diasHorariosProfesores}" var="diaHorarioProfesor">
+                <c:forEach items="${actividadBean.diasHorariosProfesores}" var="diaHorarioProfesor">
                     <tr class="odd gradeX">
                         <td><c:out value="${diaHorarioProfesor.dia}"></c:out></td>
                         <td><c:out value="${diaHorarioProfesor.horario.hora_inicio} hs a ${diaHorarioProfesor.horario.hora_fin} hs"></c:out></td>
@@ -97,11 +84,13 @@
                 </tbody>
             </table>
         </div>
+            <!-- /.row -->
+            <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
+            </form:form>
 
     </div>
 
 </div>
 <!-- /#page-wrapper -->
-
 
 

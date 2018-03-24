@@ -1,6 +1,11 @@
 package com.gym.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +27,8 @@ public class Actividad {
     @Column(nullable = false)
     private BigDecimal costo;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
+	@Cascade( value = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Set<DiaHorarioProfesor> diasHorariosProfesores;
 
     public Actividad() {

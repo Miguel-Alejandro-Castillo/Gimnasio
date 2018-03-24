@@ -12,7 +12,7 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	private Actividad actividad;
 
     @Column(nullable = false)

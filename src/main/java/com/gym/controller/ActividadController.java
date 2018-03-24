@@ -5,19 +5,13 @@ import com.gym.dao.ActividadRepository;
 import com.gym.dao.DiaHorarioProfesorRepository;
 import com.gym.dao.HorarioRepository;
 import com.gym.dao.ProfesorRepository;
-import com.gym.model.Actividad;
-import com.gym.model.DiaHorarioProfesor;
-import com.gym.model.Horario;
-import com.gym.model.Profesor;
+import com.gym.model.*;
 import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -60,31 +54,39 @@ public class ActividadController {
         mav.addObject("horarios",horarios);
         List<Profesor> profesores=profesorRepository.findAll();
         mav.addObject("profesores",profesores);
-        mav.addObject("diasHorariosProfesores", new ArrayList());
         return mav;
     }
 
-    /*@RequestMapping(value="/agregar-dia-horario-profesor", method = RequestMethod.POST)
-    public  ModelAndView submitCreateActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
-        if(result.hasErrors())
-            return new ModelAndView("crear-actividad");
-        else{
-            Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
-            actividadRepository.save(actividad);
-            return new ModelAndView("redirect:/actividades");
-        }
-
+    @RequestMapping(value="/addDiaHorarioProfesor", method = RequestMethod.POST)
+    public ModelAndView submitAddDiaHorarioProfesor(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
+       ModelAndView mav= new ModelAndView("actividad");
+        Horario newHorario = horarioRepository.findOne(actividadBean.getNewHorario());
+        Profesor newProfesor = profesorRepository.findOne(actividadBean.getNewProfesor());
+        Dia newDia = actividadBean.getNewDia();
+        DiaHorarioProfesor newDiaHorarioProfesor = new DiaHorarioProfesor( newDia, newHorario, newProfesor);
+        actividadBean.getDiasHorariosProfesores().add(newDiaHorarioProfesor);
+        return mav;
     }
-    */
+
     @RequestMapping(value="/crearActividad", method = RequestMethod.POST)
     public  ModelAndView submitCreateActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
-        if(result.hasErrors())
-            return new ModelAndView("crear-actividad");
+        ModelAndView mav;
+        if(result.hasErrors()) {
+            mav = new ModelAndView("crear-actividad");
+            String []dias={"Lunes", "Martes", "Miercoles","Jueves","Viernes","Sabado"};
+            mav.addObject("dias",dias);
+            List<Horario> horarios= horarioRepository.findAll();
+            mav.addObject("horarios",horarios);
+            List<Profesor> profesores=profesorRepository.findAll();
+            mav.addObject("profesores",profesores);
+            return mav;
+        }
         else{
             Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
             actividadRepository.save(actividad);
-            return new ModelAndView("redirect:/actividades");
+            mav=new ModelAndView("redirect:/actividades");
         }
+        return mav;
 
     }
 
@@ -97,7 +99,7 @@ public class ActividadController {
             ActividadBean actividadBean = new ActividadBean();
             actividadBean.load(actividad);
             mav= new ModelAndView("editar-actividad");
-            mav.addObject("actividadBean", actividad);
+            mav.addObject("actividadBean", actividadBean);
         }
         else {
             // renderizar a una vista que informe que no se envio un id de actividad en el path

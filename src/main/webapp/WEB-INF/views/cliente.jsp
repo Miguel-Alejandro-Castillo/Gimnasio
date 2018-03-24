@@ -70,13 +70,13 @@
 	                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 								<thead></thead>
 								<tbody>
-									<c:forEach items="${pagos}" var="pago">
+									<c:forEach items="${clienteBean.pagos}" var="pago">
 										<tr class="odd gradeX">
-											<td><c:out value="${pagos.actividad_id}"></c:out></td>
-											<td><c:out value="${pagos.fecha_desde}"></c:out></td>
-											<td><c:out value="${pagos.fecha_hasta}"></c:out></td>
-											<td><c:out value="${pagos.monto}"></c:out></td>
-											<td><c:out value="${pagos.momento_pago}"></c:out></td>
+											<td><c:out value="${pago.actividad.nombre}"></c:out></td>
+											<td><c:out value="${pago.fecha_desde}"></c:out></td>
+											<td><c:out value="${pago.fecha_hasta}"></c:out></td>
+											<td><c:out value="${pago.monto}"></c:out></td>
+											<td><c:out value="${pago.momento_pago}"></c:out></td>
 										</tr>
 									</c:forEach>
 								</tbody>

@@ -51,4 +51,8 @@ public class Horario {
 		this.hora_fin = hora_fin;
 	}
 
+	@Override
+	public String toString() {
+		return this.getHora_inicio()+ " hs a "+ this.getHora_fin()+" hs";
+	}
 }

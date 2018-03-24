@@ -1,6 +1,7 @@
 package com.gym.bean;
 
 import com.gym.model.Cliente;
+import com.gym.model.Pago;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Alejandro on 11/2/2018.
@@ -39,7 +41,7 @@ public class ClienteBean {
     private String direccion;
     @Email(message = "{campo.email.incorrecto}" )
     private String email;
-
+    private Set<Pago> pagos;
     public ClienteBean() {
         super();
     }
@@ -64,6 +66,7 @@ public class ClienteBean {
         this.telefono = cliente.getTelefono();
         this.direccion = cliente.getDireccion();
         this.email = cliente.getEmail();
+        this.pagos = cliente.getPagos();
     }
 
     public Long getId() {
@@ -128,6 +131,14 @@ public class ClienteBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(Set<Pago> pagos) {
+        this.pagos = pagos;
     }
 
     private  void load(Cliente cliente) {
