@@ -31,7 +31,7 @@ public class PagoController {
     
     @Autowired
     private ActividadRepository actividadRepository;
-
+    
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.GET)
     public ModelAndView showPagoForm(){
         ModelAndView mav=new ModelAndView("pagar");

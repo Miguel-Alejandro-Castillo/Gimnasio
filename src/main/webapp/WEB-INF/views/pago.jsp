@@ -25,17 +25,17 @@
                                             <form:errors path="fecha_hasta" cssClass="error"/>
                                         </div>
                                         <div class="form-group">
-                                            <form:label path="fecha_hasta">Fecha Hasta</form:label>
+                                            <form:label path="fecha_hasta">Fecha Desde</form:label>
                                             <form:input type="date" path="fecha_hasta"  cssClass="form-control"/>
                                             <form:errors path="fecha_hasta" cssClass="error"/>
                                         </div>
 	                                    <div class="form-group">
 	                                    	<select id="actividad" name="actividad" required>
 	                                        <option>Seleccione el ID de la actividad</option>
-	                                        <c:forEach items="${actividades}" var="idActividad">
-	                                        	<option value="${actividad}">${actividad}</option>
+	                                        <c:forEach items="${actividades}" var="actividad">
+	                                        	<option value="${actividad.id}">${actividad.nombre}</option>
 	                                        </c:forEach>
-	                                        </select>                                  	          	                                                                      
+	                                        </select>
 	                                    </div>                                                                   
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
                                     </form:form>

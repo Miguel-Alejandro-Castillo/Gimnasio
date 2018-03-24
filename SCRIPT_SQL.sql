@@ -72,3 +72,12 @@ INSERT INTO HORARIOS(hora_inicio,hora_fin)VALUES
 ('19:00:00','20:00:00'),
 ('20:00:00','21:00:00'),
 ('21:00:00','22:00:00');
+
+INSERT INTO ACTIVIDADES(nombre,costo)VALUES
+('zumba',400),
+('aero',450),
+('funcional',650),
+('funcional 2',700),
+('tango',500),
+('ritmos latinos',500),
+('crossfit',3000);

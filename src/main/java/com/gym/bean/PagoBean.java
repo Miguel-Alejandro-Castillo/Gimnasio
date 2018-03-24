@@ -17,7 +17,7 @@ import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 
 public class PagoBean {
 
@@ -25,16 +25,23 @@ public class PagoBean {
 
 	private Long id;
 	
-	private Calendar momento_pago;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
+    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
+	private Date momento_pago;
     
     @NegativeOrZero
     private BigDecimal monto;
         
-    @NotNull
-    private Calendar fecha_hasta;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
+    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
+    private Date fecha_hasta;
     
-    @NotNull
-    private Calendar fecha_desde;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
+    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
+    private Date fecha_desde;
 
     public PagoBean() {
         super();
@@ -56,11 +63,11 @@ public class PagoBean {
 		this.id = id;
 	}
 
-	public Calendar getMomento_pago() {
+	public Date getMomento_pago() {
 		return momento_pago;
 	}
 
-	public void setMomento_pago(Calendar momento_pago) {
+	public void setMomento_pago(Date momento_pago) {
 		this.momento_pago = momento_pago;
 	}
 
@@ -72,27 +79,27 @@ public class PagoBean {
 		this.monto = monto;
 	}
 
-	public Calendar getFecha_hasta() {
+	public Date getFecha_hasta() {
 		return fecha_hasta;
 	}
 
-	public void setFecha_hasta(Calendar fecha_hasta) {
+	public void setFecha_hasta(Date fecha_hasta) {
 		this.fecha_hasta = fecha_hasta;
 	}
 	
-	public Calendar getFecha_desde() {
+	public Date getFecha_desde() {
 		return fecha_desde;
 	}
 
-	public void setFecha_desde(Calendar fecha_desde) {
+	public void setFecha_desde(Date fecha_desde) {
 		this.fecha_desde = fecha_desde;
 	}
 
-	public PagoBean(Long id, Actividad actividad, BigDecimal monto, Calendar fecha_hasta, Calendar fecha_desde) {
+	public PagoBean(Long id, Actividad actividad, BigDecimal monto, Date fecha_hasta, Date fecha_desde) {
 		super();
 		this.id = id;
 		this.actividad = actividad;
-		this.momento_pago = Calendar.getInstance();
+		this.momento_pago = new Date(System.currentTimeMillis());	
 		this.monto = monto;
 		this.fecha_hasta = fecha_hasta;
 		this.fecha_desde = fecha_desde;

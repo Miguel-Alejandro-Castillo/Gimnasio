@@ -1,10 +1,9 @@
 package com.gym.model;
 
-import com.gym.bean.PagoBean;
 import com.gym.model.Actividad;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Table( name = "PAGO")
@@ -19,38 +18,38 @@ public class Pago {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Calendar momento_pago;
+    private Date momento_pago;
     
     @Column(nullable = false)
     private BigDecimal monto;
        
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Calendar fecha_hasta;
+    private Date fecha_hasta;
     
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Calendar fecha_desde;
+    private Date fecha_desde;
     
 	public Pago() {
         super();
     }
 
-    public Pago(Long id, Actividad actividad, BigDecimal monto, Calendar fecha_hasta, Calendar fecha_desde) {
+    public Pago(Long id, Actividad actividad, BigDecimal monto, Date fecha_hasta, Date fecha_desde) {
 		super();
 		this.id = id;
 		this.actividad = actividad;
-		this.momento_pago = Calendar.getInstance();
+		this.momento_pago = new Date(System.currentTimeMillis());
 		this.monto = monto;
 		this.fecha_hasta = fecha_hasta;
 		this.fecha_desde = fecha_desde;
 	}
     
-    public Calendar getFecha_desde() {
+    public Date getFecha_desde() {
 		return fecha_desde;
 	}
 
-	public void setFecha_desde(Calendar fecha_desde) {
+	public void setFecha_desde(Date fecha_desde) {
 		this.fecha_desde = fecha_desde;
 	}
     
@@ -70,11 +69,11 @@ public class Pago {
 		this.actividad = actividad;
 	}
 
-	public Calendar getMomento_pago() {
+	public Date getMomento_pago() {
 		return momento_pago;
 	}
 
-	public void setMomento_pago(Calendar momento_pago) {
+	public void setMomento_pago(Date momento_pago) {
 		this.momento_pago = momento_pago;
 	}
 
@@ -86,11 +85,11 @@ public class Pago {
 		this.monto = monto;
 	}
 
-	public Calendar getFecha_hasta() {
+	public Date getFecha_hasta() {
 		return fecha_hasta;
 	}
 
-	public void setFecha_hasta(Calendar fecha_hasta) {
+	public void setFecha_hasta(Date fecha_hasta) {
 		this.fecha_hasta = fecha_hasta;
 	}
 	
