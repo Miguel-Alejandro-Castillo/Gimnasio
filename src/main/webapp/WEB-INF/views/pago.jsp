@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -23,11 +24,16 @@
                                             <form:input type="date" path="fecha_hasta"  cssClass="form-control"/>
                                             <form:errors path="fecha_hasta" cssClass="error"/>
                                         </div>
+                                        <div class="form-group">
+                                            <form:label path="fecha_hasta">Fecha Hasta</form:label>
+                                            <form:input type="date" path="fecha_hasta"  cssClass="form-control"/>
+                                            <form:errors path="fecha_hasta" cssClass="error"/>
+                                        </div>
 	                                    <div class="form-group">
-	                                    	<select id="idActividad" name="idActividad" required>
+	                                    	<select id="actividad" name="actividad" required>
 	                                        <option>Seleccione el ID de la actividad</option>
-	                                        <c:forEach items="${idActividades}" var="idActividad">
-	                                        	<option value="${idActividad}">${idActividad}</option>
+	                                        <c:forEach items="${actividades}" var="idActividad">
+	                                        	<option value="${actividad}">${actividad}</option>
 	                                        </c:forEach>
 	                                        </select>                                  	          	                                                                      
 	                                    </div>                                                                   

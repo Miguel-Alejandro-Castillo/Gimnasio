@@ -32,6 +32,9 @@ public class PagoBean {
         
     @NotNull
     private Calendar fecha_hasta;
+    
+    @NotNull
+    private Calendar fecha_desde;
 
     public PagoBean() {
         super();
@@ -76,14 +79,23 @@ public class PagoBean {
 	public void setFecha_hasta(Calendar fecha_hasta) {
 		this.fecha_hasta = fecha_hasta;
 	}
+	
+	public Calendar getFecha_desde() {
+		return fecha_desde;
+	}
 
-	public PagoBean(Long id, Actividad actividad, BigDecimal monto, Calendar fecha_hasta) {
+	public void setFecha_desde(Calendar fecha_desde) {
+		this.fecha_desde = fecha_desde;
+	}
+
+	public PagoBean(Long id, Actividad actividad, BigDecimal monto, Calendar fecha_hasta, Calendar fecha_desde) {
 		super();
 		this.id = id;
 		this.actividad = actividad;
 		this.momento_pago = Calendar.getInstance();
 		this.monto = monto;
 		this.fecha_hasta = fecha_hasta;
+		this.fecha_desde = fecha_desde;
 	}
 
 	private void load(Pago pago) {
@@ -91,6 +103,8 @@ public class PagoBean {
     	this.setActividad(pago.getActividad());
     	this.setMomento_pago(pago.getMomento_pago());
     	this.setFecha_hasta(pago.getFecha_hasta());
+    	this.setFecha_hasta(pago.getFecha_desde());
     	this.setMonto(pago.getMonto());  
     }
+
 }
