@@ -36,7 +36,12 @@
 	                                        	<option value="${actividad.id}">${actividad.nombre}</option>
 	                                        </c:forEach>
 	                                        </select>
-	                                    </div>                                                                   
+	                                    </div>                                                               
+                                        <div class="form-group">
+                                            <form:label path="monto">Monto</form>
+                                            <form:input path="monto" cssClass="form-control"/>
+                                            <form:errors path="monto" cssClass="error"/>
+                                        </div>
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
                                     </form:form>
                                 </div>

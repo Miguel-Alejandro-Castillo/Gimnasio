@@ -21,6 +21,13 @@
     <spring:url value="/resources/css/sb-admin-2.css" var="sbAdmin2Css"/>
     <link href="${sbAdmin2Css}" rel="stylesheet"/>
 
+    <spring:url value="resources/css/demo.css" var="demoCss"/>
+    <link href="${demoCss}" rel="stylesheet">
+
+    <spring:url value="resources/css/sidebar-collapse.css" var="sideBarCss"/>
+    <link href="assets/sidebar-collapse.css" rel="stylesheet">
+
+
     <!-- Morris Charts CSS -->
     <spring:url value="/resources/css/morris.css" var="morris"/>
     <link href="${morris}" rel="stylesheet"/>
