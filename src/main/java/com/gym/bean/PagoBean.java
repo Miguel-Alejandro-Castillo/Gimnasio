@@ -25,9 +25,6 @@ public class PagoBean {
 
 	private Long id;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
-    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
 	private Date momento_pago;
     
     @NegativeOrZero
