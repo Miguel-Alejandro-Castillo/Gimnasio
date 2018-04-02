@@ -64,7 +64,7 @@
                         <form:options items="${profesores}" itemValue="id" />
                     </form:select>
 
-                    <button onclick="alert('Elemento agregado')">Agregar</button>
+                    <button onclick="submitAjax()">Agregar</button>
             <table id="tablaDiasHorariosDias">
                 <thead>
                 <tr>

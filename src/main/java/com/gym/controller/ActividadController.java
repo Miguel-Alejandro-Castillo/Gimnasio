@@ -6,8 +6,10 @@ import com.gym.dao.DiaHorarioProfesorRepository;
 import com.gym.dao.HorarioRepository;
 import com.gym.dao.ProfesorRepository;
 import com.gym.model.*;
+import com.gym.util.DiaHorarioProfesorDTO;
 import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -36,6 +38,7 @@ public class ActividadController {
     @Autowired
     private ProfesorRepository profesorRepository;
 
+    private ActividadBean actividadBean;
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showActividades(){
         ModelAndView mav=new ModelAndView("actividades");
@@ -47,7 +50,8 @@ public class ActividadController {
     @RequestMapping(value="/crearActividad", method = RequestMethod.GET)
     public ModelAndView showAltaActividadForm(){
         ModelAndView mav=new ModelAndView("crear-actividad");
-        mav.addObject("actividadBean", new ActividadBean());
+        this.actividadBean= new ActividadBean();
+        mav.addObject("actividadBean", this.actividadBean);
         String []dias={"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"};
         mav.addObject("dias",dias);
         List<Horario> horarios= horarioRepository.findAll();
@@ -57,15 +61,15 @@ public class ActividadController {
         return mav;
     }
 
-    @RequestMapping(value="/addDiaHorarioProfesor", method = RequestMethod.POST)
-    public ModelAndView submitAddDiaHorarioProfesor(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
-       ModelAndView mav= new ModelAndView("actividad");
-        Horario newHorario = horarioRepository.findOne(actividadBean.getNewHorario());
-        Profesor newProfesor = profesorRepository.findOne(actividadBean.getNewProfesor());
-        Dia newDia = actividadBean.getNewDia();
-        DiaHorarioProfesor newDiaHorarioProfesor = new DiaHorarioProfesor( newDia, newHorario, newProfesor);
-        actividadBean.getDiasHorariosProfesores().add(newDiaHorarioProfesor);
-        return mav;
+    @RequestMapping(value="/addDiaHorarioProfesor", method = RequestMethod.POST,  consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public  @ResponseBody DiaHorarioProfesor submitAddDiaHorarioProfesor( @RequestBody DiaHorarioProfesorDTO diaHorarioProfesorDTO){
+        Dia dia = diaHorarioProfesorDTO.getNewDia();
+        Horario horario = horarioRepository.findOne(diaHorarioProfesorDTO.getNewHorario());
+        Profesor profesor = profesorRepository.findOne(diaHorarioProfesorDTO.getNewProfesor());
+        DiaHorarioProfesor diaHorarioProfesor = new DiaHorarioProfesor( dia , horario, profesor);
+        this.actividadBean.getDiasHorariosProfesores().add(diaHorarioProfesor);
+        return diaHorarioProfesor;
     }
 
     @RequestMapping(value="/crearActividad", method = RequestMethod.POST)
@@ -82,7 +86,7 @@ public class ActividadController {
             return mav;
         }
         else{
-            Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
+            Actividad actividad = new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
             actividadRepository.save(actividad);
             mav=new ModelAndView("redirect:/actividades");
         }

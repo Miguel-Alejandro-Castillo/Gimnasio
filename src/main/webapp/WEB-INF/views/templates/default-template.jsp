@@ -92,6 +92,8 @@
             <script src="${dataTablesBootstrapMinJs}"></script>
             <spring:url value="/resources/js/dataTables.responsive.js" var="dataTablesResponsiveJs" />
             <script src="${dataTablesResponsiveJs}"></script>
+            <spring:url value="/resources/js/funciones.js" var="funciones" />
+            <script src="${funciones}"></script>
 
 
 
