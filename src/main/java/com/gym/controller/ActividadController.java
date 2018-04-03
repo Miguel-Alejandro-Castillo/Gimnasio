@@ -68,8 +68,12 @@ public class ActividadController {
         Horario horario = horarioRepository.findOne(diaHorarioProfesorDTO.getNewHorario());
         Profesor profesor = profesorRepository.findOne(diaHorarioProfesorDTO.getNewProfesor());
         DiaHorarioProfesor diaHorarioProfesor = new DiaHorarioProfesor( dia , horario, profesor);
-        this.actividadBean.getDiasHorariosProfesores().add(diaHorarioProfesor);
-        return diaHorarioProfesor;
+        if(!this.actividadBean.getDiasHorariosProfesores().contains(diaHorarioProfesor)) {
+            this.actividadBean.getDiasHorariosProfesores().add(diaHorarioProfesor);
+            return diaHorarioProfesor;
+        }
+        else
+            return null;
     }
 
     @RequestMapping(value="/crearActividad", method = RequestMethod.POST)
