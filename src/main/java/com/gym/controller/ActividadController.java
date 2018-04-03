@@ -79,14 +79,15 @@ public class ActividadController {
             mav = new ModelAndView("crear-actividad");
             String []dias={"Lunes", "Martes", "Miercoles","Jueves","Viernes","Sabado"};
             mav.addObject("dias",dias);
-            List<Horario> horarios= horarioRepository.findAll();
+            List<Horario> horarios = horarioRepository.findAll();
             mav.addObject("horarios",horarios);
             List<Profesor> profesores=profesorRepository.findAll();
             mav.addObject("profesores",profesores);
+            actividadBean.setDiasHorariosProfesores(this.actividadBean.getDiasHorariosProfesores());
             return mav;
         }
         else{
-            Actividad actividad = new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
+            Actividad actividad = new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto(), this.actividadBean.getDiasHorariosProfesores());
             actividadRepository.save(actividad);
             mav=new ModelAndView("redirect:/actividades");
         }
@@ -100,10 +101,16 @@ public class ActividadController {
         Long id = NumberUtils.toLong(id_actividad);
         Actividad actividad= actividadRepository.findOne(id);
         if(actividad!=null) {
-            ActividadBean actividadBean = new ActividadBean();
-            actividadBean.load(actividad);
+            this.actividadBean = new ActividadBean();
+            this.actividadBean.load(actividad);
             mav= new ModelAndView("editar-actividad");
-            mav.addObject("actividadBean", actividadBean);
+            mav.addObject("actividadBean", this.actividadBean);
+            String []dias={"Lunes", "Martes", "Miercoles","Jueves","Viernes","Sabado"};
+            mav.addObject("dias",dias);
+            List<Horario> horarios = horarioRepository.findAll();
+            mav.addObject("horarios",horarios);
+            List<Profesor> profesores=profesorRepository.findAll();
+            mav.addObject("profesores",profesores);
         }
         else {
             // renderizar a una vista que informe que no se envio un id de actividad en el path
@@ -113,13 +120,23 @@ public class ActividadController {
 
     @RequestMapping(value="/{id_actividad}/editar", method = RequestMethod.POST)
     public  ModelAndView submitEditActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
-        if(result.hasErrors())
-            return new ModelAndView("editar-actividad");
-        else{
-        	Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto());
-            actividadRepository.save(actividad);
-            return new ModelAndView("redirect:/actividades");
+        ModelAndView mav=null;
+        if(result.hasErrors()) {
+            mav= new ModelAndView("editar-actividad");
+            String[] dias = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+            mav.addObject("dias", dias);
+            List<Horario> horarios = horarioRepository.findAll();
+            mav.addObject("horarios", horarios);
+            List<Profesor> profesores = profesorRepository.findAll();
+            mav.addObject("profesores", profesores);
+            actividadBean.setDiasHorariosProfesores(this.actividadBean.getDiasHorariosProfesores());
         }
+        else{
+        	Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto(),this.actividadBean.getDiasHorariosProfesores());
+            actividadRepository.save(actividad);
+            mav = new ModelAndView("redirect:/actividades");
+        }
+        return mav;
 
     }
 

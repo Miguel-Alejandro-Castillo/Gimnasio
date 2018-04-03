@@ -48,19 +48,23 @@ public class PagoController {
     
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
     public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pagoBean") @Validated PagoBean pagoBean, BindingResult result){
-    	if(result.hasErrors())
-            return new ModelAndView("pagar");
+    	ModelAndView mav;
+        if(result.hasErrors()) {
+            mav= new ModelAndView("pagar");
+            List<Actividad> actividades= actividadRepository.findAll();
+            mav.addObject("actividades",actividades);
+        }
         else{
-	        Pago pago=new Pago(pagoBean.getId(),pagoBean.getActividad(),pagoBean.getMonto(),pagoBean.getFecha_hasta(), pagoBean.getFecha_desde());
-	        pagoRepository.save(pago);
-	        
-	        Long id = NumberUtils.toLong(id_cliente);
-	        Cliente cliente= clienteRepository.findOne(id);
+            Actividad actividad = actividadRepository.findOne(pagoBean.getActividad_id());
+	        Pago pago=new Pago(pagoBean.getId(),actividad,pagoBean.getMonto(),pagoBean.getFecha_hasta(), pagoBean.getFecha_desde());
+	        Long cliente_id = NumberUtils.toLong(id_cliente);
+	        Cliente cliente = clienteRepository.findOne(cliente_id);
 	        cliente.getPagos().add(pago);
 	        clienteRepository.save(cliente);
-	        
-	        return new ModelAndView("redirect:/{id_cliente}/editar");
+
+	        mav=new ModelAndView("redirect:/clientes/{id_cliente}/editar");
         }
+        return mav;
 
     }
 

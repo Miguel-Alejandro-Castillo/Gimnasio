@@ -139,4 +139,37 @@ public class Profesor {
 	public String toString() {
 		return this.getNombre() + " " +this.getApellido()+ " - "+this.getDni();
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Profesor)) return false;
+
+		Profesor profesor = (Profesor) o;
+
+		if (apellido != null ? !apellido.equals(profesor.apellido) : profesor.apellido != null) return false;
+		if (direccion != null ? !direccion.equals(profesor.direccion) : profesor.direccion != null) return false;
+		if (dni != null ? !dni.equals(profesor.dni) : profesor.dni != null) return false;
+		if (email != null ? !email.equals(profesor.email) : profesor.email != null) return false;
+		if (fecha_de_nacimiento != null ? !fecha_de_nacimiento.equals(profesor.fecha_de_nacimiento) : profesor.fecha_de_nacimiento != null)
+			return false;
+		if (id != null ? !id.equals(profesor.id) : profesor.id != null) return false;
+		if (nombre != null ? !nombre.equals(profesor.nombre) : profesor.nombre != null) return false;
+		if (telefono != null ? !telefono.equals(profesor.telefono) : profesor.telefono != null) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = (id != null ? id.hashCode() : 0);
+		result = 31 * result + (nombre != null ? nombre.hashCode(): 0);
+		result = 31 * result + ( apellido != null ? apellido.hashCode(): 0);
+		result = 31 * result + (dni != null ? dni.hashCode(): 0);
+		result = 31 * result + (fecha_de_nacimiento != null ? fecha_de_nacimiento.hashCode() : 0);
+		result = 31 * result + (telefono != null ? telefono.hashCode() : 0) ;
+		result = 31 * result + (direccion != null ? direccion.hashCode() :0);
+		result = 31 * result + (email != null ? email.hashCode(): 0);
+		return result;
+	}
 }

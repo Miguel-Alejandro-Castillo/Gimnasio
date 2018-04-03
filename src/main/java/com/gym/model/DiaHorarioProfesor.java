@@ -17,10 +17,10 @@ public class DiaHorarioProfesor {
     @Column(nullable = false)
     private Dia dia;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Horario horario;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Profesor profesor;
 
     public DiaHorarioProfesor() {
@@ -63,5 +63,29 @@ public class DiaHorarioProfesor {
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DiaHorarioProfesor)) return false;
+
+        DiaHorarioProfesor that = (DiaHorarioProfesor) o;
+
+        if (dia != that.dia) return false;
+        if (horario != null ? !horario.equals(that.horario) : that.horario != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (profesor != null ? !profesor.equals(that.profesor) : that.profesor != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (id != null ? id.hashCode() : 0);
+        result = 31 * result + (dia != null ? dia.hashCode() : 0);
+        result = 31 * result + (horario != null ? horario.hashCode() : 0);
+        result = 31 * result + (profesor != null ? profesor.hashCode() : 0);
+        return result;
     }
 }

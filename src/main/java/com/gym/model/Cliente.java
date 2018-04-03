@@ -15,9 +15,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany( fetch = FetchType.LAZY)
-    private Set<Pago> pagos;
-        
+
     @Column(nullable = false)
     private String nombre;
 
@@ -40,6 +38,9 @@ public class Cliente {
 
     @Column
     private String email;
+
+    @OneToMany( fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+    private Set<Pago> pagos;
 
     public Cliente() {
         super();

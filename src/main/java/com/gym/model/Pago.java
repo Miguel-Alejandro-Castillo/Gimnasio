@@ -12,7 +12,7 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Actividad actividad;
 
     @Column(nullable = false)
@@ -21,14 +21,16 @@ public class Pago {
     
     @Column(nullable = false)
     private BigDecimal monto;
-       
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date fecha_desde;
+
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fecha_hasta;
     
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date fecha_desde;
+
     
 	public Pago() {
         super();

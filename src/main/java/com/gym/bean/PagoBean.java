@@ -21,10 +21,11 @@ import java.util.Date;
 
 public class PagoBean {
 
-	private Actividad actividad;
-
 	private Long id;
-	
+
+	@NotNull
+	private Long actividad_id;
+
 	private Date momento_pago;
     
     @NegativeOrZero
@@ -43,14 +44,6 @@ public class PagoBean {
     public PagoBean() {
         super();
     }
-    
-    public Actividad getActividad() {
-		return actividad;
-	}
-
-	public void setActividad(Actividad actividad) {
-		this.actividad = actividad;
-	}
 
 	public Long getId() {
 		return id;
@@ -92,10 +85,18 @@ public class PagoBean {
 		this.fecha_desde = fecha_desde;
 	}
 
-	public PagoBean(Long id, Actividad actividad, BigDecimal monto, Date fecha_hasta, Date fecha_desde) {
+	public  Long getActividad_id() {
+		return actividad_id;
+	}
+
+	public void setActividad_id( Long actividad_id) {
+		this.actividad_id = actividad_id;
+	}
+
+	public PagoBean(Long id, Long actividad_id, BigDecimal monto, Date fecha_hasta, Date fecha_desde) {
 		super();
 		this.id = id;
-		this.actividad = actividad;
+		this.actividad_id = actividad_id;
 		this.momento_pago = new Date(System.currentTimeMillis());	
 		this.monto = monto;
 		this.fecha_hasta = fecha_hasta;
@@ -104,9 +105,9 @@ public class PagoBean {
 
 	private void load(Pago pago) {
     	this.setId(pago.getId());
-    	this.setActividad(pago.getActividad());
+    	this.setActividad_id(pago.getActividad().getId());
     	this.setMomento_pago(pago.getMomento_pago());
-    	this.setFecha_hasta(pago.getFecha_hasta());
+    	this.setFecha_desde(pago.getFecha_desde());
     	this.setFecha_hasta(pago.getFecha_desde());
     	this.setMonto(pago.getMonto());  
     }

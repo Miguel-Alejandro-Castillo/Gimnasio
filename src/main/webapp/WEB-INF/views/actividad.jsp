@@ -63,8 +63,8 @@
                         <form:option value="${null}" label="Seleccione un profesor"/>
                         <form:options items="${profesores}" itemValue="id" />
                     </form:select>
-
-                    <button onclick="submitAjax()">Agregar</button>
+                    <spring:url value="/actividades/addDiaHorarioProfesor" var="urlAddDiaHorarioProfesor"/>
+                    <button type="button" onclick="submitAjax('${urlAddDiaHorarioProfesor}')">Agregar</button>
             <table id="tablaDiasHorariosDias">
                 <thead>
                 <tr>

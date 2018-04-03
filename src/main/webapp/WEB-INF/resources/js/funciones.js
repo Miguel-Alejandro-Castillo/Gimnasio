@@ -2,7 +2,7 @@
  * Created by Alejandro on 2/4/2018.
  */
 
-function submitAjax() {
+function submitAjax(url) {
     var data = {};
     data["newDia"] = $("#newDia").val();
     data["newHorario"] = $("#newHorario").val();
@@ -11,7 +11,7 @@ function submitAjax() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "addDiaHorarioProfesor",
+            url: url,
             data: JSON.stringify(data),
             dataType: 'json',
             timeout: 600000,

@@ -32,7 +32,7 @@ public class ActividadBean {
 	}
 
 	public ActividadBean(Long id, String nombre, BigDecimal costo) {
-		super();
+		this();
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;

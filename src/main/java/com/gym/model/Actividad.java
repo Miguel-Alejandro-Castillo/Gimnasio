@@ -1,11 +1,7 @@
 package com.gym.model;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,20 +23,20 @@ public class Actividad {
     @Column(nullable = false)
     private BigDecimal costo;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@Cascade( value = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
 	private Set<DiaHorarioProfesor> diasHorariosProfesores;
 
     public Actividad() {
     	super();
-		diasHorariosProfesores=new HashSet<>();
+		diasHorariosProfesores = new HashSet<>();
     }
     
-    public Actividad(Long id, String nombre, BigDecimal costo) {
+    public Actividad(Long id, String nombre, BigDecimal costo, Set<DiaHorarioProfesor> diasHorariosProfesores) {
 		this();
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
+		this.diasHorariosProfesores = diasHorariosProfesores;
 	}
         
 	public Long getId() {
@@ -69,4 +65,7 @@ public class Actividad {
 	public void setDiasHorariosProfesores(Set<DiaHorarioProfesor> diasHorariosProfesores) {
 		this.diasHorariosProfesores = diasHorariosProfesores;
 	}
+
+	@Override
+	public String toString() { return  this.getNombre();}
 }

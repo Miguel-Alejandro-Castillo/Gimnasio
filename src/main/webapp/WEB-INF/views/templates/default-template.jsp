@@ -76,6 +76,7 @@
 
 
 
+
             <!-- jQuery -->
             <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>
             <script src="${jqueryMin}"></script>

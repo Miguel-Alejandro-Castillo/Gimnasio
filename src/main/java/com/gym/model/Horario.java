@@ -55,4 +55,26 @@ public class Horario {
 	public String toString() {
 		return this.getHora_inicio()+ " hs a "+ this.getHora_fin()+" hs";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Horario)) return false;
+
+		Horario horario = (Horario) o;
+
+		if (hora_fin != null ? !hora_fin.equals(horario.hora_fin) : horario.hora_fin != null) return false;
+		if (hora_inicio != null ? !hora_inicio.equals(horario.hora_inicio) : horario.hora_inicio != null) return false;
+		if (id != null ? !id.equals(horario.id) : horario.id != null) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = (id != null ? id.hashCode() : 0);
+		result = 31 * result + (hora_inicio != null ? hora_inicio.hashCode(): 0);
+		result = 31 * result + (hora_fin != null ? hora_fin.hashCode() : 0);
+		return result;
+	}
 }
