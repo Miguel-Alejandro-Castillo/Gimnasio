@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<div class="navbar-header">
+<div class="navbar-header" style="background-color: #729fcf;">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
     </button>
     <spring:url value="/home" var="home"></spring:url>
-    <a class="navbar-brand" href="${home}">Gimnasio</a>
+    <a class="navbar-brand" href="${home}" style="color:white;">El Deposito</a>
 </div>
 <!-- /.navbar-header -->
 
@@ -36,8 +36,9 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
+            
+            <!-- barra de busqueda
             <li class="sidebar-search">
-
                 <div class="input-group custom-search-form">
                     <input type="text" class="form-control" placeholder="Buscar Cliente...">
                                 <span class="input-group-btn">
@@ -46,8 +47,9 @@
                                     </button>
                                 </span>
                 </div>
-
             </li>
+            barra de busqueda -->
+            
             <li>
                 <spring:url value="/clientes/crear" var="crearCliente"/>
                 <a href="${home}"><i class="fa fa-dashboard fa-fw"></i>Inicio</a></a>

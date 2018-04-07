@@ -16,7 +16,7 @@ function submitAjax(url) {
             dataType: 'json',
             timeout: 600000,
             success: function (diaHorarioProfesor) {
-                $('#tablaDiasHorariosDias').append("<tr><td>"+diaHorarioProfesor.dia+"</td>"+
+                $('#dataTables-example').append("<tr><td>"+diaHorarioProfesor.dia+"</td>"+
                 "<td>"+diaHorarioProfesor.horario.hora_inicio+" hs a "+diaHorarioProfesor.horario.hora_fin+" hs</td>"+
                 "<td>"+diaHorarioProfesor.profesor.nombre+" "+diaHorarioProfesor.profesor.apellido+"</td></tr>");
             },

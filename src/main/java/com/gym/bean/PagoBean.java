@@ -33,12 +33,10 @@ public class PagoBean {
         
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
-    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
     private Date fecha_hasta;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
-    @Past(message = "{campo.fecha_de_nacimiento.pasado}" )
     private Date fecha_desde;
 
     public PagoBean() {
