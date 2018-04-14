@@ -112,5 +112,11 @@
     	<put-attribute name="main"  value="/WEB-INF/views/pago.jsp" />
     	<put-attribute name="titleSubmit" value="Realizar pago" cascade="true" />
     </definition>
+    
+    <!-- Definicion pantalla para resumen de cuentas -->
+	<definition name="resumen" extends="default-template">
+		<put-attribute name="title" value="Resumen de Cuentas" cascade="true" />
+		<put-attribute name="main" value="/WEB-INF/views/resumen.jsp" />
+	</definition>
 
 </tiles-definitions>

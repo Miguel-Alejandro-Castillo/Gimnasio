@@ -74,7 +74,7 @@
 
 
             <!-- jQuery -->
-            <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>
+            <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>	
             <script src="${jqueryMin}"></script>
 
             <!-- Bootstrap Core JavaScript -->
@@ -98,6 +98,14 @@
             <script src="${dataTablesResponsiveJs}"></script>
             <spring:url value="/resources/js/funciones.js" var="funciones" />
             <script src="${funciones}"></script>
+
+			<spring:url value="/resources/js/raphael.min.js" var="raphaelMin" />
+			<script src="${raphaelMin}"></script>
+			<spring:url value="/resources/js/morris.min.js" var="morrisMin" />
+			<script src="${morrisMin}"></script>
+			<spring:url value="/resources/js/morris-data.js" var="morrisData" />
+			<script src="${morrisData})"></script>
+    
 
 
 
