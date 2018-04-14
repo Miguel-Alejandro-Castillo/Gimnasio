@@ -4,14 +4,13 @@ import com.gym.bean.HorarioBean;
 import com.gym.dao.HorarioRepository;
 import com.gym.model.Horario;
 import com.gym.util.NumberUtils;
+import com.gym.validator.HorarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
@@ -22,6 +21,9 @@ public class HorarioController {
 
     @Autowired
     private HorarioRepository horarioRepository;
+
+    @Autowired
+    private HorarioValidator horarioValidator;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showHorarios(){
@@ -77,6 +79,11 @@ public class HorarioController {
             return new ModelAndView("redirect:/horarios");
         }
 
+    };
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(horarioValidator);
     }
 
 }
