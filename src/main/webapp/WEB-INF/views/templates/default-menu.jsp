@@ -110,6 +110,10 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <li>
+				<spring:url value="/resumen" var="resumen"/>
+                <a href="${resumen}"><i class="fa fa-bar-chart-o fa-fw"></i>Resumen</a>                                                 
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
