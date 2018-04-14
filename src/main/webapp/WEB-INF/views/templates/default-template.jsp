@@ -22,7 +22,7 @@
     <link href="${sbAdmin2Css}" rel="stylesheet"/>
 
     <spring:url value="resources/css/demo.css" var="demoCss"/>
-    <link href="${demoCss}" rel="stylesheet">
+    <link href="${demoCss}" rel="stylesheet"/>
 
     <!-- Morris Charts CSS -->
     <spring:url value="/resources/css/morris.css" var="morris"/>
