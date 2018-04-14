@@ -99,12 +99,16 @@
             <spring:url value="/resources/js/funciones.js" var="funciones" />
             <script src="${funciones}"></script>
 
+			<!-- jQuery -->
+			<!-- Morris Charts JavaScript -->
 			<spring:url value="/resources/js/raphael.min.js" var="raphaelMin" />
 			<script src="${raphaelMin}"></script>
 			<spring:url value="/resources/js/morris.min.js" var="morrisMin" />
 			<script src="${morrisMin}"></script>
+			<!--  
 			<spring:url value="/resources/js/morris-data.js" var="morrisData" />
 			<script src="${morrisData})"></script>
+			 -->
     
 
 
