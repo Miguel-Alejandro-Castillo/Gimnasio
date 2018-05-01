@@ -16,7 +16,6 @@ public class Pago {
 	private Actividad actividad;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     private Date momento_pago;
     
     @Column(nullable = false)

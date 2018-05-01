@@ -39,7 +39,7 @@ public class Cliente {
     @Column
     private String email;
 
-    @OneToMany( fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+    @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL , orphanRemoval = true)
     private Set<Pago> pagos;
 
     public Cliente() {
