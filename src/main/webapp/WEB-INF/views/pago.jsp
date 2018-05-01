@@ -20,14 +20,14 @@
                                 <form:form id="pagoForm" modelAttribute="pagoBean" action="${urlActual}" method="post" role="form">
                                         <form:hidden path="id"/>
                                         <div class="form-group">
-                                            <form:label path="fecha_desde">Fecha Hasta</form:label>
-                                            <form:input type="date" path="fecha_desde"  cssClass="form-control"/>
-                                            <form:errors path="fecha_desde" cssClass="error"/>
-                                        </div>
-                                        <div class="form-group">
                                             <form:label path="fecha_hasta">Fecha Desde</form:label>
                                             <form:input type="date" path="fecha_hasta"  cssClass="form-control"/>
                                             <form:errors path="fecha_hasta" cssClass="error"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <form:label path="fecha_desde">Fecha Hasta</form:label>
+                                            <form:input type="date" path="fecha_desde"  cssClass="form-control"/>
+                                            <form:errors path="fecha_desde" cssClass="error"/>
                                         </div>
 	                                    <div class="form-group">
                                             <form:label path="actividad_id">Actividad</form:label>

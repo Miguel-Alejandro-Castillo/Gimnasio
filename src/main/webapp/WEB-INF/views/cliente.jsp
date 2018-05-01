@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -31,7 +31,7 @@
                                         </div>
 
                                     <div class="form-group">
-                                        <form:label path="dni">Dni*</form:label>
+                                        <form:label path="dni">DNI*</form:label>
                                         <form:input type="number" path="dni"  cssClass="form-control"/>
                                         <form:errors path="dni" cssClass="error"/>
                                     </div>
@@ -68,15 +68,21 @@
                     <!-- /.panel -->                
 	                <div class="panel-body">
 	                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-								<thead></thead>
+								<thead>
+									<td>Momento Pago</td>
+									<td>Cliente</td>
+									<td>Actividad</td>
+									<td>Fecha Desde</td>
+									<td>Fecha Hasta</td>
+								</thead>
 								<tbody>
 									<c:forEach items="${clienteBean.pagos}" var="pago">
 										<tr class="odd gradeX">
+											<td><c:out value="${pago.momento_pago}"></c:out></td>
 											<td><c:out value="${pago.actividad.nombre}"></c:out></td>
 											<td><c:out value="${pago.fecha_desde}"></c:out></td>
 											<td><c:out value="${pago.fecha_hasta}"></c:out></td>
 											<td><c:out value="${pago.monto}"></c:out></td>
-											<td><c:out value="${pago.momento_pago}"></c:out></td>
 										</tr>
 									</c:forEach>
 								</tbody>
