@@ -103,11 +103,6 @@
 			<script src="${raphaelMin}"></script>
 			<spring:url value="/resources/js/morris.min.js" var="morrisMin" />
 			<script src="${morrisMin}"></script>
-			<spring:url value="/resources/js/morris-data.js" var="morrisData" />
-			<script src="${morrisData})"></script>
-    
-
-
 
             <!-- Page-Level Demo Scripts - Tables - Use for reference -->
             <script>
