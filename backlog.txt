@@ -1,0 +1,3 @@
+BACKLOG
+-Convertir los links a spring:url de resumen.jsp y verificar que ande
+-Anexar la informacion de pagos a el chart que estan en resumen.jsp
