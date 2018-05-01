@@ -29,7 +29,7 @@
                                             <form:errors path="hora_fin" cssClass="error"/>
                                         </div>
                                         <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
-                                         <spring:message code="horario.validationError.horarioExistente"/>
+
                                 </form:form>
                                 </div>
                                 

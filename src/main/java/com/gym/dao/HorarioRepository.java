@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HorarioRepository extends JpaRepository<Horario,Long> {
-    Horario findByHorario_inicioAndHorario_finAndIdNot(String horario_inicio, String horario_fin, Long id);
+    //Horario findByHorario_inicioAndHorario_finAndIdNot(String horario_inicio, String horario_fin, Long id);
 }
