@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Created by Alejandro on 14/4/2018.
  */
-@Component
+/*@Component
 public class HorarioValidator implements Validator {
 
     @Autowired
@@ -56,3 +56,4 @@ public class HorarioValidator implements Validator {
 
     }
 }
+*/
