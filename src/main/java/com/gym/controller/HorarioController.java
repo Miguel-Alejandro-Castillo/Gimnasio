@@ -4,7 +4,6 @@ import com.gym.bean.HorarioBean;
 import com.gym.dao.HorarioRepository;
 import com.gym.model.Horario;
 import com.gym.util.NumberUtils;
-import com.gym.validator.HorarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,8 +21,6 @@ public class HorarioController {
     @Autowired
     private HorarioRepository horarioRepository;
 
-    @Autowired
-    private HorarioValidator horarioValidator;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showHorarios(){
@@ -81,9 +78,6 @@ public class HorarioController {
 
     };
 
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(horarioValidator);
-    }
+
 
 }
