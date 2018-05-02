@@ -62,7 +62,7 @@ public class PagoController {
 	        cliente.getPagos().add(pago);
 	        clienteRepository.save(cliente);
 
-	        mav=new ModelAndView("redirect:/clientes/{id_cliente}/editar");
+	        mav=new ModelAndView("redirect:/clientes/{id_cliente}/clienteEditar");
         }
         return mav;
 

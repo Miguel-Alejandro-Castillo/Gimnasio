@@ -36,7 +36,8 @@ public class ResumenController{
 
 	@RequestMapping(value="/resumen/cargarGraficoResumenAnual", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<MesGanancia> cargarGraficoResumenAnual() {
-		return pagoRepository.findGananciasByAnio(Calendar.YEAR);
+		//Se debe obtener  el año actual de forma dinamica
+		return pagoRepository.findGananciasByAnio(2018);
 	}
 
 }
