@@ -8,6 +8,7 @@ import com.gym.dao.ProfesorRepository;
 import com.gym.model.*;
 import com.gym.util.DiaHorarioProfesorDTO;
 import com.gym.util.NumberUtils;
+import com.gym.util.ObjectResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -63,17 +64,17 @@ public class ActividadController {
 
     @RequestMapping(value="/addDiaHorarioProfesor", method = RequestMethod.POST,  consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public  @ResponseBody DiaHorarioProfesor submitAddDiaHorarioProfesor( @RequestBody DiaHorarioProfesorDTO diaHorarioProfesorDTO){
+    public  @ResponseBody ObjectResponse submitAddDiaHorarioProfesor( @RequestBody DiaHorarioProfesorDTO diaHorarioProfesorDTO){
         Dia dia = diaHorarioProfesorDTO.getNewDia();
         Horario horario = horarioRepository.findOne(diaHorarioProfesorDTO.getNewHorario());
         Profesor profesor = profesorRepository.findOne(diaHorarioProfesorDTO.getNewProfesor());
         DiaHorarioProfesor diaHorarioProfesor = new DiaHorarioProfesor( dia , horario, profesor);
         if(!this.actividadBean.getDiasHorariosProfesores().contains(diaHorarioProfesor)) {
             this.actividadBean.getDiasHorariosProfesores().add(diaHorarioProfesor);
-            return diaHorarioProfesor;
+            return new ObjectResponse( diaHorarioProfesor, "success");
         }
         else
-            return null;
+            return new ObjectResponse( null, "failure.diaHorarioProfesor.existente");
     }
 
     @RequestMapping(value="/crearActividad", method = RequestMethod.POST)

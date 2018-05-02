@@ -21,7 +21,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <div id="morris-bar-chart"></div>
+                    <div id="morris-bar-chart" ></div>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -64,35 +64,13 @@
     	</table>
     	</div>
     </div>
-    
 
 
-    <script type="text/javascript">
-    new Morris.Bar({
-		  element: 'morris-bar-chart',
-		  data: [
-			  
-		    { y: 'Enero', a: 100},
-		    { y: 'Febrero', a: 75 },
-		    { y: 'Marzo', a: 50 },
-		    { y: 'Abril', a: 75 },
-		    { y: 'Mayo', a: 50 },
-		    { y: 'Junio', a: 75 },
-		    { y: 'Julio', a: 100 },
-		    { y: 'Agosto', a: 100},
-		    { y: 'Septiebre', a: 75 },
-		    { y: 'Octubre', a: 50 },
-		    { y: 'Noviembre', a: 75 },
-		    { y: 'Diciembre', a: 50 }
-		  ],
-		  xkey: 'y',
-		  ykeys: ['a'],
-		  labels: ['Entrada:']
-    
-    
-});
 
-
+    <script>
+		$(document).ready(function() {
+			cargarGraficoResumenAnual();
+		});
     </script>
    
 </div>

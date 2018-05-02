@@ -13,6 +13,7 @@
     <hibernate.version>5.1.0.Final</hibernate.version>
     <mysql.connector.version>5.1.23</mysql.connector.version>
      <spring.security.version>4.2.3.RELEASE</spring.security.version>
+     <jackson-version>2.7.5</jackson-version>
   </properties>
   <dependencies>
 
@@ -127,10 +128,16 @@
       <scope>provided</scope>
     </dependency>
 
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson-version}</version>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.7.5</version>
+      <version>${jackson-version}</version>
     </dependency>
 
   </dependencies>
