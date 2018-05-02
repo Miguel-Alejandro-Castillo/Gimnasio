@@ -40,8 +40,8 @@
                                    <td><c:out value="${cliente.telefono}"></c:out></td>
                                    <td><c:out value="${cliente.direccion}"></c:out></td>
                                    <td><c:out value="${cliente.email}"></c:out></td>
-                                   <spring:url value="/clientes/${cliente.id}/editar" var="urlEditCliente"/>
-                                   <td><a href="${urlEditCliente}" >Editar cliente</a></td>
+                                   <spring:url value="/clientes/${cliente.id}/clienteDetalle" var="urlClienteDetalle"/>
+                                   <td><a href="${urlClienteDetalle}" >Detalle cliente</a></td>
                                    <spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
                                    <td><a href="${urlPagar}" >Realizar Pago</a></td>
                                </tr>
