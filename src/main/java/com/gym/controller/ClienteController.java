@@ -52,7 +52,23 @@ public class ClienteController {
 
     }
 
-    @RequestMapping(value="/{id_cliente}/editar", method = RequestMethod.GET)
+    @RequestMapping(value="/{id_cliente}/clienteDetalle", method = RequestMethod.GET)
+    public ModelAndView showDetalleCliente(@PathVariable(name = "id_cliente") String id_cliente){
+        ModelAndView mav=null;
+        Long id = NumberUtils.toLong(id_cliente);
+        Cliente cliente= clienteRepository.findOne(id);
+        if(cliente!=null) {
+            ClienteBean clienteBean = new ClienteBean(cliente);
+            mav= new ModelAndView("detalle-cliente");
+            mav.addObject("clienteBean", clienteBean);
+        }
+        else {
+            // renderizar a una vista que informe que no se envio un id de cliente en el path
+        }
+        return mav;
+    }
+    
+    @RequestMapping(value="/{id_cliente}/clienteEditar", method = RequestMethod.GET)
     public ModelAndView showEditarClienteForm(@PathVariable(name = "id_cliente") String id_cliente){
         ModelAndView mav=null;
         Long id = NumberUtils.toLong(id_cliente);
@@ -68,8 +84,9 @@ public class ClienteController {
         }
         return mav;
     }
-
-    @RequestMapping(value="/{id_cliente}/editar", method = RequestMethod.POST)
+    
+    
+    @RequestMapping(value="/{id_cliente}/clienteEditar", method = RequestMethod.POST)
     public  ModelAndView submitEditCliente(@ModelAttribute("clienteBean") @Validated ClienteBean clienteBean, BindingResult result){
         if(result.hasErrors())
             return new ModelAndView("editar-cliente");
@@ -80,5 +97,4 @@ public class ClienteController {
         }
 
     }
-
 }

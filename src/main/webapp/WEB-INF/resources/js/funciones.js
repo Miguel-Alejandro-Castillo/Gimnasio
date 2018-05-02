@@ -28,7 +28,6 @@ function submitAjax(url) {
                         break;
                 }
 
-
             },
             error: function (e) {
             }
