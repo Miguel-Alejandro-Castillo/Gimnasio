@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by Alejandro on 10/2/2018.
  */
 @Entity
-@Table( name = "CLIENTES")
+@Table( name = "clientes")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

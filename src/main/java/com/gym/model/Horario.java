@@ -3,7 +3,7 @@ package com.gym.model;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "HORARIOS")
+@Table( name = "horarios")
 public class Horario {
 
 	@Id
