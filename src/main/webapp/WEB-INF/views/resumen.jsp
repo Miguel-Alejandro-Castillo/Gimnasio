@@ -4,6 +4,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div id="page-wrapper">
 	<div class="row">
 	    <div class="col-lg-12">
@@ -67,12 +68,14 @@
 
 
 
+    <spring:url value="/resumen/cargarGraficoResumenAnual" var="cargarGraficoResumenAnual"/>
     <script>
 		$(document).ready(function() {
-			cargarGraficoResumenAnual();
+			var url = "${cargarGraficoResumenAnual}";
+			cargarGraficoResumenAnual(url);
 		});
     </script>
-   
+    
 </div>
 <!-- /#page-wrapper -->
 

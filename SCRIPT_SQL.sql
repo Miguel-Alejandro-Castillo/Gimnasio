@@ -1,8 +1,8 @@
 USE gimnasio;
-INSERT INTO ADMINISTRADORES(nombre, apellido,username,`password`)VALUES
+INSERT INTO administradores(nombre, apellido,username,`password`)VALUES
 ('eldeposito','eldeposito','admin','1234');
 
-INSERT INTO CLIENTES(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
+INSERT INTO  clientes(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
 (42032779,'Hee','radio','2001-07-30','4652041','22 Marsh Ave.','grady@att.net'),
 (31352234,'Muoi','asperse','1979-07-01','4828751',"'Salisbury, MD 21801'",'mcrawfor@sbcglobal.net'),
 (36781997,'Elenore','unsleepy','1965-12-15','4625700','9486 West Trenton St.','jyoliver@msn.com'),
@@ -53,14 +53,14 @@ INSERT INTO CLIENTES(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,
 (28570140,'Kanesha','staircase','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com'),
 (14793287,'Sybil','sprucely','1970-09-11','4812534','393 Manhattan Street','shrapnull@icloud.com');
 
-INSERT INTO PROFESORES(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
+INSERT INTO profesores(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
 (37833319,'Nancy','Villareal','1969-01-26','4380705',"'Salt Lake City, UT 84119'",'dhrakar@att.net'),
 (14933335,'Jose','Perez','1973-01-16','4732404','8124 Berkshire St.','matthijs@sbcglobal.net'),
 (46533341,'Jose','Hernandez','1977-04-09','4663208',"'Saratoga Springs, NY 12866'",'mfburgo@comcast.net'),
 (50533385,'Ramon','Lopez','1993-12-21','4535393','68 Penn St.','jpflip@optonline.net'),
 (28533340,'Sandra','Goñi','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com');
 
-INSERT INTO HORARIOS(hora_inicio,hora_fin)VALUES
+INSERT INTO horarios(hora_inicio,hora_fin)VALUES
 ('08:30:00','09:15:00'),
 ('09:30:00','10:30:00'),
 ('10:30:00','11:30:00'),
@@ -73,7 +73,7 @@ INSERT INTO HORARIOS(hora_inicio,hora_fin)VALUES
 ('20:00:00','21:00:00'),
 ('21:00:00','22:00:00');
 
-INSERT INTO ACTIVIDADES(nombre,costo)VALUES
+INSERT INTO actividades(nombre,costo)VALUES
 ('zumba',400),
 ('aero',450),
 ('funcional',650),
@@ -82,7 +82,7 @@ INSERT INTO ACTIVIDADES(nombre,costo)VALUES
 ('ritmos latinos',500),
 ('crossfit',3000);
 
-INSERT INTO PAGOS(actividad_id,momento_pago,monto,fecha_desde,fecha_hasta)VALUES
+INSERT INTO pagos(actividad_id,momento_pago,monto,fecha_desde,fecha_hasta)VALUES
 (1,'2018/02/19',1037,'2018/02/19','2018/03/19'),
 (5,'2016/05/25',1196,'2016/05/25','2016/06/25'),
 (6,'2018/06/23',690,'2018/06/23','2018/07/23'),
@@ -284,7 +284,7 @@ INSERT INTO PAGOS(actividad_id,momento_pago,monto,fecha_desde,fecha_hasta)VALUES
 (5,'2018/06/05',864,'2018/06/05','2018/07/05'),
 (4,'2018/09/12',1312,'2018/09/12','2018/10/12');
 
-INSERT INTO CLIENTES_PAGOS(Cliente_id,pagos_id)VALUES
+INSERT INTO clientes_pagos(Cliente_id,pagos_id)VALUES
 (9,1),
 (16,2),
 (31,3),

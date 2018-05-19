@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table( name = "DIAS_HORARIOS_PROFESORES")
+@Table( name = "dias_horarios_profesores")
 public class DiaHorarioProfesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

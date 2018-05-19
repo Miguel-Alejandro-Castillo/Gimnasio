@@ -38,11 +38,11 @@ function submitAjax(url) {
 
 }
 
-function cargarGraficoResumenAnual(){
+function cargarGraficoResumenAnual(urlx){
 
     $.ajax({
         type: "GET",
-        url: '/resumen/cargarGraficoResumenAnual',
+        url: urlx,
         timeout: 600000,
         success: function (ganancias) {
             ganancias = ganancias.map(function(ganancia){
