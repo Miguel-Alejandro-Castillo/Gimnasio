@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.gym.dao.ClienteRepository;
 import com.gym.model.Cliente;
-
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -35,7 +31,7 @@ public class ResumenController{
 	}
 
 	@RequestMapping(value="/resumen/cargarGraficoResumenAnual", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<MesGanancia> cargarGraficoResumenAnual() {
+	public @ResponseBody  List<MesGanancia> cargarGraficoResumenAnual() {
 		//Se debe obtener  el año actual de forma dinamica
 		return pagoRepository.findGananciasByAnio(2018);
 	}
