@@ -9,6 +9,16 @@ public class MesGanancia {
     private Integer mes;
     private BigDecimal total;
 
+    public MesGanancia() {
+        super();
+    }
+
+    public MesGanancia(Integer mes, BigDecimal total) {
+        this();
+        this.mes = mes;
+        this.total = total;
+    }
+
     public Integer getMes() {
         return mes;
     }

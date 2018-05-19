@@ -1,10 +1,9 @@
 package com.gym.controller;
 
-import com.gym.bean.HorarioBean;
 import com.gym.dao.HorarioRepository;
 import com.gym.model.Horario;
 import com.gym.util.NumberUtils;
-//import com.gym.validator.HorarioValidator;
+import com.gym.validator.HorarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,9 +21,10 @@ public class HorarioController {
     @Autowired
     private HorarioRepository horarioRepository;
 
-    /*@Autowired
+    @Autowired
     private HorarioValidator horarioValidator;
-    */
+
+
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showHorarios(){
         ModelAndView mav=new ModelAndView("horarios");
@@ -36,21 +36,24 @@ public class HorarioController {
     @RequestMapping(value="/crearHorario", method = RequestMethod.GET)
     public ModelAndView showAltaHorarioForm(){
         ModelAndView mav=new ModelAndView("crear-horario");
-        mav.addObject("horarioBean", new HorarioBean());
+        mav.addObject("horario", new Horario());
         return mav;
     }
 
     @RequestMapping(value="/crearHorario", method = RequestMethod.POST)
-    public  ModelAndView submitCreateHorario(@ModelAttribute("horarioBean") @Validated HorarioBean horarioBean, BindingResult result){
-        if(result.hasErrors())
-            return new ModelAndView("crear-horario");
-        else{
-        	Horario horario=new Horario(horarioBean.getId(),horarioBean.getHora_inicio(),horarioBean.getHora_fin());
-            horarioRepository.save(horario);
-            return new ModelAndView("redirect:/horarios");
+    public  ModelAndView submitCreateHorario(@ModelAttribute("horario") @Validated Horario horario, BindingResult result){
+        ModelAndView mav;
+        if(result.hasErrors()) {
+             mav = new ModelAndView("crear-horario");
         }
+        else{
+            horarioRepository.save(horario);
+            mav = new ModelAndView("redirect:/horarios");
+        }
+        return mav;
 
     }
+
 
     @RequestMapping(value="/{id_horario}/editar", method = RequestMethod.GET)
     public ModelAndView showEditarHorarioForm(@PathVariable(name = "id_horario") String id_horario){
@@ -58,10 +61,8 @@ public class HorarioController {
         Long id = NumberUtils.toLong(id_horario);
         Horario horario= horarioRepository.findOne(id);
         if(horario!=null) {
-            HorarioBean horarioBean = new HorarioBean();
-            horarioBean.load(horario);
             mav= new ModelAndView("editar-horario");
-            mav.addObject("horarioBean", horario);
+            mav.addObject("horario", horario);
         }
         else {
             // renderizar a una vista que informe que no se envio un id de horario en el path
@@ -70,21 +71,20 @@ public class HorarioController {
     }
 
     @RequestMapping(value="/{id_horario}/editar", method = RequestMethod.POST)
-    public  ModelAndView submitEditHorario(@ModelAttribute("horarioBean") @Validated HorarioBean horarioBean, BindingResult result){
+    public  ModelAndView submitEditHorario(@ModelAttribute("horario") @Validated Horario horario, BindingResult result){
         if(result.hasErrors())
             return new ModelAndView("editar-horario");
         else{
-        	Horario horario=new Horario(horarioBean.getId(),horarioBean.getHora_inicio(),horarioBean.getHora_fin());
             horarioRepository.save(horario);
             return new ModelAndView("redirect:/horarios");
         }
 
-    };
-
-    /*@InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(horarioValidator);
     }
-    */
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(horarioValidator);
+    }
+
 
 }

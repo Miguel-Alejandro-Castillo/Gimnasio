@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -16,19 +17,28 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                 <spring:url value="" var="urlActual"/>
-                                <form:form id="horarioForm" modelAttribute="horarioBean" action="${urlActual}" method="post" role="form">
+                                <form:form id="horarioForm" modelAttribute="horario" action="${urlActual}" method="post" role="form" novalidate="true">
                                         <form:hidden path="id"/>
                                         <div class="form-group">
-                                            <form:label path="hora_inicio">hora inicio</form:label>
-                                            <form:input  path="hora_inicio" type="time" cssClass="form-control" autofocus="autofocus"/>
-                                            <form:errors path="hora_inicio" cssClass="error"/>
+                                            <form:label path="horaInicio">hora inicio</form:label>
+                                            <form:input  path="horaInicio" type="time" cssClass="form-control" autofocus="autofocus"/>
+                                            <form:errors path="horaInicio" cssClass="errorMessage"/>
                                         </div>
                                         <div class="form-group">
-                                            <form:label path="hora_fin">hora fin</form:label>
-                                            <form:input path="hora_fin"  type="time" cssClass="form-control"/>
-                                            <form:errors path="hora_fin" cssClass="error"/>
+                                            <form:label path="horaFin">hora fin</form:label>
+                                            <form:input path="horaFin"  type="time" cssClass="form-control"/>
+                                            <form:errors path="horaFin" cssClass="errorMessage"/>
                                         </div>
-                                        <form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
+                                    <div class="form-group">
+                                         <form:button  type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
+                                         <spring:hasBindErrors name="horario">
+                                              <c:forEach items="${errors.globalErrors}" var="error">
+                                                 <br/><span class="errorMessage"> <spring:message code="${error.code}"/></span>
+                                               </c:forEach>
+                                         </spring:hasBindErrors>
+                                    </div>
+
+
 
                                 </form:form>
                                 </div>

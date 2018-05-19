@@ -18,7 +18,7 @@
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
                             </div>
                             <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
-                            <span class="error">${loginError}</span>
+                            <span class="errorMessage">${loginError}</span>
                         </fieldset>
 
                     </form>

@@ -1,19 +1,13 @@
 package com.gym.bean;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import com.gym.model.Horario;
 
 public class HorarioBean {
 	
 	private Long id;
-    
-    @NotBlank
+
     private String hora_inicio;
-    
-    @NotBlank
+
     private String hora_fin;
 
     public HorarioBean() {
@@ -29,8 +23,8 @@ public class HorarioBean {
     
     public void load(Horario horario) {
         this.setId(horario.getId());
-        this.setHora_fin(horario.getHora_fin());
-        this.setHora_inicio(horario.getHora_inicio());
+        this.setHora_fin(horario.getHoraFin());
+        this.setHora_inicio(horario.getHoraInicio());
     }
 
 	public Long getId() {

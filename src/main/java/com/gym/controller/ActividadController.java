@@ -2,7 +2,6 @@ package com.gym.controller;
 
 import com.gym.bean.ActividadBean;
 import com.gym.dao.ActividadRepository;
-import com.gym.dao.DiaHorarioProfesorRepository;
 import com.gym.dao.HorarioRepository;
 import com.gym.dao.ProfesorRepository;
 import com.gym.model.*;
@@ -16,8 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,9 +29,6 @@ public class ActividadController {
 
     @Autowired
     private HorarioRepository horarioRepository;
-
-    @Autowired
-    private DiaHorarioProfesorRepository diaHorarioProfesorRepository;
 
     @Autowired
     private ProfesorRepository profesorRepository;
