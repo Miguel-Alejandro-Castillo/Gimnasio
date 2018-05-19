@@ -44,31 +44,31 @@ function cargarGraficoResumenAnual(){
         type: "GET",
         url: '/resumen/cargarGraficoResumenAnual',
         timeout: 600000,
-        success: function (response) {
-            new Morris.Bar({
-                element: 'morris-bar-chart',
-                data: [
-
-                    { y: 'Enero', a: response[0][1]},
-                    { y: 'Febrero', a: response[1][1] },
-                    { y: 'Marzo', a: response[2][1]},
-                    { y: 'Abril', a: response[3][1] },
-                    { y: 'Mayo', a: response[4][1] },
-                    { y: 'Junio', a: response[5][1] },
-                    { y: 'Julio', a: response[6][1] },
-                    { y: 'Agosto', a: response[7][1]},
-                    { y: 'Septiembre', a: response[8][1] },
-                    { y: 'Octubre', a: response[9][1] },
-                    { y: 'Noviembre', a: response[10][1] },
-                    { y: 'Diciembre', a: response[11][1] }
-                ],
-                xkey: 'y',
-                ykeys: ['a'],
-                labels: ['Entrada:']
-
-
+        success: function (ganancias) {
+            ganancias = ganancias.map(function(ganancia){
+                return ganancia[1];
             });
+            var myConfig = {
+                type: "bar3d",
+                scaleX: {
+                    label:{
+                        text:"Resumen anual"
+                    },
+                    labels:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+                },
+                series: [
+                    {
+                        values:ganancias
+                    }
+                ]
+            };
 
+            zingchart.render({
+                id : 'morris-bar-chart',
+                data : myConfig,
+                height: "70%",
+                width: "100%"
+            });
 
         },
         error: function (e) {

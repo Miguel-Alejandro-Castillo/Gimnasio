@@ -4,10 +4,8 @@ import com.gym.model.Pago;
 import com.gym.util.MesGanancia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -30,5 +28,5 @@ public interface PagoRepository extends JpaRepository<Pago,Long> {
     " LEFT JOIN pagos p ON(meses.MONTH = MONTH(p.momento_pago) AND YEAR(p.momento_pago) = :anio ) "+
     " GROUP BY meses.MONTH"+
     " ORDER BY meses.MONTH ", nativeQuery = true)
-    List<MesGanancia> findGananciasByAnio(@Param("anio") Integer anio);
+    List<MesGanancia>  findGananciasByAnio(@Param("anio") Integer anio);
 }
