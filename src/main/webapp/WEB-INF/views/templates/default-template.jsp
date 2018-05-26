@@ -109,10 +109,26 @@
             <!-- Page-Level Demo Scripts - Tables - Use for reference -->
             <script>
                 $(document).ready(function() {
-                    $('#dataTables-example').DataTable({
+                    
+                	$('#dataTables-example').DataTable(
+                	{
                         responsive: true
+                    });         
+                    
+                    $('table tr.child').hide();
+                	
+                    $('.parent').click(function()
+					{
+						$(this).nextUntil('tr.parent').slideToggle(300);
                     });
-                });
+				});
+                
+                
+                
+                
+                
+                
+                
             </script>
 </body>
 </html>

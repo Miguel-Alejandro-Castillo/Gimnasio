@@ -3,7 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="page-wrapper">
-        <div class="row">
+	
+	        <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header"><tiles:getAsString name="title"/></h1>
             </div>
@@ -14,37 +15,34 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table  class="table table-striped table-bordered table-hover">
+                        
                             <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>nombre</th>
-                                <th>apellido</th>
-                                <th>dni</th>
-                                <th>fecha de nacimiento</th>
-                                <th>telefono</th>
-                                <th>direccion</th>
-                                <th>email</th>
-                                <th>Editar</th>
-                                <th>Pagar</th>
-                            </tr>
+                            	<tr>
+	                                <th>nombre</th>
+	                                <th>apellido</th>
+	                                <th>dni</th>
+                            	</tr>
                             </thead>
+                        
                             <tbody>
-                            <c:forEach items="${clientes}" var="cliente">
-                               <tr class="odd gradeX">
-                                   <td><c:out value="${cliente.id}"></c:out></td>
-                                   <td><c:out value="${cliente.nombre}"></c:out></td>
-                                   <td><c:out value="${cliente.apellido}"></c:out></td>
-                                   <td><c:out value="${cliente.dni}"></c:out></td>
-                                   <td><fmt:formatDate pattern="dd/MM/yyyy" value="${cliente.fecha_de_nacimiento}" /></td>
-                                   <td><c:out value="${cliente.telefono}"></c:out></td>
-                                   <td><c:out value="${cliente.direccion}"></c:out></td>
-                                   <td><c:out value="${cliente.email}"></c:out></td>
-                                   <spring:url value="/clientes/${cliente.id}/clienteDetalle" var="urlClienteDetalle"/>
-                                   <td><a href="${urlClienteDetalle}" >Detalle cliente</a></td>
-                                   <spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
-                                   <td><a href="${urlPagar}" >Realizar Pago</a></td>
-                               </tr>
+							<c:forEach items="${clientes}" var="cliente">
+									<tr class="parent">
+										<td><c:out value="${cliente.nombre}"></c:out></td>
+										<td><c:out value="${cliente.apellido}"></c:out></td>
+										<td><c:out value="${cliente.dni}"></c:out></td>
+									</tr>
+									<tr class="child"> 
+										<td>	    
+											<spring:url value="/clientes/${cliente.id}/clienteDetalle" var="urlClienteDetalle"/>
+											<a href="${urlClienteDetalle}" >Detalle cliente</a>
+										</td>
+										<td>
+											<spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
+											<a href="${urlPagar}">Realizar Pago</a>
+										</td>
+										<td></td>	
+									</tr>
                             </c:forEach>
                             </tbody>
                         </table>
@@ -60,3 +58,4 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
+
