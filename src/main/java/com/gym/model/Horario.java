@@ -11,22 +11,38 @@ public class Horario {
     private Long id;
 
     @Column(nullable = false)
-    private String hora_inicio;
+    private String horaInicio;
 
     @Column(nullable = false)
-    private String hora_fin;
+    private String horaFin;
 
-    public Horario(Long id, String hora_inicio, String hora_fin) {
+    public Horario(Long id, String horaInicio, String horaFin) {
 		
 		this.id = id;
-		this.hora_inicio = hora_inicio;
-		this.hora_fin = hora_fin;
+		this.horaInicio = horaInicio;
+		this.horaFin = horaFin;
 	}
 
     public Horario() {
     	super();
     }
-    
+
+	public String getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getHoraFin() {
+		return horaFin;
+	}
+
+	public void setHoraFin(String horaFin) {
+		this.horaFin = horaFin;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -35,25 +51,9 @@ public class Horario {
 		this.id = id;
 	}
 
-	public String getHora_inicio() {
-		return hora_inicio;
-	}
-
-	public void setHora_inicio(String hora_inicio) {
-		this.hora_inicio = hora_inicio;
-	}
-
-	public String getHora_fin() {
-		return hora_fin;
-	}
-
-	public void setHora_fin(String hora_fin) {
-		this.hora_fin = hora_fin;
-	}
-
 	@Override
 	public String toString() {
-		return this.getHora_inicio()+ " hs a "+ this.getHora_fin()+" hs";
+		return this.getHoraInicio()+ " hs a "+ this.getHoraFin()+" hs";
 	}
 
 	@Override
@@ -63,8 +63,8 @@ public class Horario {
 
 		Horario horario = (Horario) o;
 
-		if (hora_fin != null ? !hora_fin.equals(horario.hora_fin) : horario.hora_fin != null) return false;
-		if (hora_inicio != null ? !hora_inicio.equals(horario.hora_inicio) : horario.hora_inicio != null) return false;
+		if (horaFin != null ? !horaFin.equals(horario.horaFin) : horario.horaFin != null) return false;
+		if (horaInicio != null ? !horaInicio.equals(horario.horaInicio) : horario.horaInicio != null) return false;
 		if (id != null ? !id.equals(horario.id) : horario.id != null) return false;
 
 		return true;
@@ -72,9 +72,9 @@ public class Horario {
 
 	@Override
 	public int hashCode() {
-		int result = (id != null ? id.hashCode() : 0);
-		result = 31 * result + (hora_inicio != null ? hora_inicio.hashCode(): 0);
-		result = 31 * result + (hora_fin != null ? hora_fin.hashCode() : 0);
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (horaInicio != null ? horaInicio.hashCode() : 0);
+		result = 31 * result + (horaFin != null ? horaFin.hashCode() : 0);
 		return result;
 	}
 }

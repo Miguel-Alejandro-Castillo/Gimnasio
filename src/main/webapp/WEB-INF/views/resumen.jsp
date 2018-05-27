@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<spring:url value="/resumen/" var="urlResumen"/>
 <div id="page-wrapper">
 	<div class="row">
 	    <div class="col-lg-12">
@@ -18,11 +19,33 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Resumen del A&ntilde;o
+					<select id="mes" name="mes" onchange="cargarGraficoResumen('${urlResumen}');">
+						<option value="*" selected>Todos los meses</option>
+						<option value="1">Enero</option>
+						<option value="2">Febrero</option>
+						<option value="3">Marzo</option>
+						<option value="4">Abril</option>
+						<option value="5">Mayo</option>
+						<option value="6">Junio</option>
+						<option value="7">Julio</option>
+						<option value="8">Agosto</option>
+						<option value="9">Septiembre</option>
+						<option value="10">Octubre</option>
+						<option value="11">Noviembre</option>
+						<option value="12">Diciembre</option>
+					</select>
+					<select  id="anio" name="anio" onchange="cargarGraficoResumen('${urlResumen}');">
+						<option value="2017" selected>2017</option>
+						<c:forEach var = "i" begin = "2018" end = "2050">
+							<option value="${i}"> <c:out value = "${i}"/></option>
+						</c:forEach>
+					</select>
+
+
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <div id="morris-bar-chart" ></div>
+                    <div id="graficoBarras" ></div>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -66,13 +89,9 @@
     	</div>
     </div>
 
-
-
-    <spring:url value="/resumen/cargarGraficoResumenAnual" var="cargarGraficoResumenAnual"/>
     <script>
 		$(document).ready(function() {
-			var url = "${cargarGraficoResumenAnual}";
-			cargarGraficoResumenAnual(url);
+			cargarGraficoResumen('${urlResumen}');
 		});
     </script>
     

@@ -38,41 +38,84 @@ function submitAjax(url) {
 
 }
 
-function cargarGraficoResumenAnual(urlx){
-
-    $.ajax({
-        type: "GET",
-        url: urlx,
-        timeout: 600000,
-        success: function (ganancias) {
-            ganancias = ganancias.map(function(ganancia){
-                return ganancia[1];
-            });
-            var myConfig = {
-                type: "bar3d",
-                scaleX: {
-                    label:{
-                        text:"Resumen anual"
+function cargarGraficoResumen(url){
+    var mes = $("#mes").val();
+    var anio = $("#anio").val();
+    if(mes == "*") {
+        $.ajax({
+            type: "GET",
+            url: url+ "cargarGraficoResumenAnual/" +anio,
+            timeout: 600000,
+            success: function (ganancias) {
+                ganancias = ganancias.map(function (ganancia) {
+                    return ganancia[1];
+                });
+                var myConfig = {
+                    type: "bar3d",
+                    scaleX: {
+                        label: {
+                            text: "Resumen anual"
+                        },
+                        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
                     },
-                    labels:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-                },
-                series: [
-                    {
-                        values:ganancias
-                    }
-                ]
-            };
+                    series: [
+                        {
+                            values: ganancias
+                        }
+                    ]
+                };
 
-            zingchart.render({
-                id : 'morris-bar-chart',
-                data : myConfig,
-                height: "70%",
-                width: "100%"
-            });
+                zingchart.render({
+                    id: 'graficoBarras',
+                    data: myConfig,
+                    height: "70%",
+                    width: "100%"
+                });
 
-        },
-        error: function (e) {
-        }
-    });
+            },
+            error: function (e) {
+            }
+        });
+    }
+    else{
+        $.ajax({
+            type: "GET",
+            url: url+ "cargarGraficoResumenMensual/" +anio+"/"+mes,
+            timeout: 600000,
+            success: function (ganancias) {
+                labels = ganancias.map(function (ganancia) {
+                    return ganancia[0];
+                });
+                series = ganancias.map(function (ganancia) {
+                    return ganancia[1];
+                });
+                var myConfig = {
+                    type: "bar3d",
+                    scaleX: {
+                        label: {
+                            text: "Resumen Mensual"
+                        },
+                        labels: labels
+                    },
+                    series: [
+                        {
+                            values: series
+                        }
+                    ]
+                };
+
+                zingchart.render({
+                    id: 'graficoBarras',
+                    data: myConfig,
+                    height: "70%",
+                    width: "100%"
+                });
+
+            },
+            error: function (e) {
+            }
+        });
+    }
+
 
 }

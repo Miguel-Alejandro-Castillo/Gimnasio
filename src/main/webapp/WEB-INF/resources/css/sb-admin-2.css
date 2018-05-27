@@ -448,3 +448,7 @@ p {margin: 0 0 20px; line-height: 1.5;}
 #tab1:checked ~ .content #content1, #tab2:checked ~ .content #content2 { display: block; }
 
 @media screen and (max-width: 400px) { .label_tab {padding: 15px 10px;} }
+
+.errorMessage{
+  color: red;
+}

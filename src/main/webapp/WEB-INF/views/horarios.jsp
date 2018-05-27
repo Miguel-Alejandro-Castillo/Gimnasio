@@ -27,8 +27,8 @@
                             <c:forEach items="${horarios}" var="horario">
                                <tr class="odd gradeX">
                                    <td><c:out value="${horario.id}"></c:out></td>
-                                   <td><c:out value="${horario.hora_inicio}"></c:out></td>
-                                   <td><c:out value="${horario.hora_fin}"></c:out></td>
+                                   <td><c:out value="${horario.horaInicio}"></c:out></td>
+                                   <td><c:out value="${horario.horaFin}"></c:out></td>
                                    <spring:url value="/horarios/${horario.id}/editar" var="urlEditHorario"/>
                                    <td><a href="${urlEditHorario}" >Editar Horario</a></td>
                                </tr>

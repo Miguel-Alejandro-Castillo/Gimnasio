@@ -60,7 +60,8 @@ INSERT INTO profesores(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccio
 (50533385,'Ramon','Lopez','1993-12-21','4535393','68 Penn St.','jpflip@optonline.net'),
 (28533340,'Sandra','Goñi','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com');
 
-INSERT INTO horarios(hora_inicio,hora_fin)VALUES
+
+INSERT INTO horarios(horaInicio,horaFin)VALUES
 ('08:30:00','09:15:00'),
 ('09:30:00','10:30:00'),
 ('10:30:00','11:30:00'),
