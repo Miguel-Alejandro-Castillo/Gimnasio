@@ -22,26 +22,22 @@
 	                                <th>nombre</th>
 	                                <th>apellido</th>
 	                                <th>dni</th>
+                                    <th>accion</th>
                             	</tr>
                             </thead>
                         
                             <tbody>
 							<c:forEach items="${clientes}" var="cliente">
-									<tr class="parent">
+									<tr>
 										<td><c:out value="${cliente.nombre}"></c:out></td>
 										<td><c:out value="${cliente.apellido}"></c:out></td>
 										<td><c:out value="${cliente.dni}"></c:out></td>
-									</tr>
-									<tr class="child"> 
-										<td>	    
-											<spring:url value="/clientes/${cliente.id}/clienteDetalle" var="urlClienteDetalle"/>
-											<a href="${urlClienteDetalle}" >Detalle cliente</a>
-										</td>
 										<td>
-											<spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
-											<a href="${urlPagar}">Realizar Pago</a>
-										</td>
-										<td></td>	
+											<spring:url value="/clientes/${cliente.id}/clienteDetalle" var="urlClienteDetalle"/>
+                                            <a href="${urlClienteDetalle}"data-toggle="tooltip" title="Detalle" ><i class="fa fa-info-circle" style="font-size:24px;color:blue"></i></a>
+                                            <spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
+                                            <a href="${urlPagar}" data-toggle="tooltip" title="Pagar"><i class="fa fa-dollar" style="font-size:24px;color:green"></i></a>                        
+                                        </td>
 									</tr>
                             </c:forEach>
                             </tbody>
