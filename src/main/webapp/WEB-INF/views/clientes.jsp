@@ -2,9 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>
+<script src="${jqueryMin}"></script>
 <div id="page-wrapper">
-	
 	        <div class="row">
+                <c:if test="${not empty success_pago}">
+                    <div id="alert-pago" class="alert alert-success alert-dismissible fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>${success_pago}</strong>
+                    </div>
+                    <script>
+                        $(document).ready (function(){
+                            window.setTimeout(function() {
+                                $("#alert-pago").fadeTo(1500, 0).slideUp(500, function(){
+                                    $(this).hide();
+                                });
+                            }, 2500);
+                        });
+                    </script>
+                </c:if>
             <div class="col-lg-12">
                 <h1 class="page-header"><tiles:getAsString name="title"/></h1>
             </div>
@@ -38,10 +54,12 @@
 											<a href="${urlClienteDetalle}" >Detalle cliente</a>
 										</td>
 										<td>
-											<spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
-											<a href="${urlPagar}">Realizar Pago</a>
+											<spring:url value="/clientes/${cliente.id}/pagar" var="urlPagar"/>
+											<a href="${urlPagar}">Realizar pago</a>
 										</td>
-										<td></td>	
+										<td>
+										</td>
+
 									</tr>
                             </c:forEach>
                             </tbody>
