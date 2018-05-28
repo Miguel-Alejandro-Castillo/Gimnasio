@@ -12,6 +12,8 @@
     <!-- Bootstrap Core CSS -->
     <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapMinCss"/>
     <link href="${bootstrapMinCss}" rel="stylesheet"/>
+    
+    <link href="css/navbar-fixed-side.css" rel="stylesheet" />
 
     <!-- MetisMenu CSS -->
     <spring:url value="/resources/css/metisMenu.min.css" var="metisMenuMinCss"/>
@@ -57,11 +59,11 @@
             <header>
             <tiles:insertAttribute name="header" />
             </header>
+			
 
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <tiles:insertAttribute name="menu" />
-            </nav>
-
+            
+			
             <main>
                 <tiles:insertAttribute name="main" />
             </main>
@@ -69,9 +71,6 @@
             <footer>
             <tiles:insertAttribute name="footer" />
             </footer>
-
-
-
 
             <!-- jQuery -->
             <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>	
@@ -117,14 +116,12 @@
                     
                 	$('[data-toggle="tooltip"]').tooltip();
                 	
+                	
+               	
+                	
+                	
 				});
-                
-                
-                
-                
-                
-                
-                
+            
             </script>
 </body>
 </html>
