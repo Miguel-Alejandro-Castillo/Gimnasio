@@ -8,7 +8,8 @@ import com.gym.model.Actividad;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
-import com.gym.validator.PagoValidator;
+import com.gym.validator.ClienteBeanValidator;
+import com.gym.validator.PagoBeanValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,7 +35,10 @@ public class ClienteController {
     private ActividadRepository actividadRepository;
 
     @Autowired
-    private PagoValidator pagoValidator;
+    private PagoBeanValidator pagoBeanValidator;
+
+    @Autowired
+    private ClienteBeanValidator clienteBeanValidator;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showClientes(){
@@ -149,9 +153,15 @@ public class ClienteController {
 
     }
 
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(pagoValidator);
+    @InitBinder("clienteBean")
+    protected void initBinderCliente(WebDataBinder binder) {
+        binder.addValidators(clienteBeanValidator);
     }
+
+    @InitBinder("pagoBean")
+    protected void initBinderPago(WebDataBinder binder) {
+        binder.addValidators(pagoBeanValidator);
+    }
+
 
 }

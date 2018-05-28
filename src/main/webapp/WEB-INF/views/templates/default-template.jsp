@@ -115,12 +115,8 @@
                         responsive: true
                     });         
                     
-                    $('table tr.child').hide();
+                	$('[data-toggle="tooltip"]').tooltip();
                 	
-                    $('.parent').click(function()
-					{
-						$(this).nextUntil('tr.parent').slideToggle(300);
-                    });
 				});
                 
                 
