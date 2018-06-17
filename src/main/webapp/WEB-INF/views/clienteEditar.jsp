@@ -15,7 +15,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <spring:url value="" var="urlActual"/>
-                    <form:form id="clienteForm" modelAttribute="clienteBean" action="${urlActual}" method="post" role="form">
+                    <form:form id="clienteForm" modelAttribute="cliente" action="${urlActual}" method="post" role="form">
                     <div class="col-lg-6">
                             <form:hidden path="id"/>
                             <div class="form-group">
@@ -28,6 +28,15 @@
                                 <form:input path="apellido"  cssClass="form-control"/>
                                 <form:errors path="apellido" cssClass="error"/>
                             </div>
+                        <div class="form-group">
+                            <form:label path="sexo">Sexo*</form:label>
+                            <form:select path="sexo" cssClass="form-control">
+                                <form:option value="" label="Seleccione un sexo" />
+                                <form:option value="Femenino" label="Femenino" />
+                                <form:option value="Masculino" label="Masculino" />
+                            </form:select>
+                            <form:errors path="sexo" cssClass="errorMessage"/>
+                        </div>
                             <div class="form-group">
                                 <form:label path="dni">DNI*</form:label>
                                 <form:input type="number" path="dni"  cssClass="form-control"/>
@@ -42,9 +51,9 @@
                     <!-- primera columna -->
                     <div class="col-lg-6">
                         <div class="form-group">
-                          <form:label path="fecha_de_nacimiento">Fecha de nacimiento*</form:label>
-                          <form:input type="date" path="fecha_de_nacimiento"  cssClass="form-control"/>
-                          <form:errors path="fecha_de_nacimiento" cssClass="error"/>
+                          <form:label path="fechaNacimiento">Fecha de nacimiento*</form:label>
+                          <form:input type="date" path="fechaNacimiento"  cssClass="form-control"/>
+                          <form:errors path="fechaNacimiento" cssClass="error"/>
                         </div>
                         <div class="form-group">
                             <form:label path="telefono">Telefono*</form:label>
