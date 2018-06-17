@@ -20,7 +20,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 					<select id="mes" name="mes" onchange="cargarGraficoResumen('${urlResumen}');">
-						<option value="*" selected>Todos los meses</option>
+						<option value="" selected>Todos los meses</option>
 						<option value="1">Enero</option>
 						<option value="2">Febrero</option>
 						<option value="3">Marzo</option>
@@ -41,9 +41,20 @@
 						</c:forEach>
 					</select>
 
+					<select  id="idActividad" name="idActividad" onchange="cargarGraficoResumen('${urlResumen}');">
+						<option value="" selected>Todas las actividades</option>
+						<c:forEach items="${actividades}" var="actividad">
+							<option value="${actividad.id}"> <c:out value = "${actividad.nombre}"/></option>
+						</c:forEach>
+					</select>
 
                 </div>
                 <!-- /.panel-heading -->
+
+				<div id="totalRecaudado">
+
+				</div>
+
                 <div class="panel-body">
                     <div id="graficoBarras" ></div>
                 </div>
