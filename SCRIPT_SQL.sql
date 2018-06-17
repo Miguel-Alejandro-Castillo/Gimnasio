@@ -53,12 +53,12 @@ INSERT INTO  clientes(sexo,dni,nombre,apellido,fechaNacimiento,telefono,direccio
 ('Femenino',28570140,'Kanesha','staircase','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com'),
 ('Masculino',14793287,'Sybil','sprucely','1970-09-11','4812534','393 Manhattan Street','shrapnull@icloud.com');
 
-INSERT INTO profesores(dni,nombre,apellido,fecha_de_nacimiento,telefono,direccion,email) VALUES
-(37833319,'Nancy','Villareal','1969-01-26','4380705',"'Salt Lake City, UT 84119'",'dhrakar@att.net'),
-(14933335,'Jose','Perez','1973-01-16','4732404','8124 Berkshire St.','matthijs@sbcglobal.net'),
-(46533341,'Jose','Hernandez','1977-04-09','4663208',"'Saratoga Springs, NY 12866'",'mfburgo@comcast.net'),
-(50533385,'Ramon','Lopez','1993-12-21','4535393','68 Penn St.','jpflip@optonline.net'),
-(28533340,'Sandra','Goñi','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com');
+INSERT INTO profesores(sexo,dni,nombre,apellido,fechaNacimiento,telefono,direccion,email) VALUES
+('Femenino',37833319,'Nancy','Villareal','1969-01-26','4380705',"'Salt Lake City, UT 84119'",'dhrakar@att.net'),
+('Masculino',14933335,'Jose','Perez','1973-01-16','4732404','8124 Berkshire St.','matthijs@sbcglobal.net'),
+('Masculino',46533341,'Jose','Hernandez','1977-04-09','4663208',"'Saratoga Springs, NY 12866'",'mfburgo@comcast.net'),
+('Masculino',50533385,'Ramon','Lopez','1993-12-21','4535393','68 Penn St.','jpflip@optonline.net'),
+('Femenino',28533340,'Sandra','Goñi','1966-10-10','4375033',"'Norcross, GA 30092'",'jonas@yahoo.com');
 
 
 INSERT INTO horarios(horaInicio,horaFin)VALUES

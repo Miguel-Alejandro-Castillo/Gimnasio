@@ -1,6 +1,9 @@
 package com.gym.model;
 
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -22,12 +25,16 @@ public class Profesor {
     @Column(nullable = false)
     private String apellido;
 
+    @NotBlank(message = "{campo.obligatorio}")
+    @Column(nullable = false)
+    private String sexo;
+    
 	@Column(nullable = false, unique = true)
 	private  Long dni;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date fecha_de_nacimiento;
+    private Date fechaNacimiento;
 
     @Column(nullable = false)
     private String telefono;
@@ -43,12 +50,13 @@ public class Profesor {
 		super();
 	}
 
-    public Profesor(Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
+    public Profesor(String sexo,Long id, Long dni, String nombre, String apellido, Date fecha_de_nacimiento, String telefono, String direccion, String email) {
 		this();
+		this.sexo = sexo;
 	    this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.fecha_de_nacimiento = fecha_de_nacimiento;
+		this.fechaNacimiento = fecha_de_nacimiento;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.email = email;
@@ -97,12 +105,12 @@ public class Profesor {
 
 
 	public Date getFecha_de_nacimiento() {
-		return fecha_de_nacimiento;
+		return fechaNacimiento;
 	}
 
 
 	public void setFecha_de_nacimiento(Date fecha_de_nacimiento) {
-		this.fecha_de_nacimiento = fecha_de_nacimiento;
+		this.fechaNacimiento = fecha_de_nacimiento;
 	}
 
 
@@ -151,7 +159,7 @@ public class Profesor {
 		if (direccion != null ? !direccion.equals(profesor.direccion) : profesor.direccion != null) return false;
 		if (dni != null ? !dni.equals(profesor.dni) : profesor.dni != null) return false;
 		if (email != null ? !email.equals(profesor.email) : profesor.email != null) return false;
-		if (fecha_de_nacimiento != null ? !fecha_de_nacimiento.equals(profesor.fecha_de_nacimiento) : profesor.fecha_de_nacimiento != null)
+		if (fechaNacimiento != null ? !fechaNacimiento.equals(profesor.fechaNacimiento) : profesor.fechaNacimiento != null)
 			return false;
 		if (id != null ? !id.equals(profesor.id) : profesor.id != null) return false;
 		if (nombre != null ? !nombre.equals(profesor.nombre) : profesor.nombre != null) return false;
@@ -166,10 +174,18 @@ public class Profesor {
 		result = 31 * result + (nombre != null ? nombre.hashCode(): 0);
 		result = 31 * result + ( apellido != null ? apellido.hashCode(): 0);
 		result = 31 * result + (dni != null ? dni.hashCode(): 0);
-		result = 31 * result + (fecha_de_nacimiento != null ? fecha_de_nacimiento.hashCode() : 0);
+		result = 31 * result + (fechaNacimiento != null ? fechaNacimiento.hashCode() : 0);
 		result = 31 * result + (telefono != null ? telefono.hashCode() : 0) ;
 		result = 31 * result + (direccion != null ? direccion.hashCode() :0);
 		result = 31 * result + (email != null ? email.hashCode(): 0);
 		return result;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 }
