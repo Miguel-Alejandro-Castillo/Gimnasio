@@ -1,6 +1,6 @@
 package com.gym.validator;
 
-import com.gym.bean.ClienteBean;
+import com.gym.model.Cliente;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -9,10 +9,10 @@ import org.springframework.validation.Validator;
  * Created by Alejandro on 27/5/2018.
  */
 @Component
-public class ClienteBeanValidator implements Validator {
+public class ClienteValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
-        return ClienteBean.class.isAssignableFrom(aClass);
+        return Cliente.class.isAssignableFrom(aClass);
     }
 
     @Override

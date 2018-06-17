@@ -4,11 +4,7 @@ import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -62,7 +58,7 @@ public class ClienteBean {
         this.nombre = cliente.getNombre();
         this.apellido = cliente.getApellido();
         this.dni = cliente.getDni();
-        this.fecha_de_nacimiento = cliente.getFecha_de_nacimiento();
+        this.fecha_de_nacimiento = cliente.getFechaNacimiento();
         this.telefono = cliente.getTelefono();
         this.direccion = cliente.getDireccion();
         this.email = cliente.getEmail();
@@ -146,7 +142,7 @@ public class ClienteBean {
         this.setNombre(cliente.getNombre());
         this.setApellido(cliente.getApellido());
         this.setDni(cliente.getDni());
-        this.setFecha_de_nacimiento(cliente.getFecha_de_nacimiento());
+        this.setFecha_de_nacimiento(cliente.getFechaNacimiento());
         this.setTelefono(cliente.getTelefono());
         this.setDireccion(cliente.getDireccion());
         this.setEmail(cliente.getEmail());

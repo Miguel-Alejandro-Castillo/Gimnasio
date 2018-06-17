@@ -22,38 +22,42 @@
 					<div class="col-lg-6">
 						<table class="table table-striped">
 							<thead><tr><th>Nombre</th></tr></thead>
-							<tbody><tr><th>${clienteBean.nombre}</th></tr></tbody>
+							<tbody><tr><th>${cliente.nombre}</th></tr></tbody>
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Apellido</th></tr></thead>
-							<tbody><tr><th>${clienteBean.apellido}</th></tr></tbody>
+							<tbody><tr><th>${cliente.apellido}</th></tr></tbody>
 	                    </table>
+						<table class="table table-striped">
+							<thead><tr><th>Sexo</th></tr></thead>
+							<tbody><tr><th>${cliente.sexo}</th></tr></tbody>
+						</table>
 	                    <table class="table table-striped">
 							<thead><tr><th>DNI</th></tr></thead>
-							<tbody><tr><th>${clienteBean.dni}</th></tr></tbody>
+							<tbody><tr><th>${cliente.dni}</th></tr></tbody>
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Fecha de Nacimiento</th></tr></thead>
-							<tbody><tr><th>${clienteBean.fecha_de_nacimiento}</th></tr></tbody>
+							<tbody><tr><th>${cliente.fechaNacimiento}</th></tr></tbody>
 	                    </table>
 					</div>
 
 					<div class="col-lg-6">   
 						<table class="table table-striped">
 							<thead><tr><th>Direccion</th></tr></thead>
-							<tbody><tr><th>${clienteBean.direccion}</th></tr></tbody>
+							<tbody><tr><th>${cliente.direccion}</th></tr></tbody>
 						</table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Telefono</th></tr></thead>
-							<tbody><tr><th>${clienteBean.telefono}</th></tr></tbody>
+							<tbody><tr><th>${cliente.telefono}</th></tr></tbody>
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Email</th></tr></thead>
-							<tbody><tr><th>${clienteBean.email}</th></tr></tbody>
+							<tbody><tr><th>${cliente.email}</th></tr></tbody>
 	                    </table>                        
 
 		            	<div style="padding-top:35px;float:right;">
-		            		<spring:url value="/clientes/${clienteBean.id}/clienteEditar" var="urlClienteEditar"/>
+		            		<spring:url value="/clientes/${cliente.id}/clienteEditar" var="urlClienteEditar"/>
 							<a href="${urlClienteEditar}" class="btn btn-primary btn-lg">Editar cliente</a>
 						</div>
 					</div>						

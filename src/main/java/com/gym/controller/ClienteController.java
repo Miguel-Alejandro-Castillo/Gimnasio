@@ -1,6 +1,5 @@
 package com.gym.controller;
 
-import com.gym.bean.ClienteBean;
 import com.gym.bean.PagoBean;
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.ClienteRepository;
@@ -8,7 +7,7 @@ import com.gym.model.Actividad;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
-import com.gym.validator.ClienteBeanValidator;
+import com.gym.validator.ClienteValidator;
 import com.gym.validator.PagoBeanValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,29 +37,29 @@ public class ClienteController {
     private PagoBeanValidator pagoBeanValidator;
 
     @Autowired
-    private ClienteBeanValidator clienteBeanValidator;
+    private ClienteValidator clienteBeanValidator;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showClientes(){
-        ModelAndView mav=new ModelAndView("clientes");
-        List<Cliente> clientes= clienteRepository.findAll();
-        mav.addObject("clientes",clientes);
+        ModelAndView mav = new ModelAndView("clientes");
+        List<Cliente> clientes = clienteRepository.findAll();
+        mav.addObject("clientes", clientes);
         return mav;
     }
 
     @RequestMapping(value="/crear", method = RequestMethod.GET)
     public ModelAndView showAltaClienteForm(){
-        ModelAndView mav=new ModelAndView("crear-cliente");
-        mav.addObject("clienteBean", new ClienteBean());
+        ModelAndView mav = new ModelAndView("crear-cliente");
+        mav.addObject("cliente", new Cliente());
         return mav;
     }
 
     @RequestMapping(value="/crear", method = RequestMethod.POST)
-    public  ModelAndView submitCreateCliente(@ModelAttribute("clienteBean") @Validated ClienteBean clienteBean, BindingResult result){
-        if(result.hasErrors())
+    public  ModelAndView submitCreateCliente(@ModelAttribute("cliente") @Validated Cliente cliente, BindingResult result){
+        if(result.hasErrors()) {
             return new ModelAndView("crear-cliente");
+        }
         else{
-            Cliente cliente=new Cliente(clienteBean);
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }
@@ -69,13 +68,12 @@ public class ClienteController {
 
     @RequestMapping(value="/{id_cliente}/clienteDetalle", method = RequestMethod.GET)
     public ModelAndView showDetalleCliente(@PathVariable(name = "id_cliente") String id_cliente){
-        ModelAndView mav=null;
+        ModelAndView mav = null;
         Long id = NumberUtils.toLong(id_cliente);
         Cliente cliente= clienteRepository.findOne(id);
-        if(cliente!=null) {
-            ClienteBean clienteBean = new ClienteBean(cliente);
+        if(cliente != null) {
             mav= new ModelAndView("detalle-cliente");
-            mav.addObject("clienteBean", clienteBean);
+            mav.addObject("cliente", cliente);
         }
         else {
             // renderizar a una vista que informe que no se envio un id de cliente en el path
@@ -89,9 +87,8 @@ public class ClienteController {
         Long id = NumberUtils.toLong(id_cliente);
         Cliente cliente= clienteRepository.findOne(id);
         if(cliente!=null) {
-            ClienteBean clienteBean = new ClienteBean(cliente);
             mav= new ModelAndView("editar-cliente");
-            mav.addObject("clienteBean", clienteBean);
+            mav.addObject("cliente", cliente);
             
         }
         else {
@@ -102,20 +99,11 @@ public class ClienteController {
     
     
     @RequestMapping(value="/{id_cliente}/clienteEditar", method = RequestMethod.POST)
-    public  ModelAndView submitEditCliente(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("clienteBean") @Validated ClienteBean clienteBean, BindingResult result){
+    public  ModelAndView submitEditCliente(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("cliente") @Validated Cliente cliente, BindingResult result){
         if(result.hasErrors()) {
             return new ModelAndView("editar-cliente");
         }
         else{
-            Long clienteId = NumberUtils.toLong(id_cliente);
-            Cliente  cliente = clienteRepository.findOne(clienteId);
-            cliente.setApellido(clienteBean.getApellido());
-            cliente.setNombre(clienteBean.getNombre());
-            cliente.setFecha_de_nacimiento(clienteBean.getFecha_de_nacimiento());
-            cliente.setDireccion(clienteBean.getDireccion());
-            cliente.setDni(clienteBean.getDni());
-            cliente.setEmail(clienteBean.getEmail());
-            cliente.setTelefono(clienteBean.getTelefono());
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }
