@@ -80,6 +80,13 @@
         <put-attribute name="main"	value="/WEB-INF/views/profesor.jsp" />
         <put-attribute name="titleSubmit" value="Crear Profesor" cascade="true" />
     </definition>
+    
+    <!-- Definicion pantalla  para detalle de un profesor -->
+    <definition name="detalle-profesor" extends="default-template">
+        <put-attribute name="title" value="Detalle de Profesor" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/profesorDetalle.jsp" />
+        <put-attribute name="titleSubmit" value="Ver Detalle" cascade="true" />
+    </definition>
 
     <!-- Definicion pantalla  para editar un profesor-->
     <definition name="editar-profesor" extends="default-template">

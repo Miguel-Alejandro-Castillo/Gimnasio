@@ -34,7 +34,6 @@
     <spring:url value="/resources/css/font-awesome.min.css" var="fontAwesomeMin"/>
     <link href="${fontAwesomeMin}" rel="stylesheet"/>
 
-
     <!-- DataTables CSS -->
     <spring:url value="/resources/css/dataTables.bootstrap.css" var="dataTablesBootstrapCss"/>
     <link href="${dataTablesBootstrapCss}" rel="stylesheet"/>
@@ -109,15 +108,10 @@
             <script>
                 $(document).ready(function() {
                     
-                	$('#dataTables-example').DataTable(
-                	{
-                        responsive: true
-                    });         
-                    
+                	
                 	$('[data-toggle="tooltip"]').tooltip();
-                	
-                	
-               	
+                
+               		          	
                 	
                 	
 				});

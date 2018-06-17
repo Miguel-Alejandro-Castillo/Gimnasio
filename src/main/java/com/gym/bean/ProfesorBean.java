@@ -51,6 +51,18 @@ public class ProfesorBean {
         this.email = email;
         this.dni = dni;
     }
+    
+    public ProfesorBean(Profesor profesor) {
+    	this();
+    	this.id = profesor.getId();
+    	this.nombre = profesor.getNombre();
+    	this.apellido = profesor.getApellido();
+    	this.fecha_de_nacimiento = profesor.getFecha_de_nacimiento();
+    	this.telefono = profesor.getTelefono();
+    	this.direccion = profesor.getDireccion();
+    	this.email = profesor.getEmail();
+    	this.dni = profesor.getDni();
+    }
 
     public Long getDni() {
 		return dni;
