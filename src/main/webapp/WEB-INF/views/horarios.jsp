@@ -17,7 +17,6 @@
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
-                                <th>id</th>
                                 <th>hora inicio</th>
                                 <th>hora fin</th>
                                 <th>acciones</th>
@@ -26,7 +25,6 @@
                             <tbody>
                             <c:forEach items="${horarios}" var="horario">
                                <tr class="odd gradeX">
-                                   <td><c:out value="${horario.id}"></c:out></td>
                                    <td><c:out value="${horario.horaInicio}"></c:out></td>
                                    <td><c:out value="${horario.horaFin}"></c:out></td>
                                    <spring:url value="/horarios/${horario.id}/editar" var="urlEditHorario"/>
@@ -47,3 +45,20 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
+   
+	<spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    
+    <script src="${jqueryMin}"></script>
+    
+   	<script>
+   	$(document).ready(function(){
+	   $('#dataTables-example').DataTable(
+	      		{
+	      				responsive: true,
+	      				"paging":   false,
+	      				"searching": false,
+	      			    "info":     false
+	      			    
+	      		});
+   	});
+   	</script>
+	<!-- para que ande la tabla  --> 

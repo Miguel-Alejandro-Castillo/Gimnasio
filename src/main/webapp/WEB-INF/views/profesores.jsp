@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -17,30 +18,21 @@
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
-                                <th>id</th>
-                                <th>dni</th>
                                 <th>nombre</th>
                                 <th>apellido</th>
-                                <th>fecha de nacimiento</th>
-                                <th>telefono</th>
-                                <th>direccion</th>
-                                <th>email</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${profesores}" var="profesor">
                                <tr class="odd gradeX">
-                                   <td><c:out value="${profesor.id}"></c:out></td>
-                                   <td><c:out value="${profesor.dni}"></c:out></td>
                                    <td><c:out value="${profesor.nombre}"></c:out></td>
-                                   <td><c:out value="${profesor.apellido}"></c:out></td>
-                                   <td><fmt:formatDate pattern="dd/MM/yyyy" value="${profesor.fecha_de_nacimiento}" /></td>
-                                   <td><c:out value="${profesor.telefono}"></c:out></td>
-                                   <td><c:out value="${profesor.direccion}"></c:out></td>
-                                   <td><c:out value="${profesor.email}"></c:out></td>
-                                   <spring:url value="/profesores/${profesor.id}/editar" var="urlEditProfesor"/>
-                                   <td><a href="${urlEditProfesor}" >Editar profesor</a></td>
+                                   <td><c:out value="${profesor.apellido}"></c:out></td>                                   
+                                   <td style="text-align: center;">
+										<spring:url value="/profesores/${profesor.id}/profesorDetalle" var="urlProfesorDetalle"/>
+                                        <a href="${urlProfesorDetalle}"data-toggle="tooltip" title="Detalle" ><i class="fa fa-info-circle" style="font-size:24px;color:blue;padding-right: 10px;padding-left: 10px;"></i></a>                                      
+                                    </td>
+                                   
                                </tr>
                             </c:forEach>
                             </tbody>
@@ -56,4 +48,19 @@
         </div>
         <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
+    
+	<spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    
+    <script src="${jqueryMin}"></script>
+    
+   	<script>
+   	$(document).ready(function(){
+	   $('#dataTables-example').DataTable(
+	      		{
+	      				responsive: true,
+	      				"paging":   false,
+	      			    "ordering": false,
+	      			    "info":     false
+	      		});
+   	});
+   	</script>
+	<!-- para que ande la tabla  -->

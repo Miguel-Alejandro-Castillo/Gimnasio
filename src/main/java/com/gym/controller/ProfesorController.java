@@ -40,6 +40,19 @@ public class ProfesorController {
         return mav;
     }
 
+    @RequestMapping(value="/{id_profesor}/profesorDetalle", method = RequestMethod.GET)
+    public ModelAndView showDetalleProfesor(@PathVariable(name = "id_profesor") String id_profesor){
+    	ModelAndView mav = null;
+    	Long id = NumberUtils.toLong(id_profesor);
+    	Profesor profesor = profesorRepository.findOne(id);
+    	if(profesor != null) {
+    		ProfesorBean profesorBean = new ProfesorBean(profesor);
+    		mav = new ModelAndView("detalle-profesor");
+    		mav.addObject("profesorBean", profesorBean);
+    	}    	
+    	return mav;
+    }
+    
     @RequestMapping(value="/crearProfesor", method = RequestMethod.POST)
     public  ModelAndView submitCreateProfesor(@ModelAttribute("profesorBean") @Validated ProfesorBean profesorBean, BindingResult result){
         if(result.hasErrors())

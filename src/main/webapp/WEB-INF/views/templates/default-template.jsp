@@ -12,6 +12,8 @@
     <!-- Bootstrap Core CSS -->
     <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapMinCss"/>
     <link href="${bootstrapMinCss}" rel="stylesheet"/>
+    
+    <link href="css/navbar-fixed-side.css" rel="stylesheet" />
 
     <!-- MetisMenu CSS -->
     <spring:url value="/resources/css/metisMenu.min.css" var="metisMenuMinCss"/>
@@ -31,7 +33,6 @@
     <!-- Custom Fonts -->
     <spring:url value="/resources/css/font-awesome.min.css" var="fontAwesomeMin"/>
     <link href="${fontAwesomeMin}" rel="stylesheet"/>
-
 
     <!-- DataTables CSS -->
     <spring:url value="/resources/css/dataTables.bootstrap.css" var="dataTablesBootstrapCss"/>
@@ -57,11 +58,11 @@
             <header>
             <tiles:insertAttribute name="header" />
             </header>
+			
 
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <tiles:insertAttribute name="menu" />
-            </nav>
-
+            
+			
             <main>
                 <tiles:insertAttribute name="main" />
             </main>
@@ -69,9 +70,6 @@
             <footer>
             <tiles:insertAttribute name="footer" />
             </footer>
-
-
-
 
             <!-- jQuery -->
             <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>	
@@ -110,21 +108,14 @@
             <script>
                 $(document).ready(function() {
                     
-                	$('#dataTables-example').DataTable(
-                	{
-                        responsive: true
-                    });         
-                    
+                	
                 	$('[data-toggle="tooltip"]').tooltip();
+                
+               		          	
+                	
                 	
 				});
-                
-                
-                
-                
-                
-                
-                
+            
             </script>
 </body>
 </html>
