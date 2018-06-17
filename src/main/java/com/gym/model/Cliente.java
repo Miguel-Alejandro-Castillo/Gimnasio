@@ -3,6 +3,7 @@ package com.gym.model;
 import com.gym.bean.ClienteBean;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,10 +12,10 @@ import java.util.Set;
 @Entity
 @Table( name = "clientes")
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @Column(nullable = false)
     private String nombre;
@@ -40,7 +41,7 @@ public class Cliente {
     private String email;
 
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL , orphanRemoval = true)
-    private Set<Pago> pagos;
+    private Set<Pago> pagos = new HashSet<Pago>();
 
     public Cliente() {
         super();

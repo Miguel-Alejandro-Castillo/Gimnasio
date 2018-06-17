@@ -24,7 +24,7 @@ public class HorarioValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return Horario.class.equals(aClass);
+        return Horario.class.isAssignableFrom(aClass);
     }
 
     @Override

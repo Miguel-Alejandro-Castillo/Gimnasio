@@ -1,21 +1,10 @@
 package com.gym.bean;
 
 import com.gym.model.Pago;
-import com.gym.model.Actividad;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NegativeOrZero;
+import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -23,20 +12,21 @@ public class PagoBean {
 
 	private Long id;
 
-	@NotNull
+	@NotNull(message = "{campo.actividad.vacio}")
 	private Long actividad_id;
 
 	private Date momento_pago;
-    
-    @NegativeOrZero
+
+	@NotNull(message = "{campo.monto.vacio}")
+    @DecimalMin(value = "0.00", message = "{campo.monto.min}")
     private BigDecimal monto;
         
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
+    @NotNull(message = "{campo.fecha.vacio}" )
     private Date fecha_hasta;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "{campo.fecha_de_nacimiento.vacio}" )
+    @NotNull(message = "{campo.fecha.vacio}" )
     private Date fecha_desde;
 
     public PagoBean() {
@@ -100,14 +90,5 @@ public class PagoBean {
 		this.fecha_hasta = fecha_hasta;
 		this.fecha_desde = fecha_desde;
 	}
-
-	private void load(Pago pago) {
-    	this.setId(pago.getId());
-    	this.setActividad_id(pago.getActividad().getId());
-    	this.setMomento_pago(pago.getMomento_pago());
-    	this.setFecha_desde(pago.getFecha_desde());
-    	this.setFecha_hasta(pago.getFecha_desde());
-    	this.setMonto(pago.getMonto());  
-    }
 
 }
