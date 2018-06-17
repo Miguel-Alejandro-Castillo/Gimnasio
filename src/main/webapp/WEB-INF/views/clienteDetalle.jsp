@@ -16,9 +16,9 @@
 	
 	<div class="panel panel-default">
 		<div class="panel-body">
-			
 			<div class="tab-content">
 				<div id="Detalle" class="tab-pane active">
+				
 					<div class="col-lg-6">
 						<table class="table table-striped">
 							<thead><tr><th>Nombre</th></tr></thead>
