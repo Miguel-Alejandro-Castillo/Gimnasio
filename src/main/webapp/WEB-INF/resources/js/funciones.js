@@ -41,15 +41,21 @@ function submitAjax(url) {
 function cargarGraficoResumen(url){
     var mes = $("#mes").val();
     var anio = $("#anio").val();
-    if(mes == "*") {
+    var idActividad = $("#idActividad").val();
+    var urlCompleta =  url;
+    if(mes == "") {
+        urlCompleta = urlCompleta + "cargarGraficoResumenAnual?" + "anio=" + anio + "&idActividad=" + idActividad;
         $.ajax({
             type: "GET",
-            url: url+ "cargarGraficoResumenAnual/" +anio,
+            url: urlCompleta,
             timeout: 600000,
             success: function (ganancias) {
-                ganancias = ganancias.map(function (ganancia) {
+               var  ganancias = ganancias.map(function (ganancia) {
                     return ganancia[1];
                 });
+                var totalRecaudado = ganancias.reduce(function(total, ganancia){
+                  return total + ganancia
+                }, 0);
                 var myConfig = {
                     type: "bar3d",
                     scaleX: {
@@ -72,23 +78,34 @@ function cargarGraficoResumen(url){
                     width: "100%"
                 });
 
+                $("#totalRecaudado").html("<span> Total recaudado: " + totalRecaudado.toLocaleString('es-ar', {
+                    style: 'currency',
+                    currency: 'ARS',
+                    minimumFractionDigits: 2
+                }) + "</span>");
+
             },
             error: function (e) {
             }
         });
     }
     else{
+        urlCompleta = urlCompleta + "cargarGraficoResumenMensual?" + "anio=" + anio + "&mes=" + mes + "&idActividad=" + idActividad;
         $.ajax({
             type: "GET",
-            url: url+ "cargarGraficoResumenMensual/" +anio+"/"+mes,
+            url: urlCompleta,
             timeout: 600000,
             success: function (ganancias) {
-                labels = ganancias.map(function (ganancia) {
+                var labels = ganancias.map(function (ganancia) {
                     return ganancia[0];
                 });
-                series = ganancias.map(function (ganancia) {
+                var series = ganancias.map(function (ganancia) {
                     return ganancia[1];
                 });
+
+                var totalRecaudado = series.reduce(function(total, ganancia){
+                    return total + ganancia
+                }, 0);
                 var myConfig = {
                     type: "bar3d",
                     scaleX: {
@@ -110,6 +127,12 @@ function cargarGraficoResumen(url){
                     height: "70%",
                     width: "100%"
                 });
+
+                $("#totalRecaudado").html("<span> Total recaudado: " + totalRecaudado.toLocaleString('es-ar', {
+                    style: 'currency',
+                    currency: 'ARS',
+                    minimumFractionDigits: 2
+                }) + "</span>");
 
             },
             error: function (e) {
