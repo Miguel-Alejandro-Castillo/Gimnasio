@@ -83,7 +83,7 @@ INSERT INTO actividades(nombre,costo)VALUES
 ('ritmos latinos',500),
 ('crossfit',3000);
 
-INSERT INTO pagos(actividad_id,momento_pago,monto,fecha_desde,fecha_hasta)VALUES
+INSERT INTO pagos(actividad_id,momento_pago,monto,fechaDesde,fechaHasta)VALUES
 (1,'2018/02/19',1037,'2018/02/19','2018/03/19'),
 (5,'2016/05/25',1196,'2016/05/25','2016/06/25'),
 (6,'2018/06/23',690,'2018/06/23','2018/07/23'),

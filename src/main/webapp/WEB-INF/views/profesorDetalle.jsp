@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="page-wrapper">
 	
 	<div class="row">
@@ -24,38 +24,42 @@
 					<div class="col-lg-6">
 						<table class="table table-striped">
 							<thead><tr><th>Nombre</th></tr></thead>
-							<tbody><tr><th>${profesorBean.nombre}</th></tr></tbody>
+							<tbody><tr><th>${profesor.nombre}</th></tr></tbody>
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Apellido</th></tr></thead>
-							<tbody><tr><th>${profesorBean.apellido}</th></tr></tbody>
+							<tbody><tr><th>${profesor.apellido}</th></tr></tbody>
 	                    </table>
+						<table class="table table-striped">
+							<thead><tr><th>Sexo</th></tr></thead>
+							<tbody><tr><th>${profesor.sexo}</th></tr></tbody>
+						</table>
 	                    <table class="table table-striped">
 							<thead><tr><th>DNI</th></tr></thead>
-							<tbody><tr><th>${profesorBean.dni}</th></tr></tbody>
+							<tbody><tr><th>${profesor.dni}</th></tr></tbody>
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Fecha de Nacimiento</th></tr></thead>
-							<tbody><tr><th>${profesorBean.fecha_de_nacimiento}</th></tr></tbody>
+							<tbody><tr><th><fmt:formatDate value="${profesor.fechaNacimiento}" type="date" pattern="dd/MM/yyyy" /></th></tr></tbody>
 	                    </table>
 					</div>
 
 					<div class="col-lg-6">   
 						<table class="table table-striped">
 							<thead><tr><th>Direccion</th></tr></thead>
-							<tbody><tr><th>${profesorBean.direccion}</th></tr></tbody>
+							<tbody><tr><th>${profesor.direccion}</th></tr></tbody>
 						</table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Telefono</th></tr></thead>
-							<tbody><tr><th>${profesorBean.telefono}</th></tr></tbody>
+							<tbody><tr><th>${profesor.telefono}</th></tr></tbody>
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Email</th></tr></thead>
-							<tbody><tr><th>${profesorBean.email}</th></tr></tbody>
+							<tbody><tr><th>${profesor.email}</th></tr></tbody>
 	                    </table>                        
 
 		            	<div style="padding-top:35px;float:right;">
-		            		<spring:url value="/profesores/${profesorBean.id}/editar" var="urlEditProfesor"/>
+		            		<spring:url value="/profesores/${profesor.id}/editar" var="urlEditProfesor"/>
                             <a href="${urlEditProfesor}" class="btn btn-primary btn-lg" >Editar Profesor</a>                      
 						</div>
 					</div>						

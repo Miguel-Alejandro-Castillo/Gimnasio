@@ -35,7 +35,6 @@ public class Cliente {
     private String sexo;
 
     @NotNull(message = "{campo.obligatorio}")
-    @NegativeOrZero(message = "No se permiten numeros negativos o 0")
     @Column(nullable = false, unique = true)
     private  Long dni;
 

@@ -2,6 +2,8 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
@@ -38,7 +40,7 @@
 	                    </table>
 	                    <table class="table table-striped">
 							<thead><tr><th>Fecha de Nacimiento</th></tr></thead>
-							<tbody><tr><th>${cliente.fechaNacimiento}</th></tr></tbody>
+							<tbody><tr><th><fmt:formatDate value="${cliente.fechaNacimiento}" type="date" pattern="dd/MM/yyyy" /></th></tr></tbody>
 	                    </table>
 					</div>
 
@@ -69,20 +71,23 @@
 						<thead>
 							<tr>
 							<td>Momento Pago</td>
-							<td>Cliente</td>
 							<td>Actividad</td>
 							<td>Fecha Desde</td>
 							<td>Fecha Hasta</td>
+						    <td>Monto</td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${clienteBean.pagos}" var="pago">
+							<c:forEach items="${cliente.pagos}" var="pago">
 								<tr class="odd gradeX">
-									<td><c:out value="${pago.momento_pago}"></c:out></td>
+									<td><fmt:formatDate value="${pago.momento_pago}" type="both"
+														dateStyle="short" timeStyle="short" /></td>
 									<td><c:out value="${pago.actividad.nombre}"></c:out></td>
-									<td><c:out value="${pago.fecha_desde}"></c:out></td>
-									<td><c:out value="${pago.fecha_hasta}"></c:out></td>
-									<td><c:out value="${pago.monto}"></c:out></td>
+									<td><fmt:formatDate value="${pago.fechaDesde}" type="date" pattern="dd/MM/yyyy" /></td>
+									<td><fmt:formatDate value="${pago.fechaHasta}" type="date" pattern="dd/MM/yyyy" /></td>
+									<td>
+										<fmt:formatNumber value="${pago.monto}" type="currency" minFractionDigits="2" currencySymbol="$"/>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

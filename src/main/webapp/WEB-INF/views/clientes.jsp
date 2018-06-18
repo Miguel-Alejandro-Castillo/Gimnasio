@@ -53,7 +53,7 @@
 									<td style="text-align: center;">
 										<spring:url value="/clientes/${cliente.id}/clienteDetalle" var="urlClienteDetalle"/>
                                         <a href="${urlClienteDetalle}"data-toggle="tooltip" title="Detalle" ><i class="fa fa-info-circle" style="font-size:24px;color:blue;padding-right: 10px;padding-left: 10px;"></i></a>
-                                        <spring:url value="/pagar/${cliente.id}/pagar" var="urlPagar"/>
+                                        <spring:url value="/clientes/${cliente.id}/pagar" var="urlPagar"/>
                                         <a href="${urlPagar}" data-toggle="tooltip" title="Pagar"><i class="fa fa-dollar" style="font-size:24px;color:green;padding-right: 10px;padding-left: 10px;"></i></a>
                                     </td>
 								</tr>

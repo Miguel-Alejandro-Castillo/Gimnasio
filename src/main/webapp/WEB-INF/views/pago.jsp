@@ -17,25 +17,25 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                 <spring:url value="" var="urlActual"/>
-                                <form:form id="pagoForm" modelAttribute="pagoBean" action="${urlActual}" method="post" role="form" novalidate="novalidate">
+                                <form:form id="pagoForm" modelAttribute="pago" action="${urlActual}" method="post" role="form" novalidate="novalidate">
                                         <form:hidden path="id"/>
                                         <div class="form-group">
-                                            <form:label path="fecha_desde">Fecha Desde(*)</form:label>
-                                            <form:input type="date" path="fecha_desde"  cssClass="form-control"/>
-                                            <form:errors path="fecha_desde" cssClass="errorMessage"/>
+                                            <form:label path="fechaDesde">Fecha Desde(*)</form:label>
+                                            <form:input type="date" path="fechaDesde"  cssClass="form-control"/>
+                                            <form:errors path="fechaDesde" cssClass="errorMessage"/>
                                         </div>
                                         <div class="form-group">
-                                           <form:label path="fecha_hasta">Fecha Hasta(*)</form:label>
-                                           <form:input type="date" path="fecha_hasta"  cssClass="form-control"/>
-                                           <form:errors path="fecha_hasta" cssClass="errorMessage"/>
+                                           <form:label path="fechaHasta">Fecha Hasta(*)</form:label>
+                                           <form:input type="date" path="fechaHasta"  cssClass="form-control"/>
+                                           <form:errors path="fechaHasta" cssClass="errorMessage"/>
                                          </div>
 	                                    <div class="form-group">
-                                            <form:label path="actividad_id">Actividad(*)</form:label>
-                                            <form:select path="actividad_id" cssClass="form-control">
-                                                <form:option value="${null}" label="Seleccione una actividad"/>
-                                                <form:options items="${actividades}" itemValue="id" />
+                                            <form:label path="actividad">Actividad(*)</form:label>
+                                            <form:select path="actividad" cssClass="form-control">
+                                                <form:option value="-1" label="Seleccione una actividad"/>
+                                                <form:options items="${actividades}" itemValue="id" itemLabel="nombre" />
                                             </form:select>
-                                            <form:errors path="actividad_id" cssClass="errorMessage"/>
+                                            <form:errors path="actividad" cssClass="errorMessage"/>
 	                                    </div>                                                               
                                         <div class="form-group">
                                             <form:label path="monto">Monto(*)</form:label>

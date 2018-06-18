@@ -1,6 +1,10 @@
 package com.gym.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,48 +15,35 @@ public class Pago {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
+	@NotNull(message = "{campo.obligatorio}")
 	@ManyToOne(optional = false)
 	private Actividad actividad;
 
     @Column(nullable = false)
     private Date momento_pago;
-    
+
+	@NotNull(message = "{campo.obligatorio}")
+	@Min(value = 1, message = "{campo.monto.mayorQue0}")
     @Column(nullable = false)
     private BigDecimal monto;
 
-	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date fecha_desde;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "{campo.obligatorio}")
+	@Column(nullable = false)
+	private Date fechaDesde;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "{campo.obligatorio}")
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date fecha_hasta;
-    
+    private Date fechaHasta;
 
-    
 	public Pago() {
-        super();
-    }
-
-    public Pago(Long id, Actividad actividad, BigDecimal monto, Date fecha_hasta, Date fecha_desde) {
 		super();
-		this.id = id;
-		this.actividad = actividad;
-		this.momento_pago = new Date(System.currentTimeMillis());
-		this.monto = monto;
-		this.fecha_hasta = fecha_hasta;
-		this.fecha_desde = fecha_desde;
-	}
-    
-    public Date getFecha_desde() {
-		return fecha_desde;
 	}
 
-	public void setFecha_desde(Date fecha_desde) {
-		this.fecha_desde = fecha_desde;
-	}
-    
 	public Long getId() {
 		return id;
 	}
@@ -85,13 +76,20 @@ public class Pago {
 		this.monto = monto;
 	}
 
-	public Date getFecha_hasta() {
-		return fecha_hasta;
+	public Date getFechaDesde() {
+		return fechaDesde;
 	}
 
-	public void setFecha_hasta(Date fecha_hasta) {
-		this.fecha_hasta = fecha_hasta;
+	public void setFechaDesde(Date fechaDesde) {
+		this.fechaDesde = fechaDesde;
 	}
-	
+
+	public Date getFechaHasta() {
+		return fechaHasta;
+	}
+
+	public void setFechaHasta(Date fechaHasta) {
+		this.fechaHasta = fechaHasta;
+	}
 }
 	 

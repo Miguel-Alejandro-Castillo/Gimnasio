@@ -1,15 +1,16 @@
 package com.gym.controller;
 
-import com.gym.bean.PagoBean;
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.ClienteRepository;
+import com.gym.formatter.ActividadEditor;
 import com.gym.model.Actividad;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
 import com.gym.validator.ClienteValidator;
-import com.gym.validator.PagoBeanValidator;
+import com.gym.validator.PagoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,10 +36,14 @@ public class ClienteController {
     private ActividadRepository actividadRepository;
 
     @Autowired
-    private PagoBeanValidator pagoBeanValidator;
+    private PagoValidator pagoValidator;
 
     @Autowired
     private ClienteValidator clienteBeanValidator;
+
+    @Autowired
+    private ActividadEditor actividadEditor;
+
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showClientes(){
@@ -89,7 +95,6 @@ public class ClienteController {
         if(cliente!=null) {
             mav= new ModelAndView("editar-cliente");
             mav.addObject("cliente", cliente);
-            
         }
         else {
             // renderizar a una vista que informe que no se envio un id de cliente en el path
@@ -113,25 +118,24 @@ public class ClienteController {
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.GET)
     public ModelAndView showPagoForm(){
         ModelAndView mav=new ModelAndView("pagar");
-        mav.addObject("pagoBean", new PagoBean());
+        mav.addObject("pago", new Pago());
         List<Actividad> actividades = actividadRepository.findAll();
         mav.addObject("actividades",actividades);
         return mav;
     }
 
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
-    public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pagoBean") @Validated PagoBean pagoBean, BindingResult result, RedirectAttributes redirectAttributes){
+    public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Validated Pago pago, BindingResult result, RedirectAttributes redirectAttributes){
         ModelAndView mav;
         if(result.hasErrors()) {
             mav= new ModelAndView("pagar");
-            List<Actividad> actividades= actividadRepository.findAll();
+            List<Actividad> actividades = actividadRepository.findAll();
             mav.addObject("actividades",actividades);
         }
         else{
-            Actividad actividad = actividadRepository.findOne(pagoBean.getActividad_id());
-            Pago pago=new Pago(pagoBean.getId(),actividad,pagoBean.getMonto(),pagoBean.getFecha_hasta(), pagoBean.getFecha_desde());
             Long cliente_id = NumberUtils.toLong(id_cliente);
             Cliente cliente = clienteRepository.findOne(cliente_id);
+            pago.setMomento_pago(new Date(System.currentTimeMillis()));
             cliente.getPagos().add(pago);
             clienteRepository.save(cliente);
             redirectAttributes.addFlashAttribute("success_pago", "Se realizo el pago de forma exitosa.");
@@ -141,15 +145,22 @@ public class ClienteController {
 
     }
 
-    @InitBinder("clienteBean")
+    @InitBinder("cliente")
     protected void initBinderCliente(WebDataBinder binder) {
         binder.addValidators(clienteBeanValidator);
     }
 
-    @InitBinder("pagoBean")
+    @InitBinder("pago")
     protected void initBinderPago(WebDataBinder binder) {
-        binder.addValidators(pagoBeanValidator);
+        binder.addValidators(pagoValidator);
     }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Actividad.class, this.actividadEditor);
+    }
+
+
 
 
 }
