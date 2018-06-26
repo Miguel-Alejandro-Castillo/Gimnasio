@@ -74,16 +74,16 @@ INSERT INTO horarios(horaInicio,horaFin)VALUES
 ('20:00:00','21:00:00'),
 ('21:00:00','22:00:00');
 
-INSERT INTO actividades(nombre,costo)VALUES
-('zumba',400),
-('aero',450),
-('funcional',650),
-('funcional 2',700),
-('tango',500),
-('ritmos latinos',500),
-('crossfit',3000);
+INSERT INTO actividades(id,nombre,costo)VALUES
+(1,'zumba',400),
+(2,'aero',450),
+(3,'funcional',650),
+(4,'funcional 2',700),
+(5,'tango',500),
+(6,'ritmos latinos',500),
+(7,'crossfit',3000);
 
-INSERT INTO pagos(actividad_id,momento_pago,monto,fechaDesde,fechaHasta)VALUES
+INSERT INTO pagos(actividad_id,momentoPago,monto,fechaDesde,fechaHasta)VALUES
 (1,'2018/02/19',1037,'2018/02/19','2018/03/19'),
 (5,'2016/05/25',1196,'2016/05/25','2016/06/25'),
 (6,'2018/06/23',690,'2018/06/23','2018/07/23'),

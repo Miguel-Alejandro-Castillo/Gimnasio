@@ -21,7 +21,7 @@ public class Pago {
 	private Actividad actividad;
 
     @Column(nullable = false)
-    private Date momento_pago;
+    private Date momentoPago;
 
 	@NotNull(message = "{campo.obligatorio}")
 	@Min(value = 1, message = "{campo.monto.mayorQue0}")
@@ -60,12 +60,12 @@ public class Pago {
 		this.actividad = actividad;
 	}
 
-	public Date getMomento_pago() {
-		return momento_pago;
+	public Date getMomentoPago() {
+		return momentoPago;
 	}
 
-	public void setMomento_pago(Date momento_pago) {
-		this.momento_pago = momento_pago;
+	public void setMomentoPago(Date momentoPago) {
+		this.momentoPago = momentoPago;
 	}
 
 	public BigDecimal getMonto() {

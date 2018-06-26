@@ -80,7 +80,7 @@
 						<tbody>
 							<c:forEach items="${cliente.pagos}" var="pago">
 								<tr class="odd gradeX">
-									<td><fmt:formatDate value="${pago.momento_pago}" type="both"
+									<td><fmt:formatDate value="${pago.momentoPago}" type="both"
 														dateStyle="short" timeStyle="short" /></td>
 									<td><c:out value="${pago.actividad.nombre}"></c:out></td>
 									<td><fmt:formatDate value="${pago.fechaDesde}" type="date" pattern="dd/MM/yyyy" /></td>

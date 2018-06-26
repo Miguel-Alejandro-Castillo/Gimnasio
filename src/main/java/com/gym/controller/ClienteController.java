@@ -2,13 +2,13 @@ package com.gym.controller;
 
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.ClienteRepository;
-import com.gym.formatter.ActividadEditor;
+//import com.gym.formatter.ActividadEditor;
 import com.gym.model.Actividad;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
 import com.gym.validator.ClienteValidator;
-import com.gym.validator.PagoValidator;
+//import com.gym.validator.PagoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
@@ -34,15 +34,15 @@ public class ClienteController {
 
     @Autowired
     private ActividadRepository actividadRepository;
-
+/*
     @Autowired
     private PagoValidator pagoValidator;
 
     @Autowired
-    private ClienteValidator clienteBeanValidator;
-
-    @Autowired
     private ActividadEditor actividadEditor;
+*/
+    @Autowired
+    private ClienteValidator clienteBeanValidator;
 
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
@@ -135,7 +135,7 @@ public class ClienteController {
         else{
             Long cliente_id = NumberUtils.toLong(id_cliente);
             Cliente cliente = clienteRepository.findOne(cliente_id);
-            pago.setMomento_pago(new Date(System.currentTimeMillis()));
+            pago.setMomentoPago(new Date(System.currentTimeMillis()));
             cliente.getPagos().add(pago);
             clienteRepository.save(cliente);
             redirectAttributes.addFlashAttribute("success_pago", "Se realizo el pago de forma exitosa.");
@@ -149,7 +149,7 @@ public class ClienteController {
     protected void initBinderCliente(WebDataBinder binder) {
         binder.addValidators(clienteBeanValidator);
     }
-
+/*
     @InitBinder("pago")
     protected void initBinderPago(WebDataBinder binder) {
         binder.addValidators(pagoValidator);
@@ -160,7 +160,7 @@ public class ClienteController {
         binder.registerCustomEditor(Actividad.class, this.actividadEditor);
     }
 
-
+*/
 
 
 }

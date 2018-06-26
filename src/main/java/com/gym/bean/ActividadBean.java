@@ -23,7 +23,7 @@ public class ActividadBean {
 	private  BigDecimal costo;
 
 	private Dia newDia;
-	private Long  newHorario;
+	private Long newHorario;
 	private Long newProfesor;
     private Set<DiaHorarioProfesor> diasHorariosProfesores;
 	public ActividadBean() {
@@ -36,8 +36,7 @@ public class ActividadBean {
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
-	}
-    
+	}    
 
 	public Long getId() {
 		return id;

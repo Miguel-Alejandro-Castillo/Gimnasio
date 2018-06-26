@@ -20,8 +20,8 @@ public class PagoValidator implements Validator {
         Pago pago = (Pago) o;
         if(pago.getFechaDesde() != null && pago.getFechaHasta() != null) {
             if (pago.getFechaDesde().compareTo(pago.getFechaHasta()) > 0) {
-                errors.rejectValue("fechaDesde", "campo.fecha_desde.menorIgualQueFecha_hasta");
-                errors.rejectValue("fechaHasta", "campo.fecha_hasta.mayorIgualQueFecha_desde");
+                errors.rejectValue("fechaDesde", "campo.fechaDesde.menorIgualQueFechaHasta");
+                errors.rejectValue("fechaHasta", "campo.fechaHasta.mayorIgualQueFechaDesde");
             }
         }
     }

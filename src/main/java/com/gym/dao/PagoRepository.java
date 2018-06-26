@@ -23,12 +23,12 @@ public interface PagoRepository extends JpaRepository<Pago,Long> {
             " union select 11 as MONTH" +
             " union select 12 as MONTH" +
     " ) as meses "+
-    " left join pagos p on(meses.MONTH = month(p.momento_pago) and year(p.momento_pago) = ?1 ) "+
+    " left join pagos p on(meses.MONTH = month(p.momentoPago) and year(p.momentoPago) = ?1 ) "+
     " group by meses.MONTH"+
     " order by meses.MONTH ", nativeQuery = true)
     List<Object []>  findGananciasByAnio( Integer anio);
 
-    @Query( value = "select day(p.momento_pago) as dia, sum(p.monto) as total from pagos p where month(p.momento_pago) = ?2 and  year(p.momento_pago) = ?1 group by dia order by dia", nativeQuery = true)
+    @Query( value = "select day(p.momentoPago) as dia, sum(p.monto) as total from pagos p where month(p.momentoPago) = ?2 and  year(p.momentoPago) = ?1 group by dia order by dia", nativeQuery = true)
     List<Object []> findGananciasByAnioAndMes(Integer anio, Integer mes);
 
     @Query( value = "select meses.MONTH as mes, coalesce( sum(p.monto),0) as total "+
@@ -46,12 +46,12 @@ public interface PagoRepository extends JpaRepository<Pago,Long> {
             " union select 11 as MONTH" +
             " union select 12 as MONTH" +
             " ) as meses "+
-            " left join pagos p  on(meses.MONTH = month(p.momento_pago) and year(p.momento_pago) = ?1 and p.actividad_id = ?2 ) "+
+            " left join pagos p  on(meses.MONTH = month(p.momentoPago) and year(p.momentoPago) = ?1 and p.id = ?2 ) "+
             " group by meses.MONTH"+
             " order by meses.MONTH ", nativeQuery = true)
     List<Object[]> findGananciasByAnioAndIdActividad(Integer anio, Integer idActividad);
 
-    @Query( value = "select day(p.momento_pago) as dia, sum(p.monto) as total from pagos p where month(p.momento_pago) = ?2 and  year(p.momento_pago) = ?1 and p.actividad_id = ?3 group by dia order by dia", nativeQuery = true)
+    @Query( value = "select day(p.momentoPago) as dia, sum(p.monto) as total from pagos p where month(p.momentoPago) = ?2 and  year(p.momentoPago) = ?1 and p.	id = ?3 group by dia order by dia", nativeQuery = true)
     List<Object[]> findGananciasByAnioAndMesAndIdActividad(Integer anio, Integer mes, Integer idActividad);
 
 }

@@ -75,12 +75,12 @@
 								<c:forEach items="${clientes}" var="cliente">
 								<c:forEach items="${cliente.pagos}" var="pago">
 									<tr class="odd gradeX">
-									<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${pago.momento_pago}"/></td>
+									<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${pago.momentoPago}"/></td>
 									<td><c:out value="${cliente.nombre} ${cliente.apellido}"></c:out></td>
 									<td><c:out value="${pago.actividad.nombre}"></c:out></td>
 									<td><fmt:formatNumber value="${pago.monto}" type="currency" currencySymbol=""/></td>
-									<td><fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fecha_desde}" /></td>
-									<td><fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fecha_hasta}" /></td>
+									<td><fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaDesde}" /></td>
+									<td><fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaHasta}" /></td>
 									</tr>
 							   	</c:forEach>
 								</c:forEach>
