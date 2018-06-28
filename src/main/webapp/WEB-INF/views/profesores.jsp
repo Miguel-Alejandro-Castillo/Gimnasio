@@ -4,18 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"><tiles:getAsString name="title"/></h1>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+	<div class="col-lg-10">
+        <h1 class="page-header"><tiles:getAsString name="title"/></h1>
+        
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
                                 <th>nombre</th>
@@ -38,16 +32,14 @@
                             </tbody>
                         </table>
                         <!-- /.table-responsive -->
-
-                    </div>
+					</div>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-    </div>
+	</div>            
+</div>
+
+    
     
 	<spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    
     <script src="${jqueryMin}"></script>

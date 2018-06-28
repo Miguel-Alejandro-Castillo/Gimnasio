@@ -26,10 +26,6 @@
     <spring:url value="resources/css/demo.css" var="demoCss"/>
     <link href="${demoCss}" rel="stylesheet"/>
 
-    <!-- Morris Charts CSS -->
-    <spring:url value="/resources/css/morris.css" var="morris"/>
-    <link href="${morris}" rel="stylesheet"/>
-
     <!-- Custom Fonts -->
     <spring:url value="/resources/css/font-awesome.min.css" var="fontAwesomeMin"/>
     <link href="${fontAwesomeMin}" rel="stylesheet"/>
@@ -79,10 +75,6 @@
             <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapMinJs" />
             <script src="${bootstrapMinJs}"></script>
 
-            <!-- Metis Menu Plugin JavaScript -->
-            <spring:url value="/resources/js/metisMenu.min.js" var="metisMenuMinJs"/>
-            <script src="${metisMenuMinJs}"></script>
-
             <!-- Custom Theme JavaScript -->
             <spring:url value="/resources/js/sb-admin-2.js" var="sbAdmin2Js" />
             <script src="${sbAdmin2Js}"></script>
@@ -108,11 +100,8 @@
             <script>
                 $(document).ready(function() {
                     
-                	
                 	$('[data-toggle="tooltip"]').tooltip();
                 
-               		          	
-                	
                 	
 				});
             
