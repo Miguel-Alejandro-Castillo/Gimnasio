@@ -4,14 +4,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <spring:url value="/resumen/" var="urlResumen"/>
 <div id="page-wrapper">
-	<div class="row">
+
 	    <div class="col-lg-12">
 	        <h1 class="page-header">Resumen de Cuentas</h1>
 	    </div>
-	    <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    
+
+    	    <div class="col-lg-12">
     <ul class="nav nav-tabs">
     	<li class="active"><a data-toggle="tab" href="#Grafico">Grafico</a></li>   	
     	<li><a data-toggle="tab" href="#Lista">Lista</a></li>    
@@ -93,7 +91,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    
 <script src="${jqueryMin}"></script>
 

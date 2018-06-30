@@ -28,7 +28,7 @@
 
     <!-- Definicion pantalla  para crear un cliente -->
     <definition name="crear-cliente" extends="default-template">
-        <put-attribute name="title" value="Alta de cliente" cascade="true"/>
+        <put-attribute name="title" value="Alta de Cliente" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/cliente.jsp" />
         <put-attribute name="titleSubmit" value="Crear cliente" cascade="true" />
     </definition>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div id="page-wrapper">
-    <div class="row">
+    
         <c:if test="${not empty success_pago}">
         <div id="alert-pago" class="alert alert-success alert-dismissible fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -27,10 +27,6 @@
         </div>
         <!-- /.col-lg-12 -->
 
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -70,7 +66,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-    </div>
+    
     <!-- /#page-wrapper -->
     
     <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    

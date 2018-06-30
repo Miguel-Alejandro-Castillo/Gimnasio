@@ -3,14 +3,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-wrapper">
-            <div class="row">
+            
                 <div class="col-lg-12">
                     <h1 class="page-header"><tiles:getAsString name="title"/></h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+            
+           
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -54,5 +53,5 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-        </div>
+        
         <!-- /#page-wrapper -->

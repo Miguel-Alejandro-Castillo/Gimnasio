@@ -4,17 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div id="page-wrapper">
-    <div class="row">
+    
         <div class="col-lg-12">
             <h1 class="page-header"><tiles:getAsString name="title"/></h1>
         </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    <div class="row">
+          
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                <div class="row">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -45,8 +43,8 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
+    </div>
     <!-- /.row -->
-</div>
 <!-- /#page-wrapper -->
 
 	<spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    

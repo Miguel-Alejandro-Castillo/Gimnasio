@@ -6,7 +6,7 @@
 		<div class="list-group" style="width:251px">
 			
 					<spring:url value="/home" var="home"></spring:url>
-    				<a class="list-group-item" href="${home}" style="height:80px;color:white;background-color:cornflowerblue;font-size:20px;">El Deposito</a>
+    				<a class="list-group-item active" href="${home}" style="height:80px;color:white;background-color:cornflowerblue;font-size:20px;">El Deposito</a>
 			        
 			        <spring:url value="/clientes/crear" var="crearCliente"/>
                 	<a class="list-group-item" href="${home}"><i class="fa fa-dashboard fa-fw"></i>Inicio</a>
