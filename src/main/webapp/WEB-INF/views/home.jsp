@@ -5,10 +5,6 @@
             <div class="col-lg-">
                 <h1 class="page-header">Inicio</h1>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
 </div>
-<!-- /#page-wrapper -->

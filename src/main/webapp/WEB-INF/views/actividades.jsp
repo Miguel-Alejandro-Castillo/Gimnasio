@@ -5,13 +5,13 @@
 
 <div id="page-wrapper">
     
-        <div class="col-lg-12">
-            <h1 class="page-header"><tiles:getAsString name="title"/></h1>
-        </div>
+    <div class="col-lg-12">
+        <h1 class="page-header"><tiles:getAsString name="title"/></h1>
+    </div>
           
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
                 <div class="row">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
@@ -29,8 +29,6 @@
                                     <td><c:out value="${actividad.costo}"></c:out></td>
                                     <spring:url value="/actividades/${actividad.id}/editar" var="urlEditActividad"/>
                                     <td><a href="${urlEditActividad}"><i class="fa fa-gears" style="font-size:24px;padding-right:10px;padding-left:10px;"></i></a></td>
-                                    
-                                    
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -51,14 +49,14 @@
     <script src="${jqueryMin}"></script>
     
    	<script>
-   	$(document).ready(function(){
-	   $('#dataTables-example').DataTable(
-	      		{
-	      				responsive: true,
-	      				"paging":   false,
-	      			    "ordering": false,
-	      			    "info":     false
-	      		});
+   	    $(document).ready(function(){
+        $('#dataTables-example').DataTable(
+      		{
+				responsive: true,
+				"paging":   false,
+			    "ordering": false,
+			    "info":     false
+      		});
    	});
    	</script>
 	<!-- para que ande la tabla  -->

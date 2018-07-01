@@ -16,37 +16,37 @@
 	                    <spring:url value="" var="urlActual"/>
 	                    <form:form id="clienteForm" modelAttribute="cliente" action="${urlActual}" method="post" role="form" novalidate="novalidate">
 						<form:hidden path="id"/>
-	                        <div class="form-group">
-	                            <form:label path="nombre">Nombre</form:label>
-	                            <form:input path="nombre"  cssClass="form-control" autofocus="autofocus"/>
-	                            <form:errors path="nombre" cssClass="errorMessage"/>
-	                        </div>
-	                        <div class="form-group">
-	                            <form:label path="apellido">Apellido</form:label>
-	                            <form:input path="apellido"  cssClass="form-control"/>
-	                            <form:errors path="apellido" cssClass="errorMessage"/>
-	                        </div>
-	
-	                        <div class="form-group">
-	                            <form:label path="sexo">Sexo</form:label>
-	                            <form:select path="sexo" cssClass="form-control">
-	                                <form:option value="" label="Seleccione un sexo" />
-	                                <form:option value="Femenino" label="Femenino" />
-	                                <form:option value="Masculino" label="Masculino" />
-	                            </form:select>
-	                            <form:errors path="sexo" cssClass="errorMessage"/>
-	                        </div>
-	
-							<div class="form-group">
-	                            <form:label path="fechaNacimiento">Fecha de nacimiento</form:label>
-	                            <form:input type="date" path="fechaNacimiento"  cssClass="form-control"/>
-	                            <form:errors path="fechaNacimiento" cssClass="errorMessage"/>
-	                        </div>
-	                        <div class="form-group">
-	                            <form:label path="dni">DNI</form:label>
-	                            <form:input type="number" path="dni"  cssClass="form-control"/>
-	                            <form:errors path="dni" cssClass="errorMessage"/>
-	                        </div>
+                        <div class="form-group">
+                            <form:label path="nombre">Nombre</form:label>
+                            <form:input path="nombre"  cssClass="form-control" autofocus="autofocus"/>
+                            <form:errors path="nombre" cssClass="errorMessage"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="apellido">Apellido</form:label>
+                            <form:input path="apellido"  cssClass="form-control"/>
+                            <form:errors path="apellido" cssClass="errorMessage"/>
+                        </div>
+
+                        <div class="form-group">
+                            <form:label path="sexo">Sexo</form:label>
+                            <form:select path="sexo" cssClass="form-control">
+                                <form:option value="" label="Seleccione un sexo" />
+                                <form:option value="Femenino" label="Femenino" />
+                                <form:option value="Masculino" label="Masculino" />
+                            </form:select>
+                            <form:errors path="sexo" cssClass="errorMessage"/>
+                        </div>
+
+						<div class="form-group">
+                            <form:label path="fechaNacimiento">Fecha de nacimiento</form:label>
+                            <form:input type="date" path="fechaNacimiento"  cssClass="form-control"/>
+                            <form:errors path="fechaNacimiento" cssClass="errorMessage"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="dni">DNI</form:label>
+                            <form:input type="number" path="dni"  cssClass="form-control"/>
+                            <form:errors path="dni" cssClass="errorMessage"/>
+                        </div>
 					</div>
 					
 					<div class="col-lg-6">
@@ -70,10 +70,10 @@
 						<form:button type="submit" class="btn btn-default"><tiles:getAsString name="titleSubmit"/></form:button>
 						</form:form>
 					</div>
-					</div>
 				</div>
-			</div>              
-		</div>
+			</div>
+		</div>              
+	</div>
 </div>
                     
 
