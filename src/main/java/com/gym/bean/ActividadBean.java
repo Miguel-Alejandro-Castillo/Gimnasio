@@ -96,5 +96,7 @@ public class ActividadBean {
 		this.setCosto(actividad.getCosto());
 		this.setDiasHorariosProfesores(actividad.getDiasHorariosProfesores());
     }
+	@Override
+	public String toString() { return  this.getNombre();}
     
 }

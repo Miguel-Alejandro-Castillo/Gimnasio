@@ -3,14 +3,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-wrapper">
-            <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header"><tiles:getAsString name="title"/></h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+            
+            
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -30,12 +28,12 @@
                                            <form:errors path="fechaHasta" cssClass="errorMessage"/>
                                          </div>
 	                                    <div class="form-group">
-                                            <form:label path="actividad">Actividad(*)</form:label>
-                                            <form:select path="actividad" cssClass="form-control">
-                                                <form:option value="-1" label="Seleccione una actividad"/>
+                                            <form:label path="actividad.id">Actividad(*)</form:label>
+                                            <form:select path="actividad.id" cssClass="form-control">
+                                                <form:option value="null" label="Seleccione una actividad"/>
                                                 <form:options items="${actividades}" itemValue="id" itemLabel="nombre" />
                                             </form:select>
-                                            <form:errors path="actividad" cssClass="errorMessage"/>
+                                            <form:errors path="actividad.id" cssClass="errorMessage"/> 
 	                                    </div>                                                               
                                         <div class="form-group">
                                             <form:label path="monto">Monto(*)</form:label>
@@ -57,5 +55,4 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-</div>
         <!-- /#page-wrapper -->

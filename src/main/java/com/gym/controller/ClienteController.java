@@ -136,6 +136,9 @@ public class ClienteController {
             Long cliente_id = NumberUtils.toLong(id_cliente);
             Cliente cliente = clienteRepository.findOne(cliente_id);
             pago.setMomentoPago(new Date(System.currentTimeMillis()));
+            Actividad actividad = actividadRepository.findOne(pago.getActividad().getId());
+            pago.setActividad(actividad);
+            
             cliente.getPagos().add(pago);
             clienteRepository.save(cliente);
             redirectAttributes.addFlashAttribute("success_pago", "Se realizo el pago de forma exitosa.");

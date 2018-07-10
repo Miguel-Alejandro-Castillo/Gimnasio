@@ -18,6 +18,9 @@ public class PagoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Pago pago = (Pago) o;
+        if (pago.getActividad() != null && pago.getActividad().getNombre() == null) {
+        	errors.rejectValue("actividad", "campo.actividad.vacio");
+        }
         if(pago.getFechaDesde() != null && pago.getFechaHasta() != null) {
             if (pago.getFechaDesde().compareTo(pago.getFechaHasta()) > 0) {
                 errors.rejectValue("fechaDesde", "campo.fechaDesde.menorIgualQueFechaHasta");
