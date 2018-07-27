@@ -1,0 +1,7 @@
+-arreglar la logica de la lista de home - LISTO
+-Arreglar links a pagos para que muestren fechas default - LISTO
+
+-arreglar el active del navbar
+-arreglar caso actividad - gimnasio
+-validar que no hayan actividades en el mismo rango de fechas
+-Obtener monto a pagar automaticamente cuando se seleccione una actividad (con ajax?)

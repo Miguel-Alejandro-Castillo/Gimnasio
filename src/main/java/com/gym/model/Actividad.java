@@ -2,6 +2,8 @@ package com.gym.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +16,11 @@ import java.util.Set;
 public class Actividad {
 
 	@Id
+	@NotNull(message = "{campo.obligatorio}")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
     
+	@NotNull(message = "{campo.obligatorio}")
 	@Column(nullable = false, unique = true)
     private String nombre;
 

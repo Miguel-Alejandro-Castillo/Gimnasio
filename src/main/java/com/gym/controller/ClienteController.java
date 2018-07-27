@@ -2,13 +2,15 @@ package com.gym.controller;
 
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.ClienteRepository;
+import com.gym.formatter.ActividadEditor;
 //import com.gym.formatter.ActividadEditor;
 import com.gym.model.Actividad;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
 import com.gym.validator.ClienteValidator;
-//import com.gym.validator.PagoValidator;
+import com.gym.validator.PagoValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 /**
  * Created by Alejandro on 12/2/2018.
  */
@@ -34,13 +38,13 @@ public class ClienteController {
 
     @Autowired
     private ActividadRepository actividadRepository;
-/*
+
     @Autowired
     private PagoValidator pagoValidator;
 
     @Autowired
     private ActividadEditor actividadEditor;
-*/
+
     @Autowired
     private ClienteValidator clienteBeanValidator;
 
@@ -125,8 +129,11 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
-    public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Validated Pago pago, BindingResult result, RedirectAttributes redirectAttributes){
+    public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Valid Pago pago, BindingResult result, RedirectAttributes redirectAttributes){
         ModelAndView mav;
+        
+        pagoValidator.validate(pago, result);
+        
         if(result.hasErrors()) {
             mav= new ModelAndView("pagar");
             List<Actividad> actividades = actividadRepository.findAll();

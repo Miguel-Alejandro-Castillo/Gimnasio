@@ -38,73 +38,52 @@
     <spring:url value="/resources/css/dataTables.responsive.css" var="dataTablesResponsiveCss"/>
     <link href="${dataTablesResponsiveCss}" rel="stylesheet"/>
 
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-
 </head>
-<body id="wrapper">
 
-            <header>
-            <tiles:insertAttribute name="header" />
-            </header>
-			
 
-            <tiles:insertAttribute name="menu" />
-            
-			
-            <main>
-                <tiles:insertAttribute name="main" />
-            </main>
 
-            <footer>
-            <tiles:insertAttribute name="footer" />
-            </footer>
+		<div class= "row">
+		
+         <tiles:insertAttribute name="menu" />
+		
+		
+        
+             <tiles:insertAttribute name="main" />
+             	
+             
+             
+        </div>
 
-            <!-- jQuery -->
-            <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>	
-            <script src="${jqueryMin}"></script>
+         <!-- jQuery -->
+         <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>	
+         <script src="${jqueryMin}"></script>
 
-            <!-- Bootstrap Core JavaScript -->
-            <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapMinJs" />
-            <script src="${bootstrapMinJs}"></script>
+         <!-- Bootstrap Core JavaScript -->
+         <spring:url value="/resources/js/bootstrap.min.js" var="bootstrapMinJs" />
+         <script src="${bootstrapMinJs}"></script>
 
-            <!-- Custom Theme JavaScript -->
-            <spring:url value="/resources/js/sb-admin-2.js" var="sbAdmin2Js" />
-            <script src="${sbAdmin2Js}"></script>
+         <!-- Custom Theme JavaScript -->
+         
 
-            <!-- DataTables JavaScript -->
-            <spring:url value="/resources/js/jquery.dataTables.min.js" var="jqueryDataTablesMinJs" />
-            <script src="${jqueryDataTablesMinJs}"></script>
-            <spring:url value="/resources/js/dataTables.bootstrap.min.js" var="dataTablesBootstrapMinJs" />
-            <script src="${dataTablesBootstrapMinJs}"></script>
-            <spring:url value="/resources/js/dataTables.responsive.js" var="dataTablesResponsiveJs" />
-            <script src="${dataTablesResponsiveJs}"></script>
-            <spring:url value="/resources/js/funciones.js" var="funciones" />
-            <script src="${funciones}"></script>
+         <!-- DataTables JavaScript -->
+         <spring:url value="/resources/js/jquery.dataTables.min.js" var="jqueryDataTablesMinJs" />
+         <script src="${jqueryDataTablesMinJs}"></script>
+         <spring:url value="/resources/js/dataTables.bootstrap.min.js" var="dataTablesBootstrapMinJs" />
+         <script src="${dataTablesBootstrapMinJs}"></script>
+         <spring:url value="/resources/js/dataTables.responsive.js" var="dataTablesResponsiveJs" />
+         <script src="${dataTablesResponsiveJs}"></script>
+         <spring:url value="/resources/js/funciones.js" var="funciones" />
+         <script src="${funciones}"></script>
 
-			<spring:url value="/resources/js/raphael.min.js" var="raphaelMin" />
-			<script src="${raphaelMin}"></script>
-			<spring:url value="/resources/js/morris.min.js" var="morrisMin" />
-			<script src="${morrisMin}"></script>
-            <spring:url value="/resources/js/zingchart.min.js" var="zingchartMin" />
-            <script src="${zingchartMin}"></script>
+         <spring:url value="/resources/js/zingchart.min.js" var="zingchartMin" />
+         <script src="${zingchartMin}"></script>
 
-            <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-            <script>
-                $(document).ready(function() {
-                    
-                	$('[data-toggle="tooltip"]').tooltip();
-                
-                	
-				});
-            
-            </script>
-</body>
+         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+         <script>
+             $(document).ready(function() {
+             	$('[data-toggle="tooltip"]').tooltip();                	
+	});
+         
+         </script>
+
 </html>

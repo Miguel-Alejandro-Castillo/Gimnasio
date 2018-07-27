@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
-/**
- * Created by tuPaPá on 12/2/2018.
- */
 @Controller
 @RequestMapping(value="/actividades")
 public class ActividadController {

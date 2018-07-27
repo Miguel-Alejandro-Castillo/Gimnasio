@@ -1,5 +1,6 @@
 package com.gym.model;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.util.Date;
 @Entity
 @Table( name = "pagos")
 public class Pago {
-
+	Date how = new Date();
+		
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +29,7 @@ public class Pago {
 	@Min(value = 1, message = "{campo.monto.mayorQue0}")
     @Column(nullable = false)
     private BigDecimal monto;
+
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

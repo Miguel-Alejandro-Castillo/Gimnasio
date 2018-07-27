@@ -1,6 +1,9 @@
 package com.gym.validator;
 
 import com.gym.model.Pago;
+
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -18,8 +21,12 @@ public class PagoValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Pago pago = (Pago) o;
-        if (pago.getActividad() != null && pago.getActividad().getNombre() == null) {
+        if (pago.getActividad() == null) {
         	errors.rejectValue("actividad", "campo.actividad.vacio");
+        } else {
+        	if (pago.getActividad().getId() == null) {
+        		errors.rejectValue("actividad", "campo.actividad.vacio");
+        	}
         }
         if(pago.getFechaDesde() != null && pago.getFechaHasta() != null) {
             if (pago.getFechaDesde().compareTo(pago.getFechaHasta()) > 0) {
