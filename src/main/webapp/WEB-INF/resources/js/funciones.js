@@ -57,7 +57,7 @@ function cargarGraficoResumen(url){
                   return total + ganancia
                 }, 0);
                 var myConfig = {
-                    type: "bar3d",
+                    type: "bar",
                     scaleX: {
                         label: {
                             text: "Resumen anual"

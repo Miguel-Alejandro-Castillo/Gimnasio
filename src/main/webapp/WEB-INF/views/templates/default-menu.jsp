@@ -73,25 +73,13 @@ button{
 		<li><a href="${resumen}"><i class="fa fa-bar-chart-o fa-fw"></i>Resumen</a></li>
 		
 		<spring:url value="/clientes" var="listaDeClientes" />
-		<li><a href="${listaDeClientes}">Lista de Clientes</a></li>
-
-		<spring:url value="/clientes/crear" var="crearCliente" />
-		<li><a href="${crearCliente}">Nuevo Cliente</a></li>
-
-		<spring:url value="/actividades/crearActividad" var="crearActividad" />
-		<li><a href="${crearActividad}">Nueva Actividad</a></li>
+		<li><a href="${listaDeClientes}">Clientes</a></li>
 
 		<spring:url value="/actividades" var="listadoActividades" />
-		<li><a href="${listadoActividades}">Actividades</a></li>
-
-		<spring:url value="/profesores/crearProfesor" var="crearProfesor" />
-		<li><a href="${crearProfesor}">Nuevo Profesor</a></li>
+		<li><a href="${listadoActividades}">Actividades</a></li>		
 
 		<spring:url value="/profesores" var="listadoProfesores" />
 		<li><a href="${listadoProfesores}">Profesores</a></li>
-
-		<spring:url value="/horarios/crearHorario" var="crearHorario" />
-		<li><a href="${crearHorario}">Nuevo Horario</a></li>
 
 		<spring:url value="/horarios" var="listadoHorarios" />
 		<li><a href="${listadoHorarios}">Horarios</a></li>
@@ -128,10 +116,7 @@ function setNavigation() {
     path = decodeURIComponent(path);
 
     $(".navi a").each(function () {
-        var href = $(this).attr('href');
-        //if (path.substring(0, href.length) === href) {
-//            $(this).closest('li').addClass('active');
-//      }
+        var href = $(this).attr('href');	
         if (path === href) {
             $(this).closest('li').addClass('active');
       }

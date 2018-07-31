@@ -1,42 +1,56 @@
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div id="page-wrapper">
-  <div class="col-lg-12">
-    <h1 class="page-header"><tiles:getAsString name="title"/></h1>
-  </div>
-        
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-          <thead>
-            <tr>
-                <th>hora inicio</th>
-                <th>hora fin</th>
-                <th>acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:forEach items="${horarios}" var="horario">
-               <tr class="odd gradeX">
-                   <td><c:out value="${horario.horaInicio}"></c:out></td>
-                   <td><c:out value="${horario.horaFin}"></c:out></td>
-                   <spring:url value="/horarios/${horario.id}/editar" var="urlEditHorario"/>
-                   <td><a href="${urlEditHorario}" >Editar Horario</a></td>
-               </tr>
-            </c:forEach>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<div class="col-lg-9">
+	<div class="well">
+		<div class="row">
+			<div class="col-lg-11">
+				<h1 class="page-header">
+					<tiles:getAsString name="title" />
+				</h1>
+			</div>
+			<div class="col-lg-1">
+				<spring:url value="/horarios/crearHorario" var="crearHorario" />
+				<a href="${crearHorario}">
+					<button class="btn-danger" style="margin-top: 30px;">Nuevo Horario</button>
+				</a>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table width="100%"
+					class="table table-striped table-bordered table-hover"
+					id="dataTables-example">
+					<thead>
+						<tr>
+							<th>hora inicio</th>
+							<th>hora fin</th>
+							<th>acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${horarios}" var="horario">
+							<tr class="odd gradeX">
+								<td><c:out value="${horario.horaInicio}"></c:out></td>
+								<td><c:out value="${horario.horaFin}"></c:out></td>
+								<spring:url value="/horarios/${horario.id}/editar"
+									var="urlEditHorario" />
+								<td><a href="${urlEditHorario}">Editar Horario</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
-           
-<spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>    
+
+<spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
 <script src="${jqueryMin}"></script>
-    
+
 <script>
   $(document).ready(function(){
     $('#dataTables-example').DataTable(
@@ -49,4 +63,4 @@
   		});
 	  });
 </script>
-	<!-- para que ande la tabla  --> 
+<!-- para que ande la tabla  -->
