@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.gym.dao.ClienteRepository;
+import com.gym.dao.CobroRepository;
 import com.gym.model.Cliente;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ResumenController{
 
 	@Autowired
 	private ActividadRepository actividadRepository;
-
+	
 	@RequestMapping(value="/resumen", method = RequestMethod.GET)
 	public ModelAndView showResumen() {
 		ModelAndView mav = new ModelAndView("resumen");
@@ -115,5 +116,8 @@ public class ResumenController{
 	public @ResponseBody  List<Object []> cargarGraficoResumen(@PathVariable Integer anio) {
 		return pagoRepository.findGananciasByAnio(anio);
 	}
+	
+	
+	
 
 }

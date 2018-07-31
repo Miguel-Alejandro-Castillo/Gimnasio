@@ -2,6 +2,7 @@ package com.gym.controller;
 
 import com.gym.bean.ActividadBean;
 import com.gym.dao.ActividadRepository;
+import com.gym.dao.CobroRepository;
 import com.gym.dao.HorarioRepository;
 import com.gym.dao.ProfesorRepository;
 import com.gym.model.*;
@@ -29,6 +30,9 @@ public class ActividadController {
 
     @Autowired
     private ProfesorRepository profesorRepository;
+    
+    @Autowired
+	private CobroRepository cobroRepository;
 
     private ActividadBean actividadBean;
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
@@ -135,8 +139,5 @@ public class ActividadController {
         return mav;
 
     }
-
-
-
-
+ 
 }

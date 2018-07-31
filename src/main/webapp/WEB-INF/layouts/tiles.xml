@@ -133,5 +133,19 @@
 		<put-attribute name="title" value="Resumen de Cuentas" cascade="true" />
 		<put-attribute name="main" value="/WEB-INF/views/resumen.jsp" />
 	</definition>
+	
+	<!-- Definicion pantalla para cobro -->
+    <definition name="cobro" extends="default-template">
+        <put-attribute name="title" value="Cobrar" cascade="true"/>
+        <put-attribute name="main"  value="/WEB-INF/views/cobro.jsp" />
+        <put-attribute name="titleSubmit" value="Realizar Cobro" cascade="true" />
+    </definition>
+    
+    <!-- Definicion pantalla para lista de cobros -->
+    <definition name="cobros" extends="default-template">
+        <put-attribute name="title" value="Lista de Cobros" cascade="true"/>
+        <put-attribute name="main"  value="/WEB-INF/views/cobros.jsp" />
+    </definition>
+    
 
 </tiles-definitions>

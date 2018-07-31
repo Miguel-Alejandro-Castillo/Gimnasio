@@ -1,6 +1,5 @@
 package com.gym.model;
 
-//import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -9,43 +8,39 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table( name = "pagos")
-public class Pago {
-	Date how = new Date();
-		
+@Table(name = "cobros")
+public class Cobro {
+	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	@NotNull(message = "{campo.obligatorio}")
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true,  fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Actividad actividad;
 
-    @Column(nullable = false)
-    private Date momentoPago;
-
+	@Column(nullable = false)
+	private Date momentoCobro;
+	
 	@NotNull(message = "{campo.obligatorio}")
 	@Min(value = 1, message = "{campo.monto.mayorQue0}")
-    @Column(nullable = false)
-    private BigDecimal monto;
-
-
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "{campo.obligatorio}")
 	@Column(nullable = false)
+	private BigDecimal monto;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "{campo.obligatorio}")
 	private Date fechaDesde;
-
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "{campo.obligatorio}")
     @Column(nullable = false)
-    private Date fechaHasta;
-
-	public Pago() {
+	private Date fechaHasta;
+	
+	public Cobro() {
 		super();
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -62,12 +57,12 @@ public class Pago {
 		this.actividad = actividad;
 	}
 
-	public Date getMomentoPago() {
-		return momentoPago;
+	public Date getMomentoCobro() {
+		return momentoCobro;
 	}
 
-	public void setMomentoPago(Date momentoPago) {
-		this.momentoPago = momentoPago;
+	public void setMomentoCobro(Date momentoCobro) {
+		this.momentoCobro = momentoCobro;
 	}
 
 	public BigDecimal getMonto() {
@@ -94,4 +89,3 @@ public class Pago {
 		this.fechaHasta = fechaHasta;
 	}
 }
-	 

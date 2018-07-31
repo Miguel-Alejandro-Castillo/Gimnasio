@@ -73,7 +73,6 @@ public class ClienteController {
             clienteRepository.save(cliente);
             return new ModelAndView("redirect:/clientes");
         }
-
     }
 
     @RequestMapping(value="/{id_cliente}/clienteDetalle", method = RequestMethod.GET)
@@ -142,6 +141,7 @@ public class ClienteController {
         else{
             Long cliente_id = NumberUtils.toLong(id_cliente);
             Cliente cliente = clienteRepository.findOne(cliente_id);
+            pago.setActividad(null);
             pago.setMomentoPago(new Date(System.currentTimeMillis()));
             Actividad actividad = actividadRepository.findOne(pago.getActividad().getId());
             pago.setActividad(actividad);
