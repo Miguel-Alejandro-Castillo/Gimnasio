@@ -29,7 +29,6 @@ public class Pago {
     @Column(nullable = false)
     private BigDecimal monto;
 
-
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "{campo.obligatorio}")
@@ -41,6 +40,17 @@ public class Pago {
 	@NotNull(message = "{campo.obligatorio}")
     @Column(nullable = false)
     private Date fechaHasta;
+
+	@Column(nullable = true)
+	private String comentario; 
+	
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
 
 	public Pago() {
 		super();

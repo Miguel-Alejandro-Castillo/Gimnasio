@@ -37,6 +37,17 @@ public class Cobro {
     @Column(nullable = false)
 	private Date fechaHasta;
 	
+	@Column(nullable = true)
+	private String comentario;
+		
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	
 	public Cobro() {
 		super();
 	}

@@ -129,10 +129,10 @@ public class ClienteController {
 
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
     public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Valid Pago pago, BindingResult result, RedirectAttributes redirectAttributes){
-        ModelAndView mav;
+        
         
         pagoValidator.validate(pago, result);
-        
+        ModelAndView mav;
         if(result.hasErrors()) {
             mav= new ModelAndView("pagar");
             List<Actividad> actividades = actividadRepository.findAll();
@@ -141,11 +141,9 @@ public class ClienteController {
         else{
             Long cliente_id = NumberUtils.toLong(id_cliente);
             Cliente cliente = clienteRepository.findOne(cliente_id);
-            pago.setActividad(null);
             pago.setMomentoPago(new Date(System.currentTimeMillis()));
             Actividad actividad = actividadRepository.findOne(pago.getActividad().getId());
             pago.setActividad(actividad);
-            
             cliente.getPagos().add(pago);
             clienteRepository.save(cliente);
             redirectAttributes.addFlashAttribute("success_pago", "Se realizo el pago de forma exitosa.");

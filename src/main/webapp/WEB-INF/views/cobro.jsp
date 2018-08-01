@@ -45,6 +45,12 @@
 								min="0" step="0.01" />
 							<form:errors path="monto" cssClass="errorMessage" />
 						</div>
+						<div class="form-group">
+							<form:label path="comentario">Comentario</form:label>
+							<form:input type="textarea" rows="16" path="comentario" cssClass="form-control"
+								min="0" step="0.01" />
+							<form:errors path="comentario" cssClass="errorMessage" />
+						</div>						
 						<form:button type="submit" class="btn btn-default">
 							<tiles:getAsString name="titleSubmit" />
 						</form:button>

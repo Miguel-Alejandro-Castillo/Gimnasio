@@ -7,16 +7,9 @@
 
 <div class="col-lg-9">
 	<div class="well">
-		<div class="row">
-			<div class="col-lg-11">
-				<h1 class="page-header">
-					<tiles:getAsString name="title" />
-				</h1>
-			</div>
-			<div class="col-lg-1">
-				<button class="btn-danger" style="margin-top: 30px;">Algo</button>
-			</div>
-		</div>
+			<h1 class="page-header">
+				<tiles:getAsString name="title" />
+			</h1>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -51,6 +44,12 @@
 							<form:input type="number" path="monto" cssClass="form-control"
 								min="0" step="0.01" />
 							<form:errors path="monto" cssClass="errorMessage" />
+						</div>
+						<div class="form-group">
+							<form:label path="comentario">Comentario</form:label>
+							<form:input type="textarea" rows="16" path="comentario" cssClass="form-control"
+								min="0" step="0.01" />
+							<form:errors path="comentario" cssClass="errorMessage" />
 						</div>
 						<form:button type="submit" class="btn btn-default">
 							<tiles:getAsString name="titleSubmit" />
