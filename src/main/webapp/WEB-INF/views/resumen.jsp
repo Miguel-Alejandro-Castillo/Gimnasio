@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -98,7 +97,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 </div>
 
 
@@ -112,14 +111,6 @@
 		$('#dataTables-example').DataTable(
    		{
 			responsive: true,
-   		});
-		
-		   var selector = '.nav li';
-
-		   $(selector).on('click', function(){
-		       $(selector).removeClass('active');
-		       $(this).addClass('active');
-		   });
-
+   		})
 	});
 </script>

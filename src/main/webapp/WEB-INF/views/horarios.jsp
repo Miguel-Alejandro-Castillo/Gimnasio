@@ -2,21 +2,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<spring:url value="/resources/css/template.css" var="templateCss"/>
+<link href="${templateCss}" rel="stylesheet"/>
 
 <div class="col-lg-9">
 	<div class="well">
 		<div class="row">
-			<div class="col-lg-11">
+			<div class="col-lg-10">
 				<h1 class="page-header">
 					<tiles:getAsString name="title" />
 				</h1>
 			</div>
-			<div class="col-lg-1">
+			
+			<div class="col-lg-2">
 				<spring:url value="/horarios/crearHorario" var="crearHorario" />
 				<a href="${crearHorario}">
-					<button class="btn-danger" style="margin-top: 30px;">Nuevo Horario</button>
+					<button class="upperButton btn-lg"><i class="fas fa-calendar-plus"></i> Nuevo Horario</button>
 				</a>
 			</div>
+			
+			
 		</div>
 
 		<div class="panel panel-default">

@@ -1,62 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<spring:url value="/resources/css/navbar.css" var="navbarCss"/>
+<link href="${navbarCss}" rel="stylesheet"/>
 
-<style>
-a {
-	color: #000;
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:visited {
-	color: #000;
-}
-
-.navi {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	background-color: #f1f1f1;
-	position: fixed;
-	height: 100%;
-	overflow: auto;
-}
-
-.navi li {
-	list-style-type: none;
-	margin: 0 10px;
-}
-
-.navi li a{
-	display: block;
-	color: #000;
-	padding: 8px 16px;
-	text-decoration: none;
-}
-
-button{
-	display: block;
-	color: #000;
-	padding: 8px 16px;
-	text-decoration: none;
-}
-
-
-.navi li.active {
-	background-color: cornflowerblue;
-	color: white;
-}
-
-.navi li.active a {
-	color: #fff;
-	font-weight: bold;
-}
-
-</style>
-
+<spring:url value="/resources/css/all.css" var="fontAwesomeMin"/>
+    <link href="${fontAwesomeMin}" rel="stylesheet"/>
 
 <div class="col-lg-2" style="margin-left: 10px;">
 
@@ -67,29 +15,32 @@ button{
 				Deposito</a></li>
 
 		<spring:url value="/home" var="home"></spring:url>
-		<li><a href="${home}">Inicio</a></li>
-		
+		<li><a href="${home}"><i class="fas fa-home gly"></i>Inicio</a></li>
+		 
 		<spring:url value="/resumen" var="resumen" />
-		<li><a href="${resumen}"><i class="fa fa-bar-chart-o fa-fw"></i>Resumen</a></li>
+		<li><a href="${resumen}"><i class="fas fa-chart-bar gly"></i>Resumen</a></li>
 		
 		<spring:url value="/clientes" var="listaDeClientes" />
-		<li><a href="${listaDeClientes}">Clientes</a></li>
+		<li><a href="${listaDeClientes}"><i class="fas fa-users gly"></i>Clientes</a></li>
+ 	
+		<spring:url value="/cobros" var="cobros" />
+		<li><a href="${cobros}"><i class="fas fa-file-invoice-dollar gly"></i>Cobros</a></li>
 
 		<spring:url value="/actividades" var="listadoActividades" />
-		<li><a href="${listadoActividades}">Actividades</a></li>		
+		<li><a href="${listadoActividades}"><i class="fas fa-heartbeat gly"></i>Actividades</a></li>		
 
 		<spring:url value="/profesores" var="listadoProfesores" />
-		<li><a href="${listadoProfesores}">Profesores</a></li>
+		<li><a href="${listadoProfesores}"><i class="fas fa-child gly"></i>Profesores</a></li>
 
 		<spring:url value="/horarios" var="listadoHorarios" />
-		<li><a href="${listadoHorarios}">Horarios</a></li>
+		<li><a href="${listadoHorarios}"><i class="fas fa-calendar-alt gly"></i>Horarios</a></li>
 
 		
 		<li>
 		<spring:url value="/logout" var="logout"/>
 		<form action="${logout}" method="post">
-        	<a><button type="submit" class="btn" style="background-color: cornflowerblue;" >
-        	<i class="fa fa-sign-out fa-fw"></i> 
+        	<a><button type="submit" class="btn" style="background-color: cornflowerblue;color:white;margin-top:0px" >
+        	<i class="fas fa-sign-out-alt gly"></i> 
         	Logout</button></a>
         </form>
 		</li>			

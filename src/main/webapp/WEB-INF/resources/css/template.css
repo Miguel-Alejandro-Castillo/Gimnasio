@@ -1,0 +1,13 @@
+.upperButton{
+	margin-top: 20px;
+	margin-left: 10px;
+	width:130px;
+	height:70px;
+	background-color: cornflowerblue;
+	color: white;	
+}
+.panelButton{
+	margin-top: 130px; 
+	float: right	
+}
+ 

@@ -21,21 +21,25 @@ public class ActividadBean {
 
 	@NegativeOrZero @NotNull
 	private  BigDecimal costo;
+	
+	@NotNull
+	private Profesor profesor;
 
 	private Dia newDia;
-	private Long newHorario;
-	private Long newProfesor;
-    private Set<DiaHorarioProfesor> diasHorariosProfesores;
+	private Long newHorario;;
+    private Set<Leccion> lecciones;
+    
 	public ActividadBean() {
 		super();
-		this.diasHorariosProfesores = new HashSet<DiaHorarioProfesor>(0);
+		this.lecciones = new HashSet<Leccion>(0);
 	}
 
-	public ActividadBean(Long id, String nombre, BigDecimal costo) {
+	public ActividadBean(Long id, String nombre, BigDecimal costo, Profesor profesor) {
 		this();
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
+		this.profesor = profesor;
 	}    
 
 	public Long getId() {
@@ -57,6 +61,14 @@ public class ActividadBean {
 	public void setCosto(BigDecimal costo) {
 		this.costo = costo;
 	}
+	
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
 
 	public Dia getNewDia() {
 		return newDia;
@@ -73,28 +85,21 @@ public class ActividadBean {
 	public void setNewHorario(Long newHorario) {
 		this.newHorario = newHorario;
 	}
-
-	public Long getNewProfesor() {
-		return newProfesor;
+	
+	public Set<Leccion> getLecciones() {
+		return lecciones;
 	}
 
-	public void setNewProfesor(Long newProfesor) {
-		this.newProfesor = newProfesor;
-	}
-
-	public Set<DiaHorarioProfesor> getDiasHorariosProfesores() {
-		return diasHorariosProfesores;
-	}
-
-	public void setDiasHorariosProfesores(Set<DiaHorarioProfesor> diasHorariosProfesores) {
-		this.diasHorariosProfesores = diasHorariosProfesores;
+	public void setLecciones(Set<Leccion> lecciones) {
+		this.lecciones = lecciones;
 	}
 
 	public void load(Actividad actividad) {
         this.setId(actividad.getId());
 		this.setNombre(actividad.getNombre());
 		this.setCosto(actividad.getCosto());
-		this.setDiasHorariosProfesores(actividad.getDiasHorariosProfesores());
+		this.setProfesor(actividad.getProfesor());
+		this.setLecciones(actividad.getLecciones());
     }
 	@Override
 	public String toString() { return  this.getNombre();}

@@ -8,7 +8,7 @@
 
 <div class="col-lg-9">
 	<div class="well">
-		<h1 class="page-header" style="margin-top: 10px">Inicio</h1>
+		<h1 class="page-header" style="margin-top: 10px">Inicio - Ultimos Deudores</h1>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -35,7 +35,7 @@
 								<td style="text-align: center;"><spring:url
 										value="/clientes/${entrada.value.id}/pagar" var="urlPagar" />
 									<a href="${urlPagar}" data-toggle="tooltip" title="Pagar"><i
-										class="fa fa-dollar"
+										class="fa fa-money-bill-wave"
 										style="font-size: 24px; color: green; padding-right: 10px; padding-left: 10px;"></i></a>
 								</td>
 							</tr>

@@ -35,7 +35,7 @@
 							<form:select path="actividad.id" cssClass="form-control">
 								<form:option value="" label="Seleccione una actividad" />
 								<form:options items="${actividades}" itemValue="id"
-									itemLabel="nombre" />
+									itemLabel="actividadProfesor" />
 							</form:select>
 							<form:errors path="actividad" cssClass="errorMessage" />
 						</div>
@@ -45,18 +45,27 @@
 								min="0" step="0.01" />
 							<form:errors path="monto" cssClass="errorMessage" />
 						</div>
+						
 						<div class="form-group">
 							<form:label path="comentario">Comentario</form:label>
-							<form:input type="textarea" rows="16" path="comentario" cssClass="form-control"
+							<form:input type="textarea" path="comentario" cssClass="form-control"
 								min="0" step="0.01" />
 							<form:errors path="comentario" cssClass="errorMessage" />
-						</div>						
+						</div>
+						
+						
+					
+																		
 						<form:button type="submit" class="btn btn-default">
 							<tiles:getAsString name="titleSubmit" />
 						</form:button>
 					</form:form>
 				</div>
+			
+				
 			</div>
+			
+			
 		</div>
 	</div>
 </div>

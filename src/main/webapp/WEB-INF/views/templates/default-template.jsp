@@ -13,21 +13,11 @@
     <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapMinCss"/>
     <link href="${bootstrapMinCss}" rel="stylesheet"/>
     
-    <link href="css/navbar-fixed-side.css" rel="stylesheet" />
-
-    <!-- MetisMenu CSS -->
-    <spring:url value="/resources/css/metisMenu.min.css" var="metisMenuMinCss"/>
-    <link href="${metisMenuMinCss}" rel="stylesheet"/>
-
     <!-- Custom CSS -->
-    <spring:url value="/resources/css/sb-admin-2.css" var="sbAdmin2Css"/>
-    <link href="${sbAdmin2Css}" rel="stylesheet"/>
 
-    <spring:url value="resources/css/demo.css" var="demoCss"/>
-    <link href="${demoCss}" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
-    <spring:url value="/resources/css/font-awesome.min.css" var="fontAwesomeMin"/>
+    <spring:url value="/resources/css/fontawesome.min.css" var="fontAwesomeMin"/>
     <link href="${fontAwesomeMin}" rel="stylesheet"/>
 
     <!-- DataTables CSS -->

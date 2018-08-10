@@ -55,7 +55,7 @@
     </definition>
     
         <!-- Definicion pantalla  para crear una actividad -->
-    <definition name="crear-actividad" extends="default-template">
+    <definition name="crearActividad" extends="default-template">
         <put-attribute name="title" value="Alta de actividad" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/actividad.jsp" />
         <put-attribute name="titleSubmit" value="Finalizar Alta de Actividad" cascade="true" />
@@ -66,6 +66,13 @@
         <put-attribute name="title" value="Editar Actividad" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/actividad.jsp" />
         <put-attribute name="titleSubmit" value="Finalizar Edicion de Actividad" cascade="true" />
+    </definition>
+    
+    <!-- Definicion pantalla  para añadir un horario-->
+    <definition name="editar-actividad-agregar-leccion" extends="default-template">
+        <put-attribute name="title" value="Editar Actividad" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/actividadAddLeccion.jsp" />
+        <put-attribute name="titleSubmit" value="Finalizar agregado de leccion" cascade="true" />
     </definition>
 
     <!-- Definicion pantalla para listar las actividades -->
@@ -145,6 +152,12 @@
     <definition name="cobros" extends="default-template">
         <put-attribute name="title" value="Lista de Cobros" cascade="true"/>
         <put-attribute name="main"  value="/WEB-INF/views/cobros.jsp" />
+    </definition>
+    
+    <!-- Definicion pantalla para detalle de pago -->
+    <definition name="pagoDetalle" extends="default-template">
+        <put-attribute name="title" value="Detalle de Pago" cascade="true"/>
+        <put-attribute name="main"  value="/WEB-INF/views/pagoDetalle.jsp" />
     </definition>
     
 

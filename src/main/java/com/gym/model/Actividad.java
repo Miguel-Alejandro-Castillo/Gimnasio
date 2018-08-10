@@ -16,7 +16,7 @@ import java.util.Set;
 public class Actividad {
 
 	@Id
-	@NotNull(message = "{campo.obligatorio}")
+	//@NotNull(message = "{campo.obligatorio}")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    
     
@@ -27,20 +27,23 @@ public class Actividad {
     @Column(nullable = false)
     private BigDecimal costo;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
-	private Set<DiaHorarioProfesor> diasHorariosProfesores;
+    @OneToOne//(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //si se borra
+    private Profesor profesor;
+   
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+	private Set<Leccion> lecciones;
 
     public Actividad() {
     	super();
-		diasHorariosProfesores = new HashSet<>();
+		lecciones = new HashSet<>();
     }
     
-    public Actividad(Long id, String nombre, BigDecimal costo, Set<DiaHorarioProfesor> diasHorariosProfesores) {
+    public Actividad(Long id, String nombre, BigDecimal costo, Profesor profesor) {
 		this();
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
-		this.diasHorariosProfesores = diasHorariosProfesores;
+		this.profesor = profesor;
 	}
         
 	public Long getId() {
@@ -62,14 +65,27 @@ public class Actividad {
 		this.costo = costo;
 	}
 
-	public Set<DiaHorarioProfesor> getDiasHorariosProfesores() {
-		return diasHorariosProfesores;
+	public Set<Leccion> getLecciones() {
+		return lecciones;
 	}
 
-	public void setDiasHorariosProfesores(Set<DiaHorarioProfesor> diasHorariosProfesores) {
-		this.diasHorariosProfesores = diasHorariosProfesores;
+	public void setLecciones(Set<Leccion> lecciones) {
+		this.lecciones = lecciones;
 	}
 
 	@Override
 	public String toString() { return  this.getNombre();}
+	
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+	
+	public String getActividadProfesor() {
+		return this.getNombre()+" -- "+this.getProfesor().getNombre()+' '+this.getProfesor().getApellido();
+	}
+	
 }

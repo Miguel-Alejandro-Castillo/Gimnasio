@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<spring:url value="/resources/css/template.css" var="templateCss"/>
+<link href="${templateCss}" rel="stylesheet"/>
 
 <div class="col-lg-9">
 	<c:if test="${not empty success_pago}">
@@ -25,16 +27,15 @@
 
 	<div class="well">
 		<div class="row">
-			<div class="col-lg-11">
+			<div class="col-lg-10">
 				<h1 class="page-header">
 					<tiles:getAsString name="title" />
 				</h1>
 			</div>
-			<div class="col-lg-1">
+			<div class="col-lg-2">
 				<spring:url value="/clientes/crear" var="crearCliente" />
 				<a href="${crearCliente}">
-					<button class="btn-danger" style="margin-top: 30px;">Nuevo
-						Cliente</button>
+					<button class="upperButton btn-lg"><i class="fa fa-user-plus"></i> Nuevo Cliente</button>
 				</a>
 			</div>
 		</div>
@@ -85,6 +86,8 @@
 
 <script>
    	$(document).ready(function(){
+   		cargarGraficoResumen('${urlResumen}');
+   		
 	   $('#dataTables-example').DataTable(
 	      		{
 	      				responsive: true,

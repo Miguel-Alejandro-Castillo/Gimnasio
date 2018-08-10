@@ -3,11 +3,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<spring:url value="/resources/css/template.css" var="templateCss"/>
+<link href="${templateCss}" rel="stylesheet"/>
 
 <div class="col-lg-9">
 	<div class="well">
 		<h1 class="page-header">
-			<tiles:getAsString name="title" />
+			${cliente.nombre} ${cliente.apellido}
 		</h1>
 
 		<ul class="nav nav-tabs">
@@ -20,30 +22,6 @@
 				<div class="tab-content">
 					<div id="Detalle" class="tab-pane active">
 						<div class="col-lg-6">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Nombre</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>${cliente.nombre}</th>
-									</tr>
-								</tbody>
-							</table>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Apellido</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>${cliente.apellido}</th>
-									</tr>
-								</tbody>
-							</table>
 							<table class="table table-striped">
 								<thead>
 									<tr>
@@ -81,9 +59,6 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>
-
-						<div class="col-lg-6">
 							<table class="table table-striped">
 								<thead>
 									<tr>
@@ -96,6 +71,9 @@
 									</tr>
 								</tbody>
 							</table>
+						</div>
+
+						<div class="col-lg-6">
 							<table class="table table-striped">
 								<thead>
 									<tr>
@@ -121,11 +99,10 @@
 								</tbody>
 							</table>
 
-							<div style="padding-top: 35px; float: right;">
+							<div>
 								<spring:url value="/clientes/${cliente.id}/clienteEditar"
 									var="urlClienteEditar" />
-								<a href="${urlClienteEditar}" class="btn btn-primary btn-lg">Editar
-									cliente</a>
+								<a href="${urlClienteEditar}" class="btn btn-primary btn-lg panelButton">Editar Cliente</a>
 							</div>
 						</div>
 

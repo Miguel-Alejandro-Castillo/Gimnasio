@@ -2,8 +2,8 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<spring:url value="/resources/css/template.css" var="templateCss"/>
+<link href="${templateCss}" rel="stylesheet"/>
 
 <div class="col-lg-9">
 	<div class="well">
@@ -68,8 +68,8 @@
 							<form:input path="direccion" cssClass="form-control" />
 							<form:errors path="direccion" cssClass="error" />
 						</div>
-						<div style="padding-top: 16px; float: right;">
-							<form:button type="submit" class="btn btn-primary btn-lg">
+						<div>
+							<form:button type="submit" class="btn btn-primary" >
 								<tiles:getAsString name="titleSubmit" />
 							</form:button>
 						</div>

@@ -5,12 +5,16 @@ import com.gym.dao.PagoRepository;
 import com.gym.model.Actividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.gym.dao.ClienteRepository;
 import com.gym.dao.CobroRepository;
 import com.gym.model.Cliente;
+import com.gym.model.Pago;
+import com.gym.util.NumberUtils;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -117,7 +121,16 @@ public class ResumenController{
 		return pagoRepository.findGananciasByAnio(anio);
 	}
 	
-	
-	
+	@RequestMapping(value="/{id_pago}/detalle", method = RequestMethod.GET)
+	public ModelAndView showPagoDetalle(@PathVariable(name = "id_pago") String id_pago){
+		ModelAndView mav = null;
+		Long id = NumberUtils.toLong(id_pago);
+		Pago pago = pagoRepository.findOne(id);
+		if(pago != null) {
+			mav = new ModelAndView("pagoDetalle");
+			mav.addObject("pago",pago);
+		}
+		return mav;
+	}
 
 }

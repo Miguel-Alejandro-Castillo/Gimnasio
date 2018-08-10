@@ -1,7 +1,5 @@
 package com.gym.util;
 
-import com.gym.model.DiaHorarioProfesor;
-
 /**
  * Created by Alejandro on 1/5/2018.
  */

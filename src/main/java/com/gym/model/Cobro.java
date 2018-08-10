@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "cobros")
@@ -99,4 +100,13 @@ public class Cobro {
 	public void setFechaHasta(Date fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
+	
+	public Set<Leccion> getLecciones() {
+		return this.getActividad().getLecciones();
+	}
+	
+	public Profesor getProfesor() {
+		return this.getActividad().getProfesor();
+	}
+	
 }
