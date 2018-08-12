@@ -31,18 +31,16 @@
 							<form:errors path="fechaHasta" cssClass="errorMessage" />
 						</div>
 						<div class="form-group">
-							<form:label path="actividad.id">Actividad</form:label>
-							<form:select path="actividad.id" cssClass="form-control">
-								<form:option value="" label="Seleccione una actividad" />
-								<form:options items="${actividades}" itemValue="id"
-									itemLabel="nombre" />
+							<form:label path="actividad">Actividad</form:label>
+							<form:select path="actividad" cssClass="form-control" onchange="changeActividad()">
+								<form:option value="-1" label="Seleccione una actividad" />
+								<form:options items="${actividades}" itemValue="id" itemLabel="nombre" />
 							</form:select>
 							<form:errors path="actividad" cssClass="errorMessage" />
 						</div>
 						<div class="form-group">
 							<form:label path="monto">Monto</form:label>
-							<form:input type="number" path="monto" cssClass="form-control"
-								min="0" step="0.01" />
+							<form:input type="number" path="monto" cssClass="form-control" min="0" step="0.01" />
 							<form:errors path="monto" cssClass="errorMessage" />
 						</div>
 						<div class="form-group">

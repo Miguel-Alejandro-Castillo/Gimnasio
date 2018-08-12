@@ -1,6 +1,51 @@
 /**
  * Created by Alejandro on 2/4/2018.
  */
+function changeActividad(){
+    var  idActividad = $("#actividad").val();
+    if( idActividad ){
+        $.ajax({
+            type: "GET",
+            url: window.location.origin + "/actividades/"+ idActividad +"/monto",
+            timeout: 600000,
+            success: function (monto) {
+               $("#monto").val(monto);
+            },
+            error: function (e) {
+            }
+        });
+    }
+}
+
+function deleteActividad(urlDelete){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: 'Esta seguro que desea borrar esta actividad?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: urlDelete,
+                    data: {},
+                    dataType: 'json',
+                    success: function (response) {
+                        if(response == "succes"){
+                            $.alert('La actividad se ha eliminado correctamente.');
+                        }
+                        else{
+                            $.alert('La actividad no se ha eliminado correctamente.');
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+            },
+            cancel: function () {
+            }
+        }
+    });
+}
 
 function submitAjax(url) {
     var data = {};

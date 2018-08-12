@@ -1,16 +1,13 @@
 package com.gym.controller;
 
-import com.gym.bean.ActividadBean;
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.CobroRepository;
 import com.gym.dao.HorarioRepository;
 import com.gym.dao.ProfesorRepository;
+import com.gym.formatter.ProfesorEditor;
 import com.gym.model.*;
-import com.gym.util.LeccionDTO;
 import com.gym.util.NumberUtils;
-import com.gym.util.ObjectResponse;
 import com.gym.validator.HorarioValidator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,11 +16,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
 @RequestMapping(value="/actividades")
 public class ActividadController {
+
+    @Autowired
+    private ProfesorEditor profesorEditor;
 
     @Autowired
     private ActividadRepository actividadRepository;
@@ -36,16 +37,14 @@ public class ActividadController {
     
     @Autowired
 	private CobroRepository cobroRepository;
+
     @Autowired
     private HorarioValidator horarioValidator;
 
-        
-
-    private ActividadBean actividadBean;
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showActividades(){
         ModelAndView mav=new ModelAndView("actividades");
-        List<Actividad> actividades= actividadRepository.findAll();
+        List<Actividad> actividades = actividadRepository.findByBorrado(false);
         mav.addObject("actividades",actividades);
         return mav;
     }
@@ -53,27 +52,22 @@ public class ActividadController {
     @RequestMapping(value="/crearActividad", method = RequestMethod.GET)
     public ModelAndView showAltaActividadForm(){
         ModelAndView mav=new ModelAndView("crearActividad");
-        this.actividadBean= new ActividadBean();
-        mav.addObject("actividadBean", this.actividadBean);
-        List<Profesor> profesores=profesorRepository.findAll();
-        mav.addObject("profesores",profesores);
-        
+        mav.addObject("actividad", new Actividad());
+        List<Profesor> profesores = profesorRepository.findAll();
+        mav.addObject("profesores", profesores);
         return mav;
     }
 
     @RequestMapping(value="/crearActividad", method = RequestMethod.POST)
-    public  ModelAndView submitCreateActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
+    public  ModelAndView submitCreateActividad(@ModelAttribute("actividad") @Validated Actividad actividad, BindingResult result){
         ModelAndView mav;
         if(result.hasErrors()) {
             mav = new ModelAndView("crearActividad");
-            this.actividadBean= new ActividadBean();
-            mav.addObject("actividadBean", this.actividadBean);
-            List<Profesor> profesores=profesorRepository.findAll();
-            mav.addObject("profesores",profesores);
+            List<Profesor> profesores = profesorRepository.findAll();
+            mav.addObject("profesores", profesores);
             return mav;
         }
         else{
-            Actividad actividad = new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto(), actividadBean.getProfesor());
             actividadRepository.save(actividad);
             mav=new ModelAndView("redirect:/actividades");
         }
@@ -83,16 +77,14 @@ public class ActividadController {
 
     @RequestMapping(value="/{id_actividad}/editar", method = RequestMethod.GET)
     public ModelAndView showEditarActividadForm(@PathVariable(name = "id_actividad") String id_actividad){
-        ModelAndView mav=null;
+        ModelAndView mav = null;
         Long id = NumberUtils.toLong(id_actividad);
-        Actividad actividad= actividadRepository.findOne(id);
-        if(actividad!=null) {
-            this.actividadBean = new ActividadBean();
-            this.actividadBean.load(actividad);
+        Actividad actividad = actividadRepository.findOne(id);
+        if(actividad != null) {
             mav= new ModelAndView("editar-actividad");
-            mav.addObject("actividadBean", this.actividadBean);
-            List<Profesor> profesores=profesorRepository.findAll();
-            mav.addObject("profesores",profesores);
+            mav.addObject("actividad", actividad);
+            List<Profesor> profesores = profesorRepository.findAll();
+            mav.addObject("profesores", profesores);
         }
         else {
             // renderizar a una vista que informe que no se envio un id de actividad en el path
@@ -101,15 +93,14 @@ public class ActividadController {
     }
 
     @RequestMapping(value="/{id_actividad}/editar", method = RequestMethod.POST)
-    public  ModelAndView submitEditActividad(@ModelAttribute("actividadBean") @Validated ActividadBean actividadBean, BindingResult result){
-        ModelAndView mav=null;
+    public  ModelAndView submitEditActividad(@ModelAttribute("actividad") @Validated Actividad actividad, BindingResult result){
+        ModelAndView mav = null;
         if(result.hasErrors()) {
             mav= new ModelAndView("editar-actividad");
             List<Profesor> profesores = profesorRepository.findAll();
             mav.addObject("profesores", profesores);
         }
         else{
-        	Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto(),actividadBean.getProfesor());
             actividadRepository.save(actividad);
             mav = new ModelAndView("redirect:/actividades");
         }
@@ -118,18 +109,13 @@ public class ActividadController {
 
     @RequestMapping(value="/{id_actividad}/editar/agregarLeccion", method = RequestMethod.GET)
     public ModelAndView showAgregarLeccionForm(@PathVariable(name = "id_actividad") String id_actividad){
-        ModelAndView mav=null;
+        ModelAndView mav = null;
         Long id = NumberUtils.toLong(id_actividad);
         Actividad actividad= actividadRepository.findOne(id);
-        if(actividad!=null) {
-            this.actividadBean = new ActividadBean();
-            this.actividadBean.load(actividad);
-            
+        if(actividad != null) {
             mav= new ModelAndView("editar-actividad-agregar-leccion");
             Leccion leccion = new Leccion();
-            leccion.setHorario(new Horario());
             mav.addObject("leccion", leccion);
-            mav.addObject("actividadBean", this.actividadBean);   
         }
         else {
             // renderizar a una vista que informe que no se envio un id de actividad en el path
@@ -138,23 +124,30 @@ public class ActividadController {
     }
     
     @RequestMapping(value="/{id_actividad}/editar/agregarLeccion", method = RequestMethod.POST)
-    public  ModelAndView submitAgregarLeccion(@ModelAttribute("leccion") Leccion leccion, BindingResult result, ActividadBean actividadBean){
-        ModelAndView mav=null;
+    public  ModelAndView submitAgregarLeccion(@PathVariable(name = "id_actividad") String idActividad, @ModelAttribute("leccion") @Validated Leccion leccion, BindingResult result){
+        ModelAndView mav = null;
         if(result.hasErrors()) {
-        	mav= new ModelAndView("editar-actividad-agregar-leccion");
-        	leccion = new Leccion();
-            leccion.setHorario(new Horario());
-            mav.addObject("leccion", leccion);
-            mav.addObject("actividadBean", this.actividadBean);
+        	mav = new ModelAndView("editar-actividad-agregar-leccion");
         }else{
-        	Actividad actividad=new Actividad(actividadBean.getId(), actividadBean.getNombre(), actividadBean.getCosto(),actividadBean.getProfesor());
-        	if(!actividad.getLecciones().contains(leccion)) {
-        		actividad.getLecciones().add(leccion);
-        	}
+            Long id = NumberUtils.toLong(idActividad);
+            Actividad actividad= actividadRepository.findOne(id);
+        	actividad.getLecciones().add(leccion);
             actividadRepository.save(actividad);
             mav = new ModelAndView("redirect:/actividades");
         }
         return mav;
+    }
+
+    @RequestMapping(value="/{idActividad}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  @ResponseBody String delete(@PathVariable(name = "idActividad") String idActividad){
+        Actividad actividad = this.actividadRepository.findOne(Long.valueOf(idActividad));
+        actividad.setBorrado(true);
+        return this.actividadRepository.save(actividad) != null? "succes" : "failure";
+    }
+
+    @RequestMapping(value="/{idActividad}/monto", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  @ResponseBody BigDecimal getMonto(@PathVariable(name = "idActividad") String idActividad){
+        return actividadRepository.findOne(NumberUtils.toLong(idActividad)).getCosto();
     }
 
     
@@ -173,6 +166,11 @@ public class ActividadController {
             return new ObjectResponse( null, "failure.diaHorarioProfesor.existente");
     }
     */
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Profesor.class, this.profesorEditor);
+    }
    
 
 }

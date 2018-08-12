@@ -1,6 +1,5 @@
 package com.gym.model;
 
-//import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,7 +10,6 @@ import java.util.Date;
 @Entity
 @Table( name = "pagos")
 public class Pago {
-	Date how = new Date();
 		
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +18,9 @@ public class Pago {
 	@NotNull(message = "{campo.obligatorio}")
 	@ManyToOne(optional = false)
 	private Actividad actividad;
+
+	@ManyToOne(optional = false)
+	private Profesor profesor;
 
     @Column(nullable = false)
     private Date momentoPago;
@@ -102,6 +103,14 @@ public class Pago {
 
 	public void setFechaHasta(Date fechaHasta) {
 		this.fechaHasta = fechaHasta;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
 	}
 }
 	 

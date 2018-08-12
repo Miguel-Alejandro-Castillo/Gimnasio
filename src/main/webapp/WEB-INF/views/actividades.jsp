@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
+<spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
+<link href="${jqueryConfirmCss}" rel="stylesheet"/>
 
 
 <div class="col-lg-9">
@@ -48,7 +50,12 @@
 									var="urlAgregarLeccion" />
 								<td><a href="${urlAgregarLeccion}"><i
 										class="fas fa-user-plus"
-										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>										
+										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
+								<spring:url value="/actividades/${actividad.id}/delete"
+											var="urlDeleteActividad" />
+								<td><a onclick="deleteActividad('${urlDeleteActividad}')"><i
+										class="fas fa-trash-alt"
+										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -3,16 +3,13 @@ package com.gym.controller;
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.ClienteRepository;
 import com.gym.formatter.ActividadEditor;
-//import com.gym.formatter.ActividadEditor;
 import com.gym.model.Actividad;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
 import com.gym.validator.ClienteValidator;
 import com.gym.validator.PagoValidator;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -20,10 +17,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.Date;
 import java.util.List;
-
 import javax.validation.Valid;
 
 /**
@@ -92,7 +87,7 @@ public class ClienteController {
     
     @RequestMapping(value="/{id_cliente}/clienteEditar", method = RequestMethod.GET)
     public ModelAndView showEditarClienteForm(@PathVariable(name = "id_cliente") String id_cliente){
-        ModelAndView mav=null;
+        ModelAndView mav = null;
         Long id = NumberUtils.toLong(id_cliente);
         Cliente cliente= clienteRepository.findOne(id);
         if(cliente!=null) {
@@ -127,23 +122,34 @@ public class ClienteController {
         return mav;
     }
 
+    @RequestMapping(value="/{id_cliente}/pagarDesdeHome", method = RequestMethod.GET)
+    public ModelAndView showPagoFormDesdeHome( @RequestParam(name = "idActividad" , defaultValue = "-1", required = false) Long idActividad){
+        ModelAndView mav=new ModelAndView("pagar");
+        Pago pago = new Pago();
+        Actividad actividad = this.actividadRepository.findOne(idActividad);
+        if(actividad != null){
+            pago.setActividad(actividad);
+            pago.setMonto(actividad.getCosto());
+        }
+        mav.addObject("pago", pago);
+        List<Actividad> actividades = actividadRepository.findAll();
+        mav.addObject("actividades", actividades);
+        return mav;
+    }
+
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
     public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Valid Pago pago, BindingResult result, RedirectAttributes redirectAttributes){
-        
-        
-        pagoValidator.validate(pago, result);
         ModelAndView mav;
         if(result.hasErrors()) {
             mav= new ModelAndView("pagar");
             List<Actividad> actividades = actividadRepository.findAll();
-            mav.addObject("actividades",actividades);
+            mav.addObject("actividades", actividades);
         }
         else{
             Long cliente_id = NumberUtils.toLong(id_cliente);
             Cliente cliente = clienteRepository.findOne(cliente_id);
             pago.setMomentoPago(new Date(System.currentTimeMillis()));
-            Actividad actividad = actividadRepository.findOne(pago.getActividad().getId());
-            pago.setActividad(actividad);
+            pago.setProfesor(pago.getActividad().getProfesor());
             cliente.getPagos().add(pago);
             clienteRepository.save(cliente);
             redirectAttributes.addFlashAttribute("success_pago", "Se realizo el pago de forma exitosa.");
@@ -153,11 +159,33 @@ public class ClienteController {
 
     }
 
+    @RequestMapping(value="/{id_cliente}/pagarDesdeHome", method = RequestMethod.POST)
+    public  ModelAndView submitPagoDesdeHome(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Valid Pago pago, BindingResult result){
+        ModelAndView mav;
+        if(result.hasErrors()) {
+            mav= new ModelAndView("pagar");
+            List<Actividad> actividades = actividadRepository.findAll();
+            mav.addObject("actividades", actividades);
+        }
+        else{
+            Long cliente_id = NumberUtils.toLong(id_cliente);
+            Cliente cliente = clienteRepository.findOne(cliente_id);
+            pago.setMomentoPago(new Date(System.currentTimeMillis()));
+            pago.setProfesor(pago.getActividad().getProfesor());
+            cliente.getPagos().add(pago);
+            clienteRepository.save(cliente);
+            //redirectAttributes.addFlashAttribute("success_pago", "Se realizo el pago de forma exitosa.");
+            mav=new ModelAndView("redirect:/home/");
+        }
+        return mav;
+
+    }
+
     @InitBinder("cliente")
     protected void initBinderCliente(WebDataBinder binder) {
         binder.addValidators(clienteBeanValidator);
     }
-/*
+
     @InitBinder("pago")
     protected void initBinderPago(WebDataBinder binder) {
         binder.addValidators(pagoValidator);
@@ -168,7 +196,7 @@ public class ClienteController {
         binder.registerCustomEditor(Actividad.class, this.actividadEditor);
     }
 
-*/
+
 
 
 }

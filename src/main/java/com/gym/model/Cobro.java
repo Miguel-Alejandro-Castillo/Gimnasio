@@ -16,8 +16,14 @@ public class Cobro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(optional = true,  fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@NotNull(message = "{campo.obligatorio}")
+	@ManyToOne
+	@JoinColumn(nullable = false)
 	private Actividad actividad;
+
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Profesor profesor;
 
 	@Column(nullable = false)
 	private Date momentoCobro;
@@ -30,6 +36,7 @@ public class Cobro {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "{campo.obligatorio}")
+	@Column(nullable = false)
 	private Date fechaDesde;
 	
 	@Temporal(TemporalType.DATE)
@@ -108,5 +115,8 @@ public class Cobro {
 	public Profesor getProfesor() {
 		return this.getActividad().getProfesor();
 	}
-	
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
 }

@@ -11,30 +11,26 @@
 
 		<div class="row">
 			<spring:url value="" var="urlActual" />
-			<form:form id="actividadForm" modelAttribute="actividadBean"
-				action="${urlActual}" method="post" role="form">
+			<form:form id="actividadForm" modelAttribute="actividad" action="${urlActual}" method="post" role="form">
 				
 				<form:hidden path="id" />
 				<div class="col-lg-6">
 					<div class="form-group">
 						<form:label path="nombre">Nombre*</form:label>
-						<form:input path="nombre" cssClass="form-control"
-							autofocus="autofocus" />
+						<form:input path="nombre" cssClass="form-control" autofocus="autofocus" />
 						<form:errors path="nombre" cssClass="error" />
 					</div>
 					<div class="form-group">
-						<label for="costo">Costo*</label> <input type="number" id="costo"
-							name="costo" step="0.01" min="1" class="form-control"
-							value="${actividadBean.costo}" />
+						<form:label path="costo">Costo*</form:label>
+						<form:input path="costo" type="number" step="0.01" min="1" cssClass="form-control" />
 						<form:errors path="costo" cssClass="error" />
 					</div>
 					
 					<div class="form-group">
-						<form:label path="profesor.id">Profesor</form:label>
-							<form:select path="profesor.id" cssClass="form-control">
-								<form:option value="" label="Seleccione un profe" />
-								<form:options items="${profesores}" itemValue="id"
-									itemLabel="nombre" />
+						<form:label path="profesor">Profesor</form:label>
+							<form:select path="profesor" cssClass="form-control">
+								<form:option value="-1" label="Seleccione un profesor" />
+								<form:options items="${profesores}" itemValue="id" itemLabel="nombre" />
 							</form:select>
 							<form:errors path="profesor" cssClass="errorMessage" />
 					</div>

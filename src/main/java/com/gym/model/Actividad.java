@@ -1,9 +1,9 @@
 package com.gym.model;
 
 
+import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,29 +13,27 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "actividades")
-public class Actividad {
+public class Actividad extends BaseEntity{
 
-	@Id
-	//@NotNull(message = "{campo.obligatorio}")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    
-    
-	@NotNull(message = "{campo.obligatorio}")
+	@NotBlank(message = "{campo.obligatorio}")
 	@Column(nullable = false, unique = true)
     private String nombre;
 
+	@NotNull(message = "{campo.obligatorio}")
     @Column(nullable = false)
     private BigDecimal costo;
 
-    @OneToOne//(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //si se borra
+	@NotNull(message = "{campo.obligatorio}")
+    @ManyToOne
+	@JoinColumn(nullable = false)
     private Profesor profesor;
    
-    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Leccion> lecciones;
 
     public Actividad() {
     	super();
-		lecciones = new HashSet<>();
+		lecciones = new HashSet<Leccion>();
     }
     
     public Actividad(Long id, String nombre, BigDecimal costo, Profesor profesor) {
@@ -45,13 +43,7 @@ public class Actividad {
 		this.costo = costo;
 		this.profesor = profesor;
 	}
-        
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getNombre() {
 		return nombre;
 	}

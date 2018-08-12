@@ -68,6 +68,9 @@
          <spring:url value="/resources/js/zingchart.min.js" var="zingchartMin" />
          <script src="${zingchartMin}"></script>
 
+         <spring:url value="/resources/js/jquery-confirm.min.js" var="jqueryConfirmJs" />
+         <script src="${jqueryConfirmJs}"></script>
+
          <!-- Page-Level Demo Scripts - Tables - Use for reference -->
          <script>
              $(document).ready(function() {

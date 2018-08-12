@@ -33,8 +33,8 @@
 								<td><c:out value="${entrada.key.actividad.nombre}" /></td>
 	
 								<td style="text-align: center;"><spring:url
-										value="/clientes/${entrada.value.id}/pagar" var="urlPagar" />
-									<a href="${urlPagar}" data-toggle="tooltip" title="Pagar"><i
+										value="/clientes/${entrada.value.id}/pagarDesdeHome" var="urlPagar" />
+									<a href="${urlPagar}?idActividad=${entrada.key.actividad.id}" data-toggle="tooltip" title="Pagar"><i
 										class="fa fa-money-bill-wave"
 										style="font-size: 24px; color: green; padding-right: 10px; padding-left: 10px;"></i></a>
 								</td>

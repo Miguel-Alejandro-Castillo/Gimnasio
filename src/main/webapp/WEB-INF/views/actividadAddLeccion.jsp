@@ -22,12 +22,12 @@
 				<form:option value="" label="Seleccione un dia" />
 				<form:options items="${dias}" />
 			</form:select>
+			<form:errors path="dia" cssClass="errorMessage" />
 			</div>
 									
 			<div class="form-group">
 			<form:label path="horaInicio">hora inicio</form:label>
-			<form:input path="horaInicio" type="time" cssClass="form-control"
-				autofocus="autofocus" />
+			<form:input path="horaInicio" type="time" cssClass="form-control"/>
 			<form:errors path="horaInicio" cssClass="errorMessage" />
 			</div>
 			
