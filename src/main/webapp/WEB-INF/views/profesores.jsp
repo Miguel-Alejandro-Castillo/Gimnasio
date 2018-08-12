@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
+<spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
+<link href="${jqueryConfirmCss}" rel="stylesheet"/>
 
 <div class="col-lg-9">
 	<div class="well">
@@ -38,15 +40,17 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${profesores}" var="profesor">
-							<tr class="odd gradeX">
+							<tr id="row_${profesor.id}" class="odd gradeX">
 								<td><c:out value="${profesor.nombre}"></c:out></td>
 								<td><c:out value="${profesor.apellido}"></c:out></td>
-								<td style="text-align: center;"><spring:url
-										value="/profesores/${profesor.id}/profesorDetalle"
-										var="urlProfesorDetalle" /> <a href="${urlProfesorDetalle}"
-									data-toggle="tooltip" title="Detalle"><i
-										class="fa fa-info-circle"
-										style="font-size: 24px; color: blue; padding-right: 10px; padding-left: 10px;"></i></a></td>
+								<td style="text-align: center;">
+									<spring:url value="/profesores/${profesor.id}/profesorDetalle" var="urlProfesorDetalle" />
+									<a href="${urlProfesorDetalle}" data-toggle="tooltip" title="Detalle"><i class="fa fa-info-circle"
+										style="font-size: 24px; color: blue; padding-right: 10px; padding-left: 10px;"></i></a>
+									<a onclick="deleteProfesor(${profesor.id})"><i
+											class="fas fa-trash-alt"
+											style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

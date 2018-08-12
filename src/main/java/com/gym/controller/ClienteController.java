@@ -10,6 +10,7 @@ import com.gym.util.NumberUtils;
 import com.gym.validator.ClienteValidator;
 import com.gym.validator.PagoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -47,8 +48,7 @@ public class ClienteController {
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showClientes(){
         ModelAndView mav = new ModelAndView("clientes");
-        List<Cliente> clientes = clienteRepository.findAll();
-        mav.addObject("clientes", clientes);
+        mav.addObject("clientes", this.clienteRepository.findByBorrado(false));
         return mav;
     }
 
@@ -179,6 +179,18 @@ public class ClienteController {
         }
         return mav;
 
+    }
+
+    @RequestMapping(value="/{idCliente}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  @ResponseBody Boolean delete(@PathVariable(name = "idCliente") Long idCliente){
+        Cliente cliente = this.clienteRepository.findOne(idCliente);
+        if(cliente != null){
+            cliente.setBorrado(true);
+            this.clienteRepository.save(cliente);
+            return true;
+        }
+        else
+            return false;
     }
 
     @InitBinder("cliente")

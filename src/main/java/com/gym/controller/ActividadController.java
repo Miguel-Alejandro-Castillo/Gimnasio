@@ -43,9 +43,8 @@ public class ActividadController {
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showActividades(){
-        ModelAndView mav=new ModelAndView("actividades");
-        List<Actividad> actividades = actividadRepository.findByBorrado(false);
-        mav.addObject("actividades",actividades);
+        ModelAndView mav = new ModelAndView("actividades");
+        mav.addObject("actividades", this.actividadRepository.findByBorrado(false));
         return mav;
     }
     
@@ -139,10 +138,15 @@ public class ActividadController {
     }
 
     @RequestMapping(value="/{idActividad}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public  @ResponseBody String delete(@PathVariable(name = "idActividad") String idActividad){
+    public  @ResponseBody Boolean delete(@PathVariable(name = "idActividad") String idActividad){
         Actividad actividad = this.actividadRepository.findOne(Long.valueOf(idActividad));
-        actividad.setBorrado(true);
-        return this.actividadRepository.save(actividad) != null? "succes" : "failure";
+        if(actividad != null){
+            actividad.setBorrado(true);
+            this.actividadRepository.save(actividad);
+            return true;
+        }
+        else
+            return false;
     }
 
     @RequestMapping(value="/{idActividad}/monto", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

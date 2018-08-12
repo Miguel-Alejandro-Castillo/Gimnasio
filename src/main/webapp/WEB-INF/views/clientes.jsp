@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
+<spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
+<link href="${jqueryConfirmCss}" rel="stylesheet"/>
 
 <div class="col-lg-9">
 	<c:if test="${not empty success_pago}">
@@ -56,7 +58,7 @@
 
 					<tbody>
 						<c:forEach items="${clientes}" var="cliente">
-							<tr>
+							<tr id="row_${cliente.id}">
 								<td><c:out value="${cliente.nombre}"></c:out></td>
 								<td><c:out value="${cliente.apellido}"></c:out></td>
 								<td><c:out value="${cliente.dni}"></c:out></td>
@@ -66,10 +68,12 @@
 									data-toggle="tooltip" title="Detalle"><i
 										class="fa fa-info-circle"
 										style="font-size: 24px; color: blue; padding-right: 10px; padding-left: 10px;"></i></a>
-									<spring:url value="/clientes/${cliente.id}/pagar"
-										var="urlPagar" /> <a href="${urlPagar}" data-toggle="tooltip"
-									title="Pagar"><i class="fa fa-dollar"
+									<spring:url value="/clientes/${cliente.id}/pagar" var="urlPagar" />
+									<a href="${urlPagar}" data-toggle="tooltip" title="Pagar"><i class="fas fa-money-bill-wave"
 										style="font-size: 24px; color: green; padding-right: 10px; padding-left: 10px;"></i></a>
+								     <a onclick="deleteCliente(${cliente.id})"><i
+										class="fas fa-trash-alt"
+										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a>
 								</td>
 							</tr>
 						</c:forEach>

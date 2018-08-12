@@ -17,11 +17,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "clientes")
-public class Cliente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Cliente extends BaseEntity{
 
     @NotBlank(message = "{campo.obligatorio}")
     @Column(nullable = false)
@@ -63,14 +59,6 @@ public class Cliente {
 
     public Cliente() {
         super();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getApellido() {

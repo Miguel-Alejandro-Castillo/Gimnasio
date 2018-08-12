@@ -4,13 +4,11 @@ import com.gym.dao.ProfesorRepository;
 import com.gym.model.Profesor;
 import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
@@ -26,9 +24,8 @@ public class ProfesorController {
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showProfesores(){
-        ModelAndView mav=new ModelAndView("profesores");
-        List<Profesor> profesores= profesorRepository.findAll();
-        mav.addObject("profesores",profesores);
+        ModelAndView mav = new ModelAndView("profesores");
+        mav.addObject("profesores", this.profesorRepository.findByBorrado(false));
         return mav;
     }
 
@@ -87,7 +84,17 @@ public class ProfesorController {
             profesorRepository.save(profesor);
             return new ModelAndView("redirect:/profesores");
         }
-
     }
 
+    @RequestMapping(value="/{idProfesor}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  @ResponseBody Boolean delete(@PathVariable(name = "idProfesor") Long idProfesor){
+        Profesor profesor = this.profesorRepository.findOne(idProfesor);
+        if(profesor != null){
+            profesor.setBorrado(true);
+            this.profesorRepository.save(profesor);
+            return true;
+        }
+        else
+            return false;
+    }
 }

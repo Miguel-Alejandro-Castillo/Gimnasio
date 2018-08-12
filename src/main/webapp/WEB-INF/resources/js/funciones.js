@@ -1,12 +1,17 @@
 /**
  * Created by Alejandro on 2/4/2018.
  */
+
+function getUrlContextPath() {
+    return window.location.origin + window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+}
+
 function changeActividad(){
     var  idActividad = $("#actividad").val();
     if( idActividad ){
         $.ajax({
             type: "GET",
-            url: window.location.origin + "/actividades/"+ idActividad +"/monto",
+            url: getUrlContextPath() + "/actividades/" + idActividad +"/monto",
             timeout: 600000,
             success: function (monto) {
                $("#monto").val(monto);
@@ -17,31 +22,114 @@ function changeActividad(){
     }
 }
 
-function deleteActividad(urlDelete){
+function deleteProfesor(idProfesor){
     $.confirm({
         title: 'Confirmar borrado',
-        content: 'Esta seguro que desea borrar esta actividad?',
+        content: 'Esta seguro que desea borrar este Profesor?',
         buttons: {
-            confirm: function () {
+            aceptar: function () {
                 $.ajax({
                     type: "DELETE",
-                    url: urlDelete,
+                    url: getUrlContextPath() +  '/profesores/' + idProfesor + '/delete' ,
                     data: {},
-                    dataType: 'json',
-                    success: function (response) {
-                        if(response == "succes"){
-                            $.alert('La actividad se ha eliminado correctamente.');
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'El Profesor se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                        $('#row_' + idProfesor).remove();
+                                    }
+                                }
+                            });
                         }
                         else{
-                            $.alert('La actividad no se ha eliminado correctamente.');
+                            $.alert({ title: 'Operacion fallida', content: 'El Profesor no se ha eliminado correctamente.'});
                         }
                     },
                     error: function (e) {
-                        console.log(e);
+                        $.alert('Ha ocurrido un error en el servidor.');
                     }
                 });
             },
-            cancel: function () {
+            cancelar: function () {
+            }
+        }
+    });
+}
+
+function deleteCliente(idCliente){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: 'Esta seguro que desea borrar este Cliente?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: getUrlContextPath() +  '/clientes/' + idCliente + '/delete' ,
+                    data: {},
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'El Cliente se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                       $('#row_'+idCliente).remove();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'El Cliente no se ha eliminado correctamente.'});
+                        }
+
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
+            }
+        }
+    });
+}
+
+function deleteActividad(idActividad){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: '¿Esta seguro que desea borrar esta Actividad?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: getUrlContextPath() +  '/actividades/' + idActividad + '/delete' ,
+                    data: {},
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'La Actividad se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                        $('#row_' + idActividad).remove();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'La Actividad no se ha eliminado correctamente.'});
+                        }
+
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
             }
         }
     });

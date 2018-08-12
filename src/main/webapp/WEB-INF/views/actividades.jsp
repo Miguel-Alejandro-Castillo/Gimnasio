@@ -7,7 +7,6 @@
 <spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
 <link href="${jqueryConfirmCss}" rel="stylesheet"/>
 
-
 <div class="col-lg-9">
 	<div class="well">
 		<div class="row">
@@ -38,7 +37,7 @@
 
 					<tbody>
 						<c:forEach items="${actividades}" var="actividad">
-							<tr class="odd gradeX">
+							<tr id="row_${actividad.id}" class="odd gradeX">
 								<td><c:out value="${actividad.nombre}"></c:out></td>
 								<td><c:out value="${actividad.costo}"></c:out></td>
 								<spring:url value="/actividades/${actividad.id}/editar"
@@ -51,9 +50,7 @@
 								<td><a href="${urlAgregarLeccion}"><i
 										class="fas fa-user-plus"
 										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
-								<spring:url value="/actividades/${actividad.id}/delete"
-											var="urlDeleteActividad" />
-								<td><a onclick="deleteActividad('${urlDeleteActividad}')"><i
+								<td><a onclick="deleteActividad(${actividad.id})"><i
 										class="fas fa-trash-alt"
 										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
 							</tr>

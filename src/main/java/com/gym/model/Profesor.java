@@ -3,13 +3,10 @@ package com.gym.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
-import java.util.Set;
 
 /**
  * @author negro
@@ -17,11 +14,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "profesores")
-public class Profesor {
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Profesor extends BaseEntity{
 
 	@NotBlank(message = "{campo.obligatorio}")
     @Column(nullable = false)
@@ -60,14 +53,6 @@ public class Profesor {
 
 	public Profesor() {
 		super();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
