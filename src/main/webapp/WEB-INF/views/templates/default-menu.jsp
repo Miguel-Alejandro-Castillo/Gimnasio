@@ -39,7 +39,7 @@
 		<li>
 		<spring:url value="/logout" var="logout"/>
 		<form action="${logout}" method="post">
-        	<a><button type="submit" class="btn" style="background-color: cornflowerblue;color:white;margin-top:0px" >
+        	<a><button type="submit" class="navibtn" style="background-color: cornflowerblue;color:white;margin-top:0px" >
         	<i class="fas fa-sign-out-alt gly"></i> 
         	Logout</button></a>
         </form>

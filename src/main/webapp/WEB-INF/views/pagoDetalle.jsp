@@ -6,24 +6,22 @@
 
 <div class="col-lg-9">
 	<div class="well">
+		
 		<h1 class="page-header">
 			<tiles:getAsString name="title" />
+			<span style="font-weight:bold;font-size:medium">
+				Cliente: ${cliente.nombre} ${cliente.apellido}
+			</span>
 		</h1>
-
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" href="#Detalle">Detalle</a></li>
-			<li><a data-toggle="tab" href="#Pagos">Pagos</a></li>
-		</ul>
-
+		
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div class="tab-content">
-					<div id="Detalle" class="tab-pane active">
+				
 						<div class="col-lg-6">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Nombre Actividad</th>
+										<th>Nombre de la actividad abonada</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -35,31 +33,19 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Profesor</th>
+										<th>Profesor a cargo</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										
+										<th>${pago.profesor.nombre} ${pago.profesor.apellido}</th>
 									</tr>
 								</tbody>
 							</table>
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Monto</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>${pago.monto}</th>
-									</tr>
-								</tbody>
-							</table>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>momento pago</th>
+										<th>Fecha y hora del pago</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -71,17 +57,12 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Periodo</th>
+										<th>Monto cobrado al cliente</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th><fmt:formatDate value="${pago.fechaDesde}"
-												type="date" pattern="dd/MM/yyyy" /></th>
-									</tr>
-									<tr>
-										<th><fmt:formatDate value="${pago.fechaHasta}"
-												type="date" pattern="dd/MM/yyyy" /></th>
+										<th>$${pago.monto}</th>
 									</tr>
 								</tbody>
 							</table>
@@ -91,12 +72,30 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Comentario</th>
+										<th>Periodo de la actividad pagada</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th>${pago.comentario}</th>
+										<th>Desde:</th><th> <fmt:formatDate value="${pago.fechaDesde}"
+												type="date" pattern="dd/MM/yyyy" /></th>
+									</tr>
+									<tr>
+										<th>Hasta:</th><th><fmt:formatDate value="${pago.fechaHasta}"
+												type="date" pattern="dd/MM/yyyy" /></th>
+									</tr>
+								</tbody>
+							</table>
+						
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Detalle del pago</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th id="comentario" style="height:25px"></th>
 									</tr>
 								</tbody>
 							</table>
@@ -108,5 +107,18 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	<spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
+<script src="${jqueryMin}"></script>
+<script>
+	$(document).ready( function(){
+		if(${pago.comentario != null}){
+			var co = "${pago.comentario}";
+			document.getElementById('comentario').innerHTML = co;
+		}else{
+			document.getElementById('comentario').innerHTML = ' - No hay detalle de pago - ';	
+		}
+				
+ 		
+ 	});
+</script>
+<!-- para que se setee fechaDesde en hoy por default-->

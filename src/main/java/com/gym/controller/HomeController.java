@@ -40,7 +40,7 @@ public class HomeController {
             Cliente cli = clientes.get(i);
             if(!cli.getPagos().isEmpty()) {
 
-                Set<Pago> pagos = cli.getPagos();
+                List<Pago> pagos = cli.getPagos();
                 Set<Actividad> act = new HashSet<Actividad>();
 
                 //obtengo set de actividades del cliente

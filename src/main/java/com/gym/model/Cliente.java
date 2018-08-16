@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -55,7 +57,7 @@ public class Cliente extends BaseEntity{
     private String email;
 
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL , orphanRemoval = true)
-    private Set<Pago> pagos = new HashSet<Pago>();
+    private List<Pago> pagos = new ArrayList<Pago>();
 
     public Cliente() {
         super();
@@ -125,11 +127,11 @@ public class Cliente extends BaseEntity{
         this.email = email;
     }
 
-    public Set<Pago> getPagos() {
+    public List<Pago> getPagos() {
         return pagos;
     }
 
-    public void setPagos(Set<Pago> pagos) {
+    public void setPagos(List<Pago> pagos) {
         this.pagos = pagos;
     }
 }

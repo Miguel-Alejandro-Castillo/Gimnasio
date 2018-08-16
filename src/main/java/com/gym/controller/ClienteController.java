@@ -2,6 +2,7 @@ package com.gym.controller;
 
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.ClienteRepository;
+import com.gym.dao.PagoRepository;
 import com.gym.formatter.ActividadEditor;
 import com.gym.model.Actividad;
 import com.gym.model.Cliente;
@@ -34,6 +35,9 @@ public class ClienteController {
 
     @Autowired
     private ActividadRepository actividadRepository;
+    
+    @Autowired
+    private PagoRepository pagoRepository;
 
     @Autowired
     private PagoValidator pagoValidator;
@@ -114,8 +118,11 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.GET)
-    public ModelAndView showPagoForm(){
+    public ModelAndView showPagoForm(@PathVariable(name = "id_cliente") String id_cliente){
         ModelAndView mav=new ModelAndView("pagar");
+        Long cliente_id = NumberUtils.toLong(id_cliente);
+        Cliente cliente = clienteRepository.findOne(cliente_id);
+        mav.addObject("cliente",cliente);
         mav.addObject("pago", new Pago());
         List<Actividad> actividades = actividadRepository.findAll();
         mav.addObject("actividades",actividades);
@@ -123,7 +130,7 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/{id_cliente}/pagarDesdeHome", method = RequestMethod.GET)
-    public ModelAndView showPagoFormDesdeHome( @RequestParam(name = "idActividad" , defaultValue = "-1", required = false) Long idActividad){
+    public ModelAndView showPagoFormDesdeHome(@PathVariable(name = "id_cliente") String id_cliente,@RequestParam(name = "idActividad" , defaultValue = "-1", required = false) Long idActividad){
         ModelAndView mav=new ModelAndView("pagar");
         Pago pago = new Pago();
         Actividad actividad = this.actividadRepository.findOne(idActividad);
@@ -131,6 +138,9 @@ public class ClienteController {
             pago.setActividad(actividad);
             pago.setMonto(actividad.getCosto());
         }
+        Long cliente_id = NumberUtils.toLong(id_cliente);
+        Cliente cliente = clienteRepository.findOne(cliente_id);
+        mav.addObject("cliente",cliente);
         mav.addObject("pago", pago);
         List<Actividad> actividades = actividadRepository.findAll();
         mav.addObject("actividades", actividades);
@@ -193,6 +203,26 @@ public class ClienteController {
             return false;
     }
 
+
+    @RequestMapping(value="/{id_cliente}/clienteDetalle/{id_pago}", method = RequestMethod.GET)
+    public ModelAndView showDetallePago(@PathVariable(name = "id_pago") String id_pago,@PathVariable(name = "id_cliente") String id_cliente){
+        ModelAndView mav = null;
+        
+        Long id_cli = NumberUtils.toLong(id_cliente);
+        Long id_pa = NumberUtils.toLong(id_pago);
+        Cliente cliente= clienteRepository.findOne(id_cli);
+        Pago pago = pagoRepository.findOne(id_pa);
+        if(pago != null) {
+            mav= new ModelAndView("pagoDetalle");
+            mav.addObject("pago", pago);
+            mav.addObject("cliente",cliente);
+        }
+        else {
+            // renderizar a una vista que informe que no se envio un id de cliente en el path
+        }
+        return mav;
+    }
+    
     @InitBinder("cliente")
     protected void initBinderCliente(WebDataBinder binder) {
         binder.addValidators(clienteBeanValidator);

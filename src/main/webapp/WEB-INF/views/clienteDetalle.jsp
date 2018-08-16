@@ -8,9 +8,20 @@
 
 <div class="col-lg-9">
 	<div class="well">
-		<h1 class="page-header">
-			${cliente.nombre} ${cliente.apellido}
-		</h1>
+		<div class="row">
+			<div class="col-lg-10">
+				<h1 class="page-header">
+					${cliente.nombre} ${cliente.apellido}
+				</h1>
+			</div>
+			<div class="col-lg-2">
+				<spring:url value="/clientes/${cliente.id}/clienteEditar"
+						var="urlClienteEditar" />
+					<a href="${urlClienteEditar}">
+						<button class="upperButton btn-lg"><i class="fa fa-user-plus"></i> Editar Cliente</button>
+					</a>
+				</div>
+			</div>
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#Detalle">Detalle</a></li>
@@ -59,18 +70,6 @@
 									</tr>
 								</tbody>
 							</table>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Direccion</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>${cliente.direccion}</th>
-									</tr>
-								</tbody>
-							</table>
 						</div>
 
 						<div class="col-lg-6">
@@ -89,6 +88,18 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
+										<th>Direccion</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>${cliente.direccion}</th>
+									</tr>
+								</tbody>
+							</table>
+							<table class="table table-striped">
+								<thead>
+									<tr>
 										<th>Email</th>
 									</tr>
 								</thead>
@@ -98,12 +109,6 @@
 									</tr>
 								</tbody>
 							</table>
-
-							<div>
-								<spring:url value="/clientes/${cliente.id}/clienteEditar"
-									var="urlClienteEditar" />
-								<a href="${urlClienteEditar}" class="btn btn-primary btn-lg panelButton">Editar Cliente</a>
-							</div>
 						</div>
 
 					</div>
@@ -118,6 +123,7 @@
 									<td>Fecha Desde</td>
 									<td>Fecha Hasta</td>
 									<td>Monto</td>
+									<td>Accion</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -132,6 +138,13 @@
 												type="date" pattern="dd/MM/yyyy" /></td>
 										<td><fmt:formatNumber value="${pago.monto}"
 												type="currency" minFractionDigits="2" currencySymbol="$" />
+										</td>
+										<td style="text-align: center;"><spring:url
+										value="/clientes/${cliente.id}/clienteDetalle/${pago.id}"
+										var="urlPagoDetalle" /> <a href="${urlPagoDetalle}"
+									data-toggle="tooltip" title="Detalle"><i
+										class="fa fa-info-circle"
+										style="font-size: 24px; color: blue; padding-right: 10px; padding-left: 10px;"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
