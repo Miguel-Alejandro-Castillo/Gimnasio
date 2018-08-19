@@ -86,7 +86,7 @@ public class ProfesorController {
         }
     }
 
-    @RequestMapping(value="/{idProfesor}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/{idProfesor}/delete", method = RequestMethod.DELETE, produces="application/json; charset=UTF-8")
     public  @ResponseBody Boolean delete(@PathVariable(name = "idProfesor") Long idProfesor){
         Profesor profesor = this.profesorRepository.findOne(idProfesor);
         if(profesor != null){

@@ -24,5 +24,12 @@ public class PagoValidator implements Validator {
                 errors.rejectValue("fechaHasta", "campo.fechaHasta.mayorIgualQueFechaDesde");
             }
         }
+
+        if(pago.getMontoAPagar() != null && pago.getMontoRestante() != null){
+          if(pago.getMontoRestante().compareTo(pago.getMontoAPagar()) > 0 ){
+              errors.rejectValue("montoAPagar", "campo.montoAPagar.menorQueMontoRestante");
+              errors.rejectValue("montoRestante", "campo.montoRestante.mayorQueMontoAPagar");
+          }
+        }
     }
 }

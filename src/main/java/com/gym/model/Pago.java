@@ -26,9 +26,14 @@ public class Pago {
     private Date momentoPago;
 
 	@NotNull(message = "{campo.obligatorio}")
-	@Min(value = 1, message = "{campo.monto.mayorQue0}")
+	@Min(value = 0, message = "{campo.monto.min}")
     @Column(nullable = false)
-    private BigDecimal monto;
+    private BigDecimal montoAPagar;
+
+	@NotNull(message = "{campo.obligatorio}")
+	@Min(value = 0, message = "{campo.monto.min}")
+	@Column(nullable = false)
+	private BigDecimal montoRestante;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -81,12 +86,20 @@ public class Pago {
 		this.momentoPago = momentoPago;
 	}
 
-	public BigDecimal getMonto() {
-		return monto;
+	public BigDecimal getMontoAPagar() {
+		return montoAPagar;
 	}
 
-	public void setMonto(BigDecimal monto) {
-		this.monto = monto;
+	public void setMontoAPagar(BigDecimal montoAPagar) {
+		this.montoAPagar = montoAPagar;
+	}
+
+	public  BigDecimal getMontoRestante() {
+		return montoRestante;
+	}
+
+	public void setMontoRestante(BigDecimal montoRestante) {
+		this.montoRestante = montoRestante;
 	}
 
 	public Date getFechaDesde() {

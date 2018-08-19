@@ -59,10 +59,15 @@
 							<form:errors path="actividad" cssClass="errorMessage" />
 						</div>
 						<div class="form-group">
-							<form:label path="monto">Monto</form:label>
-							<form:input type="number" path="monto" cssClass="form-control" min="0" step="0.01" />
-							<form:errors path="monto" cssClass="errorMessage" />
+							<form:label path="montoAPagar">Monto a pagar</form:label>
+							<form:input type="number" path="montoAPagar" cssClass="form-control" min="0" step="0.01" />
+							<form:errors path="montoAPagar" cssClass="errorMessage" />
 						</div>
+					    <div class="form-group">
+							<form:label path="montoRestante">Monto restante</form:label>
+						    <form:input type="number" path="montoRestante" cssClass="form-control" min="0" step="0.01" />
+						    <form:errors path="montoRestante" cssClass="errorMessage" />
+					    </div>
 						<form:button type="submit" class="btn btn-default submitButton">
 							<tiles:getAsString name="titleSubmit" />
 						</form:button>

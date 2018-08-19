@@ -62,7 +62,7 @@
 								</thead>
 								<tbody>
 									<tr>
-										<th>$${pago.monto}</th>
+										<th>${pago.montoAPagar}</th>
 									</tr>
 								</tbody>
 							</table>

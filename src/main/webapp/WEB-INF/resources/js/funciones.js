@@ -6,6 +6,25 @@ function getUrlContextPath() {
     return window.location.origin + window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 }
 
+function completarPago(idCliente, idPago){
+    $.ajax({
+        type: "GET",
+        url: getUrlContextPath() + "/clientes/" + idCliente  + "/completarPago/" + idPago,
+        data: {},
+        contentType: "application/json",
+        dataType: 'json',
+        timeout: 600000,
+        success: function (isCompletePago) {
+            if(isCompletePago){
+                $("#montoRestante_" + idPago).html("$0.00");
+                $("#completarPago_" + idPago).hide();
+            }
+
+        },
+        error: function (e) {
+        }
+    });
+}
 function changeActividad(){
     var  idActividad = $("#actividad").val();
     if( idActividad ){
@@ -14,12 +33,51 @@ function changeActividad(){
             url: getUrlContextPath() + "/actividades/" + idActividad +"/monto",
             timeout: 600000,
             success: function (monto) {
-               $("#monto").val(monto);
+               $("#montoAPagar").val(monto);
             },
             error: function (e) {
             }
         });
     }
+}
+
+function deletePagoCliente(idCliente, idPago){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: 'Esta seguro que desea borrar este Pago?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: getUrlContextPath() +  '/clientes/' + idCliente + '/delete_pago/' + idPago ,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'El Pago se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                        $('#row_' + idPago).remove();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'El Pago no se ha eliminado correctamente.'});
+                        }
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
+            }
+        }
+    });
 }
 
 function deleteProfesor(idProfesor){
@@ -32,6 +90,8 @@ function deleteProfesor(idProfesor){
                     type: "DELETE",
                     url: getUrlContextPath() +  '/profesores/' + idProfesor + '/delete' ,
                     data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
                     success: function (isDelete) {
                         if( isDelete ){
                             $.alert({
@@ -69,6 +129,8 @@ function deleteCliente(idCliente){
                     type: "DELETE",
                     url: getUrlContextPath() +  '/clientes/' + idCliente + '/delete' ,
                     data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
                     success: function (isDelete) {
                         if( isDelete ){
                             $.alert({
@@ -107,6 +169,8 @@ function deleteActividad(idActividad){
                     type: "DELETE",
                     url: getUrlContextPath() +  '/actividades/' + idActividad + '/delete' ,
                     data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
                     success: function (isDelete) {
                         if( isDelete ){
                             $.alert({

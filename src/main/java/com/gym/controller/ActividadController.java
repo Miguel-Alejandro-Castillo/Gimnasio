@@ -137,7 +137,7 @@ public class ActividadController {
         return mav;
     }
 
-    @RequestMapping(value="/{idActividad}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/{idActividad}/delete", method = RequestMethod.DELETE, produces="application/json; charset=UTF-8")
     public  @ResponseBody Boolean delete(@PathVariable(name = "idActividad") String idActividad){
         Actividad actividad = this.actividadRepository.findOne(Long.valueOf(idActividad));
         if(actividad != null){

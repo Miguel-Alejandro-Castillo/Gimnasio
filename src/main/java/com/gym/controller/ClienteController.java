@@ -11,7 +11,6 @@ import com.gym.util.NumberUtils;
 import com.gym.validator.ClienteValidator;
 import com.gym.validator.PagoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
@@ -136,7 +136,7 @@ public class ClienteController {
         Actividad actividad = this.actividadRepository.findOne(idActividad);
         if(actividad != null){
             pago.setActividad(actividad);
-            pago.setMonto(actividad.getCosto());
+            pago.setMontoAPagar(actividad.getCosto());
         }
         Long cliente_id = NumberUtils.toLong(id_cliente);
         Cliente cliente = clienteRepository.findOne(cliente_id);
@@ -191,7 +191,7 @@ public class ClienteController {
 
     }
 
-    @RequestMapping(value="/{idCliente}/delete", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/{idCliente}/delete", method = RequestMethod.DELETE, produces="application/json; charset=UTF-8")
     public  @ResponseBody Boolean delete(@PathVariable(name = "idCliente") Long idCliente){
         Cliente cliente = this.clienteRepository.findOne(idCliente);
         if(cliente != null){
@@ -203,6 +203,17 @@ public class ClienteController {
             return false;
     }
 
+    @RequestMapping(value="/{idCliente}/delete_pago/{idPago}", method = RequestMethod.DELETE, produces="application/json; charset=UTF-8")
+    public  @ResponseBody Boolean deletePago(@PathVariable(name = "idCliente") Long idCliente, @PathVariable(name = "idPago")  Long idPago ){
+        Cliente cliente = this.clienteRepository.findOne(idCliente);
+        if(cliente != null){
+            boolean isBorrado =  cliente.getPagos().removeIf(pago -> pago.getId().equals(idPago));
+            this.clienteRepository.save(cliente);
+            return isBorrado;
+        }
+        else
+            return false;
+    }
 
     @RequestMapping(value="/{id_cliente}/clienteDetalle/{id_pago}", method = RequestMethod.GET)
     public ModelAndView showDetallePago(@PathVariable(name = "id_pago") String id_pago,@PathVariable(name = "id_cliente") String id_cliente){
@@ -221,6 +232,19 @@ public class ClienteController {
             // renderizar a una vista que informe que no se envio un id de cliente en el path
         }
         return mav;
+    }
+
+    @RequestMapping(value="/{idCliente}/completarPago/{idPago}", method = RequestMethod.GET, produces="application/json; charset=UTF-8")
+    public  @ResponseBody boolean completarPago(@PathVariable(name = "idCliente") Long idCliente, @PathVariable(name = "idPago")  Long idPago ){
+
+        Pago pago = this.clienteRepository.findPagoByIdClienteAndIdPago(idCliente, idPago);
+        if(pago != null){
+           pago.setMontoRestante(BigDecimal.ZERO);
+           this.pagoRepository.save(pago);
+           return true;
+        }
+        else
+            return false;
     }
     
     @InitBinder("cliente")
