@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 
 /**
@@ -150,14 +152,15 @@ public class ClienteController {
     @RequestMapping(value="/{id_cliente}/pagar", method = RequestMethod.POST)
     public  ModelAndView submitPago(@PathVariable(name = "id_cliente") String id_cliente, @ModelAttribute("pago") @Valid Pago pago, BindingResult result, RedirectAttributes redirectAttributes){
         ModelAndView mav;
+        Long cliente_id = NumberUtils.toLong(id_cliente);
+        Cliente cliente = clienteRepository.findOne(cliente_id);
         if(result.hasErrors()) {
             mav= new ModelAndView("pagar");
             List<Actividad> actividades = actividadRepository.findAll();
             mav.addObject("actividades", actividades);
+            mav.addObject("cliente",cliente);
         }
         else{
-            Long cliente_id = NumberUtils.toLong(id_cliente);
-            Cliente cliente = clienteRepository.findOne(cliente_id);
             pago.setMomentoPago(new Date(System.currentTimeMillis()));
             pago.setProfesor(pago.getActividad().getProfesor());
             cliente.getPagos().add(pago);
@@ -235,16 +238,21 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/{idCliente}/completarPago/{idPago}", method = RequestMethod.GET, produces="application/json; charset=UTF-8")
-    public  @ResponseBody boolean completarPago(@PathVariable(name = "idCliente") Long idCliente, @PathVariable(name = "idPago")  Long idPago ){
+    public  @ResponseBody boolean completarPago(@PathVariable(name = "idCliente") Long idCliente, @PathVariable(name = "idPago")  Long idPago){
 
         Pago pago = this.clienteRepository.findPagoByIdClienteAndIdPago(idCliente, idPago);
         if(pago != null){
-           pago.setMontoRestante(BigDecimal.ZERO);
+           pago.setMontoPagado(pago.getMontoAPagar());
            this.pagoRepository.save(pago);
            return true;
         }
         else
             return false;
+    }
+
+    @RequestMapping(value="/{idCliente}/getMontoAPagar/{idPago}", method = RequestMethod.GET, produces="application/json; charset=UTF-8")
+    public  @ResponseBody BigDecimal getMontoAPagar(@PathVariable(name = "idCliente") Long idCliente, @PathVariable(name = "idPago")  Long idPago){
+        return this.clienteRepository.findMontoAPagarByIdPago(idCliente, idPago);
     }
     
     @InitBinder("cliente")

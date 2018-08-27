@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
+<fmt:setLocale value = "es_AR" scope="session"/>
 
 <div class="col-lg-9">
 	<div class="well">
@@ -42,8 +43,8 @@
 										<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss"
 												value="${cobro.momentoCobro}" /></td>
 										<td><c:out value="${cobro.actividad.nombre}"></c:out></td>
-										<td><fmt:formatNumber value="${cobro.monto}"
-												type="currency" currencySymbol="" /></td>
+										<td><fmt:formatNumber value="${cobro.monto}" type="currency" currencySymbol="$ " /></td>
+										<td></td>
 									</tr>
 							</c:forEach>
 						</tbody>

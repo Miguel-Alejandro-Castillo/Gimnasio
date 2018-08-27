@@ -25,10 +25,10 @@ public class PagoValidator implements Validator {
             }
         }
 
-        if(pago.getMontoAPagar() != null && pago.getMontoRestante() != null){
-          if(pago.getMontoRestante().compareTo(pago.getMontoAPagar()) > 0 ){
-              errors.rejectValue("montoAPagar", "campo.montoAPagar.menorQueMontoRestante");
-              errors.rejectValue("montoRestante", "campo.montoRestante.mayorQueMontoAPagar");
+        if(pago.getMontoAPagar() != null && pago.getMontoPagado() != null){
+          if(pago.getMontoPagado().compareTo(pago.getMontoAPagar()) > 0 ){
+              errors.rejectValue("montoAPagar", "campo.montoAPagar.menorQueMontoPagado");
+              errors.rejectValue("montoPagado", "campo.montoPagado.mayorQueMontoAPagar");
           }
         }
     }

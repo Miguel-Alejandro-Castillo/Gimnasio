@@ -64,10 +64,11 @@
 							<form:errors path="montoAPagar" cssClass="errorMessage" />
 						</div>
 					    <div class="form-group">
-							<form:label path="montoRestante">Monto restante</form:label>
-						    <form:input type="number" path="montoRestante" cssClass="form-control" min="0" step="0.01" />
-						    <form:errors path="montoRestante" cssClass="errorMessage" />
+							<form:label path="montoPagado">Monto pagado</form:label>
+						    <form:input type="number" path="montoPagado" cssClass="form-control" min="0" step="0.01" />
+						    <form:errors path="montoPagado" cssClass="errorMessage" />
 					    </div>
+
 						<form:button type="submit" class="btn btn-default submitButton">
 							<tiles:getAsString name="titleSubmit" />
 						</form:button>

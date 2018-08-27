@@ -15,7 +15,7 @@ Urgente
 -baja de actividad (si un cliente pago una actividad que fue eliminada, esta tiene que figurar en los pagos!!)
 -baja de profesor, añadir el boton en detalle. si se elimino un profesor, sus cobros asociados deben permanecer intactos!
 -baja de cliente, añadir el boton en detalle, sus pagos deben permanecer intactos!
-
+-Revisar las asociacion de profesores con actividades( chequear modelo con cardinalidad )
 -------
 
 

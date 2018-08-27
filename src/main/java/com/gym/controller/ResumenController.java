@@ -5,16 +5,13 @@ import com.gym.dao.PagoRepository;
 import com.gym.model.Actividad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.gym.dao.ClienteRepository;
-import com.gym.dao.CobroRepository;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -120,7 +117,25 @@ public class ResumenController{
 	public @ResponseBody  List<Object []> cargarGraficoResumen(@PathVariable Integer anio) {
 		return pagoRepository.findGananciasByAnio(anio);
 	}
-	
+
+     /*
+	@RequestMapping( value = "/resumen/cargarGraficoResumen/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody  Object cargarGraficoResumen(@PathVariable Integer mes, @PathVariable Integer anio, @PathVariable Long idActividad) {
+		if(anio == null){
+			return this.pagoRepository.gananciasAnuales(mes, idActividad);
+		}
+		else{
+			if(mes == null){
+				return this.pagoRepository.gananciasMensuales(anio, idActividad);
+			}
+			else{
+				return this.pagoRepository.gananciasDiarias(anio, mes, idActividad);
+			}
+		}
+
+	}
+	*/
+
 	@RequestMapping(value="/{id_pago}/detalle", method = RequestMethod.GET)
 	public ModelAndView showPagoDetalle(@PathVariable(name = "id_pago") String id_pago){
 		ModelAndView mav = null;

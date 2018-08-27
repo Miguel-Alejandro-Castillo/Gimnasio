@@ -90,11 +90,10 @@
 
 <script>
    	$(document).ready(function(){
-   		cargarGraficoResumen('${urlResumen}');
    		
 	   $('#dataTables-example').DataTable(
 	      		{
-	      				responsive: true,
+	      				responsive: true
 	      		});
    	});
 </script>

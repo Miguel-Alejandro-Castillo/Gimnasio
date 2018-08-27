@@ -7,6 +7,7 @@
 <link href="${templateCss}" rel="stylesheet"/>
 <spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
 <link href="${jqueryConfirmCss}" rel="stylesheet"/>
+<fmt:setLocale value = "es_AR" scope="session"/>
 
 <div class="col-lg-9">
 	<div class="well">
@@ -125,6 +126,7 @@
 									<td>Fecha Desde</td>
 									<td>Fecha Hasta</td>
 									<td>Monto a pagar</td>
+									<td>Monto pagado</td>
 									<td>Monto restante</td>
 									<td>Accion</td>
 								</tr>
@@ -139,15 +141,15 @@
 												type="date" pattern="dd/MM/yyyy" /></td>
 										<td><fmt:formatDate value="${pago.fechaHasta}"
 												type="date" pattern="dd/MM/yyyy" /></td>
-										<td><fmt:formatNumber value="${pago.montoAPagar}"
-												type="currency" minFractionDigits="2" currencySymbol="$" />
+										<td id="montoAPagar_${pago.id}">
+											<fmt:formatNumber value="${pago.montoAPagar}" type="currency" minFractionDigits="2" currencySymbol="$ "   />
 										</td>
-										<td id="montoRestante_${pago.id}"><fmt:formatNumber value="${pago.montoRestante}"
-															  type="currency" minFractionDigits="2" currencySymbol="$" />
+										<td id="montoPagado_${pago.id}">
+											<fmt:formatNumber value="${pago.montoPagado}" type="currency" minFractionDigits="2" currencySymbol="$ " />
 										</td>
 										<td style="text-align: center;">
 											<spring:url value="/clientes/${cliente.id}/clienteDetalle/${pago.id}" var="urlPagoDetalle" />
-											<c:if test="${pago.montoRestante gt 0.00}">
+											<c:if test="${pago.montoPagado lt pago.montoAPagar}">
 												<a id="completarPago_${pago.id}" onclick="completarPago(${cliente.id}, ${pago.id})" data-toggle="tooltip" title="Completar pago">
 													<i class="fas fa-check-double" style="font-size: 24px; color: blue; padding-right: 10px; padding-left: 10px;"></i></a>
 											</c:if>

@@ -2,6 +2,8 @@ package com.gym.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -26,14 +28,16 @@ public class Pago {
     private Date momentoPago;
 
 	@NotNull(message = "{campo.obligatorio}")
-	@Min(value = 0, message = "{campo.monto.min}")
+	@DecimalMin(value = "0.00", message = "{campo.monto.min}")
+	@Digits(integer = 10, fraction = 2, message = "{campo.monto.onlyTwoDecimals}")
     @Column(nullable = false)
     private BigDecimal montoAPagar;
 
 	@NotNull(message = "{campo.obligatorio}")
-	@Min(value = 0, message = "{campo.monto.min}")
+	@DecimalMin(value = "0.00", message = "{campo.monto.min}")
+	@Digits(integer = 10, fraction = 2, message = "{campo.monto.onlyTwoDecimals}")
 	@Column(nullable = false)
-	private BigDecimal montoRestante;
+	private BigDecimal montoPagado;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -94,12 +98,12 @@ public class Pago {
 		this.montoAPagar = montoAPagar;
 	}
 
-	public  BigDecimal getMontoRestante() {
-		return montoRestante;
+	public  BigDecimal getMontoPagado() {
+		return montoPagado;
 	}
 
-	public void setMontoRestante(BigDecimal montoRestante) {
-		this.montoRestante = montoRestante;
+	public void setMontoPagado(BigDecimal montoPagado) {
+		this.montoPagado = montoPagado;
 	}
 
 	public Date getFechaDesde() {

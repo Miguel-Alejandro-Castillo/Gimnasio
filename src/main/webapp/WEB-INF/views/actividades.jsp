@@ -6,6 +6,7 @@
 <link href="${templateCss}" rel="stylesheet"/>
 <spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
 <link href="${jqueryConfirmCss}" rel="stylesheet"/>
+<fmt:setLocale value = "es_AR" scope="session"/>
 
 <div class="col-lg-9">
 	<div class="well">
@@ -39,20 +40,20 @@
 						<c:forEach items="${actividades}" var="actividad">
 							<tr id="row_${actividad.id}" class="odd gradeX">
 								<td><c:out value="${actividad.nombre}"></c:out></td>
-								<td><c:out value="${actividad.costo}"></c:out></td>
-								<spring:url value="/actividades/${actividad.id}/editar"
-									var="urlEditActividad" />
-								<td><a href="${urlEditActividad}"><i
-										class="fas fa-edit"
-										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
-								<spring:url value="/actividades/${actividad.id}/editar/agregarLeccion"
-									var="urlAgregarLeccion" />
-								<td><a href="${urlAgregarLeccion}"><i
-										class="fas fa-user-plus"
-										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
-								<td><a onclick="deleteActividad(${actividad.id})"><i
-										class="fas fa-trash-alt"
-										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a></td>
+								<td><fmt:formatNumber value="${actividad.costo}" type="currency" minFractionDigits="2" currencySymbol="$ " /></td>
+								<td> <spring:url value="/actividades/${actividad.id}/editar" var="urlEditActividad" />
+									 <a href="${urlEditActividad}">
+										 <i class="fas fa-edit" style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
+									 </a>
+									<spring:url value="/actividades/${actividad.id}/editar/agregarLeccion" var="urlAgregarLeccion" />
+									<a href="${urlAgregarLeccion}">
+										<i class="fas fa-user-plus" style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
+									</a>
+									<a onclick="deleteActividad(${actividad.id})"><i
+											class="fas fa-trash-alt"
+											style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
+									</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

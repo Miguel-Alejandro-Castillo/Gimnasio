@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<spring:url value="/resumen/" var="urlResumen" />
+<fmt:setLocale value = "es_AR" scope="session"/>
 
 
 <div class="col-lg-9">
@@ -21,7 +21,7 @@
 					<div id="Grafico" class="tab-pane active">
 						<div class="panel-heading">
 							<select id="mes" name="mes"
-								onchange="cargarGraficoResumen('${urlResumen}');">
+								onchange="cargarGraficoResumen();">
 								<option value="" selected>Todos los meses</option>
 								<option value="1">Enero</option>
 								<option value="2">Febrero</option>
@@ -36,18 +36,19 @@
 								<option value="11">Noviembre</option>
 								<option value="12">Diciembre</option>
 							</select> <select id="anio" name="anio"
-								onchange="cargarGraficoResumen('${urlResumen}');">
+								onchange="cargarGraficoResumen();">
 								<option value="2017" selected>2017</option>
 								<c:forEach var="i" begin="2018" end="2050">
 									<option value="${i}">
 										<c:out value="${i}" /></option>
 								</c:forEach>
-							</select> <select id="idActividad" name="idActividad"
-								onchange="cargarGraficoResumen('${urlResumen}');">
+							</select>
+							<select id="idActividad" name="idActividad" onchange="cargarGraficoResumen();">
 								<option value="" selected>Todas las actividades</option>
 								<c:forEach items="${actividades}" var="actividad">
 									<option value="${actividad.id}">
-										<c:out value="${actividad.nombre}" /></option>
+										<c:out value="${actividad.nombre}" />
+									</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -67,7 +68,8 @@
 										<th>Fecha Pago</th>
 										<th>Cliente</th>
 										<th>Actividad</th>
-										<th>Monto</th>
+										<th>Monto a pagar</th>
+										<th>Monto pagado</th>
 										<th>Fecha desde</th>
 										<th>Fecha hasta</th>
 									</tr>
@@ -76,17 +78,27 @@
 									<c:forEach items="${clientes}" var="cliente">
 										<c:forEach items="${cliente.pagos}" var="pago">
 											<tr class="odd gradeX">
-												<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss"
-														value="${pago.momentoPago}" /></td>
-												<td><c:out
-														value="${cliente.nombre} ${cliente.apellido}"></c:out></td>
-												<td><c:out value="${pago.actividad.nombre}"></c:out></td>
-												<td><fmt:formatNumber value="${pago.monto}"
-														type="currency" currencySymbol="" /></td>
-												<td><fmt:formatDate pattern="dd/MM/yyyy"
-														value="${pago.fechaDesde}" /></td>
-												<td><fmt:formatDate pattern="dd/MM/yyyy"
-														value="${pago.fechaHasta}" /></td>
+												<td>
+													<fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${pago.momentoPago}"/>
+												</td>
+												<td>
+													<c:out value="${cliente.nombre} ${cliente.apellido}"></c:out>
+												</td>
+												<td>
+													<c:out value="${pago.actividad.nombre}"></c:out>
+												</td>
+												<td>
+													<fmt:formatNumber value="${pago.montoAPagar}" type="currency" currencySymbol="$ "/>
+												</td>
+												<td>
+													<fmt:formatNumber value="${pago.montoPagado}" type="currency" currencySymbol="$ "/>
+												</td>
+												<td>
+													<fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaDesde}"/>
+												</td>
+												<td>
+													<fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaHasta}"/>
+												</td>
 											</tr>
 										</c:forEach>
 									</c:forEach>
@@ -106,7 +118,7 @@
 
 <script>
 	$(document).ready(function() {
-		cargarGraficoResumen('${urlResumen}');
+		cargarGraficoResumen();
 				
 		$('#dataTables-example').DataTable(
    		{

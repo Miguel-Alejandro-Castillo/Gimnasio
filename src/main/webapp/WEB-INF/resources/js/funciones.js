@@ -6,25 +6,42 @@ function getUrlContextPath() {
     return window.location.origin + window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 }
 
-function completarPago(idCliente, idPago){
+function getMoneyString(number){
+    return number.toLocaleString('es-ar', {
+                                           style: 'currency',
+                                           currency: 'ARS',
+                                           minimumFractionDigits: 2});
+}
+
+function GET(url, functionSuccess, functionError){
     $.ajax({
         type: "GET",
-        url: getUrlContextPath() + "/clientes/" + idCliente  + "/completarPago/" + idPago,
+        url: getUrlContextPath() + url,
         data: {},
         contentType: "application/json",
         dataType: 'json',
-        timeout: 600000,
-        success: function (isCompletePago) {
-            if(isCompletePago){
-                $("#montoRestante_" + idPago).html("$0.00");
-                $("#completarPago_" + idPago).hide();
-            }
-
-        },
-        error: function (e) {
-        }
+        //timeout de 2 minutos
+        timeout: 1000 * 120,
+        success: functionSuccess,
+        error: functionError
     });
 }
+
+function completarPago(idCliente, idPago){
+    GET("/clientes/" + idCliente  + "/completarPago/" + idPago,
+         function(isCompletePago){
+             if(isCompletePago) {
+                 GET("/clientes/" + idCliente + "/getMontoAPagar/" + idPago,
+                     function (montoTotalAPagar) {
+                         if(!isNaN(montoTotalAPagar)){
+                             $("#montoPagado_" + idPago).html(getMoneyString(montoTotalAPagar));
+                             $("#completarPago_" + idPago).hide();
+                         }
+                     });
+             }
+         });
+}
+
 function changeActividad(){
     var  idActividad = $("#actividad").val();
     if( idActividad ){
@@ -235,11 +252,11 @@ function submitAjax(url) {
 
 }
 
-function cargarGraficoResumen(url){
+function cargarGraficoResumen(){
     var mes = $("#mes").val();
     var anio = $("#anio").val();
     var idActividad = $("#idActividad").val();
-    var urlCompleta =  url;
+    var urlCompleta = getUrlContextPath() + "/resumen/";
     if(mes == "") {
         urlCompleta = urlCompleta + "cargarGraficoResumenAnual?" + "anio=" + anio + "&idActividad=" + idActividad;
         $.ajax({
@@ -275,11 +292,7 @@ function cargarGraficoResumen(url){
                     width: "100%"
                 });
 
-                $("#totalRecaudado").html("<span> Total recaudado: " + totalRecaudado.toLocaleString('es-ar', {
-                    style: 'currency',
-                    currency: 'ARS',
-                    minimumFractionDigits: 2
-                }) + "</span>");
+                $("#totalRecaudado").html("<span> Total recaudado: " + getMoneyString(totalRecaudado) + "</span>");
 
             },
             error: function (e) {
