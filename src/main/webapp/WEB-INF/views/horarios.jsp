@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
+<style>
+    td{
+        font-size: smaller;
+    }
+
+</style>
 
 <div class="col-lg-9">
 	<div class="well">
@@ -23,31 +29,180 @@
 			
 			
 		</div>
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-body">
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<table width="100%"
-					class="table table-striped table-bordered table-hover"
-					id="dataTables-example">
-					<thead>
-						<tr>
-							<th>hora inicio</th>
-							<th>hora fin</th>
-							<th>acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${horarios}" var="horario">
-							<tr class="odd gradeX">
-								<td><c:out value="${horario.horaInicio}"></c:out></td>
-								<td><c:out value="${horario.horaFin}"></c:out></td>
-								<spring:url value="/horarios/${horario.id}/editar"
-									var="urlEditHorario" />
-								<td><a href="${urlEditHorario}">Editar Horario</a></td>
+					<div class="col-lg-2">
+					<table
+						class="table table-striped table-bordered table-hover dataTables-example">
+                        <caption>Lunes</caption>
+                        <thead>
+                            <tr>
+                                <td>hora</td>
+                                <td>actividad</td>
+                            </tr>
+                        </thead>
+
+						<tbody>
+	                        <c:forEach items="${leccionesLunes}" var="lunes">
+	                        <tr class="odd gradeX">
+	                            <td>
+                                    <c:out value="${lunes.key.horaInicio}"></c:out>
+                                -
+                                    <c:out value="${lunes.key.horaFin}"></c:out>
+                                </td>
+                                <td>
+                                    <c:out value="${lunes.value.nombre}"></c:out>
+								</td>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+	                        </c:forEach>                        
+						</tbody>
+					</table>
+					</div>
+
+					<div class="col-lg-2">
+					<table
+						class="table table-striped table-bordered table-hover dataTables-example">
+                        <caption>Martes</caption>
+                        <thead>
+                            <tr>
+                                <td>hora</td>
+                                <td>actividad</td>
+                            </tr>
+                        </thead>
+
+						<tbody>
+	                        <c:forEach items="${leccionesMartes}" var="martes">
+	                        <tr class="odd gradeX">
+	                            <td>
+                                    <c:out value="${martes.key.horaInicio}"></c:out>
+                                -
+                                    <c:out value="${martes.key.horaFin}"></c:out>
+                                </td>
+                                <td>
+                                    <c:out value="${martes.value.nombre}"></c:out>
+								</td>
+							</tr>
+	                        </c:forEach>                        
+						</tbody>
+					</table>
+					</div>
+
+
+					<div class="col-lg-2">
+					<table
+						class="table table-striped table-bordered table-hover dataTables-example">
+                        <caption>Miercoles</caption>
+                        <thead>
+                            <tr>
+                                <td>hora</td>
+                                <td>actividad</td>
+                            </tr>
+                        </thead>
+
+						<tbody>
+	                        <c:forEach items="${leccionesMiercoles}" var="miercoles">
+	                        <tr class="odd gradeX">
+	                            <td>
+                                    <c:out value="${miercoles.key.horaInicio}"></c:out>
+                                -
+                                    <c:out value="${miercoles.key.horaFin}"></c:out>
+                                </td>
+                                <td>
+                                    <c:out value="${miercoles.value.nombre}"></c:out>
+								</td>
+							</tr>
+	                        </c:forEach>                        
+						</tbody>
+					</table>
+					</div>
+
+					<div class="col-lg-2">
+					<table
+						class="table table-striped table-bordered table-hover dataTables-example">
+                        <caption>Jueves</caption>
+                        <thead>
+                            <tr>
+                                <td>hora</td>
+                                <td>actividad</td>
+                            </tr>
+                        </thead>
+
+						<tbody>
+	                        <c:forEach items="${leccionesJueves}" var="jueves">
+	                        <tr class="odd gradeX">
+	                            <td>
+                                    <c:out value="${jueves.key.horaInicio}"></c:out>
+                                -
+                                    <c:out value="${jueves.key.horaFin}"></c:out>
+                                </td>
+                                <td>
+                                    <c:out value="${jueves.value.nombre}"></c:out>
+								</td>
+							</tr>
+	                        </c:forEach>                        
+						</tbody>
+					</table>
+					</div>
+
+					<div class="col-lg-2">
+					<table
+						class="table table-striped table-bordered table-hover dataTables-example">
+                        <caption>Viernes</caption>
+                        <thead>
+                            <tr>
+                                <td>hora</td>
+                                <td>actividad</td>
+                            </tr>
+                        </thead>
+
+						<tbody>
+	                        <c:forEach items="${leccionesViernes}" var="viernes">
+	                        <tr class="odd gradeX">
+	                            <td>
+                                    <c:out value="${viernes.key.horaInicio}"></c:out>
+                                -
+                                    <c:out value="${viernes.key.horaFin}"></c:out>
+                                </td>
+                                <td>
+                                    <c:out value="${viernes.value.nombre}"></c:out>
+								</td>
+							</tr>
+	                        </c:forEach>                        
+						</tbody>
+					</table>
+					</div>
+
+					<div class="col-lg-2">
+					<table
+						class="table table-striped table-bordered table-hover dataTables-example">
+                        <caption>Sabado</caption>
+                        <thead>
+                            <tr>
+                                <td>hora</td>
+                                <td>actividad</td>
+                            </tr>
+                        </thead>
+
+						<tbody>
+	                        <c:forEach items="${leccionesSabado}" var="sabado">
+	                        <tr class="odd gradeX">
+	                            <td>
+                                    <c:out value="${sabado.key.horaInicio}"></c:out>
+                                -
+                                    <c:out value="${sabado.key.horaFin}"></c:out>
+                                </td>
+                                <td>
+                                    <c:out value="${sabado.value.nombre}"></c:out>
+								</td>
+							</tr>
+	                        </c:forEach>                        
+						</tbody>
+					</table>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>
@@ -57,15 +212,18 @@
 <script src="${jqueryMin}"></script>
 
 <script>
-  $(document).ready(function(){
-    $('#dataTables-example').DataTable(
-  		{
-  				responsive: true,
-  				"paging":   false,
-  				"searching": false,
-  			    "info":     false
-  			    
-  		});
-	  });
+  $(document).ready(function() {
+      var table = $('.dataTables-example').DataTable(
+          {
+              responsive: false,
+              "paging": false,
+              "searching": false,
+              "info": false,
+              "order": [0, 'asc'],
+              "columnDefs": [
+                  { "orderable": false, "targets": 1 }
+              ]
+          });
+  })
 </script>
 <!-- para que ande la tabla  -->

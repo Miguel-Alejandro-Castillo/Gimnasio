@@ -41,18 +41,16 @@
 							<tr id="row_${actividad.id}" class="odd gradeX">
 								<td><c:out value="${actividad.nombre}"></c:out></td>
 								<td><fmt:formatNumber value="${actividad.costo}" type="currency" minFractionDigits="2" currencySymbol="$ " /></td>
-								<td> <spring:url value="/actividades/${actividad.id}/editar" var="urlEditActividad" />
-									 <a href="${urlEditActividad}">
-										 <i class="fas fa-edit" style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
-									 </a>
-									<spring:url value="/actividades/${actividad.id}/editar/agregarLeccion" var="urlAgregarLeccion" />
-									<a href="${urlAgregarLeccion}">
-										<i class="fas fa-user-plus" style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
-									</a>
+								<td>
 									<a onclick="deleteActividad(${actividad.id})"><i
 											class="fas fa-trash-alt"
 											style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
 									</a>
+									<spring:url value="/actividades/${actividad.id}/detalle" var="urlActividadDetalle"/>
+									<a href="${urlActividadDetalle}">
+										<i class="fas fa-info-circle"></i>
+									</a>
+
 								</td>
 							</tr>
 						</c:forEach>

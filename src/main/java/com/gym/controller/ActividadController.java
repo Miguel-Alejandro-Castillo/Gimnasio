@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value="/actividades")
@@ -54,6 +55,24 @@ public class ActividadController {
         mav.addObject("actividad", new Actividad());
         List<Profesor> profesores = profesorRepository.findAll();
         mav.addObject("profesores", profesores);
+        return mav;
+    }
+
+    @RequestMapping(value="/{id_actividad}/detalle", method = RequestMethod.GET)
+    public ModelAndView showActividadDetalle(@PathVariable(name = "id_actividad") String id_actividad){
+        ModelAndView mav = null;
+        Long id = NumberUtils.toLong(id_actividad);
+        Actividad actividad = actividadRepository.findOne(id);
+        if(actividad != null) {
+            mav= new ModelAndView("detalle-actividad");
+            mav.addObject("actividad", actividad);
+            Set<Leccion> lecciones = actividad.getLecciones();
+            mav.addObject("lecciones",lecciones);
+
+        }
+        else {
+            // renderizar a una vista que informe que no se envio un id de actividad en el path
+        }
         return mav;
     }
 

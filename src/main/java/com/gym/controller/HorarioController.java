@@ -1,7 +1,11 @@
 package com.gym.controller;
 
+import com.gym.dao.ActividadRepository;
 import com.gym.dao.HorarioRepository;
+import com.gym.model.Actividad;
+import com.gym.model.Dia;
 import com.gym.model.Horario;
+import com.gym.model.Leccion;
 import com.gym.util.NumberUtils;
 import com.gym.validator.HorarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -24,12 +31,30 @@ public class HorarioController {
     @Autowired
     private HorarioValidator horarioValidator;
 
+    @Autowired
+    private ActividadRepository actividadRepository;
+
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showHorarios(){
         ModelAndView mav=new ModelAndView("horarios");
-        List<Horario> horarios= horarioRepository.findAll();
-        mav.addObject("horarios",horarios);
+        List<Actividad> actividades= actividadRepository.findAll();
+
+        HashMap<Leccion,Actividad> leccionesLunes = this.leccionesElDia(Dia.Lunes,actividades);
+        HashMap<Leccion,Actividad> leccionesMartes = this.leccionesElDia(Dia.Martes,actividades);
+        HashMap<Leccion,Actividad> leccionesMiercoles = this.leccionesElDia(Dia.Miercoles,actividades);
+        HashMap<Leccion,Actividad> leccionesJueves = this.leccionesElDia(Dia.Jueves,actividades);
+        HashMap<Leccion,Actividad> leccionesViernes = this.leccionesElDia(Dia.Viernes,actividades);
+        HashMap<Leccion,Actividad> leccionesSabado = this.leccionesElDia(Dia.Sabado,actividades);
+
+        mav.addObject("leccionesLunes", leccionesLunes);
+        mav.addObject("leccionesMartes", leccionesMartes);
+        mav.addObject("leccionesMiercoles", leccionesMiercoles);
+        mav.addObject("leccionesJueves", leccionesJueves);
+        mav.addObject("leccionesViernes", leccionesViernes);
+        mav.addObject("leccionesSabado", leccionesSabado);
+
+
         return mav;
     }
 
@@ -86,5 +111,16 @@ public class HorarioController {
         binder.setValidator(horarioValidator);
     }
 
+    public HashMap<Leccion,Actividad> leccionesElDia(Dia dia, List<Actividad> actividades){
+
+        HashMap<Leccion,Actividad> lecciones = new HashMap<Leccion,Actividad>();
+        for (Actividad actividad : actividades){
+            for (Leccion leccion : actividad.getLecciones()){
+                if(leccion.getDia() == dia) lecciones.put(leccion,actividad);
+            }
+        }
+
+        return lecciones;
+    }
 
 }
