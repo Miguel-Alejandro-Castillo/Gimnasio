@@ -61,6 +61,12 @@
         <put-attribute name="titleSubmit" value="Finalizar Alta de Actividad" cascade="true" />
     </definition>
 
+    <!-- Definicion pantalla  para detalle de una actividad-->
+    <definition name="detalle-actividad" extends="default-template">
+        <put-attribute name="title" value="Detalle Actividad" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/actividadDetalle.jsp" />
+    </definition>
+
     <!-- Definicion pantalla  para editar una actividad-->
     <definition name="editar-actividad" extends="default-template">
         <put-attribute name="title" value="Editar Actividad" cascade="true"/>
