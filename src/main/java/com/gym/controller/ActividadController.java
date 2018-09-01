@@ -68,6 +68,7 @@ public class ActividadController {
             mav.addObject("actividad", actividad);
             Set<Leccion> lecciones = actividad.getLecciones();
             mav.addObject("lecciones",lecciones);
+
         }
         else {
             // renderizar a una vista que informe que no se envio un id de actividad en el path
