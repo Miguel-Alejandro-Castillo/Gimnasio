@@ -3,93 +3,57 @@ package com.gym.dao;
 import com.gym.model.Pago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
+
 @Repository
 public interface PagoRepository extends JpaRepository<Pago,Long> {
 
-    @Query( value = "select meses.MONTH as mes, coalesce( sum(p.montoPagado),0) as total "+
-     " from  "+
-            " (select 1 as MONTH " +
-            " union select 2 as MONTH"+
-            " union select 3 as MONTH"+
-            " union select 4 as MONTH"+
-            " union select 5 as MONTH"+
-            " union select 6  as MONTH"+
-            " union select 7 as MONTH" +
-            " union select 8  as MONTH" +
-            " union select 9 as MONTH" +
-            " union select 10 as MONTH" +
-            " union select 11 as MONTH" +
-            " union select 12 as MONTH" +
-    " ) as meses "+
-    " left join pagos p on(meses.MONTH = month(p.momentoPago) and year(p.momentoPago) = ?1 ) "+
-    " group by meses.MONTH"+
-    " order by meses.MONTH ", nativeQuery = true)
-    List<Object []>  findGananciasByAnio( Integer anio);
-
-    @Query( value = "select day(p.momentoPago) as dia, sum(p.montoPagado) as total from pagos p where month(p.momentoPago) = ?2 and  year(p.momentoPago) = ?1 group by dia order by dia", nativeQuery = true)
-    List<Object []> findGananciasByAnioAndMes(Integer anio, Integer mes);
-
-    @Query( value = "select meses.MONTH as mes, coalesce( sum(p.montoPagado),0) as total "+
-            " from  "+
-            " (select 1 as MONTH " +
-            " union select 2 as MONTH"+
-            " union select 3 as MONTH"+
-            " union select 4 as MONTH"+
-            " union select 5 as MONTH"+
-            " union select 6  as MONTH"+
-            " union select 7 as MONTH" +
-            " union select 8  as MONTH" +
-            " union select 9 as MONTH" +
-            " union select 10 as MONTH" +
-            " union select 11 as MONTH" +
-            " union select 12 as MONTH" +
-            " ) as meses "+
-            " left join pagos p  on(meses.MONTH = month(p.momentoPago) and year(p.momentoPago) = ?1 and p.id = ?2 ) "+
-            " group by meses.MONTH"+
-            " order by meses.MONTH ", nativeQuery = true)
-    List<Object[]> findGananciasByAnioAndIdActividad(Integer anio, Integer idActividad);
-
-    @Query( value = "select day(p.momentoPago) as dia, sum(p.montoPagado) as total from pagos p where month(p.momentoPago) = ?2 and  year(p.momentoPago) = ?1 and p.id = ?3 group by dia order by dia", nativeQuery = true)
-    List<Object[]> findGananciasByAnioAndMesAndIdActividad(Integer anio, Integer mes, Integer idActividad);
-
-    /*
-    @Query( value = "select distinct year(p.momentoPago) as anio from Pago p where p.montoPagado > 0 order by anio asc")
+    @Query( value = "select distinct year(p.momentoPago) as anio from Pago p order by anio asc")
     List<Integer> aniosConAlMenosUnPago();
 
-    @Query( value = " select year(p.momentoPago) as anio, sum(p.montoPagado) as total" +
-                    " from Pago p" +
-                    " where p.montoPagado > 0 and (?1 is null or month(p.momentoPago) = ?1) and (?2 is null or p.actividad_id = ?2)" +
+
+    @Query( value = "select year(p.momentoPago) as anio, sum(p.montoPagado) as total" +
+                    " from pagos p" +
+                    " where (?1 is null or month(p.momentoPago) = ?1) and (?2 is null or p.actividad_id = ?2)" +
                     " group by anio" +
-                    " order by anio")
-    Map<Integer, BigDecimal> gananciasAnuales(Integer mes, Long idActividad);
+                    " order by anio", nativeQuery = true)
+    List<Object[]> gananciasAnuales(Integer mes, Long idActividad);
 
-
-
-    @Query( value = "select meses.mes as mes, coalesce( sum(p.montoPagado),0) as total "+
+    @Query( value = "select meses.nombre as  mes, coalesce( sum(p.montoPagado),0) as total"+
             " from  "+
-            " (select 1 as mes " +
-            " union select 2 as mes"+
-            " union select 3 as mes"+
-            " union select 4 as mes"+
-            " union select 5 as mes"+
-            " union select 6 as mes"+
-            " union select 7 as mes" +
-            " union select 8 as mes" +
-            " union select 9 as mes" +
-            " union select 10 as mes" +
-            " union select 11 as mes" +
-            " union select 12 as mes" +
+            " (select 1 numero, 'Enero' nombre" +
+            " union select 2, 'Febrero'"+
+            " union select 3, 'Marzo'"+
+            " union select 4, 'Abril'"+
+            " union select 5, 'Mayo'"+
+            " union select 6, 'Junio'"+
+            " union select 7, 'Julio'" +
+            " union select 8, 'Agosto'" +
+            " union select 9, 'Agosto'" +
+            " union select 10, 'Octubre'" +
+            " union select 11, 'Noviembre'" +
+            " union select 12, 'Diciembre'" +
             " ) as meses "+
-            " left join pagos p  on(meses.mes = month(p.momentoPago) and (?1 is null or year(p.momentoPago) = ?1) and ( ?2 is null or p.actividad_id = ?2) "+
-            " group by meses.mes"+
-            " order by meses.mes", nativeQuery = true)
-    Map<Integer, BigDecimal> gananciasMensuales(Integer anio, Long idActividad);
+            " left join pagos p on (meses.numero = month(p.momentoPago)) and (?1 is null or year(p.momentoPago) = ?1) and ( ?2 is null or p.actividad_id = ?2) "+
+            " group by meses.numero", nativeQuery = true)
+    List<Object[]> gananciasMensuales(Integer anio, Long idActividad);
 
 
-    Map<Integer, BigDecimal> gananciasDiarias(Integer anio, Integer mes, Long idActividad);
-    */
+
+    @Query(value = " select dias.dia, coalesce( sum(p.montoPagado), 0) total " +
+                   " from (select day(a.Date) dia " +
+                   "       from (select last_day(date_add(makedate(:anio, 1), interval (:mes)-1 month)) - interval (a.a + (10 * b.a) + (100 * c.a)) day as Date " +
+                   "            from (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a " +
+                   "                  cross join (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b " +
+                   "                  cross join (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c " +
+                   "           ) a " +
+                   "       where a.Date between date_add(date_add(last_day(date_add(makedate(:anio, 1), interval (:mes)-1 month)), interval 1 day), interval - 1 month) and last_day(date_add(makedate(:anio, 1), interval (:mes)-1 month)) order by dia " +
+                   "      ) dias " +
+                   "     left join pagos p on dias.dia = day(p.momentoPago) and year(p.momentoPago) = :anio and month(p.momentoPago) = :mes and (:idActividad is null or p.actividad_id = :idActividad) " +
+                   " group by dias.dia " +
+                   " order by dias.dia;", nativeQuery = true)
+    List<Object[]> gananciasDiarias(@Param("anio") Integer anio, @Param("mes") Integer mes, @Param("idActividad") Long idActividad);
+
 }

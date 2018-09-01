@@ -37,11 +37,12 @@
 								<option value="12">Diciembre</option>
 							</select> <select id="anio" name="anio"
 								onchange="cargarGraficoResumen();">
-								<option value="2017" selected>2017</option>
-								<c:forEach var="i" begin="2018" end="2050">
-									<option value="${i}">
-										<c:out value="${i}" /></option>
-								</c:forEach>
+							     <option value="" selected>Todas los a&ntilde;os</option>
+							    <c:forEach items="${anios}" var="anio">
+								     <option value="${anio}">
+									   <c:out value="${anio}" />
+								    </option>
+							   </c:forEach>
 							</select>
 							<select id="idActividad" name="idActividad" onchange="cargarGraficoResumen();">
 								<option value="" selected>Todas las actividades</option>
