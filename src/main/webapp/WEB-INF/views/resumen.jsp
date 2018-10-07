@@ -15,57 +15,54 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<div class="col-lg-4">
+					<div class="form-group">
+						<select class="form-control" id="mes" name="mes"
+								onchange="cargarResumen();">
+							<option value="" selected>Todos los meses</option>
+							<option value="1">Enero</option>
+							<option value="2">Febrero</option>
+							<option value="3">Marzo</option>
+							<option value="4">Abril</option>
+							<option value="5">Mayo</option>
+							<option value="6">Junio</option>
+							<option value="7">Julio</option>
+							<option value="8">Agosto</option>
+							<option value="9">Septiembre</option>
+							<option value="10">Octubre</option>
+							<option value="11">Noviembre</option>
+							<option value="12">Diciembre</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<select class="form-control" id="anio" name="anio" onchange="cargarResumen();">
+							<option value="" selected>Todas los a&ntilde;os</option>
+							<c:forEach items="${anios}" var="anio">
+								<option value="${anio}">
+									<c:out value="${anio}" />
+								</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<select class="form-control" id="idActividad" name="idActividad" onchange="cargarResumen();">
+							<option value="" selected>Todas las actividades</option>
+							<c:forEach items="${actividades}" var="actividad">
+								<option value="${actividad.id}">
+									<c:out value="${actividad.nombre}" />
+								</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
 				<div class="tab-content">
 					<div id="Grafico" class="tab-pane active">
 						<div class="panel-heading">
-
-								<div class="col-lg-4">
-									<div class="form-group">
-										<select class="form-control" id="mes" name="mes"
-											onchange="cargarGraficoResumen();">
-											<option value="" selected>Todos los meses</option>
-											<option value="1">Enero</option>
-											<option value="2">Febrero</option>
-											<option value="3">Marzo</option>
-											<option value="4">Abril</option>
-											<option value="5">Mayo</option>
-											<option value="6">Junio</option>
-											<option value="7">Julio</option>
-											<option value="8">Agosto</option>
-											<option value="9">Septiembre</option>
-											<option value="10">Octubre</option>
-											<option value="11">Noviembre</option>
-											<option value="12">Diciembre</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="form-group">
-										<select class="form-control" id="anio" name="anio" onchange="cargarGraficoResumen();">
-											<option value="" selected>Todas los a&ntilde;os</option>
-											<c:forEach items="${anios}" var="anio">
-												<option value="${anio}">
-													<c:out value="${anio}" />
-												</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="form-group">
-										<select class="form-control" id="idActividad" name="idActividad" onchange="cargarGraficoResumen();">
-											<option value="" selected>Todas las actividades</option>
-											<c:forEach items="${actividades}" var="actividad">
-												<option value="${actividad.id}">
-													<c:out value="${actividad.nombre}" />
-												</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-
 							<div id="totalRecaudado"></div>
-
 							<div id="graficoBarras"></div>
 						</div>
 
@@ -73,8 +70,7 @@
 
 					<div id="Lista" class="tab-pane">
 						<div class="col-lg-12">
-							<table width="100%" class="table table-condensed table-bordered"
-								id="dataTables-example">
+							<table id="dataTables-resumen" width="100%" class="table table-condensed table-bordered">
 								<thead>
 									<tr>
 										<th>Fecha Pago</th>
@@ -86,35 +82,6 @@
 										<th>Fecha hasta</th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach items="${clientes}" var="cliente">
-										<c:forEach items="${cliente.pagos}" var="pago">
-											<tr class="odd gradeX">
-												<td>
-													<fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${pago.momentoPago}"/>
-												</td>
-												<td>
-													<c:out value="${cliente.nombre} ${cliente.apellido}"></c:out>
-												</td>
-												<td>
-													<c:out value="${pago.actividad.nombre}"></c:out>
-												</td>
-												<td>
-													<fmt:formatNumber value="${pago.montoAPagar}" type="currency" currencySymbol="$ "/>
-												</td>
-												<td>
-													<fmt:formatNumber value="${pago.montoPagado}" type="currency" currencySymbol="$ "/>
-												</td>
-												<td>
-													<fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaDesde}"/>
-												</td>
-												<td>
-													<fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaHasta}"/>
-												</td>
-											</tr>
-										</c:forEach>
-									</c:forEach>
-								</tbody>
 							</table>
 						</div>
 					</div>
@@ -129,12 +96,7 @@
 <script src="${jqueryMin}"></script>
 
 <script>
-	$(document).ready(function() {
-		cargarGraficoResumen();
-				
-		$('#dataTables-example').DataTable(
-   		{
-			responsive: true,
-   		})
+	$(function() {
+		cargarResumen();
 	});
 </script>

@@ -26,8 +26,8 @@
                 editar
             </button>
 
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#agregarLeccion">
-                agregarleccion
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#agregarLeccion" onclick="loadPopupAddLeccion(${actividad.id})">
+                agregar leccion
             </button>
 
             <!-- Modal -->
@@ -65,10 +65,10 @@
                                         <option value="${dia.nombre}"><c:out value="dia.nombre"/></option>
                                     </c:forEach>
                                 </select>
-                                <label>Hora Inicio</label>
-                                <input path="leccion.horaInicio" type="time"/>
-                                <label>Hora Fin</label>
-                                <input path="leccion.horaFin" type="time"/>
+                                <label for="horaInicio">Hora Inicio</label>
+                                <input id="horaInicio" name="horaInicio" type="time"/>
+                                <label for="horaFin">Hora Fin</label>
+                                <input path="horaFin" type="time"/>
                                 <input type="submit" value="Finalizar">
                             </form>
                         </div>

@@ -3,6 +3,7 @@ package com.gym.controller;
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.PagoRepository;
 import com.gym.model.Actividad;
+import com.gym.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,23 @@ public class ResumenController{
 				return this.pagoRepository.gananciasDiarias(anio, mes, idActividad);
 			}
 		}
+	}
+
+	@RequestMapping( value = "/resumen/cargarListadoResumen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Response cargarListadoResumen(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio, @RequestParam(name = "idActividad", required = false) Long idActividad) {
+
+		if(anio == null){
+			return new Response(this.clienteRepository.listadoGananciasAnuales(mes, idActividad));
+		}
+		else{
+			if(mes == null){
+				return new Response(this.clienteRepository.listadoGananciasMensuales(anio, idActividad));
+			}
+			else{
+				return new Response(this.clienteRepository.listadoGananciasDiarias(anio, mes, idActividad));
+			}
+		}
+
 	}
 
 

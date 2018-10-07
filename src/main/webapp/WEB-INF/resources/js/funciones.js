@@ -13,6 +13,14 @@ function getMoneyString(number){
                                            minimumFractionDigits: 2});
 }
 
+function getLocalDateString(date){
+    return (new Date(date)).toLocaleDateString('es-ar');
+}
+
+function getLocalDateTimeString(date){
+    return (new Date(date)).toLocaleString('es-ar');
+}
+
 function GET(url, functionSuccess, functionError){
     $.ajax({
         type: "GET",
@@ -252,6 +260,51 @@ function submitAjax(url) {
 
 }
 
+function cargarListadoResumen(){
+    var mes = $("#mes").val();
+    var anio = $("#anio").val();
+    var idActividad = $("#idActividad").val();
+    var urlCompleta = getUrlContextPath() + "/resumen/cargarListadoResumen?" + "mes=" +  mes + "&anio=" + anio + "&idActividad=" + idActividad;
+    $('#dataTables-resumen').DataTable( {
+        "processing": true,
+        destroy: true,
+        "ajax": urlCompleta,
+        columnDefs: [
+            { type: 'date-euro', targets: [0, 5, 6] },
+        ],
+        "columns": [
+            { "data": "momentoPago",
+                "render": function ( data, type, row ) {
+                        return getLocalDateTimeString(data);
+                }
+            },
+            { "data": "cliente" },
+            { "data": "actividad" },
+            { "data": "montoAPagar",
+               "render": function ( data, type, row ) {
+                    return getMoneyString(data);
+                }
+            },
+            { "data": "montoPagado",
+                "render": function ( data, type, row ) {
+                    return getMoneyString(data);
+                }
+            },
+            { "data": "fechaDesde",
+                "render": function ( data, type, row ) {
+                        return getLocalDateString(data);
+                }
+            },
+            { "data": "fechaHasta",
+                "render": function ( data, type, row ) {
+                        return getLocalDateString(data);
+                }
+            }
+        ]
+    } );
+
+}
+
 function cargarGraficoResumen(){
     var mes = $("#mes").val();
     var anio = $("#anio").val();
@@ -297,4 +350,53 @@ function cargarGraficoResumen(){
 
     });
 
+}
+
+function cargarResumen(){
+    cargarGraficoResumen();
+    cargarListadoResumen();
+}
+
+function loadPopupAddLeccion(idActividad){
+    $.ajax({
+        type: "GET",
+        url: getUrlContextPath() + "/actividades/" + idActividad + "/editar/agregarLeccionPopup",
+        //timeout de 2 minutos
+        timeout: 1000 * 120,
+        success: function(page){
+            $("#agregarLeccion").html(page);
+        },
+        error: undefined
+    });
+}
+
+function submitAddLeccionPopup(idActividad){
+    /*  Submit form using Ajax */
+    $('button[type=submit]').click(function(e) {
+
+        //Prevent default submission of form
+        e.preventDefault();
+
+        //Remove all errors
+        $('input').next().remove();
+
+        $.post({
+            url : getUrlContextPath() + '/actividades/' + 1 + '/editar/agregarLeccionPopup',
+            data : $('form[name=leccionForm]').serialize(),
+            success : function(response) {
+
+                if(response.errores == {}){
+                    //Set response
+                    $('#resultContainer pre code').text(JSON.stringify(res.employee));
+                    $('#resultContainer').show();
+
+                }else{
+                    //Set error messages
+                    $.each(response.errores,function(key,value){
+                        $('#leccionForm #' +key+']').after('<span class="error">'+value+'</span>');
+                    });
+                }
+            }
+        })
+    });
 }

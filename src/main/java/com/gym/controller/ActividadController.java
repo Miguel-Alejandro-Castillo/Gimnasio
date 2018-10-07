@@ -7,18 +7,22 @@ import com.gym.dao.ProfesorRepository;
 import com.gym.formatter.ProfesorEditor;
 import com.gym.model.*;
 import com.gym.util.NumberUtils;
+import com.gym.util.Response;
 import com.gym.validator.HorarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value="/actividades")
@@ -31,16 +35,7 @@ public class ActividadController {
     private ActividadRepository actividadRepository;
 
     @Autowired
-    private HorarioRepository horarioRepository;
-
-    @Autowired
     private ProfesorRepository profesorRepository;
-    
-    @Autowired
-	private CobroRepository cobroRepository;
-
-    @Autowired
-    private HorarioValidator horarioValidator;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showActividades(){
@@ -126,7 +121,7 @@ public class ActividadController {
     }
 
     @RequestMapping(value="/{id_actividad}/editar/agregarLeccion", method = RequestMethod.GET)
-    public ModelAndView showAgregarLeccionForm(@PathVariable(name = "id_actividad") String id_actividad){
+     public ModelAndView showAgregarLeccionForm(@PathVariable(name = "id_actividad") String id_actividad){
         ModelAndView mav = null;
         Long id = NumberUtils.toLong(id_actividad);
         Actividad actividad= actividadRepository.findOne(id);
@@ -134,6 +129,24 @@ public class ActividadController {
             mav= new ModelAndView("editar-actividad-agregar-leccion");
             Leccion leccion = new Leccion();
             mav.addObject("leccion", leccion);
+            mav.addObject("urlAction", "/actividades/" + id + "/editar/agregarLeccion");
+        }
+        else {
+            // renderizar a una vista que informe que no se envio un id de actividad en el path
+        }
+        return mav;
+    }
+
+    @RequestMapping(value="/{id_actividad}/editar/agregarLeccionPopup", method = RequestMethod.GET)
+    public ModelAndView showAgregarLeccionFormPopup(@PathVariable(name = "id_actividad") String id_actividad){
+        ModelAndView mav = null;
+        Long id = NumberUtils.toLong(id_actividad);
+        Actividad actividad= actividadRepository.findOne(id);
+        if(actividad != null) {
+            mav= new ModelAndView("editar-actividad-agregar-leccion-popup");
+            Leccion leccion = new Leccion();
+            mav.addObject("leccion", leccion);
+            mav.addObject("urlAction", "/actividades/" + id + "/editar/agregarLeccionPopup");
         }
         else {
             // renderizar a una vista que informe que no se envio un id de actividad en el path
@@ -154,6 +167,21 @@ public class ActividadController {
             mav = new ModelAndView("redirect:/actividades");
         }
         return mav;
+    }
+
+    @RequestMapping(value="/{id_actividad}/editar/agregarLeccionPopup", method = RequestMethod.POST)
+    public  @ResponseBody
+    Response submitAgregarLeccionPopup(@PathVariable(name = "id_actividad") String idActividad, @ModelAttribute("leccion") @Validated Leccion leccion, BindingResult result){
+          Response response = new Response();
+          if(result.hasErrors()){
+              Map<String, String> errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+              response.setErrores(errors);
+          }
+          else{
+              response.setData(leccion);
+              //guardar la leccion
+          }
+          return response;
     }
 
     @RequestMapping(value="/{idActividad}/delete", method = RequestMethod.DELETE, produces="application/json; charset=UTF-8")
