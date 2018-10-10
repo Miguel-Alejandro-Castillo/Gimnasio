@@ -6,51 +6,46 @@
 <link href="${templateCss}" rel="stylesheet"/>
 <fmt:setLocale value = "es_AR" scope="session"/>
 
-<div class="col-lg-9">
-	<div class="well">
-		<div class="row">
-			<div class="col-lg-10">
-				<h1 class="page-header">
-					<tiles:getAsString name="title" />
-				</h1>
-			</div>
-			
-			<div class="col-lg-2">
-				<spring:url value="/cobros/realizar" var="realizarCobro" />
-				<a href="${realizarCobro}">
-					<button class="upperButton btn-lg"><i class="fas fa-hand-holding-usd"></i> Realizar cobro</button>
-				</a>
-			</div>
-			
+
+<div class="well">
+	<div class="row">
+		<div class="col-lg-9">
+			<h1 class="page-header">
+				<tiles:getAsString name="title" />
+			</h1>
 		</div>
 
-			
-			
-					<table class="table table-condensed table-bordered"
-						id="dataTables-example">
-						<thead>
-							<tr>
-								<th>Fecha Pago</th>
-								<th>Actividad</th>
-								<th>Monto</th>
-								<th>Accion</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${cobros}" var="cobro">
-								
-									<tr class="odd gradeX">
-										<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss"
-												value="${cobro.momentoCobro}" /></td>
-										<td><c:out value="${cobro.actividad.nombre}"></c:out></td>
-										<td><fmt:formatNumber value="${cobro.monto}" type="currency" currencySymbol="$ " /></td>
-										<td></td>
-									</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
+		<div class="col-lg-3">
+			<spring:url value="/cobros/realizar" var="realizarCobro" />
+			<a href="${realizarCobro}">
+				<button class="btn upperButton"><i class="fas fa-hand-holding-usd"></i> Realizar cobro</button>
+			</a>
+		</div>
+
+	</div>
+
+	<table class="table table-striped table-bordered table-hover"
+		id="dataTables-example">
+		<thead>
+			<tr>
+				<th>Fecha Pago</th>
+				<th>Actividad</th>
+				<th>Monto</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${cobros}" var="cobro">
+				<tr class="odd gradeX">
+					<td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss"
+							value="${cobro.momentoCobro}" /></td>
+					<td><c:out value="${cobro.actividad.nombre}"></c:out></td>
+					<td><fmt:formatNumber value="${cobro.monto}" type="currency" currencySymbol="$ " /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+
 
 <spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
 <script src="${jqueryMin}"></script>

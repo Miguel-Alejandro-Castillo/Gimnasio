@@ -14,7 +14,8 @@
     <link href="${bootstrapMinCss}" rel="stylesheet"/>
     
     <!-- Custom CSS -->
-
+    <spring:url value="/resources/css/template.css" var="templateCss"/>
+    <link href="${templateCss}" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
     <spring:url value="/resources/css/fontawesome.min.css" var="fontAwesomeMin"/>
@@ -31,17 +32,15 @@
 </head>
 
 
-
-		<div class= "row">
-		
-         <tiles:insertAttribute name="menu" />
-		
-		
-        
-             <tiles:insertAttribute name="main" />
-             	
-             
-             
+<body>
+		<div class= "row" style="width: 1350px">
+            <div class="col-lg-2">
+                <tiles:insertAttribute name="menu" />
+            </div>
+            <div class="col-lg-1"style="color:white"></div>
+            <div class="col-lg-9">
+                <tiles:insertAttribute name="main" />
+            </div>
         </div>
 
          <!-- jQuery -->
@@ -79,4 +78,5 @@
          
          </script>
 
+</body>
 </html>

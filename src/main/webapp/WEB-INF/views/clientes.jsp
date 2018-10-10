@@ -7,37 +7,30 @@
 <spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
 <link href="${jqueryConfirmCss}" rel="stylesheet"/>
 
-<div class="col-lg-9">
-	<c:if test="${not empty success_pago}">
-		<div id="alert-pago"
-			class="alert alert-success alert-dismissible fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			<strong>${success_pago}</strong>
-		</div>
 
+	<c:if test="${not empty success_pago}">
 		<script>
 			$(document).ready(function() {
-				window.setTimeout(function() {
-					$("#alert-pago").fadeTo(1500, 0).slideUp(500, function() {
-						$(this).hide();
-					});
-				}, 2500);
+                $.alert({
+                    title: '',
+					content: '<strong style="font-size: 20px;">El pago se registró con Éxito!</strong>',
+                    type: 'green',
+                });
 			});
 		</script>
-
 	</c:if>
 
 	<div class="well">
 		<div class="row">
-			<div class="col-lg-10">
+			<div class="col-lg-9">
 				<h1 class="page-header">
 					<tiles:getAsString name="title" />
 				</h1>
 			</div>
-			<div class="col-lg-2">
+			<div class="col-lg-3">
 				<spring:url value="/clientes/crear" var="crearCliente" />
 				<a href="${crearCliente}">
-					<button class="upperButton btn-lg"><i class="fa fa-user-plus"></i> Nuevo Cliente</button>
+					<button class="btn upperButton"><i class="fas fa-user-plus"></i>Nuevo Cliente</button>
 				</a>
 			</div>
 		</div>
@@ -65,15 +58,14 @@
 								<td style="text-align: center;"><spring:url
 										value="/clientes/${cliente.id}/clienteDetalle"
 										var="urlClienteDetalle" /> <a href="${urlClienteDetalle}"
-									data-toggle="tooltip" title="Detalle"><i
-										class="fa fa-info-circle"
-										style="font-size: 24px; color: blue; padding-right: 10px; padding-left: 10px;"></i></a>
+									data-toggle="tooltip" title="Detalle">
+									<i class="fas fa-info-circle menuIcon blue"></i></a>
 									<spring:url value="/clientes/${cliente.id}/pagar" var="urlPagar" />
-									<a href="${urlPagar}" data-toggle="tooltip" title="Pagar"><i class="fas fa-money-bill-wave"
-										style="font-size: 24px; color: green; padding-right: 10px; padding-left: 10px;"></i></a>
+									<a href="${urlPagar}" data-toggle="tooltip" title="Pagar">
+										<i class="fas fa-money-bill-wave menuIcon green"></i>
+									</a>
 								     <a onclick="deleteCliente(${cliente.id})"><i
-										class="fas fa-trash-alt"
-										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i></a>
+										class="fas fa-trash-alt menuIcon"></i></a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -90,11 +82,10 @@
 
 <script>
    	$(document).ready(function(){
-   		
 	   $('#dataTables-example').DataTable(
-	      		{
-	      				responsive: true
-	      		});
+			{
+					responsive: true
+			});
    	});
 </script>
 

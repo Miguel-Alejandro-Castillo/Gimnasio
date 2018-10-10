@@ -1,32 +1,5 @@
-
-Nuevo Modelo:
-	-DiaHorarioProfesor eliminado, Actividad ahora tiene un Profesor pareja, Cada actividad tiene un conjunto de DiaHorarios, o "Lecciones"
-	que se van a crear y guardar en cada Actividad, es decir cuando esta se elimine, tambien se eliminaran sus Lecciones.
-	-El script de SQL ya no confiable, debido a que faltan varios campos nuevos.
-
--arreglar la logica de la lista de home - LISTO
--Arreglar links a pagos para que muestren fechas default - LISTO
--abm de cobro - LISTO
--pago areglado - LISTO
--arreglar el active del navbar - LISTO
-
-Urgente
--Arreglar Agregar Leccion/Clase. (los atributos horaInicio, horaFin en el formulario de horario quedan en null por algun motivo).
--baja de actividad (si un cliente pago una actividad que fue eliminada, esta tiene que figurar en los pagos!!)
--baja de profesor, añadir el boton en detalle. si se elimino un profesor, sus cobros asociados deben permanecer intactos!
--baja de cliente, añadir el boton en detalle, sus pagos deben permanecer intactos!
--Revisar las asociacion de profesores con actividades( chequear modelo con cardinalidad )
--------
-
-
--eliminar validador de horarios solapados, conservar el de horario fin debe ser mayor a horario inicio
--En la vista de pagos, el input de monto a pagar debe ser automaticamente llenado cuando se seleccione una actividad con su monto correspondiente, no obstante, debe permanecer editable
-- editar actividad vista -> el select del profesor tiene que estar por default el profe actual
-
--cambiar los atributos telefono, direccion, email y dni para que sean opcionales
--Añadir atributo comentario y boolean "tiene ficha medica" en cliente
-- Eliminar Vista de Horarios y Repositorio de estos eliminado, la vista de horarios ahora tiene que mostrar la lista de Lecciones con sus respectivas Actividades y Profesores
 -Instalar debian en la maquina 
+-Reemplazar el formulario de creacion de actividad por una consulta AJAX
 
 
 

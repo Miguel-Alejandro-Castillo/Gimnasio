@@ -37,7 +37,7 @@
     <!-- Definicion pantalla  para editar un cliente-->
     <definition name="editar-cliente" extends="default-template">
         <put-attribute name="title" value="Editar cliente" cascade="true"/>
-        <put-attribute name="main"	value="/WEB-INF/views/clienteEditar.jsp" />
+        <put-attribute name="main"	value="/WEB-INF/views/cliente.jsp" />
         <put-attribute name="titleSubmit" value="Modificar datos" cascade="true" />
     </definition>
 

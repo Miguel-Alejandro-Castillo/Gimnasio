@@ -1,15 +1,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
-
-<div class="col-lg-9">
-	<div class="well">
+<div class="well">
+	<div class="headerWrapper">
 		<h1 class="page-header">
 			<tiles:getAsString name="title" />
 		</h1>
-		<div class="panel panel-default">
-			<div class="panel-body">
+		<spring:url value="/profesores" var="atras"/>
+		<a href="${atras}">
+			<button class="btn backButton"><i class="fas fa-arrow-left"></i> Atras</button>
+		</a>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
 				<div class="col-lg-6">
 					<spring:url value="" var="urlActual" />
 					<form:form id="profesorForm" modelAttribute="profesor"
@@ -48,7 +52,6 @@
 							<form:errors path="dni" cssClass="errorMessage" />
 						</div>
 				</div>
-
 				<div class="col-lg-6">
 					<div class="form-group">
 						<form:label path="telefono">Telefono</form:label>
@@ -72,7 +75,6 @@
 						</div>
 						</form:form>
 					</div>
-
 				</div>
 			</div>
 		</div>

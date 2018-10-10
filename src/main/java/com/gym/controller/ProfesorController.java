@@ -1,6 +1,8 @@
 package com.gym.controller;
 
+import com.gym.dao.CobroRepository;
 import com.gym.dao.ProfesorRepository;
+import com.gym.model.Cobro;
 import com.gym.model.Profesor;
 import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +25,9 @@ public class ProfesorController {
 
     @Autowired
     private ProfesorRepository profesorRepository;
+
+    @Autowired
+    private CobroRepository cobroRepository;
 
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showProfesores(){
@@ -41,9 +48,12 @@ public class ProfesorController {
     	ModelAndView mav = null;
     	Long id = NumberUtils.toLong(id_profesor);
     	Profesor profesor = profesorRepository.findOne(id);
+        List<Cobro> cobrosProfesor;
     	if(profesor != null) {
     		mav = new ModelAndView("detalle-profesor");
-    		mav.addObject("profesor", profesor);
+    		cobrosProfesor = this.cobroRepository.findByProfesorId(profesor.getId());
+            mav.addObject("profesor", profesor);
+    		mav.addObject("cobros", cobrosProfesor);
     	}
         else{
             //renderizar una vista que informe que el profesor con id igual id_profesor no existe

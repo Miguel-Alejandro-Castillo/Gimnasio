@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="col-lg-9">
+
 	<div class="well">
 		<h1 class="page-header">
 			<tiles:getAsString name="title" />
@@ -46,4 +46,3 @@
 			
 			<!-- Boton de Submit -->
 		</div>
-</div>

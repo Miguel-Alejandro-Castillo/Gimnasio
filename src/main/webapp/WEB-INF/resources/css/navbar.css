@@ -20,7 +20,7 @@ a:visited {
 	position: fixed;
 	height: 100%;
 	overflow: auto;
-	 text-align: left;
+	text-align: left;
 }
 
 .navi li {
@@ -37,10 +37,14 @@ a:visited {
 
 .navibtn{
 	display: block;
-	color: #000;
 	padding: 8px 16px;
 	text-decoration: none;
 	margin:25px;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: cornflowerblue;
+	color:white;
+	margin-top:0px
 }
 
 

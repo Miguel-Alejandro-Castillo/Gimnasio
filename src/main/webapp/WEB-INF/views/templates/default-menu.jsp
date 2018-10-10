@@ -6,13 +6,13 @@
 <spring:url value="/resources/css/all.css" var="fontAwesomeMin"/>
     <link href="${fontAwesomeMin}" rel="stylesheet"/>
 
-<div class="col-lg-2" style="margin-left: 10px;">
+
 
 	<ul class="navi">
 		<spring:url value="/home" var="home"></spring:url>
-		<li><a href="${home}"
-			style="height: 80px; color: white; background-color: cornflowerblue; font-size: 20px;">El
-				Deposito</a></li>
+		<li><a href="${home}" style="height: 80px;color: white;background-color: cornflowerblue;font-size: 20px;font-weight:bold">El Deposito</a></li>
+
+		<hr>
 
 		<spring:url value="/home" var="home"></spring:url>
 		<li><a href="${home}"><i class="fas fa-home gly"></i>Inicio</a></li>
@@ -39,17 +39,12 @@
 		<li>
 		<spring:url value="/logout" var="logout"/>
 		<form action="${logout}" method="post">
-        	<a><button type="submit" class="navibtn" style="background-color: cornflowerblue;color:white;margin-top:0px" >
-        	<i class="fas fa-sign-out-alt gly"></i> 
-        	Logout</button></a>
+        	<a>
+				<button type="submit" class="btn navibtn"><i class="fas fa-sign-out-alt gly"></i>Salir</button>
+			</a>
         </form>
 		</li>			
 	</ul>
-
-</div>
-
-		
-
 
 
 <spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
@@ -68,7 +63,7 @@ function setNavigation() {
 
     $(".navi a").each(function () {
         var href = $(this).attr('href');	
-        if (path === href) {
+        if ((path === href)) {
             $(this).closest('li').addClass('active');
       }
         
