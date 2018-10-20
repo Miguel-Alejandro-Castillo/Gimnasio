@@ -184,6 +184,47 @@ function deleteCliente(idCliente){
     });
 }
 
+function deleteLeccion(idActividad, idLeccion, row){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: '¿Esta seguro que desea borrar esta Leccion?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: getUrlContextPath() +  '/actividades/' + idActividad + '/leccion/' + idLeccion + '/delete' ,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'La Leccion se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                        var table = $('#tableLecciones').DataTable();
+                                        table.row(row).remove().draw();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'La Leccion no se ha eliminado correctamente.'});
+                        }
+
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
+            }
+        }
+    });
+}
+
 function deleteActividad(idActividad){
     $.confirm({
         title: 'Confirmar borrado',
@@ -370,33 +411,72 @@ function loadPopupAddLeccion(idActividad){
     });
 }
 
+function resetForm(form){
+    //Reset form
+    $(form).trigger("reset");}
+
 function submitAddLeccionPopup(idActividad){
     /*  Submit form using Ajax */
-    $('button[type=submit]').click(function(e) {
+    $.post({
+        url : getUrlContextPath() + '/actividades/' + idActividad + '/editar/agregarLeccionPopup',
+        data : $('#addLeccionForm').serialize(),
+        success : function(response) {
 
-        //Prevent default submission of form
-        e.preventDefault();
+            if(jQuery.isEmptyObject( response.errores )){
+              //Ocultar modal
+               $('#modalAgregarLeccion').modal('toggle');
+                //Actualizar rows de la tabla
+                 var table = $('#tableLecciones').DataTable( {
+                    responsive: true,
+                    destroy: true,
+                    data: response.data.lecciones,
+                    columns: [
+                        { data: "dia" },
+                        { data: "horaInicio" },
+                        { data: "horaFin" },
+                        { targets: -1, data: null, defaultContent: "<a><i class=\"fas fa-trash-alt\" style=\"font-size: 24px; padding-right: 10px; padding-left: 10px;\"></i> </a>"}
 
-        //Remove all errors
-        $('input').next().remove();
+                    ]
 
-        $.post({
-            url : getUrlContextPath() + '/actividades/' + 1 + '/editar/agregarLeccionPopup',
-            data : $('form[name=leccionForm]').serialize(),
-            success : function(response) {
+                } );
+                $('#tableLecciones tbody').on( 'click', 'a', function () {
+                    var row = $(this).parents('tr');
+                    var index = table.row(row).index();
+                    var lecciones = table.rows().data();
+                    deleteLeccion(idActividad, lecciones[index].id, row);
 
-                if(response.errores == {}){
-                    //Set response
-                    $('#resultContainer pre code').text(JSON.stringify(res.employee));
-                    $('#resultContainer').show();
+                } );
+                //Limpiar inputs del formulario de la ventana modal
+                resetForm('#addLeccionForm');
+                $.get(getUrlContextPath() + '/actividades/' + idActividad + '/detalle');
 
-                }else{
-                    //Set error messages
-                    $.each(response.errores,function(key,value){
-                        $('#leccionForm #' +key+']').after('<span class="error">'+value+'</span>');
-                    });
-                }
+            }else{
+                //Remove all errors
+                $('input').next().remove();
+                //Set error messages
+                $.each(response.errores,function(key,value){
+                    $('#addLeccionForm #' +key+']').after('<span class="error">'+value+'</span>');
+                });
             }
-        })
+        }
     });
+
+}
+function addLeccionPopup(idActividad) {
+
+        $('#addLeccionForm').parsley({
+            successClass: 'has-success',
+            errorClass: 'has-error',
+            classHandler: function(el) {
+                return el.$element.closest(".form-group");
+            },
+            errorsContainer: function(el) {
+                return el.$element.closest('.form-group');
+            },
+            errorsWrapper: '<span class="help-block"></span>',
+            errorTemplate: "<span></span>"
+        }).on('form:submit', function () {
+            submitAddLeccionPopup(idActividad);
+            return false; // Don't submit form for this demo
+        });
 }

@@ -81,7 +81,7 @@ public class Leccion {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = 0;
         result = 31 * result + (dia != null ? dia.hashCode() : 0);
         result = 31 * result + (horaInicio != null ? horaInicio.hashCode() : 0);
         result = 31 * result + (horaFin != null ? horaFin.hashCode() : 0);

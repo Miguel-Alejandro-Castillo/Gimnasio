@@ -1,6 +1,5 @@
 package com.gym.model;
 
-
 import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,11 +28,11 @@ public class Actividad extends BaseEntity{
     private Profesor profesor;
    
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Leccion> lecciones;
+	private Set<Leccion> lecciones ;
 
     public Actividad() {
     	super();
-		lecciones = new HashSet<Leccion>();
+		this.lecciones = new HashSet<Leccion>();
     }
     
     public Actividad(Long id, String nombre, BigDecimal costo, Profesor profesor) {
