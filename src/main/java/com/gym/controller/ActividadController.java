@@ -168,19 +168,20 @@ public class ActividadController {
         return mav;
     }
 
-    @RequestMapping(value="/{id_actividad}/editar/agregarLeccionPopup", method = RequestMethod.POST)
+    @RequestMapping(value="/{idActividad}/editar/agregarLeccionPopup", method = RequestMethod.POST)
     public  @ResponseBody
-    Response submitAgregarLeccionPopup(@PathVariable(name = "id_actividad") String idActividad, @ModelAttribute("leccion") @Validated Leccion leccion, BindingResult result){
+    Response submitAgregarLeccionPopup(@PathVariable Long idActividad, @ModelAttribute("leccion") @Validated Leccion leccion, BindingResult result){
           Response response = new Response();
           if(result.hasErrors()){
               Map<String, String> errors = result.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
               response.setErrores(errors);
           }
           else{
-              Actividad actividad = this.actividadRepository.findOne(Long.valueOf(idActividad));
+              Actividad actividad = this.actividadRepository.findOne(idActividad);
+              leccion = this.leccionRepository.save(leccion);
               actividad.getLecciones().add(leccion);
-              actividad = this.actividadRepository.save(actividad);
-              response.setData(actividad);
+              this.actividadRepository.save(actividad);
+              response.setData(leccion);
           }
           return response;
     }

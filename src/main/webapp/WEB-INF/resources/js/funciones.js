@@ -423,32 +423,16 @@ function submitAddLeccionPopup(idActividad){
         success : function(response) {
 
             if(jQuery.isEmptyObject( response.errores )){
-              //Ocultar modal
+                var leccionAgregada = response.data;
+               //Ocultar modal
                $('#modalAgregarLeccion').modal('toggle');
-                //Actualizar rows de la tabla
-                 var table = $('#tableLecciones').DataTable( {
-                    responsive: true,
-                    destroy: true,
-                    data: response.data.lecciones,
-                    columns: [
-                        { data: "dia" },
-                        { data: "horaInicio" },
-                        { data: "horaFin" },
-                        { targets: -1, data: null, defaultContent: "<a><i class=\"fas fa-trash-alt\" style=\"font-size: 24px; padding-right: 10px; padding-left: 10px;\"></i> </a>"}
+                //Agregar row en la tabla
+                var table = $('#tableLecciones').DataTable();
+                table.row.add( [ leccionAgregada.dia, leccionAgregada.horaInicio, leccionAgregada.horaFin,
+                                 "<a onclick=\"deleteLeccion(" + idActividad + ", " + leccionAgregada.id + ", $(this).parent().parent())\"><i class=\"fas fa-trash-alt\" style=\"font-size: 24px; padding-right: 10px; padding-left: 10px;\"></i> </a>"] ).draw();
 
-                    ]
-
-                } );
-                $('#tableLecciones tbody').on( 'click', 'a', function () {
-                    var row = $(this).parents('tr');
-                    var index = table.row(row).index();
-                    var lecciones = table.rows().data();
-                    deleteLeccion(idActividad, lecciones[index].id, row);
-
-                } );
                 //Limpiar inputs del formulario de la ventana modal
                 resetForm('#addLeccionForm');
-                $.get(getUrlContextPath() + '/actividades/' + idActividad + '/detalle');
 
             }else{
                 //Remove all errors
