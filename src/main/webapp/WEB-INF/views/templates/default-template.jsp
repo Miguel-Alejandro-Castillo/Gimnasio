@@ -32,15 +32,13 @@
 </head>
 
 
-<body>
-		<div class= "row" style="width: 1350px">
-            <div class="col-lg-2">
-                <tiles:insertAttribute name="menu" />
-            </div>
-            <div class="col-lg-1"style="color:white"></div>
-            <div class="col-lg-9">
-                <tiles:insertAttribute name="main" />
-            </div>
+		<div class= "row">
+		
+         <tiles:insertAttribute name="menu" />
+
+         <tiles:insertAttribute name="main" />
+
+
         </div>
 
          <!-- jQuery -->
@@ -69,6 +67,9 @@
 
          <spring:url value="/resources/js/jquery-confirm.min.js" var="jqueryConfirmJs" />
          <script src="${jqueryConfirmJs}"></script>
+
+         <spring:url value="/resources/js/date-euro.js" var="dateEuro" />
+         <script src="${dateEuro}"></script>
 
          <!-- Page-Level Demo Scripts - Tables - Use for reference -->
          <script>

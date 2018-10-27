@@ -2,6 +2,7 @@ package com.gym.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Lenmie 04/08/18
@@ -15,6 +16,7 @@ public class Leccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "{campo.obligatorio}")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Dia dia;

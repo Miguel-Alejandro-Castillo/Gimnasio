@@ -25,6 +25,10 @@
             <i class="fas fa-user-plus" style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
         </a>
 
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#agregarLeccion" onclick="loadPopupAddLeccion(${actividad.id})">
+                agregar leccion
+            </button>
+
 
         <!-- Trigger the modal with a button -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editarActividad">
@@ -56,26 +60,29 @@
             </div>
         </div>
 
-        <div id="agregarLeccion" class="modal face" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3>Agregar Leccion</h3>
-                    </div>
-                    <div class="modal-body">
-                        <form id="leccionForm" modelAttribute="leccion" action="" method="post" role="form" novalidate="novalidate" accept-charset="UTF-8">
-                            <select id="dia" name="dia">
-                                <c:forEach items="${dias}" var="dia">
-                                    <option value="${dia.nombre}"><c:out value="dia.nombre"/></option>
-                                </c:forEach>
-                            </select>
-                            <label>Hora Inicio</label>
-                            <input path="leccion.horaInicio" type="time"/>
-                            <label>Hora Fin</label>
-                            <input path="leccion.horaFin" type="time"/>
-                            <input type="submit" value="Finalizar">
-                        </form>
+
+            <div id="agregarLeccion" class="modal face" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3>Agregar Leccion</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form id="leccionForm" modelAttribute="leccion" action="" method="post" role="form" novalidate="novalidate" accept-charset="UTF-8">
+                                <select id="dia" name="dia">
+                                    <c:forEach items="${dias}" var="dia">
+                                        <option value="${dia.nombre}"><c:out value="dia.nombre"/></option>
+                                    </c:forEach>
+                                </select>
+                                <label for="horaInicio">Hora Inicio</label>
+                                <input id="horaInicio" name="horaInicio" type="time"/>
+                                <label for="horaFin">Hora Fin</label>
+                                <input path="horaFin" type="time"/>
+                                <input type="submit" value="Finalizar">
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>

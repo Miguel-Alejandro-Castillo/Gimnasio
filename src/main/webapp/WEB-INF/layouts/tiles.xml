@@ -74,12 +74,23 @@
         <put-attribute name="main"	value="/WEB-INF/views/actividad.jsp" />
         <put-attribute name="titleSubmit" value="Finalizar Edicion de Actividad" cascade="true" />
     </definition>
-    
+
     <!-- Definicion pantalla  para añadir un horario-->
     <definition name="editar-actividad-agregar-leccion" extends="default-template">
         <put-attribute name="title" value="Editar Actividad" cascade="true"/>
-        <put-attribute name="main"	value="/WEB-INF/views/actividadAddLeccion.jsp" />
+        <put-attribute name="main">
+           <definition template="/WEB-INF/views/actividadAddLeccion.jsp" >
+               <put-attribute name="script" value=""/>
+           </definition>
+        </put-attribute>
         <put-attribute name="titleSubmit" value="Finalizar agregado de leccion" cascade="true" />
+        <put-attribute name="script" value="" cascade="true"/>
+    </definition>
+
+    <!-- Definicion pantalla popup para añadir una leccion-->
+    <definition name="editar-actividad-agregar-leccion-popup" template="/WEB-INF/views/actividadAddLeccion.jsp">
+        <put-attribute name="titleSubmit" value="Agregar leccion"/>
+        <put-attribute name="script" value="/WEB-INF/views/scriptActividadAddLeccionPopup.jsp"/>
     </definition>
 
     <!-- Definicion pantalla para listar las actividades -->

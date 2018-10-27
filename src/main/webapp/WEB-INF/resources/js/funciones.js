@@ -13,6 +13,14 @@ function getMoneyString(number){
                                            minimumFractionDigits: 2});
 }
 
+function getLocalDateString(date){
+    return (new Date(date)).toLocaleDateString('es-ar');
+}
+
+function getLocalDateTimeString(date){
+    return (new Date(date)).toLocaleString('es-ar');
+}
+
 function GET(url, functionSuccess, functionError){
     $.ajax({
         type: "GET",
@@ -252,103 +260,143 @@ function submitAjax(url) {
 
 }
 
+function cargarListadoResumen(){
+    var mes = $("#mes").val();
+    var anio = $("#anio").val();
+    var idActividad = $("#idActividad").val();
+    var urlCompleta = getUrlContextPath() + "/resumen/cargarListadoResumen?" + "mes=" +  mes + "&anio=" + anio + "&idActividad=" + idActividad;
+    $('#dataTables-resumen').DataTable( {
+        "processing": true,
+        destroy: true,
+        "ajax": urlCompleta,
+        columnDefs: [
+            { type: 'date-euro', targets: [0, 5, 6] },
+        ],
+        "columns": [
+            { "data": "momentoPago",
+                "render": function ( data, type, row ) {
+                        return getLocalDateTimeString(data);
+                }
+            },
+            { "data": "cliente" },
+            { "data": "actividad" },
+            { "data": "montoAPagar",
+               "render": function ( data, type, row ) {
+                    return getMoneyString(data);
+                }
+            },
+            { "data": "montoPagado",
+                "render": function ( data, type, row ) {
+                    return getMoneyString(data);
+                }
+            },
+            { "data": "fechaDesde",
+                "render": function ( data, type, row ) {
+                        return getLocalDateString(data);
+                }
+            },
+            { "data": "fechaHasta",
+                "render": function ( data, type, row ) {
+                        return getLocalDateString(data);
+                }
+            }
+        ]
+    } );
+
+}
+
 function cargarGraficoResumen(){
     var mes = $("#mes").val();
     var anio = $("#anio").val();
     var idActividad = $("#idActividad").val();
-    var urlCompleta = getUrlContextPath() + "/resumen/";
-    if(mes == "") {
-        urlCompleta = urlCompleta + "cargarGraficoResumenAnual?" + "anio=" + anio + "&idActividad=" + idActividad;
-        $.ajax({
-            type: "GET",
-            url: urlCompleta,
-            timeout: 600000,
-            success: function (ganancias) {
-               var  ganancias = ganancias.map(function (ganancia) {
-                    return ganancia[1];
-                });
-                var totalRecaudado = ganancias.reduce(function(total, ganancia){
-                  return total + ganancia
-                }, 0);
-                var myConfig = {
-                    type: "bar",
-                    scaleX: {
-                        label: {
-                            text: "Resumen anual"
-                        },
-                        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-                    },
-                    series: [
-                        {
-                            values: ganancias
-                        }
-                    ]
-                };
+    var urlCompleta = "/resumen/cargarGraficoResumen?" + "mes=" +  mes + "&anio=" + anio + "&idActividad=" + idActividad;
 
-                zingchart.render({
-                    id: 'graficoBarras',
-                    data: myConfig,
-                    height: "70%",
-                    width: "100%"
-                });
-
-                $("#totalRecaudado").html("<span> Total recaudado: " + getMoneyString(totalRecaudado) + "</span>");
-
-            },
-            error: function (e) {
-            }
+    GET(urlCompleta, function (resultado) {
+        var labels = resultado.map(function(elem){
+            return elem[0];
         });
-    }
-    else{
-        urlCompleta = urlCompleta + "cargarGraficoResumenMensual?" + "anio=" + anio + "&mes=" + mes + "&idActividad=" + idActividad;
-        $.ajax({
-            type: "GET",
-            url: urlCompleta,
-            timeout: 600000,
-            success: function (ganancias) {
-                var labels = ganancias.map(function (ganancia) {
-                    return ganancia[0];
-                });
-                var series = ganancias.map(function (ganancia) {
-                    return ganancia[1];
-                });
 
-                var totalRecaudado = series.reduce(function(total, ganancia){
-                    return total + ganancia
-                }, 0);
-                var myConfig = {
-                    type: "bar3d",
-                    scaleX: {
-                        label: {
-                            text: "Resumen Mensual"
-                        },
-                        labels: labels
-                    },
-                    series: [
-                        {
-                            values: series
-                        }
-                    ]
-                };
-
-                zingchart.render({
-                    id: 'graficoBarras',
-                    data: myConfig,
-                    height: "70%",
-                    width: "100%"
-                });
-
-                $("#totalRecaudado").html("<span> Total recaudado: " + totalRecaudado.toLocaleString('es-ar', {
-                    style: 'currency',
-                    currency: 'ARS',
-                    minimumFractionDigits: 2
-                }) + "</span>");
-
-            },
-            error: function (e) {
-            }
+        var  ganancias = resultado.map(function (elem) {
+            return elem[1];
         });
-    }
 
+        var totalRecaudado = ganancias.reduce(function(total, ganancia){
+            return total + ganancia;
+        }, 0);
 
+        var myConfig = {
+            type: "bar",
+            scaleX: {
+                label: {
+                    text: "Resumen"
+                },
+                labels: labels
+            },
+            series: [
+                {
+                    values: ganancias
+                }
+            ]
+        };
+
+        zingchart.render({
+            id: 'graficoBarras',
+            data: myConfig,
+            height: "70%",
+            width: "100%"
+        });
+
+        $("#totalRecaudado").html("<span> Total recaudado: " + getMoneyString(totalRecaudado) + "</span>");
+
+    });
+
+}
+
+function cargarResumen(){
+    cargarGraficoResumen();
+    cargarListadoResumen();
+}
+
+function loadPopupAddLeccion(idActividad){
+    $.ajax({
+        type: "GET",
+        url: getUrlContextPath() + "/actividades/" + idActividad + "/editar/agregarLeccionPopup",
+        //timeout de 2 minutos
+        timeout: 1000 * 120,
+        success: function(page){
+            $("#agregarLeccion").html(page);
+        },
+        error: undefined
+    });
+}
+
+function submitAddLeccionPopup(idActividad){
+    /*  Submit form using Ajax */
+    $('button[type=submit]').click(function(e) {
+
+        //Prevent default submission of form
+        e.preventDefault();
+
+        //Remove all errors
+        $('input').next().remove();
+
+        $.post({
+            url : getUrlContextPath() + '/actividades/' + 1 + '/editar/agregarLeccionPopup',
+            data : $('form[name=leccionForm]').serialize(),
+            success : function(response) {
+
+                if(response.errores == {}){
+                    //Set response
+                    $('#resultContainer pre code').text(JSON.stringify(res.employee));
+                    $('#resultContainer').show();
+
+                }else{
+                    //Set error messages
+                    $.each(response.errores,function(key,value){
+                        $('#leccionForm #' +key+']').after('<span class="error">'+value+'</span>');
+                    });
+                }
+            }
+        })
+    });
 }

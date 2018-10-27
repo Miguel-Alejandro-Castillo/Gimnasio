@@ -3,6 +3,7 @@ package com.gym.controller;
 import com.gym.dao.ActividadRepository;
 import com.gym.dao.PagoRepository;
 import com.gym.model.Actividad;
+import com.gym.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,6 @@ import com.gym.dao.ClienteRepository;
 import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import com.gym.util.NumberUtils;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -36,91 +34,13 @@ public class ResumenController{
 		mav.addObject("clientes", clientes);
 		List<Actividad> actividades = actividadRepository.findAll();
 		mav.addObject("actividades", actividades);
+		List<Integer> anios = this.pagoRepository.aniosConAlMenosUnPago();
+		mav.addObject("anios", anios);
 		return mav;
 	}
 
-	@RequestMapping(value="/resumen/cargarGraficoResumenAnual{idActividad}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody  List<Object []> cargarGraficoResumenAnual(
-			@RequestParam(value = "anio", required = false) Integer anio,
-			@RequestParam(value = "idActividad", required = false) Integer idActividad) {
-		if(anio != null && idActividad != null){
-			return pagoRepository.findGananciasByAnioAndIdActividad(anio, idActividad);
-		}
-		else{
-			if( anio != null && idActividad == null){
-				return pagoRepository.findGananciasByAnio(anio);
-			}
-			else{
-				return new ArrayList<Object[]>();
-			}
-		}
-
-	}
-
-	@RequestMapping(value="/resumen/cargarGraficoResumenMensual", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody  List<Object []> cargarGraficoResumenMensual(
-			@RequestParam(value = "anio", required = false) Integer anio,
-			@RequestParam(value = "mes", required = false) Integer mes,
-			@RequestParam(value = "idActividad", required = false) Integer idActividad) {
-		List<Object []> gananciasMes = new ArrayList<Object []>();
-		if(anio != null && mes != null && idActividad != null){
-			gananciasMes = pagoRepository.findGananciasByAnioAndMesAndIdActividad(anio, mes, idActividad);
-
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(anio, mes - 1, 1);
-			int lastDayMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-			for (int day = 1; day <= lastDayMonth; day++) {
-				boolean encontreDia = false;
-				for (Object[] diaGanancia : gananciasMes) {
-					if ((int) diaGanancia[0] == day) {
-						encontreDia = true;
-						break;
-					}
-				}
-				if (!encontreDia) {
-					Object[] newGananciaMes = {day, new BigDecimal(0)};
-					gananciasMes.add(day - 1, newGananciaMes);
-				}
-			}
-
-		}
-		else {
-			if(anio != null && mes != null && idActividad == null) {
-				gananciasMes = pagoRepository.findGananciasByAnioAndMes(anio, mes);
-
-				Calendar calendar = Calendar.getInstance();
-				calendar.set(anio, mes - 1, 1);
-				int lastDayMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-				for (int day = 1; day <= lastDayMonth; day++) {
-					boolean encontreDia = false;
-					for (Object[] diaGanancia : gananciasMes) {
-						if ((int) diaGanancia[0] == day) {
-							encontreDia = true;
-							break;
-						}
-					}
-					if (!encontreDia) {
-						Object[] newGananciaMes = {day, new BigDecimal(0)};
-						gananciasMes.add(day - 1, newGananciaMes);
-					}
-				}
-			}
-			else{
-				//
-			}
-		}
-
-		return gananciasMes;
-	}
-
-	@RequestMapping(value="/resumen/cargarGraficoResumenMesualAnualActividad/{anio}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody  List<Object []> cargarGraficoResumen(@PathVariable Integer anio) {
-		return pagoRepository.findGananciasByAnio(anio);
-	}
-
-     /*
-	@RequestMapping( value = "/resumen/cargarGraficoResumen/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody  Object cargarGraficoResumen(@PathVariable Integer mes, @PathVariable Integer anio, @PathVariable Long idActividad) {
+	@RequestMapping( value = "/resumen/cargarGraficoResumen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody  List<Object[]> cargarGraficoResumen(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio, @RequestParam(name = "idActividad", required = false) Long idActividad) {
 		if(anio == null){
 			return this.pagoRepository.gananciasAnuales(mes, idActividad);
 		}
@@ -132,9 +52,25 @@ public class ResumenController{
 				return this.pagoRepository.gananciasDiarias(anio, mes, idActividad);
 			}
 		}
+	}
+
+	@RequestMapping( value = "/resumen/cargarListadoResumen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Response cargarListadoResumen(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio, @RequestParam(name = "idActividad", required = false) Long idActividad) {
+
+		if(anio == null){
+			return new Response(this.clienteRepository.listadoGananciasAnuales(mes, idActividad));
+		}
+		else{
+			if(mes == null){
+				return new Response(this.clienteRepository.listadoGananciasMensuales(anio, idActividad));
+			}
+			else{
+				return new Response(this.clienteRepository.listadoGananciasDiarias(anio, mes, idActividad));
+			}
+		}
 
 	}
-	*/
+
 
 	@RequestMapping(value="/{id_pago}/detalle", method = RequestMethod.GET)
 	public ModelAndView showPagoDetalle(@PathVariable(name = "id_pago") String id_pago){
