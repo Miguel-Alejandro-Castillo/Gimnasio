@@ -71,6 +71,9 @@
          <spring:url value="/resources/js/date-euro.js" var="dateEuro" />
          <script src="${dateEuro}"></script>
 
+         <spring:url value="/resources/js/parsley.min.js" var="parsleyMin" />
+         <script src="${parsleyMin}"></script>
+
          <!-- Page-Level Demo Scripts - Tables - Use for reference -->
          <script>
              $(document).ready(function() {

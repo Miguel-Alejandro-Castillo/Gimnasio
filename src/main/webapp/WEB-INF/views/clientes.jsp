@@ -76,10 +76,6 @@
 	</div>
 </div>
 
-
-<spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
-<script src="${jqueryMin}"></script>
-
 <script>
    	$(document).ready(function(){
 	   $('#dataTables-example').DataTable(

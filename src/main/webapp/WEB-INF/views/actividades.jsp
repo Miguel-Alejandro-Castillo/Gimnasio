@@ -62,13 +62,11 @@
 <spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
 <script src="${jqueryMin}"></script>
 
+
 <script>
 	$(document).ready(function() {
 		$('#dataTables-example').DataTable({
-			responsive : true,
-			"paging" : false,
-			"ordering" : false,
-			"info" : false
+			responsive : true
 		});
 	});
 </script>
