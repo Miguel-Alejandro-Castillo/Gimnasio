@@ -32,7 +32,7 @@ public class Actividad extends BaseEntity{
 
     public Actividad() {
     	super();
-		this.lecciones = new HashSet<Leccion>();
+		this.lecciones = new HashSet<>();
     }
     
     public Actividad(Long id, String nombre, BigDecimal costo, Profesor profesor) {
