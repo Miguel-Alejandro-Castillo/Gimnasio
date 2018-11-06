@@ -31,16 +31,16 @@
 
 </head>
 
-
+<body>
 		<div class= "row">
-		
-         <tiles:insertAttribute name="menu" />
+            <div class="col-lg-2" style="margin-left: 10px;">
+                <tiles:insertAttribute name="menu" />
+            </div>
 
-         <tiles:insertAttribute name="main" />
-
-
+            <div class="col-lg-9">
+                <tiles:insertAttribute name="main" />
+            </div>
         </div>
-
          <!-- jQuery -->
          <spring:url value="/resources/js/jquery.min.js" var="jqueryMin"/>	
          <script src="${jqueryMin}"></script>

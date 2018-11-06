@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+
 <div class="well">
 	<h1 class="page-header" style="margin-top: 10px">Inicio - Ultimos Deudores</h1>
 
