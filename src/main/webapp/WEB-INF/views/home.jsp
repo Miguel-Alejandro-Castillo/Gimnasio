@@ -6,7 +6,7 @@
 
 
 <div class="well">
-	<h1 class="page-header" style="margin-top: 10px">Inicio - Ultimos Deudores</h1>
+	<h1 class="page-header" style="margin-top: 10px">Inicio - Pagos Vencidos</h1>
 
 	<div class="panel panel-default">
 		<div class="panel-body">

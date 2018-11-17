@@ -22,9 +22,6 @@
 		
 		<spring:url value="/clientes" var="listaDeClientes" />
 		<li><a href="${listaDeClientes}"><i class="fas fa-users gly"></i>Clientes</a></li>
- 	
-		<spring:url value="/cobros" var="cobros" />
-		<li><a href="${cobros}"><i class="fas fa-file-invoice-dollar gly"></i>Cobros</a></li>
 
 		<spring:url value="/actividades" var="listadoActividades" />
 		<li><a href="${listadoActividades}"><i class="fas fa-heartbeat gly"></i>Actividades</a></li>		
@@ -34,6 +31,9 @@
 
 		<spring:url value="/horarios" var="listadoHorarios" />
 		<li><a href="${listadoHorarios}"><i class="fas fa-calendar-alt gly"></i>Horarios</a></li>
+
+		<spring:url value="/cobros" var="cobros" />
+		<li><a href="${cobros}"><i class="fas fa-file-invoice-dollar gly"></i>Cobros</a></li>
 
 		
 		<li>
