@@ -45,6 +45,7 @@
 							<th>Nombre</th>
 							<th>Apellido</th>
 							<th>Dni</th>
+							<th>Ficha Medica</th>
 							<th>Accion</th>
 						</tr>
 					</thead>
@@ -55,6 +56,14 @@
 								<td><c:out value="${cliente.nombre}"></c:out></td>
 								<td><c:out value="${cliente.apellido}"></c:out></td>
 								<td><c:out value="${cliente.dni}"></c:out></td>
+								<c:choose>
+									<c:when test="${cliente.tieneFicha}">
+										<td>Si</td>
+									</c:when>
+									<c:when test="${!cliente.tieneFicha}">
+										<td>No</td>
+									</c:when>
+								</c:choose>
 								<td style="text-align: center;"><spring:url
 										value="/clientes/${cliente.id}/clienteDetalle"
 										var="urlClienteDetalle" /> <a href="${urlClienteDetalle}"

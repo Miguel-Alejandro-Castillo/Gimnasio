@@ -36,6 +36,11 @@ public class ProfesorController {
         return mav;
     }
 
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Profesor> getProfesores(){
+        return this.profesorRepository.findAll();
+    }
+
     @RequestMapping(value="/crearProfesor", method = RequestMethod.GET)
     public ModelAndView showAltaProfesorForm(){
         ModelAndView mav=new ModelAndView("crear-profesor");

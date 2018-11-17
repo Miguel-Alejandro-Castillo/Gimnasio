@@ -69,6 +69,11 @@
 						<form:input path="direccion" cssClass="form-control" />
 						<form:errors path="direccion" cssClass="error" />
 					</div>
+					<div class="form-group">
+						<form:label path="tieneFicha">Tiene Ficha Medica*</form:label>
+						<form:checkbox path="tieneFicha" cssClass="form-control" />
+						<form:errors path="tieneFicha" cssClass="error" />
+					</div>
 					<div>
 						<form:button type="submit" class="btn panelButton" >
 							<tiles:getAsString name="titleSubmit" />

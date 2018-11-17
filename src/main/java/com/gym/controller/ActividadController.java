@@ -52,6 +52,11 @@ public class ActividadController {
         return mav;
     }
 
+    @GetMapping(value = "/{idActividad}/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Actividad getActividad(@PathVariable Long idActividad){
+        return this.actividadRepository.findOne(idActividad);
+    }
+
     @RequestMapping(value="/{id_actividad}/detalle", method = RequestMethod.GET)
     public ModelAndView showActividadDetalle(@PathVariable(name = "id_actividad") String id_actividad){
         ModelAndView mav = null;
@@ -117,6 +122,19 @@ public class ActividadController {
             mav = new ModelAndView("redirect:/actividades");
         }
         return mav;
+    }
+
+    @PostMapping(value="/{idActividad}/edit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  @ResponseBody Response editActividadModal(@RequestBody @Validated Actividad actividad, BindingResult result){
+        Response response = null;
+        if(result.hasErrors()) {
+
+        }
+        else{
+            actividad = this.actividadRepository.save(actividad);
+            response = new Response(actividad);
+        }
+        return response;
     }
 
     @RequestMapping(value="/{id_actividad}/editar/agregarLeccion", method = RequestMethod.GET)
@@ -189,7 +207,7 @@ public class ActividadController {
     @RequestMapping(value="/{idActividad}/delete", method = RequestMethod.DELETE, produces="application/json; charset=UTF-8")
     public  @ResponseBody Boolean deleteActividad(@PathVariable(name = "idActividad") String idActividad){
         Actividad actividad = this.actividadRepository.findOne(Long.valueOf(idActividad));
-        if(actividad != null){
+        if(actividad != null && actividad.getId() != 1 && actividad.getId() != 2){
             actividad.setBorrado(true);
             this.actividadRepository.save(actividad);
             return true;

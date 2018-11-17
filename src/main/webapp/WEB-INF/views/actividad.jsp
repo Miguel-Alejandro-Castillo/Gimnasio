@@ -8,11 +8,9 @@
 		<h1 class="page-header">
 			<tiles:getAsString name="title" />
 		</h1>
-
 		<div class="row">
 			<spring:url value="" var="urlActual" />
 			<form:form id="actividadForm" modelAttribute="actividad" action="${urlActual}" method="post" role="form">
-				
 				<form:hidden path="id" />
 				<div class="col-lg-6">
 					<div class="form-group">
@@ -22,7 +20,7 @@
 					</div>
 					<div class="form-group">
 						<form:label path="costo">Costo*</form:label>
-						<form:input path="costo" type="number" step="0.01" min="1" cssClass="form-control" />
+						<form:input path="costo" type="number" step="0.01" min="0.00" cssClass="form-control" />
 						<form:errors path="costo" cssClass="error" />
 					</div>
 					
@@ -42,7 +40,8 @@
 						<tiles:getAsString name="titleSubmit" />
 					</form:button>
 					</form:form>
-				</div>
-			
-			<!-- Boton de Submit -->
 		</div>
+		<!-- Boton de Submit -->
+	</div>
+</div>
+

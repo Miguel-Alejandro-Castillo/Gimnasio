@@ -45,10 +45,12 @@
 								<a href="${urlActividadDetalle}">
 									<i class="fas fa-info-circle menuIcon blue"></i>
 								</a>
-								<a onclick="deleteActividad(${actividad.id})"><i
-										class="fas fa-trash-alt menuIcon"
-										style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
-								</a>
+
+									<a onclick="deleteActividad(${actividad.id})"><i
+											class="fas fa-trash-alt menuIcon"
+											style="font-size: 24px; padding-right: 10px; padding-left: 10px;"></i>
+									</a>
+
 							</td>
 						</tr>
 					</c:forEach>

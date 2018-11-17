@@ -29,6 +29,10 @@
     <spring:url value="/resources/css/dataTables.responsive.css" var="dataTablesResponsiveCss"/>
     <link href="${dataTablesResponsiveCss}" rel="stylesheet"/>
 
+    <!-- Jquery Confirm CSS  -->
+    <spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
+    <link href="${jqueryConfirmCss}" rel="stylesheet"/>
+
 </head>
 
 <body>
@@ -60,7 +64,7 @@
          <spring:url value="/resources/js/dataTables.responsive.js" var="dataTablesResponsiveJs" />
          <script src="${dataTablesResponsiveJs}"></script>
          <spring:url value="/resources/js/funciones.js" var="funciones" />
-         <script src="${funciones}"></script>
+         <script src="${funciones}" charset="utf-8"></script>
 
          <spring:url value="/resources/js/zingchart.min.js" var="zingchartMin" />
          <script src="${zingchartMin}"></script>
@@ -78,8 +82,7 @@
          <script>
              $(document).ready(function() {
              	$('[data-toggle="tooltip"]').tooltip();                	
-	});
-         
+	         });
          </script>
 
 </body>

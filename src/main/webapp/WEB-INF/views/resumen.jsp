@@ -4,13 +4,15 @@
 <fmt:setLocale value = "es_AR" scope="session"/>
 
 
-<div class="well">
-	<h1 class="page-header">Resumen de Cuentas</h1>
+
+	<div class="well">
+		<h1 class="page-header">Resumen de Cuentas</h1>
 
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#Grafico">Grafico</a></li>
 			<li><a data-toggle="tab" href="#Lista">Lista</a></li>
 		</ul>
+
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-lg-4">
@@ -64,17 +66,12 @@
 							<div id="graficoBarras"></div>
 						</div>
 
-						<div id="graficoBarras"></div>
 					</div>
 
-
-				</div>
-
-				<div id="Lista" class="tab-pane">
-					<div class="col-lg-12">
-						<table width="100%" class="table table-condensed table-bordered"
-							id="dataTables-example">
-							<thead>
+					<div id="Lista" class="tab-pane">
+						<div class="col-lg-12">
+							<table id="dataTables-resumen" width="100%" class="table table-condensed table-bordered">
+								<thead>
 								<tr>
 									<th>Fecha Pago</th>
 									<th>Cliente</th>
@@ -84,52 +81,22 @@
 									<th>Fecha desde</th>
 									<th>Fecha hasta</th>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${clientes}" var="cliente">
-									<c:forEach items="${cliente.pagos}" var="pago">
-										<tr class="odd gradeX">
-											<td>
-												<fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${pago.momentoPago}"/>
-											</td>
-											<td>
-												<c:out value="${cliente.nombre} ${cliente.apellido}"></c:out>
-											</td>
-											<td>
-												<c:out value="${pago.actividad.nombre}"></c:out>
-											</td>
-											<td>
-												<fmt:formatNumber value="${pago.montoAPagar}" type="currency" currencySymbol="$ "/>
-											</td>
-											<td>
-												<fmt:formatNumber value="${pago.montoPagado}" type="currency" currencySymbol="$ "/>
-											</td>
-											<td>
-												<fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaDesde}"/>
-											</td>
-											<td>
-												<fmt:formatDate pattern="dd/MM/yyyy" value="${pago.fechaHasta}"/>
-											</td>
-										</tr>
-									</c:forEach>
-								</c:forEach>
-							</tbody>
-						</table>
-
+								</thead>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
 
 
-<spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
-<script src="${jqueryMin}"></script>
 
-<script>
-	$(function() {
-		cargarResumen();
-	});
-</script>
+	<spring:url value="/resources/js/jquery.min.js" var="jqueryMin" />
+	<script src="${jqueryMin}"></script>
+
+	<script>
+        $(function() {
+            cargarResumen();
+        });
+	</script>

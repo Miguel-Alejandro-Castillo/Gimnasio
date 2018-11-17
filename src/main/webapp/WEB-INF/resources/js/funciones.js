@@ -1,6 +1,7 @@
 /**
  * Created by Alejandro on 2/4/2018.
  */
+var vm = {};
 
 function getUrlContextPath() {
     return window.location.origin + window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
@@ -412,8 +413,11 @@ function loadPopupAddLeccion(idActividad){
 }
 
 function resetForm(form){
-    //Reset form
-    $(form).trigger("reset");}
+    //Clear errores
+    $(form).parsley().reset();
+    //Clear inputs
+    $(form).trigger('reset');
+}
 
 function submitAddLeccionPopup(idActividad){
     /*  Submit form using Ajax */
@@ -429,14 +433,14 @@ function submitAddLeccionPopup(idActividad){
                 //Agregar row en la tabla
                 var table = $('#tableLecciones').DataTable();
                 table.row.add( [ leccionAgregada.dia, leccionAgregada.horaInicio, leccionAgregada.horaFin,
-                                 "<a onclick=\"deleteLeccion(" + idActividad + ", " + leccionAgregada.id + ", $(this).parent().parent())\"><i class=\"fas fa-trash-alt\" style=\"font-size: 24px; padding-right: 10px; padding-left: 10px;\"></i> </a>"] ).draw();
+                                 "<a onclick=\"deleteLeccion(" + idActividad + ", " + leccionAgregada.id + ", $(this).parent().parent())\"><i class=\"fas fa-trash-alt\" style=\"font-size: 24px; padding-right: 5px; padding-left: 5px;\"></i> </a>"] ).draw();
 
                 //Limpiar inputs del formulario de la ventana modal
                 resetForm('#addLeccionForm');
 
             }else{
                 //Remove all errors
-                $('input').next().remove();
+                $('form[name=addLeccionPopup] :input').next().remove();
                 //Set error messages
                 $.each(response.errores,function(key,value){
                     $('#addLeccionForm #' +key+']').after('<span class="error">'+value+'</span>');
@@ -449,6 +453,7 @@ function submitAddLeccionPopup(idActividad){
 function addLeccionPopup(idActividad) {
 
         $('#addLeccionForm').parsley({
+            trigger: 'change',
             successClass: 'has-success',
             errorClass: 'has-error',
             classHandler: function(el) {
@@ -463,4 +468,74 @@ function addLeccionPopup(idActividad) {
             submitAddLeccionPopup(idActividad);
             return false; // Don't submit form for this demo
         });
+}
+
+function editActividadModal(idActividad){
+    $('#editActividadForm').parsley({
+        trigger: 'change',
+        successClass: 'has-success',
+        errorClass: 'has-error',
+        classHandler: function(el) {
+            return el.$element.closest(".form-group");
+        },
+        errorsContainer: function(el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<span class="help-block"></span>',
+        errorTemplate: "<span></span>"
+    }).on('form:submit', function () {
+        submitEditActividadModal(idActividad);
+        return false; // Don't submit form for this demo
+    });
+}
+
+function submitEditActividadModal(idActividad){
+    /*  Submit form using Ajax */
+    vm.actividad.nombre = $('form[name=editActividadForm] input[name=nombre]').val();
+    vm.actividad.costo = $('form[name=editActividadForm] input[name=costo]').val();
+    var profesorId = parseFloat($('form[name=editActividadForm] select[name=profesor]').val());
+    vm.actividad.profesor = vm.profesores.find(function(profesor){ return profesor.id = profesorId; });
+
+    $.ajax({
+        type: "POST",
+        url: getUrlContextPath() + '/actividades/' + idActividad + '/edit',
+        data: JSON.stringify(vm.actividad),
+        contentType: "application/json",
+        dataType: 'json',
+        //timeout de 1 minutos
+        timeout: 1000 * 60,
+        success: function (response) {
+                if(jQuery.isEmptyObject( response.errores )){
+                    window.location.href =  getUrlContextPath() + '/actividades/' + idActividad + '/detalle';
+                }
+        }, error: function(error){
+            alert(error);
+        }
+    });
+
+}
+
+
+function loadFormEditActividad(idActividad){
+    $.getJSON(getUrlContextPath() + "/actividades/" + idActividad + "/get", function(actividad) {
+        if(actividad) {
+            vm.actividad = actividad;
+            $("form[name=editActividadForm] :input").each(function () {
+                input = $(this);
+                input.val(actividad[input.attr('name')]);
+            });
+
+            var selectProfesor = $("form[name=editActividadForm] select[name=profesor]");
+            selectProfesor.empty();
+            selectProfesor.append("<option value=''> Seleccione un profesor </option>");
+
+            $.getJSON(getUrlContextPath() + "/profesores/get", function (profesores) {
+                vm.profesores = profesores;
+                profesores.forEach(function (profesor) {
+                    selectProfesor.append("<option value=" + profesor.id + " >" + profesor.apellido + ", " + profesor.nombre + "</option>");
+                });
+                selectProfesor.val(actividad.profesor.id);
+            });
+        }
+    });
 }

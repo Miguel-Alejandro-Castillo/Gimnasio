@@ -1,5 +1,6 @@
 package com.gym.model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,8 +34,7 @@ public class Cliente extends BaseEntity{
     @Column(nullable = false)
     private String sexo;
 
-    @NotNull(message = "{campo.obligatorio}")
-    @Column(nullable = false, unique = true)
+    @Column
     private  Long dni;
 
     @Temporal(TemporalType.DATE)
@@ -44,17 +44,18 @@ public class Cliente extends BaseEntity{
     @Column(nullable = false)
     private Date fechaNacimiento;
 
-    @NotBlank(message = "{campo.obligatorio}")
-    @Column(nullable = false)
+    @Column
     private String telefono;
 
-    @NotBlank(message = "{campo.obligatorio}")
-    @Column(nullable = false)
+    @Column
     private String direccion;
 
     @Email(message = "{campo.email.incorrecto}" )
     @Column
     private String email;
+
+    @Column
+    private Boolean tieneFicha;
 
     @OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Pago> pagos = new ArrayList<Pago>();
@@ -134,4 +135,8 @@ public class Cliente extends BaseEntity{
     public void setPagos(List<Pago> pagos) {
         this.pagos = pagos;
     }
+
+    public Boolean getTieneFicha() { return tieneFicha; }
+
+    public void setTieneFicha(Boolean tieneFicha) { this.tieneFicha = tieneFicha; }
 }
