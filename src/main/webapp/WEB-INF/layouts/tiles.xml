@@ -177,6 +177,25 @@
         <put-attribute name="title" value="Detalle de Pago" cascade="true"/>
         <put-attribute name="main"  value="/WEB-INF/views/pagoDetalle.jsp" />
     </definition>
-    
+
+    <!-- Definicion pantalla  para crear un producto -->
+    <definition name="crear-producto" extends="default-template">
+        <put-attribute name="title" value="Alta de producto" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/producto.jsp" />
+        <put-attribute name="titleSubmit" value="Crear producto" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla  para editar un producto-->
+    <definition name="editar-producto" extends="default-template">
+        <put-attribute name="title" value="Editar producto" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/producto.jsp" />
+        <put-attribute name="titleSubmit" value="Modificar datos" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla para listar a todos los productos -->
+    <definition name="productos" extends="default-template">
+        <put-attribute name="title" value="Listado de productos" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/productos.jsp" />
+    </definition>
 
 </tiles-definitions>

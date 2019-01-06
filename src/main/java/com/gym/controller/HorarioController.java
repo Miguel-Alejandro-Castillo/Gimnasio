@@ -54,7 +54,6 @@ public class HorarioController {
         mav.addObject("leccionesViernes", leccionesViernes);
         mav.addObject("leccionesSabado", leccionesSabado);
 
-
         return mav;
     }
 
@@ -76,7 +75,6 @@ public class HorarioController {
             mav = new ModelAndView("redirect:/horarios");
         }
         return mav;
-
     }
 
 
