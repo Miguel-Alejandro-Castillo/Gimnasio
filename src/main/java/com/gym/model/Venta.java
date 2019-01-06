@@ -44,9 +44,9 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public Venta(Producto producto, Date fecha) {
+    public Venta(Producto producto) {
         this.producto = producto;
-        this.fecha = fecha;
+        this.fecha = new Date();
     }
 
     public Venta() {

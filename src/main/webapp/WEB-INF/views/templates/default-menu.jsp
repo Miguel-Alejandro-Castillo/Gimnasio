@@ -35,6 +35,9 @@
 		<spring:url value="/cobros" var="cobros" />
 		<li><a href="${cobros}"><i class="fas fa-file-invoice-dollar gly"></i>Cobros</a></li>
 
+		<spring:url value="/productos" var="productos" />
+		<li><a href="${productos}"><i class="fas fa-file-invoice-dollar gly"></i>Venta de Productos</a></li>
+
 		
 		<li>
 		<spring:url value="/logout" var="logout"/>

@@ -57,7 +57,7 @@
                         <td><c:out value="${producto.costo}"></c:out></td>
 
                         <td style="text-align: center;">
-                            <spring:url value="/productos/${producto.id}/productoEditar" var="urlProductoEditar" />
+                            <spring:url value="/productos/${producto.id}/editar" var="urlProductoEditar" />
                             <a href="${urlProductoEditar}">
                                 <button class="btn editButton"><i class="fa fa-user-plus"></i> Editar Producto</button>
                             </a>

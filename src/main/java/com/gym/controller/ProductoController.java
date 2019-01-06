@@ -3,6 +3,7 @@ package com.gym.controller;
 import com.gym.dao.ProductoRepository;
 import com.gym.dao.VentaRepository;
 import com.gym.model.Producto;
+import com.gym.model.Venta;
 import com.gym.util.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class ProductoController {
     @Autowired
     private VentaRepository ventaRepository;
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public ModelAndView listarProductos(){
         ModelAndView mav = new ModelAndView("productos");
         mav.addObject("productos",productoRepository.findAll());//que muestro solo los que no esta borrados
@@ -59,7 +60,7 @@ public class ProductoController {
     */
 
     @RequestMapping(value = "/{id_producto}/editar",method = RequestMethod.GET)
-    public ModelAndView submitModificarProducto(@PathVariable("id_producto") String id_producto){
+    public ModelAndView showModificarProducto(@PathVariable("id_producto") String id_producto){
         ModelAndView mav = null;
         Long id = NumberUtils.toLong(id_producto);
         Producto producto = productoRepository.findOne(id);
@@ -83,6 +84,19 @@ public class ProductoController {
         }
         return mav;
     }
+
+    @RequestMapping(value = "/{id_producto}/venta",method = RequestMethod.POST)
+    public ModelAndView submitVenta(@PathVariable("id_producto") String id_producto, @ModelAttribute("producto")@Validated Producto producto, BindingResult result){
+        ModelAndView mav;
+        if(result.hasErrors()){
+            mav = new ModelAndView("productos");
+        }else{
+            ventaRepository.save(new Venta(producto));
+            mav = new ModelAndView("redirect:/productos");
+        }
+        return mav;
+    }
+
 
 
 
