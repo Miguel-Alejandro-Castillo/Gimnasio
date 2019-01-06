@@ -185,6 +185,46 @@ function deleteCliente(idCliente){
     });
 }
 
+function deleteProducto(idProducto){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: '¿Esta seguro que desea borrar este Producto?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: getUrlContextPath() +  '/productos/' + idProducto + '/delete' ,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'El Producto se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                        $('#row_'+idProducto).remove();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'El Producto no se ha eliminado correctamente.'});
+                        }
+
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
+            }
+        }
+    });
+}
+
 function deleteLeccion(idActividad, idLeccion, row){
     $.confirm({
         title: 'Confirmar borrado',

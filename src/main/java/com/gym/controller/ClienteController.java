@@ -270,7 +270,4 @@ public class ClienteController {
         binder.registerCustomEditor(Actividad.class, this.actividadEditor);
     }
 
-
-
-
 }

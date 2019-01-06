@@ -5,15 +5,13 @@ import com.gym.dao.VentaRepository;
 import com.gym.model.Producto;
 import com.gym.model.Venta;
 import com.gym.util.NumberUtils;
+import com.gym.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,10 +24,10 @@ public class ProductoController {
     @Autowired
     private VentaRepository ventaRepository;
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value={"", "/"},method = RequestMethod.GET)
     public ModelAndView listarProductos(){
         ModelAndView mav = new ModelAndView("productos");
-        mav.addObject("productos",productoRepository.findAll());//que muestro solo los que no esta borrados
+        mav.addObject("productos", productoRepository.findByBorradoIsFalse());//que muestro solo los que no esta borrados
         return mav;
     }
 
@@ -46,7 +44,7 @@ public class ProductoController {
         if(result.hasErrors()){
             mav = new ModelAndView("crear-producto");
         }else {
-            productoRepository.save(producto);
+            this.productoRepository.save(producto);
             mav = new ModelAndView("redirect:/productos");
         }
         return mav;
@@ -97,7 +95,17 @@ public class ProductoController {
         return mav;
     }
 
-
-
+    @RequestMapping(value="/{idProducto}/delete", method = RequestMethod.DELETE,  produces="application/json; charset=UTF-8")
+    public  @ResponseBody
+    Response delete(@PathVariable(name = "idProducto") Long idProducto){
+        Boolean isDelete = false;
+        Producto producto = this.productoRepository.findOne(idProducto);
+        if(producto != null){
+            producto.setBorrado(true);
+            this.productoRepository.save(producto);
+            isDelete = true;
+        }
+        return new Response(isDelete);
+    }
 
 }

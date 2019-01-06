@@ -55,7 +55,8 @@
                     <tr id="row_${producto.id}">
                         <td><c:out value="${producto.nombre}"></c:out></td>
                         <td><c:out value="${producto.costo}"></c:out></td>
-
+                        <td></td>
+                        <td></td>
                         <td style="text-align: center;">
                             <spring:url value="/productos/${producto.id}/editar" var="urlProductoEditar" />
                             <a href="${urlProductoEditar}">
@@ -64,7 +65,7 @@
                             <a>
                                 <i class="fas fa-money-bill-wave menuIcon green"></i>
                             </a>
-                            <a>
+                            <a onclick="deleteProducto(${producto.id})">
                                 <i class="fas fa-trash-alt menuIcon"></i>
                             </a>
                         </td>

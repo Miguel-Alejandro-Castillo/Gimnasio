@@ -1,6 +1,7 @@
 package com.gym.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,14 +17,30 @@ public class Producto {
     private String nombre;
 
     @Column(name = "costo")
-    private Long costo;
+    private BigDecimal costo;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             mappedBy = "producto",
             orphanRemoval = true
     )
-    private Set<Venta> ventas = new HashSet<>();
+    private Set<Venta> ventas;
+
+    @Column(name = "borrado", nullable = false)
+    private boolean borrado;
+
+    public Producto() {
+        super();
+        this.ventas = new HashSet<>();
+        this.borrado = false;
+    }
+
+    public Producto(String nombre, BigDecimal costo, Set<Venta> ventas) {
+        this();
+        this.nombre = nombre;
+        this.costo = costo;
+        this.ventas = ventas;
+    }
 
     public Long getId() {
         return id;
@@ -41,11 +58,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Long getCosto() {
+    public BigDecimal getCosto() {
         return costo;
     }
 
-    public void setCosto(Long costo) {
+    public void setCosto(BigDecimal costo) {
         this.costo = costo;
     }
 
@@ -57,6 +74,14 @@ public class Producto {
         this.ventas = ventas;
     }
 
+    public boolean isBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
     public void addVenta(Venta venta){
         ventas.add(venta);
         venta.setProducto(this);
@@ -65,14 +90,5 @@ public class Producto {
     public void removeVenta(Venta venta){
         ventas.remove(venta);
         venta.setProducto(null);
-    }
-
-    public Producto() {
-    }
-
-    public Producto(String nombre, Long costo, Set<Venta> ventas) {
-        this.nombre = nombre;
-        this.costo = costo;
-        this.ventas = ventas;
     }
 }
