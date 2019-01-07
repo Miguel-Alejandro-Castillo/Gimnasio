@@ -2,17 +2,20 @@ package com.gym.controller;
 
 import com.gym.dao.ProductoRepository;
 import com.gym.dao.VentaRepository;
+import com.gym.dto.ProductoVentaDTO;
 import com.gym.model.Producto;
 import com.gym.model.Venta;
 import com.gym.util.NumberUtils;
 import com.gym.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/productos")
@@ -27,7 +30,9 @@ public class ProductoController {
     @RequestMapping(value={"", "/"},method = RequestMethod.GET)
     public ModelAndView listarProductos(){
         ModelAndView mav = new ModelAndView("productos");
-        mav.addObject("productos", productoRepository.findByBorradoIsFalse());//que muestro solo los que no esta borrados
+        mav.addObject("productos", this.productoRepository.listadoProductosVentas(null, null));//que muestro solo los que no esta borrados
+        List<Integer> anios = this.ventaRepository.aniosConAlMenosUnaVenta();
+        mav.addObject("anios", anios);
         return mav;
     }
 
@@ -89,7 +94,7 @@ public class ProductoController {
         if(result.hasErrors()){
             mav = new ModelAndView("productos");
         }else{
-            ventaRepository.save(new Venta(producto));
+            ventaRepository.save(new Venta(producto, producto.getCosto()));
             mav = new ModelAndView("redirect:/productos");
         }
         return mav;
@@ -106,6 +111,15 @@ public class ProductoController {
             isDelete = true;
         }
         return new Response(isDelete);
+    }
+
+    @RequestMapping( value = "/listadoProductosVentas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ModelAndView cargarListadoProductos(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio ) {
+        ModelAndView mav = new ModelAndView("productos");
+        mav.addObject("productos", this.productoRepository.listadoProductosVentas(mes, anio));//que muestro solo los que no esta borrados
+        List<Integer> anios = this.ventaRepository.aniosConAlMenosUnaVenta();
+        mav.addObject("anios", anios);
+        return mav;
     }
 
 }

@@ -14,7 +14,7 @@
             $.alert({
                 title: '',
                 content: '<strong style="font-size: 20px;">La venta se registró con Éxito!</strong>',
-                type: 'green',
+                type: 'green'
             });
         });
     </script>
@@ -37,6 +37,38 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <select class="form-control" id="mes" name="mes" onchange="cargarListadoVentasProductos()">
+                        <option value="" ${ empty param["mes"] ? 'selected="selected"' : ''}>Todos los meses</option>
+                        <option value="1" ${ param["mes"] == "1" ? 'selected="selected"' : ''}>Enero</option>
+                        <option value="2" ${ param["mes"] == "2" ? 'selected="selected"' : ''}>Febrero</option>
+                        <option value="3" ${ param["mes"] == "3" ? 'selected="selected"' : ''}>Marzo</option>
+                        <option value="4" ${ param["mes"] == "4" ? 'selected="selected"' : ''}>Abril</option>
+                        <option value="5" ${ param["mes"] == "5" ? 'selected="selected"' : ''}>Mayo</option>
+                        <option value="6" ${ param["mes"] == "6" ? 'selected="selected"' : ''}>Junio</option>
+                        <option value="7" ${ param["mes"] == "7" ? 'selected="selected"' : ''}>Julio</option>
+                        <option value="8" ${ param["mes"] == "8" ? 'selected="selected"' : ''}>Agosto</option>
+                        <option value="9" ${ param["mes"] == "9" ? 'selected="selected"' : ''}>Septiembre</option>
+                        <option value="10" ${ param["mes"] == "10" ? 'selected="selected"' : ''}>Octubre</option>
+                        <option value="11" ${ param["mes"] == "11" ? 'selected="selected"' : ''}>Noviembre</option>
+                        <option value="12" ${ param["mes"] == "12" ? 'selected="selected"' : ''}>Diciembre</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+
+                    <select class="form-control" id="anio" name="anio" onchange="cargarListadoVentasProductos()">
+                        <option value="" ${ empty param["anio"] ? 'selected="selected"' : ''}>Todas los a&ntilde;os</option>
+                        <c:forEach items="${anios}" var="anio">
+                            <option value="${anio}" ${ anio.toString() == param["anio"] ? 'selected="selected"' : ''}>
+                                <c:out value="${anio}" />
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
             <table class="table table-striped table-bordered table-hover"
                    id="dataTables-example">
                 <thead>
@@ -52,20 +84,20 @@
 
                 <tbody>
                 <c:forEach items="${productos}" var="producto">
-                    <tr id="row_${producto.id}">
-                        <td><c:out value="${producto.nombre}"></c:out></td>
-                        <td><c:out value="${producto.costo}"></c:out></td>
-                        <td></td>
-                        <td></td>
+                    <tr id="row_${producto.idProducto}">
+                        <td><c:out value="${producto.nombreProducto}"></c:out></td>
+                        <td><c:out value="${producto.costoProducto}"></c:out></td>
+                        <td><c:out value="${producto.cantVendida}"></c:out></td>
+                        <td><c:out value="${producto.recaudado}"></c:out></td>
                         <td style="text-align: center;">
-                            <spring:url value="/productos/${producto.id}/editar" var="urlProductoEditar" />
+                            <spring:url value="/productos/${producto.idProducto}/editar" var="urlProductoEditar" />
                             <a href="${urlProductoEditar}">
                                 <button class="btn editButton"><i class="fa fa-user-plus"></i> Editar Producto</button>
                             </a>
                             <a>
                                 <i class="fas fa-money-bill-wave menuIcon green"></i>
                             </a>
-                            <a onclick="deleteProducto(${producto.id})">
+                            <a onclick="deleteProducto(${producto.idProducto})">
                                 <i class="fas fa-trash-alt menuIcon"></i>
                             </a>
                         </td>
