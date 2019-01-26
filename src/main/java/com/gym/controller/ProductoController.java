@@ -2,7 +2,6 @@ package com.gym.controller;
 
 import com.gym.dao.ProductoRepository;
 import com.gym.dao.VentaRepository;
-import com.gym.dto.ProductoVentaDTO;
 import com.gym.model.Producto;
 import com.gym.model.Venta;
 import com.gym.util.NumberUtils;
@@ -14,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
 @Controller
@@ -30,9 +28,7 @@ public class ProductoController {
     @RequestMapping(value={"", "/"},method = RequestMethod.GET)
     public ModelAndView listarProductos(){
         ModelAndView mav = new ModelAndView("productos");
-        mav.addObject("productos", this.productoRepository.listadoProductosVentas(null, null));//que muestro solo los que no esta borrados
-        List<Integer> anios = this.ventaRepository.aniosConAlMenosUnaVenta();
-        mav.addObject("anios", anios);
+        mav.addObject("productos", this.productoRepository.findByBorradoIsFalse());//que muestro solo los que no esta borrados
         return mav;
     }
 
@@ -76,14 +72,14 @@ public class ProductoController {
         return mav;
     }
 
-    @RequestMapping(value = "/{id_producto/editar}",method = RequestMethod.POST)
+    @RequestMapping(value = "/{id_producto}/editar",method = RequestMethod.POST)
     public ModelAndView submitModificarProducto(@PathVariable("id_producto") String id_producto, @ModelAttribute("producto") @Validated Producto producto, BindingResult result){
         ModelAndView mav;
         if(result.hasErrors()){
             mav = new ModelAndView("editar-producto");
         }else{
             productoRepository.save(producto);
-            mav = new ModelAndView("redirect:/productos");
+            mav = new ModelAndView("redirect:/productos/");
         }
         return mav;
     }
@@ -113,10 +109,10 @@ public class ProductoController {
         return new Response(isDelete);
     }
 
-    @RequestMapping( value = "/listadoProductosVentas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping( value = "/productosVentas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ModelAndView cargarListadoProductos(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio ) {
-        ModelAndView mav = new ModelAndView("productos");
-        mav.addObject("productos", this.productoRepository.listadoProductosVentas(mes, anio));//que muestro solo los que no esta borrados
+        ModelAndView mav = new ModelAndView("productosVentas");
+        mav.addObject("productos", this.productoRepository.listadoProductosVentas(mes, anio));
         List<Integer> anios = this.ventaRepository.aniosConAlMenosUnaVenta();
         mav.addObject("anios", anios);
         return mav;

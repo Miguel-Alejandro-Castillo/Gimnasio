@@ -198,4 +198,10 @@
         <put-attribute name="main"	value="/WEB-INF/views/productos.jsp" />
     </definition>
 
+    <!-- Definicion pantalla para listar a todos los productos  vendidos-->
+    <definition name="productosVentas" extends="default-template">
+        <put-attribute name="title" value="Listado de productos vendidos" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/productosVentas.jsp" />
+    </definition>
+
 </tiles-definitions>
