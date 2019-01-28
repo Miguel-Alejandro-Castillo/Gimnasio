@@ -22,7 +22,7 @@
 
 <div class="well">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-9">
             <h1 class="page-header">
                 <tiles:getAsString name="title" />
             </h1>
@@ -30,12 +30,7 @@
         <div class="col-lg-3">
             <spring:url value="/productos/crear" var="crearProducto" />
             <a href="${crearProducto}">
-                <button class="btn upperButton"><i class="fas fa-spray-can"></i>Nuevo Producto</button>
-            </a>
-        </div>
-        <div class="col-lg-3">
-            <a href="/productos">
-                <button class="btn upperButton"><i class="fas fa-arrow-right"></i> Lista de Productos</button>
+                <button class="btn upperButton"><i class="fas fa-user-plus"></i>Nuevo Producto</button>
             </a>
         </div>
     </div>

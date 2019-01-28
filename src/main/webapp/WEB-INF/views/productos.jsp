@@ -22,7 +22,7 @@
 
 <div class="well">
   <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-6">
       <h1 class="page-header">
         <tiles:getAsString name="title" />
       </h1>
@@ -30,7 +30,13 @@
     <div class="col-lg-3">
       <spring:url value="/productos/crear" var="crearProducto" />
       <a href="${crearProducto}">
-        <button class="btn upperButton"><i class="fas fa-user-plus"></i>Nuevo Producto</button>
+        <button class="btn upperButton"><i class="fas fa-spray-can"></i>Nuevo Producto</button>
+      </a>
+    </div>
+    <div class="col-lg-3">
+      <spring:url value="/productos/productosVentas" var="productosVentas" />
+      <a href="${productosVentas}">
+        <button class="btn upperButton"><i class="fas fa-arrow-right"></i> Ventas Realizadas</button>
       </a>
     </div>
   </div>
@@ -58,7 +64,7 @@
               <a href="${urlProductoEditar}">
                 <button class="btn editButton"><i class="fa fa-user-plus"></i> Editar Producto</button>
               </a>
-              <a>
+              <a onclick="venderProducto(${producto.id})">
                 <i class="fas fa-money-bill-wave menuIcon green"></i>
               </a>
               <a onclick="deleteProducto(${producto.id})">

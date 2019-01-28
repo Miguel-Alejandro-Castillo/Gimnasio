@@ -184,7 +184,40 @@ function deleteCliente(idCliente){
         }
     });
 }
+function venderProducto(idProducto){
+    $.confirm({
+        title: 'Confirmar Venta',
+        content: '¿Registrar la venta de una unidad del producto?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "POST",
+                    url: getUrlContextPath() +  '/productos/' + idProducto + '/venta' ,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (success) {
+                        if( success ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'El Cliente se ha eliminado correctamente.'
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'El Cliente no se ha eliminado correctamente.'});
+                        }
 
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
+            }
+        }
+    });
+}
 function deleteProducto(idProducto){
     $.confirm({
         title: 'Confirmar borrado',

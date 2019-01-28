@@ -5,12 +5,21 @@
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
 
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">
+            <tiles:getAsString name="title" />
+        </h1>
+    </div>
+    <div class="col-lg-3">
+        <a href="/productos">
+            <button class="btn upperButton"><i class="fas fa-arrow-right"></i> Lista de Productos</button>
+        </a>
+    </div>
 
-<div class="well">
+</div>
+    <div class="well">
 
-    <h1 class="page-header">
-        <tiles:getAsString name="title" />
-    </h1>
 
     <div class="panel panel-default">
         <div class="panel-body">
@@ -31,10 +40,14 @@
                             <form:input path="costo" cssClass="form-control" />
                             <form:errors path="costo" cssClass="error" />
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <form:button type="submit" class="btn panelButton" >
+                                    <tiles:getAsString name="titleSubmit" />
+                                </form:button>
+                            </div>
+                        </div>
 
-                        <form:button type="submit" class="btn panelButton" >
-                            <tiles:getAsString name="titleSubmit" />
-                        </form:button>
                     </div>
                     <!-- boton -->
                 </div>
@@ -42,5 +55,6 @@
             </form:form>
         </div>
     </div>
-</div></div>
+    </div>
+</div>
 
