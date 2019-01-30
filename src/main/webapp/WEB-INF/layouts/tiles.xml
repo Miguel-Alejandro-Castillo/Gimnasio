@@ -182,7 +182,7 @@
     <definition name="crear-producto" extends="default-template">
         <put-attribute name="title" value="Alta de producto" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/producto.jsp" />
-        <put-attribute name="titleSubmit" value="Crear producto" cascade="true" />
+        <put-attribute name="titleSubmit" value="Crear" cascade="true" />
     </definition>
 
     <!-- Definicion pantalla  para editar un producto-->
@@ -194,13 +194,13 @@
 
     <!-- Definicion pantalla para listar a todos los productos -->
     <definition name="productos" extends="default-template">
-        <put-attribute name="title" value="Listado de productos" cascade="true"/>
+        <put-attribute name="title" value="Productos Actuales" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/productos.jsp" />
     </definition>
 
     <!-- Definicion pantalla para listar a todos los productos  vendidos-->
     <definition name="productosVentas" extends="default-template">
-        <put-attribute name="title" value="Listado de productos vendidos" cascade="true"/>
+        <put-attribute name="title" value="Ventas Realizadas" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/productosVentas.jsp" />
     </definition>
 

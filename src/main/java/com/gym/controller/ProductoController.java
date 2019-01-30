@@ -84,16 +84,17 @@ public class ProductoController {
         return mav;
     }
 
-    @RequestMapping(value = "/{id_producto}/venta",method = RequestMethod.POST)
-    public ModelAndView submitVenta(@PathVariable("id_producto") String id_producto, @ModelAttribute("producto")@Validated Producto producto, BindingResult result){
-        ModelAndView mav;
-        if(result.hasErrors()){
-            mav = new ModelAndView("productos");
-        }else{
+
+    @RequestMapping(value="/{idProducto}/venta", method = RequestMethod.POST,  produces="application/json; charset=UTF-8")
+    public  @ResponseBody
+    Response venta(@PathVariable(name = "idProducto") Long idProducto){
+        Boolean success = false;
+        Producto producto = this.productoRepository.findOne(idProducto);
+        if(producto != null){
             ventaRepository.save(new Venta(producto, producto.getCosto()));
-            mav = new ModelAndView("redirect:/productos");
+            success = true;
         }
-        return mav;
+        return new Response(success);
     }
 
     @RequestMapping(value="/{idProducto}/delete", method = RequestMethod.DELETE,  produces="application/json; charset=UTF-8")
