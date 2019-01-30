@@ -26,20 +26,30 @@ public class Producto {
     )
     private Set<Venta> ventas;
 
+    @OneToMany(
+            mappedBy = "producto",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Stock> stocks;
+
     @Column(name = "borrado", nullable = false)
     private boolean borrado;
 
     public Producto() {
         super();
         this.ventas = new HashSet<>();
+        this.stocks= new HashSet<>();
         this.borrado = false;
     }
 
-    public Producto(String nombre, BigDecimal costo, Set<Venta> ventas) {
+    public Producto(String nombre, BigDecimal costo, Set<Venta> ventas, boolean borrado, Set<Stock> stocks) {
         this();
         this.nombre = nombre;
         this.costo = costo;
         this.ventas = ventas;
+        this.borrado = borrado;
+        this.stocks = stocks;
     }
 
     public Long getId() {
@@ -90,5 +100,13 @@ public class Producto {
     public void removeVenta(Venta venta){
         ventas.remove(venta);
         venta.setProducto(null);
+    }
+
+    public Set<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
     }
 }
