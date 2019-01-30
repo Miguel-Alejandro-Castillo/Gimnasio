@@ -390,7 +390,7 @@ function cargarListadoResumen(){
 function cargarListadoVentasProductos(){
     var mes = $("#mes").val();
     var anio = $("#anio").val();
-    var urlCompleta = getUrlContextPath() + "/listadoProductosVentas?" + "mes=" +  (mes ? mes : "") + "&anio=" + (anio ? anio : "");
+    var urlCompleta = getUrlContextPath() + "/productos/productosVentas?" + "mes=" +  (mes ? mes : "") + "&anio=" + (anio ? anio : "");
     window.location = urlCompleta;
 }
 
