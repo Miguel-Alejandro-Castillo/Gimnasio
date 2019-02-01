@@ -50,6 +50,7 @@
                 style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
           <th>Nombre</th>
           <th>Costo</th>
+          <th>Stock Actual</th>
           <th>Accion</th>
         </tr>
         </thead>
@@ -59,6 +60,7 @@
           <tr id="row_${producto.id}">
             <td><c:out value="${producto.nombre}"></c:out></td>
             <td><c:out value="${producto.costo}"></c:out></td>
+            <td><c:out value="${producto.stockActual}"></c:out></td>
             <td style="text-align: center;">
               <spring:url value="/productos/${producto.id}/editar" var="urlProductoEditar" />
               <a href="${urlProductoEditar}">
@@ -69,6 +71,10 @@
               </a>
               <a onclick="deleteProducto(${producto.id})">
                 <i class="fas fa-trash-alt menuIcon"></i>
+              </a>
+              <spring:url value="/productos/${producto.id}/registrarStock" var="urlRegistrarStock" />
+              <a href="${urlRegistrarStock}">
+                <button class="btn editButton"><i class="fa fa-user-plus"></i> registrar stock</button>
               </a>
             </td>
           </tr>

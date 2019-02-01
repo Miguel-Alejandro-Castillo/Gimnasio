@@ -2,6 +2,7 @@ package com.gym.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,8 @@ public class Producto {
 
     @Column(name = "costo")
     private BigDecimal costo;
+
+    private Integer stockActual;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -43,13 +46,21 @@ public class Producto {
         this.borrado = false;
     }
 
-    public Producto(String nombre, BigDecimal costo, Set<Venta> ventas, boolean borrado, Set<Stock> stocks) {
-        this();
+    public Producto(String nombre, BigDecimal costo, Integer stockActual, Set<Venta> ventas, Set<Stock> stocks, boolean borrado) {
         this.nombre = nombre;
         this.costo = costo;
+        this.stockActual = stockActual;
         this.ventas = ventas;
-        this.borrado = borrado;
         this.stocks = stocks;
+        this.borrado = borrado;
+    }
+
+    public Integer getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(Integer stockActual) {
+        this.stockActual = stockActual;
     }
 
     public Long getId() {

@@ -5,26 +5,32 @@ package com.gym.model;
  */
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 @Table( name = "stocks")
 public class Stock extends BaseEntity {
 
+    @NotNull
     @Column
     private Date fechaIngreso;
 
+    @NotNull
     @Column
     private Integer cantidadRecibida;
 
+    @NotNull
     @Column
     private Integer cantidadActual;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    public Stock() {
+    public Stock(){
+
     }
 
     public Stock(Date fechaIngreso, Integer cantidadRecibida, Integer cantidadActual, Producto producto) {

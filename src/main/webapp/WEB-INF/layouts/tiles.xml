@@ -179,6 +179,13 @@
     </definition>
 
     <!-- Definicion pantalla  para crear un producto -->
+    <definition name="crear-stock" extends="default-template">
+        <put-attribute name="title" value="Alta de Stock" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/stock.jsp" />
+        <put-attribute name="titleSubmit" value="Registrar Stock" cascade="true" />
+    </definition>
+
+    <!-- Definicion pantalla  para crear un producto -->
     <definition name="crear-producto" extends="default-template">
         <put-attribute name="title" value="Alta de producto" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/producto.jsp" />
