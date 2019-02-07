@@ -22,14 +22,16 @@
 
 
         ${stock.producto}
+
     <div class="panel panel-default">
         <div class="panel-body">
-            <spring:url value="" var="urlActual" />
+            <spring:url value="/productos/registrarStock" var="urlActual" />
             <form:form id="stockForm" modelAttribute="stock"
                        action="${urlActual}" method="post" role="form">
                 <div class="row">
                     <div class="col-lg-6">
                         <form:hidden path="id" />
+                        <form:hidden path="producto.id" />
                         <div class="form-group">
                             <form:label path="cantidadRecibida">cantidadRecibida*</form:label>
                             <form:input path="cantidadRecibida" cssClass="form-control"

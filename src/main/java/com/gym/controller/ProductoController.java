@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/productos")
@@ -47,7 +48,7 @@ public class ProductoController {
             producto.setStockActual(s);
 
         }
-        mav.addObject("productos", this.productoRepository.findByBorradoIsFalse());//que muestro solo los que no esta borrados
+        mav.addObject("productos", productos);//que muestro solo los que no esta borrados
         return mav;
     }
 
@@ -70,16 +71,11 @@ public class ProductoController {
         return mav;
     }
 
-    @RequestMapping(value = "/{id_producto}/registrarStock",method = RequestMethod.POST)
-    public ModelAndView submitStock(@ModelAttribute("stock") @Validated Stock stock,
-                                    @PathVariable("id_producto") String id_producto,
-                                    BindingResult result){
+    @RequestMapping(value = "/registrarStock",method = RequestMethod.POST)
+    public ModelAndView submitStock(@ModelAttribute("stock") @Validated Stock stock, BindingResult result){
         ModelAndView mav;
-        Long id = NumberUtils.toLong(id_producto);
-        Producto producto = productoRepository.findOne(id);
-        if(result.hasErrors()){
-            mav = new ModelAndView("crear-stock");
-        }else {
+        Producto producto = productoRepository.findOne(stock.getProducto().getId());
+
             Stock ultimoStock;
             if (this.stockRepository.obtenerUltimoStock(producto.getId()).isEmpty()){
                 ultimoStock = new Stock();
@@ -93,7 +89,7 @@ public class ProductoController {
             stock.setFechaIngreso(new Date());
             this.stockRepository.save(stock);
             mav = new ModelAndView("redirect:/productos");
-        }
+
         return mav;
     }
 
@@ -135,6 +131,22 @@ public class ProductoController {
             productoRepository.save(producto);
             mav = new ModelAndView("redirect:/productos/");
         }
+        return mav;
+    }
+
+    @RequestMapping(value = "/crear", method = RequestMethod.GET)
+    public ModelAndView showCrearProducto(){
+        ModelAndView mav = new ModelAndView("crear-producto");
+        mav.addObject("producto",new Producto());
+        return mav;
+    }
+
+    @RequestMapping(value = "/{id_producto}/editar",method = RequestMethod.GET)
+    public ModelAndView showModificarProducto(@PathVariable("id_producto") String idProducto,BindingResult result){
+        ModelAndView mav = new ModelAndView("editar-producto");
+        Producto producto = this.productoRepository.findOne(Long.valueOf(idProducto));
+        Set<Stock> stocks = this.stockRepository.findAll()//obtener todos los stocks de este producto
+        mav.addObject(mav.addObject("producto",producto);
         return mav;
     }
 
