@@ -1,5 +1,7 @@
 package com.gym.model;
 
+import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -31,8 +33,9 @@ public class Producto {
 
     @OneToMany(
             mappedBy = "producto",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = {CascadeType.MERGE,CascadeType.REMOVE},
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
     private Set<Stock> stocks;
 

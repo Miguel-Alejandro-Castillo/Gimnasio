@@ -4,6 +4,7 @@ package com.gym.model;
  * Created by Alejandro on 29/1/2019.
  */
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -20,9 +21,8 @@ public class Stock extends BaseEntity {
     @Column
     private Integer cantidadRecibida;
 
-    @NotNull
     @Column
-    private Integer cantidadActual;
+    private Integer stockAnterior;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
@@ -33,11 +33,19 @@ public class Stock extends BaseEntity {
 
     }
 
-    public Stock(Date fechaIngreso, Integer cantidadRecibida, Integer cantidadActual, Producto producto) {
+    public Stock(@NotNull Date fechaIngreso, @NotNull Integer cantidadRecibida, Integer stockAnterior, @NotNull Producto producto) {
         this.fechaIngreso = fechaIngreso;
         this.cantidadRecibida = cantidadRecibida;
-        this.cantidadActual = cantidadActual;
+        this.stockAnterior = stockAnterior;
         this.producto = producto;
+    }
+
+    public Integer getStockAnterior() {
+        return stockAnterior;
+    }
+
+    public void setStockAnterior(Integer stockAnterior) {
+        this.stockAnterior = stockAnterior;
     }
 
     @Override
@@ -74,11 +82,5 @@ public class Stock extends BaseEntity {
         this.cantidadRecibida = cantidadRecibida;
     }
 
-    public Integer getCantidadActual() {
-        return cantidadActual;
-    }
 
-    public void setCantidadActual(Integer cantidadActual) {
-        this.cantidadActual = cantidadActual;
-    }
 }

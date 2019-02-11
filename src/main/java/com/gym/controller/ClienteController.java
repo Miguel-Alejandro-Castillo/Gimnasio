@@ -71,8 +71,7 @@ public class ClienteController {
             return new ModelAndView("crear-cliente");
         }
         else{
-            clienteRepository.save(cliente);
-            return new ModelAndView("redirect:/clientes");
+            return new ModelAndView("redirect:/clientes/" + clienteRepository.save(cliente).getId().toString() +"/pagar");
         }
     }
 

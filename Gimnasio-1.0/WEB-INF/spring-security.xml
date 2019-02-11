@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-4.2.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+       <beans:import resource="dispatcher-servlet.xml"/>
+       <http auto-config="true">
+              <csrf disabled="true" />
+              <intercept-url pattern="/clientes/**" access="isAuthenticated()" />
+              <intercept-url pattern="/home" access="isAuthenticated()"/>
+              <intercept-url pattern="/login" access="permitAll"/>
+
+              <form-login
+                      login-page='/login'
+                      default-target-url="/home"
+                      login-processing-url="/login"
+                      authentication-failure-url="/login?error=true"
+                      username-parameter="username"
+                      password-parameter="password "/>
+
+              <logout logout-url="/logout"
+                      logout-success-url="/login"
+                      delete-cookies="true"
+                      invalidate-session="true"  />
+
+       </http>
+       <authentication-manager>
+              <authentication-provider ref="customAuthenticationProvider" />
+              <authentication-provider>
+                     <user-service>
+                            <user name="admin" password="1234" authorities="ROLE_USER" />
+                     </user-service>
+
+              </authentication-provider>
+       </authentication-manager>
+       <beans:bean id="customAuthenticationProvider" class="com.gym.util.CustomAuthenticationProvider"/>
+
+</beans:beans>

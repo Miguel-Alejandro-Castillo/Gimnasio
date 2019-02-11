@@ -12,4 +12,7 @@ public interface VentaRepository extends JpaRepository<Venta,Long>{
 
     @Query( value = "select distinct year(v.fecha) as anio from  Venta v order by anio asc")
     List<Integer> aniosConAlMenosUnaVenta();
+
+    @Query(value = "select * from venta where producto_id = ?1 order by fecha desc limit 10", nativeQuery = true)
+    List<Venta> obtenerUltimasVentas(Long id_producto);
 }
