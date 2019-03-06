@@ -19,7 +19,7 @@
 
 </div>
     <div class="well">
-
+        stock.jsp
 
     <div class="panel panel-default">
         <div class="panel-body">

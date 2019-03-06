@@ -217,11 +217,23 @@
         <put-attribute name="main"  value="/WEB-INF/views/productoDetalle.jsp" />
     </definition>
 
-
     <!-- Definicion pantalla para listar a todos los stocks -->
     <definition name="stocks" extends="default-template">
         <put-attribute name="title" value="Ingreo de Productos" cascade="true"/>
         <put-attribute name="main"	value="/WEB-INF/views/stocks.jsp" />
     </definition>
+
+    <definition name="crear-ingreso" extends="default-template">
+        <put-attribute name="title" value="Ingreso de Dinero" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/ingreso.jsp" />
+        <put-attribute name="titleSubmit" value="Ingresar Dinero" cascade="true" />
+    </definition>
+
+    <definition name="crear-egreso" extends="default-template">
+        <put-attribute name="title" value="Egreso de Dinero" cascade="true"/>
+        <put-attribute name="main"	value="/WEB-INF/views/egreso.jsp" />
+        <put-attribute name="titleSubmit" value="Retirar Dinero" cascade="true" />
+    </definition>
+
 
 </tiles-definitions>

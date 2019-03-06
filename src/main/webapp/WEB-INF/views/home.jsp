@@ -17,7 +17,7 @@
 						style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
 						<th>Nombre</th>
 						<th>Apellido</th>
-						<th>Ultimo Pago</th>
+						<th>Ultima vez que Pago</th>
 						<th>Actividad</th>
 						<th>Accion</th>
 					</tr>

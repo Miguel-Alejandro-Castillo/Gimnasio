@@ -3,6 +3,7 @@ package com.gym.controller;
 import com.gym.dao.ProductoRepository;
 import com.gym.dao.StockRepository;
 import com.gym.dao.VentaRepository;
+import com.gym.dto.ProductoVentaDTO;
 import com.gym.model.Producto;
 import com.gym.model.Stock;
 import com.gym.model.Venta;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.WebParam;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/productos")
@@ -38,21 +39,8 @@ public class ProductoController {
     public ModelAndView listarProductos(){
         ModelAndView mav = new ModelAndView("productos");
         List<Producto> productos = this.productoRepository.findByBorradoIsFalse();
-        /*
-        for (Producto producto: productos
-             ) {
-            int s;
-            List<Stock> ultimoStock = stockRepository.obtenerUltimoStock(producto.getId());
-            if(ultimoStock != null){
-                if(ultimoStock.isEmpty()){
-                    s = 0;
-                }else{
-                    s = ultimoStock.get(0).getStockAnterior() + ultimoStock.get(0).getCantidadRecibida() - stockRepository.vendidosDesdeElUltimoStock(producto.getId());
-                }
-                producto.setStockActual(s);
-            }
-        }
-        */
+        productos = productos.stream().filter( p ->
+                !p.getNombre().equals("RETIRO DE EFECTIVO") && !p.getNombre().equals("INGRESO DE EFECTIVO") && !p.getNombre().equals("GASTO GENERAL") && !p.getNombre().equals("PAGO DISTRIBUIDOR")).collect(Collectors.toList());
         mav.addObject("productos", productos);//que muestro solo los que no esta borrados
         return mav;
     }
@@ -211,11 +199,45 @@ public class ProductoController {
         }
         return new Response(isDelete);
     }
-
-    @RequestMapping( value = "/productosVentas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+/*
+    @RequestMapping( value = "/productosVentas", method = RequestMethod.GET)
     public @ResponseBody ModelAndView cargarListadoProductos(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio ) {
         ModelAndView mav = new ModelAndView("productosVentas");
-        mav.addObject("productos", this.productoRepository.listadoProductosVentas(mes, anio));
+        if(mes == null && anio == null){
+            mav.addObject("productos", this.productoRepository.listadoProductosVentasTodo());
+            BigDecimal total = this.productoRepository.obtenerTotalTodo();
+            mav.addObject("total",total);
+        }else if(mes == null && anio != null){
+            mav.addObject("productos", this.productoRepository.listadoProductosVentasAnio(anio));
+            BigDecimal total = this.productoRepository.obtenerTotalAnio(anio);
+            mav.addObject("total",total);
+        }else if(mes != null && anio != null){
+            mav.addObject("productos", this.productoRepository.listadoProductosVentasAnioMes(mes, anio));
+            BigDecimal total = this.productoRepository.obtenerTotalAnioMes(mes, anio);
+            mav.addObject("total",total);
+        }
+        List<Integer> anios = this.ventaRepository.aniosConAlMenosUnaVenta();
+        mav.addObject("anios", anios);
+        return mav;
+    }
+*/
+
+    @RequestMapping( value = "/productosVentas", method = RequestMethod.GET)
+    public @ResponseBody ModelAndView cargarListadoProductos(@RequestParam(name = "mes", required = false) Integer mes, @RequestParam(name = "anio", required = false) Integer anio ) {
+        ModelAndView mav = new ModelAndView("productosVentas");
+        if(mes == null && anio == null){
+            mav.addObject("ventas", this.ventaRepository.obtenerHoy());
+            BigDecimal total = this.productoRepository.obtenerTotalHoy();
+            mav.addObject("total",total);
+        }else if(mes == null && anio != null){
+            mav.addObject("ventas", this.ventaRepository.listarVentasAnio(anio));
+            BigDecimal total = this.productoRepository.obtenerTotalAnio(anio);
+            mav.addObject("total",total);
+        }else if(mes != null && anio != null){
+            mav.addObject("ventas", this.ventaRepository.listarVentasMesAnio(mes,anio));
+            BigDecimal total = this.productoRepository.obtenerTotalAnioMes(mes, anio);
+            mav.addObject("total",total);
+        }
         List<Integer> anios = this.ventaRepository.aniosConAlMenosUnaVenta();
         mav.addObject("anios", anios);
         return mav;
@@ -249,5 +271,66 @@ public class ProductoController {
         }
         return mav;
     }
+
+    @RequestMapping(value = "/mantenimientoCrearProductosEspeciales",method = RequestMethod.GET)
+    public void especial(){
+        Producto ingreso = new Producto();
+        Producto egreso1 = new Producto();
+        Producto egreso2 = new Producto();
+        Producto egreso3 = new Producto();
+
+        ingreso.setNombre("INGRESO DE EFECTIVO");
+        ingreso.setVentas(null);
+        egreso1.setNombre("GASTO GENERAL");
+        egreso1.setVentas(null);
+        egreso2.setNombre("PAGO DISTRIBUIDOR");
+        egreso2.setVentas(null);
+        egreso3.setNombre("RETIRO DE EFECTIVO");
+        egreso3.setVentas(null);
+
+        this.productoRepository.save(ingreso);
+        this.productoRepository.save(egreso1);
+        this.productoRepository.save(egreso2);
+        this.productoRepository.save(egreso3);
+    }
+
+    @RequestMapping(value = "/egreso",method = RequestMethod.GET)
+    public ModelAndView showEgreso(){
+        ModelAndView mav = new ModelAndView("crear-egreso");
+        mav.addObject("egresos",productoRepository.obtenerEgresos());
+        mav.addObject("producto",new Producto());
+        return mav;
+    }
+
+    @RequestMapping(value = "/egreso", method = RequestMethod.POST)
+    public ModelAndView egreso(@ModelAttribute(name = "producto") @Validated  Producto producto, BindingResult result){
+        ModelAndView mav = new ModelAndView("redirect:/productos/productosVentas");
+        int res = producto.getCosto().intValue() * -1;
+        ventaRepository.save(new Venta(producto, BigDecimal.valueOf(res)));
+        return mav;
+    }
+
+    @RequestMapping(value = "/ingreso",method = RequestMethod.GET)
+    public ModelAndView showIngreso(){
+        ModelAndView mav = new ModelAndView("crear-ingreso");
+        Producto producto = productoRepository.obtenerIngreso();
+        mav.addObject("producto",producto);
+        return mav;
+    }
+
+    @RequestMapping(value = "/ingreso", method = RequestMethod.POST)
+    public ModelAndView submitIngreso(@ModelAttribute("producto") @Validated Producto producto, BindingResult result){
+        ModelAndView mav;
+        if(result.hasErrors()){
+            mav = new ModelAndView("crear-producto");
+        }else {
+            ventaRepository.save(new Venta(producto, producto.getCosto()));
+            mav = new ModelAndView("redirect:/productos/productosVentas");
+        }
+        return mav;
+    }
+
+
+
 
 }

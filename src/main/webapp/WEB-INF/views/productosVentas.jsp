@@ -22,7 +22,7 @@
 
 <div class="well">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <h1 class="page-header">
                 <tiles:getAsString name="title" />
             </h1>
@@ -33,18 +33,27 @@
                 <button class="btn upperButton"><i class="fas fa-spray-can"></i>Nuevo Producto</button>
             </a>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
+            <a href="/productos/ingreso">
+                <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Ingreso</button>
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="/productos/egreso">
+                <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Retiro</button>
+            </a>
+        </div>
+        <div class="col-lg-2">
             <a href="/productos">
-                <button class="btn upperButton"><i class="fas fa-arrow-right"></i> Lista de Productos</button>
+                <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Productos</button>
             </a>
         </div>
     </div>
-
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-lg-3">
                 <div class="form-group">
-                    <select class="form-control" id="mes" name="mes" onchange="cargarListadoVentasProductos()" disabled>
+                    <select class="form-control" id="mes" name="mes" onchange="cargarListadoVentasProductos()">
                         <option value="" ${ empty param["mes"] ? 'selected="selected"' : ''}>Todos los meses</option>
                         <option value="1" ${ param["mes"] == "1" ? 'selected="selected"' : ''}>Enero</option>
                         <option value="2" ${ param["mes"] == "2" ? 'selected="selected"' : ''}>Febrero</option>
@@ -64,7 +73,7 @@
             <div class="col-lg-3">
                 <div class="form-group">
 
-                    <select class="form-control" id="anio" name="anio" onchange="cargarListadoVentasProductos()" disabled>
+                    <select class="form-control" id="anio" name="anio" onchange="cargarListadoVentasProductos()">
                         <option value="" ${ empty param["anio"] ? 'selected="selected"' : ''}>Todas los a&ntilde;os</option>
                         <c:forEach items="${anios}" var="anio">
                             <option value="${anio}" ${ anio.toString() == param["anio"] ? 'selected="selected"' : ''}>
@@ -79,24 +88,23 @@
                 <thead>
                 <tr
                         style="font-family: Lucida Sans Unicode, Lucida Grande, sans-serif">
+                    <th>Fecha</th>
                     <th>Nombre</th>
-                    <th>Costo</th>
-                    <th>Vendidos</th>
                     <th>Recaudado</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <c:forEach items="${productos}" var="producto">
-                    <tr id="row_${producto.idProducto}">
-                        <td><c:out value="${producto.nombreProducto}"></c:out></td>
-                        <td><c:out value="${producto.costoProducto}"></c:out></td>
-                        <td><c:out value="${producto.cantVendida}"></c:out></td>
-                        <td><c:out value="${producto.recaudado}"></c:out></td>
+                <c:forEach items="${ventas}" var="venta">
+                    <tr id="row_${venta.id}">
+                        <td><c:out value="${venta.fecha}"></c:out></td>
+                        <td><c:out value="${venta.producto.nombre}"></c:out></td>
+                        <td><c:out value="${venta.total}"></c:out></td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
+            <h3>Total: ${total}</h3>
         </div>
     </div>
 </div>
