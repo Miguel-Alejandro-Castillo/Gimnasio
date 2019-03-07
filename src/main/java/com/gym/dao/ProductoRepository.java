@@ -45,7 +45,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Long>{
 
     @Query( value = "select sum(v.total) " +
             "        from venta v " +
-            "        where and (year(v.fecha) = ?1)",nativeQuery = true)
+            "        where (year(v.fecha) = ?1)",nativeQuery = true)
     BigDecimal obtenerTotalAnio(Integer anio);
 
     @Query( value = "select sum(v.total) " +

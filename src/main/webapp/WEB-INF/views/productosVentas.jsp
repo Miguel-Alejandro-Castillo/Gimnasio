@@ -22,7 +22,7 @@
 
 <div class="well">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <h1 class="page-header">
                 <tiles:getAsString name="title" />
             </h1>
@@ -32,21 +32,21 @@
             <a href="${crearProducto}">
                 <button class="btn upperButton"><i class="fas fa-spray-can"></i>Nuevo Producto</button>
             </a>
-        </div>
-        <div class="col-lg-2">
-            <a href="/productos/ingreso">
-                <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Ingreso</button>
-            </a>
-        </div>
-        <div class="col-lg-2">
-            <a href="/productos/egreso">
-                <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Retiro</button>
-            </a>
-        </div>
-        <div class="col-lg-2">
             <a href="/productos">
                 <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Productos</button>
             </a>
+
+
+        </div>
+            <div class="col-lg-3">
+            <a href="/productos/egreso">
+                <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Retiro</button>
+            </a>
+
+                <a href="/productos/ingreso">
+                    <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Ingreso</button>
+                </a>
+
         </div>
     </div>
     <div class="panel panel-default">
