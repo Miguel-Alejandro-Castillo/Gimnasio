@@ -32,18 +32,21 @@
             <a href="${crearProducto}">
                 <button class="btn upperButton"><i class="fas fa-spray-can"></i>Nuevo Producto</button>
             </a>
-            <a href="/productos">
+            <spring:url value="/productos" var="listaProductos" />
+            <a href="${listaProductos}">
                 <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Productos</button>
             </a>
 
 
         </div>
             <div class="col-lg-3">
-            <a href="/productos/egreso">
+                <spring:url value="/productos/egreso" var="egreso" />
+            <a href="${egreso}">
                 <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Retiro</button>
             </a>
 
-                <a href="/productos/ingreso">
+                <spring:url value="/productos/ingreso" var="ingreso" />
+                <a href="${ingreso}">
                     <button class="btn upperButton"><i class="fas fa-arrow-right"></i>Ingreso</button>
                 </a>
 
