@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.validation.Valid;
 
 /**
@@ -54,7 +51,21 @@ public class ClienteController {
     @RequestMapping(value={"", "/"}, method = RequestMethod.GET)
     public ModelAndView showClientes(){
         ModelAndView mav = new ModelAndView("clientes");
-        mav.addObject("clientes", this.clienteRepository.findByBorrado(false));
+
+        mav.addObject("clientes", new ArrayList<Cliente>());
+        return mav;
+    }
+
+    @RequestMapping(value ={"/busqueda"},method = RequestMethod.GET)
+    public ModelAndView showClientesByNombre(@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido){
+        ModelAndView mav = new ModelAndView("clientes");
+        if(!nombre.isEmpty() && apellido.isEmpty()){
+            mav.addObject("clientes",this.clienteRepository.findByNombre(nombre));
+        }else if(nombre.isEmpty() && !apellido.isEmpty()) {
+            mav.addObject("clientes",this.clienteRepository.findByApellido(apellido));
+        }else if(!nombre.isEmpty()){
+            mav.addObject("clientes",this.clienteRepository.findByBusqueda(nombre, apellido));
+        }
         return mav;
     }
 
@@ -253,6 +264,8 @@ public class ClienteController {
     public  @ResponseBody BigDecimal getMontoAPagar(@PathVariable(name = "idCliente") Long idCliente, @PathVariable(name = "idPago")  Long idPago){
         return this.clienteRepository.findMontoAPagarByIdPago(idCliente, idPago);
     }
+
+
     
     @InitBinder("cliente")
     protected void initBinderCliente(WebDataBinder binder) {

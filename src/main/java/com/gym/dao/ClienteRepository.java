@@ -5,6 +5,7 @@ import com.gym.model.Cliente;
 import com.gym.model.Pago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -38,4 +39,13 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long> {
             " order by p.momentoPago desc " )
     List<PagoClienteDTO> listadoGananciasDiarias(Integer anio, Integer mes, Long idActividad);
 
+
+    @Query(value = "from Cliente c where c.nombre like %:nombre%",nativeQuery = false)
+    List<Cliente> findByNombre(@Param("nombre")String nombre);
+
+    @Query(value = "from Cliente c where c.apellido like %:apellido%",nativeQuery = false)
+    List<Cliente> findByApellido(@Param("apellido")String apellido);
+
+    @Query(value = "from Cliente c where c.apellido like %:apellido% and nombre like %:nombre%",nativeQuery = false)
+    List<Cliente> findByBusqueda(@Param("nombre")String nombre,@Param("apellido")String apellido);
 }

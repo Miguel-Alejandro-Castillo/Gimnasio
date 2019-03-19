@@ -145,6 +145,46 @@ function deleteProfesor(idProfesor){
     });
 }
 
+
+function deleteVenta(id){
+    $.confirm({
+        title: 'Confirmar borrado',
+        content: 'Esta seguro que desea borrar este Profesor?',
+        buttons: {
+            aceptar: function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: getUrlContextPath() +  '/productos/' + id + '/deleteVenta' ,
+                    data: {},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function (isDelete) {
+                        if( isDelete ){
+                            $.alert({
+                                title: 'Operacion exitosa',
+                                content: 'La Venta se ha eliminado correctamente.',
+                                buttons: {
+                                    ok: function(){
+                                        $('#row_' + id).remove();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            $.alert({ title: 'Operacion fallida', content: 'La venta no se ha eliminado correctamente.'});
+                        }
+                    },
+                    error: function (e) {
+                        $.alert('Ha ocurrido un error en el servidor.');
+                    }
+                });
+            },
+            cancelar: function () {
+            }
+        }
+    });
+}
+
 function deleteCliente(idCliente){
     $.confirm({
         title: 'Confirmar borrado',

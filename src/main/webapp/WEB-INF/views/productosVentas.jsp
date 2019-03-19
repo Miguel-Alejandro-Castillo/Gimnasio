@@ -94,6 +94,7 @@
                     <th>Fecha</th>
                     <th>Nombre</th>
                     <th>Recaudado</th>
+                    <th>Accion</th>
                 </tr>
                 </thead>
 
@@ -103,6 +104,11 @@
                         <td><c:out value="${venta.fecha}"></c:out></td>
                         <td><c:out value="${venta.producto.nombre}"></c:out></td>
                         <td><c:out value="${venta.total}"></c:out></td>
+                        <td>
+                            <a onclick="deleteVenta(${venta.id})">
+                                <i class="fas fa-trash-alt menuIcon"></i>
+                            </a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

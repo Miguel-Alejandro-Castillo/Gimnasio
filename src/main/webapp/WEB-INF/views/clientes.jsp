@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <spring:url value="/resources/css/template.css" var="templateCss"/>
 <link href="${templateCss}" rel="stylesheet"/>
 <spring:url value="/resources/css/jquery-confirm.min.css" var="jqueryConfirmCss"/>
@@ -34,6 +35,21 @@
 				</a>
 			</div>
 		</div>
+
+
+			<form id="clienteForm"  action="/clientes/busqueda" method="get" role="form">
+				<div class="form-group">
+					<label for="nombre">Nombre:</label>
+					<input name="nombre" class="form-control" id="nombre">
+				</div>
+				<div class="form-group">
+					<label for="apellido">Apellido:</label>
+					<input name="apellido" class="form-control" id="apellido">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn upperButton">Buscar</button>
+				</div>
+			</form>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
