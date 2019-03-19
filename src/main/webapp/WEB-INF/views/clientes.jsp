@@ -36,8 +36,8 @@
 			</div>
 		</div>
 
-
-			<form id="clienteForm"  action="/clientes/busqueda" method="get" role="form">
+			<spring:url value="/clientes/busqueda" var="busqueda" />
+			<form id="clienteForm"  action="${busqueda}" method="get" role="form">
 				<div class="form-group">
 					<label for="nombre">Nombre:</label>
 					<input name="nombre" class="form-control" id="nombre">
